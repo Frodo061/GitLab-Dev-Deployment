@@ -18,4 +18,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "vm2" do |vm2|
       vm2.vm.network "private_network", ip: "10.0.0.102"
     end
+    config.vm.define "vm3" do |vm3|
+      vm3.vm.network "private_network", ip: "10.0.0.103"
+    end
 end
