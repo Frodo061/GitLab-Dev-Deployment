@@ -1,0 +1,239 @@
+% ---------------------------------------------------------------
+% TO COMPILE USE: pdflatex -shell-escape -jobname report *.tex
+% ---------------------------------------------------------------
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------------------------------------------------------------
+% ALL PACKAGES
+% ---------------------------------------------------------------
+\usepackage[left=3cm,right=2.5cm,top=3cm,bottom=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{mathtools}
+\usepackage{outlines}
+\usepackage{lipsum}
+
+
+\usepackage{minted} %for code template
+\usemintedstyle{friendly}
+\definecolor{bg}{rgb}{0.96,0.96,0.96}
+
+
+
+
+
+\begin{document}
+% ---------------------------------------------------------------
+% FIRST PAGE
+% ---------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=2.2]{images/logo_um.jpg}
+    \end{figure}
+    {\huge\bfseries Universidade do Minho \par}
+    \vspace{0.5cm}
+    {\large Mestrado Integrado em Engenharia Informática \par}
+    \vspace{2cm}
+    {\Large \emph{System Deployment and Benchmarking} \par}
+    \vspace{2cm}
+    {\Large Fase 1 \par}
+    \vspace{0.2cm}
+    {\Large\bfseries \emph{Deployment} da aplicação \emph{GitLab} \par}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{images/gitlab_logo.png}
+    \end{figure}
+    \vspace{2.5cm}
+    {\Large Grupo 4 \par}
+     \vspace{0.5cm}
+    {\Large\itshape João Alves (A77070)\par}
+    {\Large\itshape Gonçalo Raposo (A77211)\par}
+    {\Large\itshape Alexandre Dias (A78425)\par}
+    {\Large\itshape Hugo Oliveira (A78565)\par}
+    \vfill
+    {\large \today\par}
+    \centering
+\end{titlepage}
+
+
+
+
+% ---------------------------------------------------------------
+% ABSTRACT
+% ---------------------------------------------------------------
+\vspace*{\fill}
+\begin{abstract}
+Paragraph 1.
+
+Paragraph 2.
+
+Paragraph 3.
+\end{abstract}
+\vspace*{\fill}
+\thispagestyle{empty}
+
+
+
+
+% ---------------------------------------------------------------
+% TABLE OF CONTENTS
+% ---------------------------------------------------------------
+\clearpage
+\tableofcontents
+\listoffigures
+\clearpage
+
+
+
+
+% ---------------------------------------------------------------
+% INTRODUCTION
+% ---------------------------------------------------------------
+\setcounter{page}{1}
+\section{Introduction}
+
+\lipsum[1]
+
+
+
+
+% ---------------------------------------------------------------
+% CONTENT
+% ---------------------------------------------------------------
+\section{Title}
+
+\lipsum[2]
+
+
+% ---------------------------------------------------------------
+\subsection{Sub-Title}
+
+\lipsum[3]
+
+
+% ---------------------------------------------------------------
+\subsubsection{Sub-Sub-Title}
+
+\lipsum[5]
+
+
+% ---------------------------------------------------------------
+\newpage
+\section{Code example}
+
+\begin{figure}[H]
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{c}
+#include <stdio.h>
+int main()
+{
+   // printf() displays the string inside quotation
+   printf("Hello, World!");
+   return 0;
+}
+\end{minted}
+\caption{Example of code in \emph{C}.}
+\label{fig:c}
+\end{figure}
+
+\bigbreak
+Simple reference to the image ~\ref{fig:c}. 
+
+Below is a code with bigger font and without line numbers.
+
+\bigbreak
+\begin{minted}[bgcolor=bg, 
+               fontsize=\small, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{c}
+#include <stdio.h>
+int main()
+{
+   // printf() displays the string inside quotation
+   printf("Hello, World!");
+   return 0;
+}
+\end{minted}
+
+
+
+% ---------------------------------------------------------------
+\newpage
+\section{Images}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=4]{images/logo_um.jpg}
+  \caption{Caption example.}
+\end{figure}
+
+
+
+% ---------------------------------------------------------------
+\section{Lists}
+
+\noindent
+Using \emph{outline}:
+
+\begin{outline}
+  \1 Point 1:
+      \2 Point 1.1;
+      \2 Point 1.2;
+            \3 Point 1.2.1;
+  \1 Point 2;
+  \1 Point 3;
+\end{outline}
+
+\noindent
+Using \emph{itemize}:
+
+\begin{itemize}
+  \item Item 1;
+  \item Item 2;
+\end{itemize}
+
+
+
+% ---------------------------------------------------------------
+\newpage
+\section{Conclusion}
+
+\lipsum[1]
+
+\end{document}
