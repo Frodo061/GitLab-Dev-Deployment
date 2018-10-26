@@ -1,6 +1,6 @@
-# Report template for LaTeX
+# Report
 
-To compile this template just run one of this comands:
+To compile this file just run one of this comands:
 
 ```bash
 pdflatex -shell-escape -jobname report *.tex
