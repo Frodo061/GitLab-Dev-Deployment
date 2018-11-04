@@ -106,9 +106,12 @@ Paragraph 3.
 % INTRODUCTION
 % ---------------------------------------------------------------
 \setcounter{page}{1}
-\section{Introduction}
+\section{Introdução}
+Hoje em dia, grande parte da população prescinde de algum do seu tempo em deslocações, para, e dos seus locais de trabalho, e espera-se que permaneçam no seu escritório, cumprindo assim os seus horários estabelecidos nos contratos. No entanto, apesar de já existirem várias empresas que são remote-friendly, o \emph{GitLab}, adotou uma ideia bastante diferente na sua organização, e abandonou o conceito de escritório físico permanentemente.
 
-\lipsum[1]
+Neste trabalho serão analisados os componentes constituintes do \emph{GitLab}, bem como a sua estrutura. Serão analisados os componentes críticos para o desempenho da aplicação.
+
+
 
 
 
@@ -116,28 +119,126 @@ Paragraph 3.
 % ---------------------------------------------------------------
 % CONTENT
 % ---------------------------------------------------------------
-\section{Title}
+\newpage
+\section{\emph{GitLab}}
+Antes de podermos descrever toda a arquitetura e funcionamento do \emph{GitLab}, é necessário perceber o que é o \emph{\textbf{git}}.
 
-\lipsum[2]
+\subsection{O que é o \emph{git}?}
+O \emph{git} é um sistema \emph{open source} que permite controlar versões de ficheiros de um projecto de uma forma rápida e eficaz.
+
+O uso de um sistema como este, permite, em projetos que possam envolver vários contribuidores, criar e editar ficheiros em simultâneo, bem como retroceder a versões mais antigas destes. Assim, existe a possibilidade de analisarmos toda a evolução de um projecto.
+
+\subsection{O que é o \emph{GitLab}?}
+O \textbf{\emph{GitLab}} é uma plataforma grátis que permite hospedar projectos em servidores locais ou remotos, utilizando o \textbf{\emph{git}} para fazer o controlo de versões. O \emph{GitLab} é um concorrente \emph{open source} direto aos serviços \emph{GitHub} e \emph{Bitbucket}.
+
+Para além desta sua principal funcionalidade, a empresa \emph{GitLab} disponibiliza o código da sua aplicação para que qualquer utilizador possa a usar livremente num outro ambiente. Recentemente, foi disponibilizado uma imagem \emph{Docker} que permite instalar e correr o \emph{GitLab} facilmente. Para uma utilização que permita uma alta disponibilidade da aplicação, é necessário alterar e configurar os diferentes componentes da \emph{stack} aplicacional do \emph{GitLab}.
+
+\subsection{\emph{GitLab Software Delivery}}
+Existem atualmente dois tipos de distribuição do \emph{GitLab}, a versão CE (\emph{Community Edition}) e a versão EE (\emph{Enterprise Edition}).
+
+\begin{itemize}
+    \item \textbf{\emph{Community Edition}}: é uma versão \emph{open source} onde não apoio de uma qualquer empresa no processo de \emph{delivery} ou \emph{deployment}. Apresenta funcionalidades reduzidas.
+    \item \textbf{\emph{Enterprise Edition}}: ao contrários da versão anterior, esta inclui vários serviços para além dos incluidos na versão CE, entre estes, destacamos o suporte técnico especializado 24/7, a gestão adicional de servidores, \emph{performance} e segurança, ferramentas de estatística. Esta versão apresenta diferentes preçários mensais.
+\end{itemize}
+
+\subsection{\emph{GitLab} visto como um escritório físico}
+Apesar de se tratar de uma empresa \emph{remote-only}, o \emph{GitLab} e os seus componentes podem ser vistos, analogamente, como um escritório físico.
+
+\begin{itemize}
+    \item \textbf{Os repositórios} serão os bens que o \emph{GitLab} gere. Estes armazenam as chamadas \textit{codebases}, que são constituídas por todo o código que é usado para construir uma aplicação;
+    \item \textbf{\emph{Nginx}} pode ser visto como uma secretaria, onde os utilizadores se dirigem para requisitar certas operações, que serão realizadas pelos funcionários que trabalham no escritório.
+    \item \textbf{A base de dados} pode ser comparada com uma série de armários que contêm ficheiros com informações sobre:
+    \begin{itemize}
+        \item Os bens que são armazenados;
+        \item Os utilizadores que se dirigem à secretaria (permissões).
+    \end{itemize}
+    \item \textbf{\emph{Redis}} é visto como uma espécie de quadro, que contém uma série de tarefas, para serem executadas pelos operários.
+    \item \textbf{\emph{SideKiq}} recolhe tarefas do quadro (\emph{Redis}), tratando principalmente do envio de emails.
+    \item \textbf{\emph{Unicorn worker}} é um operário que trata de tarefas rápidas/gerais, coletadas pelo quadro (Redis). Estas consistem principalmente em:
+    \begin{itemize}
+        \item Verificar as permissões dos utilizadores , confirmando a sessão de cada um no \emph{Redis};
+        \item Cria tarefas para o \emph{Sidekiq};
+        \item Vai buscar informações ao armazenamento.
+    \end{itemize}
+    \item \textbf{\emph{GitLab-shell}} pode ser visto também como um funcionário que recebe ordens por fax (SSH), comunica com o \emph{Sidekiq} por via do \emph{Redis}.
+    \item \textbf{\emph{Gitaly}} corresponde a uma espécie de escritório secundário que gere todas as operações feitas através do \emph{git}, desde monitorizar a sua eficiência, até manter cópias dos resultados de operações mais custosas.
+\end{itemize}
+
+Posto isto, conseguimos já identificar a maior parte dos componentes que constituem a arquitetura do \emph{GitLab} e visualizar, de uma maneira ainda muito abstrata, o seu funcionamento. Mais à frente iremos abordar mais aprofundadamente a arquitetura da aplicação, começando componente a componente, e terminando com o seu funcionamento geral detalhado.
 
 
-% ---------------------------------------------------------------
-\subsection{Sub-Title}
-
-\lipsum[3]
 
 
-% ---------------------------------------------------------------
-\subsubsection{Sub-Sub-Title}
 
-\lipsum[5]
+
+
+
 
 
 % ---------------------------------------------------------------
 \newpage
-\section{Code example}
+\section{Arquitetura do \emph{GitLab}}
+
+A alta \textbf{disponibilidade} e \textbf{escabilidade} são, hoje em dia, condições importantes e obrigatórias em qualquer aplicação. Se estes requisitos não são cumpridos, os utilizadores podem querer migrar para outra aplicação idêntica.
+
+Um dos principais aspetos para a alta disponibilidade, consiste no \emph{clustering} da aplicação. Isto é, para prevenirmos que uma aplicação se torne indisponível, são criadas várias réplicas da mesma. Estas réplicas são, no entanto, invisiveis ao utilizador, dado que este apenas vê a aplicação como uma única instância.
+
+Seguindo este raciocinio, o \emph{GitLab} foi desenhado sobre um padrão de várias camadas a trabalhar entre si. Como hoje em dia é impossível tornar uma aplicação \emph{stateless}, devido à necessidade de guardar informações de utilizadores por exemplo, é importante separarmos os componentes com estado (como uma base de dados ou sistema de ficheiros) dos componentes sem estado, meramente aplicacionais. Como seria de esperar, isto gera complexidade no desenho e configuração da aplicação.
+
+O \emph{GitLab} possui cerca de 7 camadas aplicacionais distintas, projetadas e configuradas para assegurarem a alta disponibilidade. A imagem em baixo, demonstra a arquitetura do \emph{GitLab}.
 
 \begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.47]{images/gitlab_architecture_diagram.png}
+  \caption{Arquitetura do \emph{GitLab}.}
+\end{figure}
+
+\newpage
+\subsection{\emph{GitLab frontend}}
+A aplicação \emph{web} do \emph{GitLab} foi desenvolvida utilizando a \emph{framework} \emph{Ruby on Rails}, baseada num padrão \emph{MVC}. Esta aplicação permite não só a gestão de repositórios \emph{git}, como também a gestão de comentários e pedidos dos \emph{bugs} que complementam os diferentes projectos.
+
+Relativamente à estruturação da aplicação \emph{web}, é importante destacarmos os seguintes componentes da camada aplicacional:
+
+\begin{itemize}
+    \item \emph{\textbf{NGINX}}: é um servidor \emph{web} utilizado para servir conteúdo \emph{web} aos clientes;
+    \item \emph{\textbf{GitLab Shell}} e \emph{\textbf{GitLab Workhorse}}: lidam com os comandos \emph{git} enviados pela a aplicação \emph{web}. Ou seja, comandos como \emph{clone, fork, push} ou \emph{pull}, são redirecionados para um destes componentes onde serão executados;
+    \item \emph{\textbf{Sidekiq}} e \emph{\textbf{Unicorn}}: utilizados sobretudo para lidarem com a gestão do processamento \emph{Ruby} e pedidos especificos \emph{http}. Estes componentes são completamente \emph{stateless}, pois não persistem qualquer tipo de dados, no entanto são eles que lidam com a gestão de tarefas. Estes componentes são de elevada importância, uma vez que, ao existirem várias instâncias da camada \emph{frontend}, não devem ser apresentados dados inconsistentes;
+\end{itemize}
+
+
+\subsection{Base de dados - \emph{PostgreSQL}}
+O \emph{Postegres} é um sistema de base de dados relacional \emph{open source} que permite o controlo e  persistência de dados.
+
+Os dados que são armazenados incluem dados do utilizador (como \emph{username}, \emph{email}, \emph{password}, definições de conta), permissões dos repositórios, comentários, problemas encontrados e todos os outros dados que não são diretamente controlados pelo \emph{git}. Todos os dados devem, uma vez mais, estar disponíveis e consistentes para poderem ser exibidos e validados corretamente para a aplicação \emph{web} do \emph{GitLab}.
+
+
+\subsection{\emph{Redis}}
+O \emph{Redis} é também \emph{open source} e funciona como uma estrutura de armazenamento de dados guardada em memória. É geralmente utilizada como \emph{cache} para um rápido acessoa dados num curto período de tempo.
+
+Dentro da camada aplicacional do \emph{GitLab}, o \emph{Redis} funciona como um serviço que guarda as sessões ativas e uma lista de tarefas a serem realizadas. Isto é, a informação da sessão de um utilizador e as tarefas que estão a ser executadas são guardadas numa instância \emph{Redis}.
+
+Para além destas funcionalidades, o \emph{Redis} permite que os restantes componentes da camada aplicacional guardem o seu estado e o partilhem com o resto dos componentes. Tal como alguns dos componenetes anteriores, é também importante que toda a informação seja consistente e facilmente partilhada com as várias instâncias criadas do \emph{GitLab}.
+
+
+\subsection{Gestor de Ficheiros Distribuído}
+Todas as instâncias do \emph{GitLab} que necessitam de acesso ao mesmo sistema de ficheiros utilizam o \emph{git}. O \emph{git} é um software de gestão e controlo de versões, direcionado principalmente para código fonte, cujo protocolo funciona guardando ficheiros num sistema de ficheiros partilhado.
+
+No entanto, existem também algumas outras pastas que são partilhadas fora do \emph{git}, incluindo-se a pasta que armazena as chaves \emph{SSH}, recursos que são carregados, por exemplo imagens, entre outros pequenos ficheiros que necessitam de estar presentes em todas as instâncias do \emph{GitLab}.
+
+
+
+
+
+
+
+
+% ---------------------------------------------------------------
+\newpage
+\section{Ficheiros de configuração}
+
+Identificar os ficheiros onde são alterados valores para comunicar com diferentes componenetes ou camadas aplicacionais, por exemplo base da dados.
+Usar o mint para colocar partes do texto de configuração.
+
 \begin{minted}[bgcolor=bg, 
                fontsize=\footnotesize, 
                framesep=2mm,
@@ -150,90 +251,76 @@ Paragraph 3.
                breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
                breaksymbolindentright=0pt,
                breaksymbolsepright=1pt
-]{c}
-#include <stdio.h>
-int main()
-{
-   // printf() displays the string inside quotation
-   printf("Hello, World!");
-   return 0;
-}
+]{text}
+/home/git/gitlab/log/
 \end{minted}
-\caption{Example of code in \emph{C}.}
-\label{fig:c}
-\end{figure}
 
-\bigbreak
-Simple reference to the image ~\ref{fig:c}. 
 
-Below is a code with bigger font and without line numbers.
 
-\bigbreak
-\begin{minted}[bgcolor=bg, 
-               fontsize=\small, 
-               framesep=2mm,
-               %linenos,
-               breaklines,
-               breakautoindent=true,
-               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
-               breaksymbolindentleft=0pt,
-               breaksymbolsepleft=1pt,
-               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
-               breaksymbolindentright=0pt,
-               breaksymbolsepright=1pt
-]{c}
-#include <stdio.h>
-int main()
-{
-   // printf() displays the string inside quotation
-   printf("Hello, World!");
-   return 0;
-}
-\end{minted}
+
+
 
 
 
 % ---------------------------------------------------------------
 \newpage
-\section{Images}
+\section{Diferentes cenários}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=4]{images/logo_um.jpg}
-  \caption{Caption example.}
-\end{figure}
+Podemos usar este tópico para descrever e identificar as operações cujo desempenho é critico!
+Usar por exemplo uma tabela 
+
+\subsection{Pequena escala}
+\subsection{Grande escala}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 % ---------------------------------------------------------------
-\section{Lists}
+% DO NOT DELETE
+% ---------------------------------------------------------------
+\iffalse
+\newpage
+\section{Troubleshooting}
 
-\noindent
-Using \emph{outline}:
-
-\begin{outline}
-  \1 Point 1:
-      \2 Point 1.1;
-      \2 Point 1.2;
-            \3 Point 1.2.1;
-  \1 Point 2;
-  \1 Point 3;
-\end{outline}
-
-\noindent
-Using \emph{itemize}:
-
-\begin{itemize}
-  \item Item 1;
-  \item Item 2;
-\end{itemize}
-
-
-
+Para permitir a análise de erros ocorridos na aplicação são armazenadas as alterações feitas nos seus componentes através de ficheiros de log.
 % ---------------------------------------------------------------
 \newpage
-\section{Conclusion}
 
-\lipsum[1]
+\section{Software Delivery}
+\subsection{Definição}
+Software Delivery é o processo de fazer chegar um produto a um mercado. Assim, entende-se que poderá ter várias conotações, poderá ser um produto em estado de desenvolvimento alpha a ser entregue a um comprador antes do software estar disponivel à restante comunidade, um update a software interno de uma empresa, ou então a disponibilidade para download de software a toda a comunidade.
+Por consequência, pode-se concluir que qualquer pessoa que detenha um produto de software com intenções de venda, desenvolvimento ou mesmo teste e validação de software por questões de qualidade, estará diretamente relacionada com Software Delivery.
 
+\subsection{Estado da Arte}
+Antigamente, o desenvolvimento de software era feito com um longo prazo de planeamento e os ciclos de entrega de um produto (quer a disponibilização da versão release assim como updates) eram bastante longos. Atualmente, numa sociedade em que a tecnologia rege o quotidiano da maior parte das pessoas e em que a competição pela atenção dos clientes é enorme, as empresas de software foram obrigadas a mudar os seus protocolos, fazendo com que a entrega de software se torna-se mais dinâmica, frequente e com ciclos de entrega muito curtos de forma a que esta, consiga superar os seus competidores tornando-se mais próxima dos clientes e responder às suas necessidades o mais prontamente possível. Assim, não só os prazos de entrega se tornaram num dos principais fatores de satisfação por parte dos clientes, como também a necessidade do software disponibilizado ser de qualidade, para poder corresponder às expectativas deste.
+\par Em suma, a informatização da sociedade obrigou a uma maior necessidade de velocidade e qualidade no que toca a software delivery, o que exigiu com que as empresas de desenvolvimento de software ganhassem grande relevância no dia a dia e que adotassem novas estratégias para conseguir satisfazer os consumidores finais. 
+
+\subsection{GitLab Software Delivery}
+Atualmente existem dois tipos de distribuições do GitLab, a versão CE (Community Edition) e a versão EE (Enterprise Edition). 
+
+\subsubsection{Community Edition}
+A versão Community Edition é open source não havendo qualquer empresa externa envolvida no processo de delivery ou deployment. A existencia de controlo de versões, revisão de problemas, revisão de código,etc. e a possibilidade de a instalação do sistema poder ser feita em qualquer server, container ou cloud provider destaca o GitLab da concorrência sendo este uma das principais ferramentas utiizadas atualmente por profissionais na àrea da informática por todo o mundo.
+
+\subsubsection{Enterprise Edition}
+A versão Enterprise inclui vários pacotes de serviços com diferentes preçarios anuais que incluem desde suporte técnico especializado 24/7 até ferramentas de estatistica, performance, segurança e comunicação via chat.
+
+\subsubsection{Novas versões}
+Novas versões do gitlab são disponibilizadas no master branch enquanto que, versões mais antigas e consideradas estáveis são guardadas em branches. De notar que tanto  a EE como a CE necessitam dos add-ons (gitlab-shell e gitaly) que se podem encontrar no master branche.
+\fi
+% ---------------------------------------------------------------
+% ---------------------------------------------------------------
 \end{document}
