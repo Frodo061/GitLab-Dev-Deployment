@@ -177,7 +177,7 @@ O \emph{GitLab} possui cerca de 7 camadas aplicacionais distintas, projetadas e 
 Toda a estrutura do \emph{GitLab} pode ser comparada como um escritório físico. Vejamos alguns componentes na seguinte lista.
 
 \begin{itemize}
-    \item \textbf{Os repositórios} serão os bens que o \emph{GitLab} gere. Estes armazenam as chamadas \textit{codebases}, \sout{que são constituídas por todo o código que é usado para construir uma aplicação};
+    \item \textbf{Os repositórios} serão os bens que o \emph{GitLab} gere. Estes armazenam as chamadas \textit{codebases}, que são constituídas por todo o código fonte que é usado para construir uma aplicação;
     \item \textbf{\emph{Nginx}} pode ser visto como uma secretaria, onde os utilizadores se dirigem para requisitar certas operações, que serão realizadas pelos funcionários que lá trabalham;
     \item \textbf{Armazenamento de dados} consiste numa série de armários que contêm ficheiros com informações sobre:
     \begin{itemize}
@@ -185,14 +185,14 @@ Toda a estrutura do \emph{GitLab} pode ser comparada como um escritório físico
         \item os utilizadores que se dirigem à secretaria.
     \end{itemize}
     \item \textbf{\emph{Redis}} é visto como uma espécie de quadro, que contém uma série de tarefas, para serem executadas pelos funcionários;
-    \item \textbf{\emph{Sidekiq}} \sout{recolhe tarefas do quadro (\emph{Redis}), tratando principalmente do envio de emails};
+    \item \textbf{\emph{Sidekiq}} pode ser comparado como um trabalhador, que recolhe as suas tarefas do quadro (\emph{Redis}), tratando principalmente do envio de emails;
     \item \textbf{\emph{Unicorn worker}} é um operário que trata de tarefas rápidas/gerais, coletadas pelo quadro (Redis). Estas consistem principalmente em:
     \begin{itemize}
         \item verificar as permissões dos utilizadores , confirmando a sessão de cada um no \emph{Redis};
         \item criar tarefas para o \emph{Sidekiq};
         \item recolher dados presentes no armazenamento de dados.
     \end{itemize}
-    \item \textbf{\emph{GitLab-shell}} pode ser visto também como um funcionário que recebe ordens (por \emph{SSH}), \sout{comunica com o \emph{Sidekiq} por via do \emph{Redis}};
+    \item \textbf{\emph{GitLab-shell}} pode ser visto também como um funcionário que recebe ordens (por \emph{SSH}), comunica com o \emph{Sidekiq} por via do \emph{Redis} e faz alguns pedidos rápidos aos \emph{Unicorn Workers} ou diretamente, ou por via do \emph{Nginx};
     \item \textbf{\emph{Gitaly}} corresponde a uma espécie de escritório secundário que gere todas as operações feitas através do \emph{git}, desde monitorizar a sua eficiência, até manter cópias dos resultados de operações mais custosas.
 \end{itemize}
 
@@ -231,7 +231,7 @@ No contexto da aplicação \emph{GitLab}, o \emph{HAProxy} funciona como um \emp
 \end{figure}
 
 \newpage
-"HAProxy will be used as the load balancer for the GitLab frontend. However, it will be a separate load balancer from the one used in the previous HA components. This adds security by having a separation of the outside and inside networks. The HAProxy for GitLab will have its outside requests coming from outside the private network, and forward all its requests to the inside network. By having HAProxy act as the edge node between networks, there is a tight control of what can be accessed on the GitLab frontend machines. No one can try and connect to any unauthorized ports on GitLab, because the HAProxy will only forward specifically allowed requests."
+Para além das funcionalidades descritas em cima, o \emph{HAProxy}
 
 % Relativamente à comunicação entre os vários servidores \emph{proxy} e os servidores aplicacionais, existem três formas distintas: os servidores aplicacionais detêm o seu próprio \emph{SSL} (um distinto para cada servidor);
 % https://docs.gitlab.com/ee/administration/high_availability/load_balancer.html
@@ -252,7 +252,7 @@ Para além destas funcionalidades, o \emph{Redis} permite que os restantes compo
 
 \subsubsection{\emph{Redis Sentinel}}
 
-O \emph{Redis Sentinel} tem uma funcionalidade muito semelhante ao \emph{Keepalived}. Para garantirmos uma alta disponibilidade, é necessário que para além de existir um \emph{Master} e um \emph{Slave} do \emph{Redis}, exista algo à escuta de falhas de instâncias \emph{Redis}, começando automaticamente o processo de \emph{failover}, que consiste em atribuir uma nova instância.
+O \emph{Redis Sentinel} tem uma funcionalidade muito semelhante ao \emph{Keepalived}. Para garantirmos uma alta disponibilidade, é necessário que para além de existir um \emph{Master} e um \emph{Slave} do \emph{Redis}, exista algo à escuta de falhas de instâncias \emph{Redis}, começando automaticamente o processo de \emph{failover}, que consiste em atribuir uma nova instância aquando uma falha.
 
 Com o \emph{Redis Sentinel}, consegue-se garantir a existência e disponibilidade de uma instância \emph{Redis} para um cliente, tornando abstratas todas as falhas.
 
@@ -264,22 +264,57 @@ O \emph{Postegres} é um sistema de base de dados relacional \emph{open source} 
 
 Os dados que são armazenados incluem dados do utilizador (como \emph{username}, \emph{email}, \emph{password}, definições de conta, etc), permissões dos repositórios, comentários, problemas encontrados e todos os outros dados que não são diretamente controlados pelo \emph{git}. Todos os dados devem, uma vez mais, estar disponíveis e consistentes para poderem ser exibidos e validados corretamente para a aplicação \emph{web} do \emph{GitLab}.
 
+Num cluster onde possam existir várias instâncias do \emph{Postgres} (como o \emph{master} ou \emph{slaves}/réplicas), existe também uma instância do \emph{HAProxy}. Tal como vimos anteriormente, o \emph{HAProxy} permite o balanceamento de carga e permite transmitir os pedidos a um grupo de nós previamente conhecidos. Ou seja, qualquer instância da aplicação \emph{GitLab} irá comunicar com este \emph{HAProxy} acreditando que este é a base de dados. 
+
+Os diferentes \emph{slaves} são configurados para se manterem \emph{up to date} e prontos a atuarem como \emph{master} no caso de uma falha do servidor principal. A alta escalabilidade e disponibilidade do \emph{Postgres} é mantida através da utilização de instâncias \emph{HAProxy} e \emph{Patroni}.
+
 
 \subsubsection{\emph{Patroni}}
 
-Fazer
+O \emph{Patroni} é uma \emph{framework} escrita em \emph{python} usada para facilitar e automatizar processos como replicação e falhas de instâncias do  \emph{PostgreSQL}.
 
+Ainda que o \emph{Postreges} suporte mecanismos de \emph{master/slave}, a adição ou remoção de novos nós que contêm réplicas dos dados é uma tarefa dificil e que requer configurações que podem induzir a erros. Com a integração do \emph{Patroni}, é possivel utilizar aplicar estes mecanismos de replicação automaticamente sem necessidade dos habituais processos manuais de configuração. Além disso, após uma falha, o \emph{Patroni} é capaz de resolver o processo de recuperação, selecionando um novo \emph{master}.
 
-\subsection{Gestor de ficheiros distribuído}
-Todas as instâncias do \emph{GitLab} que necessitam de acesso ao mesmo sistema de ficheiros, utilizam o \emph{git}. O \emph{git} é um software de gestão e controlo de versões, direcionado principalmente para código fonte, cujo protocolo funciona guardando ficheiros num sistema de ficheiros partilhado.
+Esta \emph{framework} corre em conjunto com as instâncias do \emph{Postgres}. Para que seja possível reconhecer e atualizar o estado de cada uma destas instâncias, o \emph{Patroni} recorre ao \emph{ETCD}, no entanto este suporta outras alternativas, como \emph{Consul} e \emph{Zookeeper}.
 
-No entanto, existem também algumas outras pastas que são partilhadas fora do \emph{git}. Incluem-se: a pasta que armazena as chaves \emph{SSH}, recursos estáticos que são carregadps (como é o de imagens) e outros ficheiros que necessitam de estar presentes em todas as instâncias do \emph{GitLab}.
+\begin{figure}[H]
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               % linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
++---------------+--------+-------------+--------+----------+-----------+
+|    Cluster    | Member |     Host    |  Role  |  State   | Lag in MB |
++---------------+--------+-------------+--------+----------+-----------+
+| pg-ha-cluster |  pg-1  | 10.142.0.11 |        | running  |       0.0 |
+| pg-ha-cluster |  pg-2  | 10.142.0.10 | Leader | running  |       0.0 |
++---------------+--------+-------------+--------+----------+-----------+
+\end{minted}
+\caption{Exemplo de uma tabela com o estado do \emph{Patroni}.}
+\label{fig:c}
+\end{figure}
+
 
 
 \subsubsection{\emph{ETCD}}
 
-Fazer
+O \emph{ETCD} é um gestor distribuído de ficheiros de configuração que permite guardar informações num estilo \emph{key-value}. Ou seja, o estado de cada uma das instâncias do \emph{Postegres} é guardado aqui. 
 
+Este \emph{cluster} aprensenta um \emph{time to live} (configurável) para o armazenamento dos dados. Isto é, ao fim deste tempo, todos os dados sobre os estados das máquinas, é removido. Isto garante que as instâncias \emph{Patroni} verificam continuamente o estado e o atualizam. Com a utilização deste recurso, o \emph{Patroni} consegue reconhecer facilmente quem são as máquinas disponíveis bem como o líder atual.
+
+Como podemos verificar, este é um componente crítico na estrutura do \emph{GitLab}, pelo que devem existir várias instâncias de \emph{ETCD}.
+
+\newpage
+\subsection{Gestor de ficheiros distribuído}
+Todas as instâncias do \emph{GitLab} que necessitam de acesso ao mesmo sistema de ficheiros, utilizam o \emph{git}. O \emph{git} é um software de gestão e controlo de versões, direcionado principalmente para código fonte, cujo protocolo funciona guardando ficheiros num sistema de ficheiros partilhado. No entanto, existem também algumas outras pastas que são partilhadas fora do \emph{git}. Incluem-se: a pasta que armazena as chaves \emph{SSH}, recursos estáticos que são carregados (como é o de imagens) e outros ficheiros que necessitam de estar presentes em todas as instâncias do \emph{GitLab}.
 
 
 
@@ -291,7 +326,7 @@ Fazer
 \newpage
 \section{Ficheiros de configuração}
 
-O ficheiro de configuração existente na aplicação \emph{GitLab}, permite indicar e "apontar" os diferentes componentes que permitem a alta disponibilidade e escalabilidade da aplicação. Além disso, este ficheiro contém ainda alguma informação referente ao seu \emph{IP} e ao \emph{hostname} da máquina.
+O ficheiro de configuração existente na aplicação \emph{GitLab}, permite indicar e "apontar" os diferentes componentes que permitem a alta disponibilidade e escalabilidade da aplicação. Além disto, este ficheiro contém ainda alguma informação referente ao seu \emph{IP} e ao \emph{hostname} da máquina.
 
 \begin{minted}[bgcolor=bg, 
                fontsize=\footnotesize, 
@@ -309,9 +344,390 @@ O ficheiro de configuração existente na aplicação \emph{GitLab}, permite ind
 /etc/gitlab/gitlab.rb
 \end{minted}
 
-Através deste ficheiro de configuração 
+Através deste ficheiro de configuração é possível configurar o sistema de maneira a que este esteja preparado para possuir diferentes nodos. Caso não sejam feitas alterações ao ficheiro, o comando:
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+gitlab-ctl reconfigure
+\end{minted}
 
-Identificar os ficheiros onde são alterados valores para comunicar com diferentes componentes ou camadas aplicacionais, por exemplo base da dados.
+Irá fazer a instalação com este preparado para apenas um nodo no sistema.
+
+Posto isto, para permitir a distribuição do sistema por diferentes nodos é possível editar o ficheiro de configuração para redefinir comportamentos por omissão. 
+
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+gitlab_rails['db_adapter'] = "postgresql"  
+gitlab_rails['db_encoding'] = "unicode"  
+gitlab_rails['db_database'] = "gitlab-prod"  
+gitlab_rails['db_pool'] = 10  
+gitlab_rails['db_username'] = "gitlab"  
+gitlab_rails['db_password'] = "somefancyandhardtoguesspass"  
+gitlab_rails['db_host'] = "node-pgsql01.invalid"  
+gitlab_rails['db_port'] = 5432 
+postgresql['enable'] = false
+\end{minted}
+Desta forma está a definido o sistema de bases de dados, em que: 
+\begin{itemize}
+    \item db\_username e db\_password\\
+    
+Deverão corresponder ao nome de utilizador e password selecionados durante a criação da base de dados.
+
+    \item db\_host
+    
+Servidor/nodo que irá dar suporte à base de dados.
+
+    \item db\_port
+    
+Porta em que será servido o serviço.
+
+    \item db\_adapter
+    
+Serviço de base de dados a ser utilizado
+
+    \item db\_encoding
+    
+Codificação da base de dados
+
+    \item db\_database
+
+Nome da base de dados
+
+    \item postgresql['enable']
+
+A opção irá desativar o postgresql nativo da aplicação, permitindo que seja corrida uma instância externa da base de dados.
+
+\end{itemize}
+
+
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+gitlab_rails['redis_host'] = "node-pgsql01.invalid"  
+gitlab_rails['redis_port'] = 6379  
+gitlab_rails['redis_database'] = 0
+redis['enable'] = false  
+nginx['enable'] = true  
+nginx['redirect_http_to_https'] = true  
+
+\end{minted}
+
+Posteriormente é necessário também indicar o nodo de suporte bem como a porta onde irá estar a correr o redis.
+
+Tal como o postgresql, o redis deverá ser desativado para evitar que a aplicação corra o redis nativo e corra um redis externo em vez disso
+
+O nginx pode ainda ser ativado ou desativado.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+
+gitlab_ci['db_adapter'] = "postgresql"  
+gitlab_ci['db_encoding'] = "unicode"  
+gitlab_ci['db_database'] = "gitlab-ci-prod"  
+gitlab_ci['db_pool'] = 10  
+gitlab_ci['db_username'] = "gitlab_ci"  
+gitlab_ci['db_password'] = "somefancyandhardtoguesspass2"  
+gitlab_ci['db_host'] = "node-pgsql01.invalid"  
+gitlab_ci['db_port'] = 5432  
+gitlab_ci['redis_host'] = "node-pgsql01.invalid"  
+gitlab_ci['redis_port'] = 6379  
+ci_redis['enable'] = false 
+\end{minted}
+
+Após definidas as opções para o gitlab\_rails é necessários defini-las também para o gitlab\_ci.
+
+
+É possível recorrer ao haproxy para distribuir o sistema, para tal é necessário alterar o ficheiro:
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+/etc/haproxy/haproxy.cfg
+\end{minted}
+
+Neste, estarão as configurações do proxy a ser implementado.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+global  
+    daemon
+    maxconn    30000
+    user     haproxy
+    group     haproxy
+    chroot      /var/lib/haproxy
+    log     /dev/log    local0
+    log     /dev/log    local1 notice
+
+\end{minted}
+
+\begin{itemize}
+    \item daemon
+
+Esta opção trata de executar o processo em segundo plano, é equivalente a correr o programa com a opção \emph{-D} e pode ser desativada com a opção \emph{-db}.
+
+    \item maxconn
+    
+Número máximo de conecções concorrentes por processo, caso este parâmetro não seja definido, caso não haja limites de memória estabelecidos será assumido o valor de \emph{DEFAULT\_MAXCONN}, caso contrário este valor será calculado com base no tamanho do buffer, limite de memória, memória alocada para compressão, tamanho da cache SSL e o uso ou não de SSL e \emph{maxsslconn} associado.
+
+    \item user <username>
+    
+UID do utilizador <username>.
+
+    \item group <groupname>
+    
+GID do grupo <groupname>.
+
+    \item chroot
+    
+Muda para a diretoria selecionada e executa um chroot, restringindo os previlégios do processo e seus filhos à diretoria selecionada. Isto aumenta o nível de segurança no caso de exploração de vulnerabilidades uma vez que dificulta bastante a exploração do sistema por parte do atacante. Este comando funciona apenas quando executado com permissões de super utilizador. É importante garantir que a diretoria selecionada está vazia e não pode ser escrita por ninguém.
+
+    \item log
+    
+Adiciona um servidor global para log. Podem ser definidos diversos servidores globais que irão receber logs para inícios de ligação e saidas, assim como logs dos proxies configurados através de \emph{log global}.
+
+\end{itemize}
+
+
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+defaults  
+    mode http
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+
+\end{minted}
+
+\begin{itemize}
+    \item mode
+    
+Define o protocolo a ser utilizado na instância (TCP, HTTP, Health).
+    
+    \item timeout connect
+    
+Define o tempo máximo de espera para tentar fazer uma ligação com sucesso a um servidor.
+    
+    \item timeout client
+    
+Define o período máximo de inatividade por parte do cliente.
+    
+    \item timeout server
+    
+Define o tempo máximo de inatividade por parte do servidor.
+    
+\end{itemize}
+
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+frontend http-in  
+    bind 10.8.0.13:80
+    default_backend http-servers
+
+\end{minted}
+
+\begin{itemize}
+    \item bind
+    
+Define os vários endereços ou portas do frontend.
+    
+    \item default\_backend 
+    
+Especifica o backend a utilizar quando não tiverem sido definidas nenhumas regras de \emph{use\_backend}
+\end{itemize}
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+frontend ssh-in  
+    mode tcp
+    #option tcplog
+    bind 10.8.0.13:22
+    default_backend ssh-servers
+\end{minted}
+
+
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+backend ssh-servers  
+    mode tcp
+    option allbackups
+    timeout server 2h
+    server node-gitlab01 10.8.0.10:22
+    server node-gitlab02 10.8.0.11:22 backup
+
+\end{minted}
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+backend http-servers  
+    option allbackups
+    option forwardfor
+    http-request set-header X-Forwarded-Port %[dst_port]
+    http-request add-header X-Forwarded-Proto https if { ssl_fc }
+    option httpchk HEAD / HTTP/1.1\r\nHost:node-pgsql01.invalid
+    server node-gitlab01 10.8.0.10:80 check maxconn 5000
+    server node-gitlab02 10.8.0.11:80 check maxconn 5000 backup
+
+\end{minted}
+
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{text}
+listen admin  
+    bind 10.8.0.13:8080
+    stats enable
+    stats uri /
+    stats hide-version
+    stats auth admin:secret
+\end{minted}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Identificar os ficheiros onde são alterados valores para comunicar com diferentes componentes ou camadas aplicacionais, por exemplo base de dados.
 Usar o mint para colocar partes do texto de configuração.
 
 \begin{minted}[bgcolor=bg, 
@@ -349,10 +765,13 @@ Através da análise da arquitetura do \emph{GitLab}, conseguimos detetar facilm
     \hline
     \textbf{Componente} & \textbf{Motivo} & \textbf{Solução} \\ \hline
     \textit{HAProxy} & Utilizado para balancear tráfego entre os diferentes componentes como o PostgreSQL ou pedidos como o Redis. & Pag 21. \\ \hline
-    \textit{HAProxy} & Utilizado para balancear tráfego entre os diferentes componentes como o PostgreSQL ou pedidos como o Redis. & pag 21. \\
+    \textit{Keepalived} &Responsável por manter sempre duas instâncias de HAProxy ativas. & pag 21. \\
     \hline
+    \textit{Redis Sentinel} & Incubido de 
     \end{tabular}
 \end{center}
+
+
 
 \section{Diferentes cenários}
 \subsection{Pequena escala}
