@@ -6,8 +6,8 @@ VAGRANT_PROVIDER = 'virtualbox'
 
 # Virtual Machine settings
 VM_HOSTNAME = 'gitlab-deployment'
-VM_MEMORY = 2048
-VM_CPUS = 2
+VM_MEMORY = 4096
+VM_CPUS = 4
 
 # Multiple Machines
 VM_NAME = 'gitlabVM'

@@ -27,6 +27,7 @@
 \usepackage{mathtools}
 \usepackage{outlines}
 \usepackage[normalem]{ulem}
+\usepackage{adjustbox}
 
 \usepackage{minted} %for code template
 \usemintedstyle{friendly}
@@ -79,11 +80,9 @@
 % ---------------------------------------------------------------
 \vspace*{\fill}
 \begin{abstract}
-Paragraph 1.
+No presente relatório vai ser feita uma análise do \textit{GitLab}. Será feita uma breve explicação sobre o que consiste a aplicação e qual a sua funcionalidade, posteriormente irá ser descrita a arquitetura do \textit{GitLab} e serão analisados os diferentes componentes da aplicação, assim como a sua função e importância.
 
-Paragraph 2.
-
-Paragraph 3.
+Analisar-se-á ainda os ficheiros de configuração do \textit{GitLab} de forma a perceber as diferentes formas de implementação e integração de diferentes componentes da aplicação, como HAProxy e Unicorn. Serão ainda analisados os componentes críticos da aplicação e diferentes implementações de disponibilidade juntamente com as vantagens e desvantagens das mesmas.
 \end{abstract}
 \vspace*{\fill}
 \thispagestyle{empty}
@@ -107,9 +106,9 @@ Paragraph 3.
 % ---------------------------------------------------------------
 \setcounter{page}{1}
 \section{Introdução}
-Hoje em dia, grande parte da população prescinde de algum do seu tempo em deslocações, para, e dos seus locais de trabalho, e espera-se que permaneçam no seu escritório, cumprindo assim os seus horários estabelecidos nos contratos. No entanto, apesar de já existirem várias empresas que são remote-friendly, o \emph{GitLab}, adotou uma ideia bastante diferente na sua organização, e abandonou o conceito de escritório físico permanentemente.
-
-Neste trabalho serão analisados os componentes constituintes do \emph{GitLab}, bem como a sua estrutura. Serão analisados os componentes críticos para o desempenho da aplicação.
+Hoje em dia, grande parte da população prescinde de algum do seu tempo em deslocações de e para os seus locais de trabalho, e espera-se que permaneçam no seu escritório, cumprindo assim os seus horários estabelecidos nos contratos. No entanto, apesar de já existirem várias empresas que são remote-friendly, o \emph{GitLab}, adotou uma ideia bastante diferente na sua organização, e abandonou o conceito de escritório físico permanentemente.
+\newline
+\par Numa primeira fase, iremos apresentar a plataforma \emph{GitLab} e por sua vez os serviços oferecidos por esta.Posteriormente iremos demonstrar toda a arquitetura do \emph{GitLab} primeiro fazendo uma comparação desta com um escritório físico e mais tarde descrevendo cada componente no que diz respeito às suas funcionalidades incluindo Base de Dados e Gestor de ficheiros.Seguidamente, será relatado sobre os ficheiros de configuração da plataforma assim como forma de editar estes e comandos associados.No quinto capítulo, serão expostos os componentes críticos do \emph{GitLab}. Finalmente, no ultimo capítulo, serão apresentados várias implementações do sistema consoante a Disponibilidade necessária para satisfazer os serviços de diferentes números de utilizadores, variando das dezenas até às centenas de milhares. 
 
 
 
@@ -204,14 +203,19 @@ Nas secções a seguir, serão descritos todos os componentes presentes na arqui
 % ---------------------------------------------------------------
 \subsection{\emph{GitLab frontend}}
 
-A aplicação \emph{GitLab} apresenta uma interface \emph{web} que utiliza várias tecnologias \emph{open source}. A sua aplicação \emph{web} foi desenvolvida utilizando a \emph{framework} \emph{Ruby on Rails}, baseada num padrão \emph{MVC}. Esta aplicação permite não só, a gestão de repositórios \emph{git}, como também a gestão de comentários que complementam os diferentes projectos.
+A aplicação \emph{GitLab} apresenta uma interface \emph{web} que utiliza várias tecnologias \emph{open source}. A sua aplicação \emph{web} foi desenvolvida utilizando a \emph{framework} \emph{Ruby on Rails}, baseada num padrão \emph{MVC}. Esta aplicação permite não só, a gestão de repositórios \emph{git}, como também a gestão de comentários, que complementam os diferentes projetos.
 
 Relativamente à estruturação da aplicação \emph{web}, é importante destacarmos os seguintes componentes da camada aplicacional:
 
 \begin{itemize}
     \item \emph{\textbf{NGINX}}: é um servidor \emph{web} utilizado para servir conteúdo \emph{web} aos clientes;
-    \item \emph{\textbf{GitLab Shell}} e \emph{\textbf{GitLab Workhorse}}: lidam com os comandos \emph{git} enviados pela a aplicação \emph{web}. Ou seja, comandos como \emph{clone, fork, push} ou \emph{pull}, são redirecionados para um destes componentes onde serão executados;
-    \item \emph{\textbf{Sidekiq}} e \emph{\textbf{Unicorn}}: utilizados sobretudo para lidarem com a gestão do processamento \emph{Ruby} e pedidos específicos \emph{http}. Estes componentes são completamente \emph{stateless}, pois não persistem qualquer tipo de dados, no entanto são eles que lidam com a gestão de tarefas. Estes componentes são de elevada importância, uma vez que não devem ser apresentados dados inconsistentes na existência de várias instâncias da camada \emph{frontend}.
+    \item \emph{\textbf{GitLab Shell}} e \emph{\textbf{GitLab Workhorse}}: lidam com os comandos \emph{git} enviados pela a aplicação \emph{web} ou por conexões via \emph{ssh}. Ou seja, comandos como \emph{clone, fork, push} ou \emph{pull}, são redirecionados para um destes componentes, onde serão executados;
+    \begin{itemize}
+        \item o \emph{GitLab Shell} permite ainda modificar a lista as chaves autoritativas \emph{ssh} dos utilizadores, verificar um determinada chave pública, limitar comandos \emph{git} aos utilizadores e, por fim, copiar entre o cliente e servidores \emph{Gitaly};
+        \item o \emph{GitLab Workhorse} funciona como um \emph{reverse proxy} que trata de pedidos \emph{http} (p.e transferências de arquivos, \emph{git pull/push}, etc). É responsável por assumir uma ligação direta com a aplicação \emph{GitLab}, tentando sempre que possível, diminuir as comunicações entre estes dois (por exemplo ficheiros \emph{Javascript} e \emph{CSS} são diretamente passados ao cliente); assume-se então que os servidores \emph{Nginx} ou \emph{Apache} enviam os pedidos ao \emph{Workhorse} e este ao \emph{backend} do \emph{GitLab}.
+    \end{itemize}
+    \item \emph{\textbf{Sidekiq}}: ferramenta responsável pela gestão e execução de processos \emph{Ruby} da aplicação \emph{GitLab} em \emph{background}. O \emph{Sideiq} foi introduzido devido a \emph{memory leaks} da aplicação \emph{GitLab}. Ou seja, por forma a evitar as fugas de memória, o \emph{Sideiq} é reiniciado a cada intervalo de tempo previamente definido, permitindo que a aplicação esteja disponível;
+    \item \emph{\textbf{Unicorn}}: tal como o \emph{Sideiq}, o \emph{Unicorn} foi introduzido para gerir e uso de memória entre pedidos \emph{web http} e pedidos \emph{git} via \emph{http}. É um \emph{deamon} que corre a aplicação \emph{GitLab} (\emph{master}) e contém um conjuntos de \emph{workers}. Cada um é responsável por executar uma tarefa durante um determinado período (\emph{timeout}, caso contrário, a tarefa é atribuída a outro \emph{worker}. O \emph{master} nunca lida com os pedidos recebidos. Tal como referido anteriormente, o \emph{GitLab} apresenta \emph{memory leaks}. Ao fim de algum tempo, os processos começam a apresentar falhas, que podem ser controladas com a interropção do processo (\emph{kill}).
 \end{itemize}
 
 Os componentes descritos em cima fazem parte da camada aplicacional \emph{GitLab}, no entanto, não traduzem a verdadeira essência da aplicação \emph{GitLab}. Isto é, a aplicação ou várias instâncias desta não guardam qualquer tipo de informação a longo prazo. O \emph{frontend} do \emph{GitLab} faz pedidos à camada lógica da aplicação para que possa ser guardado um dado estado ou informação num dos outros componentes da \emph{stack}. O único estado que é guardado na aplicação, é o ficheiro de configuração que abordaremos mais à frente.
@@ -222,7 +226,7 @@ Os componentes descritos em cima fazem parte da camada aplicacional \emph{GitLab
 
 O \emph{HAProxy} (\emph{High Performance TCP/HTTP Load Balancer}) é um servidor \emph{proxy} para \emph{web} que oferece soluções fiáveis como: alta escalabilidade, balanceamento de carga e \emph{proxying} para aplicações que usam \emph{TCP} e \emph{HTTP}.
 
-No contexto da aplicação \emph{GitLab}, o \emph{HAProxy} funciona como um \emph{gateway} que distribui tráfego e pedidos pelos vários servidores que correm a aplicação \emph{GitLab}. Em baixo, encontra-se uma imagem que pretende demonstrar o funcionamento do \emph{HAProxy}, destacado como \emph{load balancer} que recebe vários pedidos \emph{TCP} e \emph{HTTP} e encaminha-os para os servidores que correm o \emph{GitLab}.
+No contexto da aplicação \emph{GitLab}, o \emph{HAProxy} tem várias funcionalidades e funciona como um \emph{gateway} que distribui tráfego e pedidos pelos vários servidores que correm a aplicação \emph{GitLab}. Em baixo, encontra-se uma imagem que pretende demonstrar o funcionamento do \emph{HAProxy}, destacado como \emph{load balancer} que recebe vários pedidos \emph{SSH} e \emph{HTTP} e encaminha-os para os servidores que correm o \emph{GitLab}.
 
 \begin{figure}[H]
   \centering
@@ -230,8 +234,7 @@ No contexto da aplicação \emph{GitLab}, o \emph{HAProxy} funciona como um \emp
   \caption{Exemplo de funcionamento do \emph{HAProxy}.}
 \end{figure}
 
-\newpage
-Para além das funcionalidades descritas em cima, o \emph{HAProxy}
+Para além das funcionalidades descritas em cima, o \emph{HAProxy} funciona como um \emph{edge-node} entre a rede externa (\emph{internet}) e a rede interna do \emph{GitLab}. Isto é, o \emph{HAProxy} irá negar qualquer tentativa de acesso (através de \emph{sockets unix}) aos servidores \emph{frontend} do \emph{GitLab}.
 
 % Relativamente à comunicação entre os vários servidores \emph{proxy} e os servidores aplicacionais, existem três formas distintas: os servidores aplicacionais detêm o seu próprio \emph{SSL} (um distinto para cada servidor);
 % https://docs.gitlab.com/ee/administration/high_availability/load_balancer.html
@@ -248,7 +251,7 @@ O \emph{Redis} funciona como uma estrutura de armazenamento de dados guardada em
 
 Dentro da camada aplicacional do \emph{GitLab}, o \emph{Redis} funciona como um serviço que guarda as sessões ativas de utilizadores e uma lista de tarefas a serem realizadas pelo \emph{Sidekiq}. Isto é, a informação da sessão de um utilizador e as tarefas que estão a ser executadas são guardadas numa ou várias instâncias \emph{Redis}.
 
-Para além destas funcionalidades, o \emph{Redis} permite que os restantes componentes da camada aplicacional guardem o seu estado e o partilhem com o resto dos componentes, por exemplo, através de trocas de messagens. Tal como alguns dos componentes anteriores, é também importante que toda a informação seja consistente e facilmente partilhada com as várias instâncias do \emph{GitLab}. Deste modo, o \emph{Redis} é uma peça fundamental para o funcionamento do \emph{GitLab frontend}.
+Para além destas funcionalidades, o \emph{Redis} permite que os restantes componentes da camada aplicacional guardem o seu estado e o partilhem com o resto dos componentes, por exemplo, através de trocas de messagens. Tal como alguns dos componentes anteriores, é também importante que toda a informação seja consistente e facilmente partilhada com as várias instâncias do \emph{GitLab}.
 
 \subsubsection{\emph{Redis Sentinel}}
 
@@ -275,7 +278,7 @@ O \emph{Patroni} é uma \emph{framework} escrita em \emph{python} usada para fac
 
 Ainda que o \emph{Postreges} suporte mecanismos de \emph{master/slave}, a adição ou remoção de novos nós que contêm réplicas dos dados é uma tarefa dificil e que requer configurações que podem induzir a erros. Com a integração do \emph{Patroni}, é possivel utilizar aplicar estes mecanismos de replicação automaticamente sem necessidade dos habituais processos manuais de configuração. Além disso, após uma falha, o \emph{Patroni} é capaz de resolver o processo de recuperação, selecionando um novo \emph{master}.
 
-Esta \emph{framework} corre em conjunto com as instâncias do \emph{Postgres}. Para que seja possível reconhecer e atualizar o estado de cada uma destas instâncias, o \emph{Patroni} recorre ao \emph{ETCD}, no entanto este suporta outras alternativas, como \emph{Consul} e \emph{Zookeeper}.
+Esta \emph{framework} corre em conjunto com as instâncias do \emph{Postgres}. Para que seja possível reconhecer e atualizar o estado de cada uma destas instâncias, o \emph{Patroni} recorre ao \emph{ETCD}, no entanto este suporta outras alternativas, como \textbf{\emph{Consul}} ou \textbf{\emph{Zookeeper}}.
 
 \begin{figure}[H]
 \begin{minted}[bgcolor=bg, 
@@ -296,6 +299,7 @@ Esta \emph{framework} corre em conjunto com as instâncias do \emph{Postgres}. P
 +---------------+--------+-------------+--------+----------+-----------+
 | pg-ha-cluster |  pg-1  | 10.142.0.11 |        | running  |       0.0 |
 | pg-ha-cluster |  pg-2  | 10.142.0.10 | Leader | running  |       0.0 |
+| pg-ha-cluster |  pg-3  | 10.142.0.09 |        | running  |       0.0 |
 +---------------+--------+-------------+--------+----------+-----------+
 \end{minted}
 \caption{Exemplo de uma tabela com o estado do \emph{Patroni}.}
@@ -303,22 +307,31 @@ Esta \emph{framework} corre em conjunto com as instâncias do \emph{Postgres}. P
 \end{figure}
 
 
+\subsection{\textcolor{red}{Gestores de ficheiros} - reformular}
 
-\subsubsection{\emph{ETCD}}
-
-O \emph{ETCD} é um gestor distribuído de ficheiros de configuração que permite guardar informações num estilo \emph{key-value}. Ou seja, o estado de cada uma das instâncias do \emph{Postegres} é guardado aqui. 
-
-Este \emph{cluster} aprensenta um \emph{time to live} (configurável) para o armazenamento dos dados. Isto é, ao fim deste tempo, todos os dados sobre os estados das máquinas, é removido. Isto garante que as instâncias \emph{Patroni} verificam continuamente o estado e o atualizam. Com a utilização deste recurso, o \emph{Patroni} consegue reconhecer facilmente quem são as máquinas disponíveis bem como o líder atual.
-
-Como podemos verificar, este é um componente crítico na estrutura do \emph{GitLab}, pelo que devem existir várias instâncias de \emph{ETCD}.
-
-\newpage
-\subsection{Gestor de ficheiros distribuído}
 Todas as instâncias do \emph{GitLab} que necessitam de acesso ao mesmo sistema de ficheiros, utilizam o \emph{git}. O \emph{git} é um software de gestão e controlo de versões, direcionado principalmente para código fonte, cujo protocolo funciona guardando ficheiros num sistema de ficheiros partilhado. No entanto, existem também algumas outras pastas que são partilhadas fora do \emph{git}. Incluem-se: a pasta que armazena as chaves \emph{SSH}, recursos estáticos que são carregados (como é o de imagens) e outros ficheiros que necessitam de estar presentes em todas as instâncias do \emph{GitLab}.
 
+\bigbreak
+% ver https://gist.github.com/yurishkuro/10cb2dc42f42a007a8ce0e055ed0d171
+Ferramentas como \textbf{\emph{ETCD}}, \textbf{\emph{Consul}} e \textbf{\emph{Zookeeper}} permitem guardar informações num estilo \emph{key-value} dentro de um \emph{cluster}. Ou seja, podemos guardar o estado de cada uma das instâncias do \emph{Postegres} nestas ferramentas. 
+
+Consideremos o \emph{ETCD}. Este aprensenta um \emph{time to live} (configurável) para o armazenamento dos dados. Isto é, ao fim deste tempo, todos os dados sobre os estados das máquinas, é removido. Isto garante que as instâncias \emph{Patroni} verificam continuamente o estado e o atualizam. Com a utilização deste recurso, o \emph{Patroni} consegue reconhecer facilmente quem são as máquinas disponíveis bem como o líder atual. Como podemos verificar, este é um componente crítico na estrutura do \emph{GitLab}, pelo que devem existir várias instâncias de \emph{ETCD}.
 
 
 
+\subsection{\emph{Gitaly}}
+
+O \emph{Gitaly} é um serviço RPC (\emph{Remote Procedure Call}) que trata todas as chamadas ao \emph{git}, feitas pelo \emph{GitLab}.
+
+O diagrama seguinte mostra como um servidor \emph{git} teria um número de clientes distintos.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.4]{images/gitlab-gitaly.png}
+  \caption{Exemplo de }
+\end{figure}
+
+Mas eu não acho que seja aquilo que se tem que falar
 
 
 
@@ -326,12 +339,13 @@ Todas as instâncias do \emph{GitLab} que necessitam de acesso ao mesmo sistema 
 \newpage
 \section{Ficheiros de configuração}
 
-O ficheiro de configuração existente na aplicação \emph{GitLab}, permite indicar e "apontar" os diferentes componentes que permitem a alta disponibilidade e escalabilidade da aplicação. Além disto, este ficheiro contém ainda alguma informação referente ao seu \emph{IP} e ao \emph{hostname} da máquina.
+Para uma melhor interpretação do ficheiro de configuração, utilizamos o \emph{Omnibus}, um \emph{package} de instalação do \emph{GitLab} para podermos configurar os parâmetros da aplicação \emph{GitLab} diretamente.
+
+O ficheiro principal de configuração é o \texttt{gitlab.rb}. Cada instância do \emph{GitLab} irá possuir o seu ficheiro de configuração. Este ficheiro encontra-se na seguinte diretoria:
 
 \begin{minted}[bgcolor=bg, 
                fontsize=\footnotesize, 
                framesep=2mm,
-               linenos,
                breaklines,
                breakautoindent=true,
                breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
@@ -341,14 +355,13 @@ O ficheiro de configuração existente na aplicação \emph{GitLab}, permite ind
                breaksymbolindentright=0pt,
                breaksymbolsepright=1pt
 ]{text}
-/etc/gitlab/gitlab.rb
+/etc/gitlab/
 \end{minted}
 
-Através deste ficheiro de configuração é possível configurar o sistema de maneira a que este esteja preparado para possuir diferentes nodos. Caso não sejam feitas alterações ao ficheiro, o comando:
+Sempre que for efetuada qualquer alteração neste ficheiro, devemos executar o seguinte comando:
 \begin{minted}[bgcolor=bg, 
                fontsize=\footnotesize, 
                framesep=2mm,
-               linenos,
                breaklines,
                breakautoindent=true,
                breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
@@ -357,19 +370,23 @@ Através deste ficheiro de configuração é possível configurar o sistema de m
                breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
                breaksymbolindentright=0pt,
                breaksymbolsepright=1pt
-]{text}
-gitlab-ctl reconfigure
+]{bash}
+$ gitlab-ctl reconfigure
 \end{minted}
 
-Irá fazer a instalação com este preparado para apenas um nodo no sistema.
+De seguida, iremos abordar algumas das possíveis configurações que são permitidas no \emph{GitLab}.
 
-Posto isto, para permitir a distribuição do sistema por diferentes nodos é possível editar o ficheiro de configuração para redefinir comportamentos por omissão. 
 
+% ---------------------------------------------------------------
+\subsection{Endereço \emph{url} para acesso ao \emph{GitLab}}
+
+Para que os utilizadores consigam aceder remotamente à aplicação \emph{web} do \emph{GitLab}, é necessário definir o \emph{url}. De notar que, caso pretendam um acesso externo, é necessário registar este endereço \emph{url} para que seja possível a resolução de nomes (DNS), ou seja, associar este \emph{ip} ao nome. 
+
+Para isto, basta adicionar a seguinte linha ao ficheiro de configuração:
 
 \begin{minted}[bgcolor=bg, 
                fontsize=\footnotesize, 
                framesep=2mm,
-               linenos,
                breaklines,
                breakautoindent=true,
                breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
@@ -378,47 +395,411 @@ Posto isto, para permitir a distribuição do sistema por diferentes nodos é po
                breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
                breaksymbolindentright=0pt,
                breaksymbolsepright=1pt
-]{text}
-gitlab_rails['db_adapter'] = "postgresql"  
-gitlab_rails['db_encoding'] = "unicode"  
+]{ruby}
+external_url "http://gitlab.example.com"
+\end{minted}
+
+É ainda possível definir um \emph{url} relativo: 
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+external_url "http://example.com/gitlab"
+\end{minted}
+
+
+% ---------------------------------------------------------------
+\subsection{Integração com a base de dados}
+
+Como foi abordado anteriormente, o sistema de base de dados recomendado é o \emph{PostgreSQL}. 
+
+Caso se pretenda utilizar uma máquina diferente para correr um sistema de base de dados, é necessário efetuar os seguintes passos:
+
+\begin{itemize}
+    \item \texttt{db\_host}: representa o \emph{ip} ou nome do nó/máquina;
+    \item \texttt{db\_port}: representa a porta por onde está a ser fornecido o serviço \emph{postgres};
+    \item \texttt{db\_database}: representa o nome do nome dado à base de dados;
+    \item \texttt{db\_username} e \texttt{db\_password}: representa os dados de acesso à base de dados;
+    \item \texttt{postgresql['enable']}: opção que permite desativar o \emph{postgres} nativo da aplicação, permitindo que seja outra instância a servi-la.
+\end{itemize}
+
+% gitlab_rails['db_encoding'] = "unicode"
+% gitlab_rails['db_pool'] = 10
+
+\begin{figure}[H]
+\centering
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+gitlab_rails['db_adapter'] = "postgresql"
+gitlab_rails['db_host'] = "10.0.0.101"  
+gitlab_rails['db_port'] = 5432
 gitlab_rails['db_database'] = "gitlab-prod"  
-gitlab_rails['db_pool'] = 10  
-gitlab_rails['db_username'] = "gitlab"  
-gitlab_rails['db_password'] = "somefancyandhardtoguesspass"  
-gitlab_rails['db_host'] = "node-pgsql01.invalid"  
-gitlab_rails['db_port'] = 5432 
+gitlab_rails['db_username'] = "gitlab-user"  
+gitlab_rails['db_password'] = "gitlab-password"  
+
 postgresql['enable'] = false
 \end{minted}
-Desta forma está a definido o sistema de bases de dados, em que: 
+\caption{Exemplo de configuração para o \emph{postgreSQL}.}
+\label{fig:c}
+\end{figure}
+
+O \emph{package omnibus}, por \emph{default}, não irá importar o \emph{schema} da base de dados do \emph{GitLab} nem irá criar um administrador, necessário para a aplicação.
+
+Como tal, é necessário proceder à criação da base de dados. É importante referir que este processo deverá ser apenas efetuado uma única vez, pelo que, os seguintes excertos de código apenas deverão ser adicionados num único ficheiro de configuração de um instância \emph{GitLab}.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+# especificar uma password de utilizador root
+gitlab_rails['initial_root_password'] = 'nonstandardpassword'
+\end{minted}
+
+Por fim, executar o comando \texttt{\$ gitlab-rake gitlab:setup}.
+
+No caso de existirem vários servidores \emph{GitLab} a partilharem a mesma base de dados e for necessário efetuar a migração de dados de uma base de dados, é importante limitar o número de máquinas que irão efetuar este processo. Para isso devemos, para cada máquina que corre o \emph{GitLab}, adicionar o seguinte:
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+# ativar ou desativar a migração automática
+gitlab_rails['auto_migrate'] = false
+\end{minted}
+
+
+
+
+
+% ---------------------------------------------------------------
+\subsection{Integração com um servidor SMTP}
+
+O \emph{GitLab} permite que seja utilizado um servidor de \emph{emails} externo, que esteja a correr noutro nó computacional.
+
+Os parâmetros necessário à configuração são muito semelhantes aos da configuração de um servidor \emph{SMTP} ou \emph{IMAP}:
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+gitlab_rails['smtp_enable'] = true
+gitlab_rails['smtp_address'] = "smtp.mailtrap.io"
+gitlab_rails['smtp_port'] = 2525
+gitlab_rails['smtp_user_name'] = "username"
+gitlab_rails['smtp_password'] = "password"
+gitlab_rails['smtp_domain'] = "smtp.mailtrap.io"
+gitlab_rails['smtp_tls'] = true
+
+gitlab_rails['smtp_openssl_verify_mode'] = 'none'
+gitlab_rails['smtp_enable_starttls_auto'] = false
+gitlab_rails['smtp_ssl'] = false
+gitlab_rails['smtp_force_ssl'] = false
+\end{minted}
+
+O exemplo em cima está apenas a utilizar o protocolo de segurança \emph{TLS}, no entanto é possível utilizarmos também o protocolo \emph{SSL}.
+
+O \emph{GitLab} disponibiliza \href{https://docs.gitlab.com/omnibus/settings/smtp.html#smtp-settings}{\emph{online}} vários exemplos de configuração de servidores \emph{SMTP} de vários \emph{providers}.
+
+
+% ---------------------------------------------------------------
+\subsection{Integração com o \emph{Nginx}}
+
+Por \emph{default}, o \emph{package} de instalação \emph{omnibus} instala um \emph{bundle Nginx}. Para ser possível utilizar um conjunto de servidores externos \emph{Nginx} ou \emph{Apache}, é necessário os adicionar ao grupo de servidores \emph{web} \texttt{gitlab-www}.
+
+Para se juntar novos servidores ao grupo descrito em cima, é necessário os adicionar ao grupo principal e, se necessário, desativar o \emph{bundle Nginx}. De notar que, para servidores que corram \emph{Debian/Ubuntu} o grupo será \texttt{www-data}. Para servidores que corram \emph{RHEL/CentOS} o grupo será \texttt{nginx}.
+
+Em baixo encontra-se um exemplo de configuração a ser adicionado ao ficheiro \texttt{gitlab.rb}.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+# desativar o bundle
+nginx['enable'] = false
+
+# adicionar o nó ao grupo externo
+web_server['external_users'] = ['www-data']
+
+# adicionar o servidore aos servidores proxies confiáveis (IPv4 e/ou IPv6)
+gitlab_rails['trusted_proxies'] = ['192.168.1.0/24', '192.168.2.1']
+\end{minted}
+
+Por \emph{default} o \emph{Nginx} aceita pedidos vindos de qualquer endereço \emph{ip}. No entanto, podemos especificar a lista de endereços válidos.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+# receber pedidos de todos os endereços IPv4 e IPv6
+nginx['listen_addresses'] = ["0.0.0.0", "[::]"] 
+\end{minted}
+
+Caso uma instância do \emph{GitLab} esteja a correr atrás de um \emph{reserve proxy}, ou seja, os pedidos são encaminhados do \emph{proxy} para o servidor \emph{GitLab} e vice versa, é necessário alterar a porta \emph{default} (80 para \emph{http} e 443 para \emph{https}) para uma porta válida. Em baixo segue um exemplo.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+nginx['listen_port'] = 8081
+\end{minted}
+
+% ---------------------------------------------------------------
+\iffalse
+\subsection{Integração de um LDAP}
+\par Caso queira integrar um serviço \emph{LDAP}, poderá faze-lo adicionando ao ficheiro \emph{gitlab.rb} o seguinte: 
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+#Ativa o serviço LDAP
+gitlab_rails['ldap_enabled']=true
+
+gitlab_rails['ldap_servers']=YAML.load <<-EOS
+main:
+  #Nome identificador
+  label: 'LDAP'
+  #ip do servidor ldap
+  host: '_your_ldap_server'
+  #Numero da porta
+  port: 389 # or 636
+  #id LDPA do utilizador
+  uid: 'sAMAccountName'
+  #Escolha da encriptação do serviço
+  encryption: 'plain' # "start_tls" or "simple_tls" or "plain"
+  #Permissões do utilizador
+  bind_dn: '_the_full_dn_of_the_user_you_will_bind_with'
+  #Password do utilizador
+  password: '_the_password_of_the_bind_user'
+  #Se o serviço está disponivel como active_directory
+  active_directory: true
+  #Escolher se pode utilizar o email associado para fazer login
+  allow_username_or_email_login: false
+  #Escolher a opção de aceitar letras maiúsculas
+  lowercase_usernames: false
+  base: ''
+  user_filter: ''
+EOS
+\end{minted}
+Desta forma, os utilizadores com a versão \emph{Community} podem realizar o seu login através do sistema de serviços LDPA.
+\newline
+No caso de utilizadores com a versão \emph{Enterprise}, estes conseguem usufruir de vários serviços LDPA configurando o ficheiro com.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+#Ativa o serviço LDAP
+gitlab_rails['ldap_enabled']=true
+gitlab_rails['ldap_servers']=YAML.load <<-EOS
+main:
+  #Nome identificador
+  label: 'LDAP'
+  #ip do servidor ldap
+  host: '_your_ldap_server'
+  #Numero da porta
+  port: 389 # or 636
+  #id LDPA do utilizador
+  uid: 'sAMAccountName'
+  #Escolha da encriptação do serviço
+  encryption: 'plain' # "start_tls" or "simple_tls" or "plain"
+  #Permissões do utilizador
+  bind_dn: '_the_full_dn_of_the_user_you_will_bind_with'
+  #Password do utilizador
+  password: '_the_password_of_the_bind_user'
+  #Se o serviço está disponivel como active_directory
+  active_directory: true
+  #Escolher se pode utilizar o email associado para fazer login
+  allow_username_or_email_login: false
+  #Escolher a opção de aceitar letras maiúsculas
+  lowercase_usernames: false
+  block_auto_created_users: false
+  base: ''
+  user_filter: ''
+  group_base: ''
+  admin_group: ''
+  sync_ssh_keys: false
+#Serviço secundário LDPA
+secondary: 
+  label: 'LDAP'
+  host: '_your_ldap_server'
+  port: 389
+  uid: 'sAMAccountName'
+  encryption: 'plain' # "start_tls" or "simple_tls" or "plain"
+  bind_dn: '_the_full_dn_of_the_user_you_will_bind_with'
+  password: '_the_password_of_the_bind_user'
+  active_directory: true
+  allow_username_or_email_login: false
+  lowercase_usernames: false
+  #Para permitir novos utilizadores precisarem de aprovação do administrador 
+  #No caso de false, novos utilizador não necessitam de autorização por parte do administrador
+  block_auto_created_users: false
+  base: ''
+  user_filter: ''
+  #Diretoria onde se pode procurar grupos
+  group_base: ''
+  #Procura por todos os administradores do grupo
+  admin_group: ''
+  #Sincronizar com as chaves públicas do ssh para autenticação do cliente
+  sync_ssh_keys: false
+EOS
+\end{minted}
+\fi
+
+% ---------------------------------------------------------------
+\subsection{Integração com o \emph{GitLab-Shell}}
+
+O \emph{GitLab-Shell} permite lidar com as sessões \emph{SSH} do \emph{git} e, mais importante ainda, alterar a lista das chaves autoritativas. O ficheiro de configuração permite várias alterações no que diz respeito ao funcionamento do \emph{GitLab-Shell}. Entre as quais destacamos: alteração da diretoria onde são mantidas as chaves \emph{SSH} e diretoria de ficheiros \emph{log} e ainda, alteração das diretorias dos certificados \emph{SSL}.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+gitlab_shell['auth_file'] = "/var/opt/gitlab/.ssh/authorized_keys"
+gitlab_shell['log_directory'] = "/var/log/gitlab/gitlab-shell/"
+gitlab_shell['log_format'] = 'json'
+gitlab_shell['http_settings'] = { 
+    user: 'username', 
+    password: 'password', 
+    ca_file: '/etc/ssl/cert.pem', 
+    ca_path: '/etc/pki/tls/certs', 
+    self_signed_cert: false
+}
+\end{minted}
+
+% ---------------------------------------------------------------
+\subsection{Integração com o \emph{GitLab-Workwhorse}}
+
+Como vimos anteriormente, o \emph{GitLab-Workwhorse} funciona como um servidor de \emph{proxy}, pelo que deverá ter acesso ao \emph{backend} da aplicação \emph{GitLab}. O ficheiro de configuração permite alterar vários parâmetros sobre o funcionamento dp \emph{GitLab-Workwhorse}, entre os quais: alterar o endereço do servidor \emph{backend}; limitar o número de pedidos recebidos e definir um \emph{timeout} para esses; etc. Em baixo apresentamos um exemplo de configuração. 
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+gitlab_workhorse['auth_backend'] = "http://localhost:8080"
+gitlab_workhorse['api_queue_limit'] = 0
+gitlab_workhorse['api_queue_duration'] = "30s"
+\end{minted}
+
+% ---------------------------------------------------------------
+\subsection{Integração com o \emph{Unicorn}}
+
+O \emph{GitLab} disponibiliza um conjuntos de parâmetros que permitem alterar os valores \emph{default} do \emph{Unicorn}. Entre estes, destacamos os seguintes:
+
 \begin{itemize}
-    \item db\_username e db\_password\\
-    
-Deverão corresponder ao nome de utilizador e password selecionados durante a criação da base de dados.
-
-    \item db\_host
-    
-Servidor/nodo que irá dar suporte à base de dados.
-
-    \item db\_port
-    
-Porta em que será servido o serviço.
-
-    \item db\_adapter
-    
-Serviço de base de dados a ser utilizado
-
-    \item db\_encoding
-    
-Codificação da base de dados
-
-    \item db\_database
-
-Nome da base de dados
-
-    \item postgresql['enable']
-
-A opção irá desativar o postgresql nativo da aplicação, permitindo que seja corrida uma instância externa da base de dados.
-
+    \item \textbf{\emph{listen address}}: é possível definirmos a interface por onde estão a ser enviadas as tarefas;
+    \item \textbf{\emph{listen port}}: tamem é possível definirmos o \emph{socket unix};
+    \item \textbf{\emph{timeout}}: tempo máximo permitido para a execução de uma tarefa; geralmente varia entre os 15 e 30 segunos para que possa ser possível outras tarefas serem executadas;
+    \item \textbf{\emph{worker\_processes}}: número de processos que são lançados; geralmente este número resulta na soma do número de \emph{cores CPU} com 1; especial cuidado para máquinas com pouca memória \emph{RAM} disponível;
 \end{itemize}
 
 
@@ -426,7 +807,7 @@ A opção irá desativar o postgresql nativo da aplicação, permitindo que seja
 \begin{minted}[bgcolor=bg, 
                fontsize=\footnotesize, 
                framesep=2mm,
-               linenos,
+               %linenos,
                breaklines,
                breakautoindent=true,
                breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
@@ -435,19 +816,127 @@ A opção irá desativar o postgresql nativo da aplicação, permitindo que seja
                breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
                breaksymbolindentright=0pt,
                breaksymbolsepright=1pt
-]{text}
-gitlab_rails['redis_host'] = "node-pgsql01.invalid"  
-gitlab_rails['redis_port'] = 6379  
-gitlab_rails['redis_database'] = 0
-redis['enable'] = false  
-nginx['enable'] = true  
-nginx['redirect_http_to_https'] = true  
-
+]{ruby}
+unicorn['listen'] = 'localhost'
+unicorn['port'] = 8080
+unicorn['worker_processes'] = 4
+unicorn['worker_timeout'] = 30
 \end{minted}
 
-Posteriormente é necessário também indicar o nodo de suporte bem como a porta onde irá estar a correr o redis.
+% https://gitlab.com/gitlab-org/gitlab-ce/blob/master/config/unicorn.rb.example
 
-Tal como o postgresql, o redis deverá ser desativado para evitar que a aplicação corra o redis nativo e corra um redis externo em vez disso
+% ---------------------------------------------------------------
+\subsection{Integração com o \emph{Sideiq}}
+
+No que concerne à configuração do \emph{Sideiq}, o \emph{GitLab}, tal como com o \emph{Unicorn}, disponibiliza vários parâmetros de configuração desta ferramenta de gestão de processos do \emph{Ruby}.
+
+Em baixo segue um exemplo simples de configuração.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               %linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+sidekiq['listen_port'] = 8082
+sidekiq['listen_address'] = "localhost"
+
+# Timeout máximo (segundos) de execução de tarefas
+sidekiq['shutdown_timeout'] = 8
+
+# Número de threads criadas pelo Sideiq
+sidekiq['concurrency'] = 25
+\end{minted}
+
+
+% ---------------------------------------------------------------
+\subsection{Integração com o \emph{Redis}}
+
+Caso se pretenta utilizar um instância do \emph{Redis} diferente daquela fornecida pelo \emph{omnibus}, o \emph{GitLab} permite que sejam adicionadas as informações necessárias ao ficheiro de configuração. 
+
+Devemos primeiramente desativar o \emph{bundle} fornecido pelo \emph{omnibus}.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               % linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+redis['enable'] = false  
+\end{minted}
+
+De seguida devemos indicar a instância \emph{Redis} que queremos integrar na nossa aplicação.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               % linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+# Redis via TCP
+gitlab_rails['redis_host'] = "node-pgsql01.invalid"  
+gitlab_rails['redis_port'] = 6379
+
+# Redis via sockets Unix
+gitlab_rails['redis_socket'] = '/tmp/redis.sock'
+\end{minted}
+
+Podemos no entanto utilizar o \emph{omnibus} para criar instâncias \emph{Redis}, que podem ou não apresentar diferentes funcionalidades, como: servir como \emph{cache}; armazenamento de filas de espera ou partilha de estado.
+
+\begin{minted}[bgcolor=bg, 
+               fontsize=\footnotesize, 
+               framesep=2mm,
+               % linenos,
+               breaklines,
+               breakautoindent=true,
+               breaksymbolleft=\raisebox{0.8ex}{\tiny\hookrightarrow},
+               breaksymbolindentleft=0pt,
+               breaksymbolsepleft=1pt,
+               breaksymbolright=\raisebox{0.8ex}{\tiny\hookleftarrow},
+               breaksymbolindentright=0pt,
+               breaksymbolsepright=1pt
+]{ruby}
+external_url 'https://gitlab.example.com'
+ 
+# Ativar unicamente o Redis
+redis_master_role['enable'] = true
+ 
+redis['port'] = 6379
+redis['bind'] = '10.0.0.1'
+
+# Se pretender, escolher uma das 3 opções em baixo
+gitlab_rails['redis_cache_instance'] = REDIS_CACHE_URL
+gitlab_rails['redis_queues_instance'] = REDIS_QUEUES_URL
+gitlab_rails['redis_shared_state_instance'] = REDIS_SHARED_STATE_URL
+\end{minted}
+
+
+
+\iffalse
+% ---------------------------------------------------------------
+\newpage
+\subsection{Integração com o \emph{HAProxy}}
 
 O nginx pode ainda ser ativado ou desativado.
 
@@ -533,13 +1022,13 @@ Esta opção trata de executar o processo em segundo plano, é equivalente a cor
     
 Número máximo de conecções concorrentes por processo, caso este parâmetro não seja definido, caso não haja limites de memória estabelecidos será assumido o valor de \emph{DEFAULT\_MAXCONN}, caso contrário este valor será calculado com base no tamanho do buffer, limite de memória, memória alocada para compressão, tamanho da cache SSL e o uso ou não de SSL e \emph{maxsslconn} associado.
 
-    \item user <username>
+    \item user $<username>$
     
-UID do utilizador <username>.
+UID do utilizador $<username>$.
 
-    \item group <groupname>
+    \item group $<groupname>$
     
-GID do grupo <groupname>.
+GID do grupo $<groupname>$.
 
     \item chroot
     
@@ -643,7 +1132,7 @@ frontend ssh-in
     default_backend ssh-servers
 \end{minted}
 
-
+Aqui são é feito o bind e definidos os servidores backend. É também alterado o protocolo destes servidores.
 
 \begin{minted}[bgcolor=bg, 
                fontsize=\footnotesize, 
@@ -666,6 +1155,24 @@ backend ssh-servers
     server node-gitlab02 10.8.0.11:22 backup
 
 \end{minted}
+
+\begin{itemize}
+    \item option allbackups
+    
+Quando os servidores principais estiverem indisponíveis irá distribuir a carga por todos os servidores de backup fazendo balanceamento de carga entre eles. Caso esta opção seja selecionada, o comportamento por defeito será enviar os pedidos sempre para o primeiro servidor de backup disponível, não fazendo balanceamento de carga. Dessa forma um servidor pode não ser o suficiente para responder aos pedidos, ativando a opção, caso os servidores principais estejam indisponíveis, o serviço fornecido será mais estável caso hajam muitos pedidos.
+    
+    \item timeout server
+    
+Define o tempo máximo de inatividade por parte do servidor.
+    
+    \item server
+    
+Declara um servidor no backend. Deverá receber o nome do servidor e o endereço dos mesmo como argumentos. O parâmetro backup no segundo servidor determina que este deverá ser utilizado para balanceamento de carga apenas quando os servidores principais estiverem indisponíveis.
+
+Este pode ainda receber parâmetros como maxconn para redefinir o número máximo de conecções para o servidor ou check para analisar os servidores periodicamente e poder garantir que realmente está a responder aos pedidos.
+    
+\end{itemize}
+
 
 \begin{minted}[bgcolor=bg, 
                fontsize=\footnotesize, 
@@ -691,6 +1198,23 @@ backend http-servers
 
 \end{minted}
 
+\begin{itemize}
+    \item option forwardfor
+Adiciona o cabeçalho X-Forwarded-For nos pedidos enviados ao servidor.
+
+Como o HAProxy funciona em modo \emph{reverse proxy} os servidores irão ver o proxy como o seu cliente. Através desta opção torna-se possível registar o IP dos clientes nos ficheiros de log do sistema, uma vez que o IP do cliente é adicionado ao cabeçalho do pedido HTTP.
+    
+    \item http-request set-header X-Forwarded-Port
+    
+Define a X-Forwarded-Port como sendo o valor de dst\_port, que será a porta de destino do pedido do cliente.
+    
+    \item http-request add-header
+    
+    
+    \item option httpchk
+Permite análises do estado dos servidores através do protocolo HTTP. Por defeito esta análise consiste em tentar estabelecer uma ligação TCP com sucesso.
+
+\end{itemize}
 
 \begin{minted}[bgcolor=bg, 
                fontsize=\footnotesize, 
@@ -713,6 +1237,29 @@ listen admin
     stats auth admin:secret
 \end{minted}
 
+O listen permite definir onde um ou mais servidores irão estar à escuta.
+
+\begin{itemize}
+    \item bind
+Através do bind é definida a porta e o IP em que o servidor irá estar disponível.
+
+    \item stats enable
+Permite a realização de um relatório estatístico.
+
+    \item stats uri /
+Permite o relatório estatístico e define o \emph{Uniform Resource Identifier} (URI) para aceder ao mesmo.    
+
+    \item hide-version
+Esconde a versão do HAProxy no relatório estatístico.
+
+Por defeito uma das informações incluídas no relatório estatístico é a versão do HAProxy a ser atualizada naquele momento. No entanto esta é uma informação que caso seja fornecida pode facilitar a procura e exploração de fraquezas conhecidas da versão, por este motivo é aconselhável usar a opção hide-version para excluir a versão do relatório.
+
+    \item stats auth admin:secret
+Permite estatísticas com autenticação garantindo acesso a uma conta, restringindo simultaneamente o acesso apenas para as contas criadas.
+
+É possível criar tantas contas necessário, no entanto, é recomendado que se use palavras chave de outras contas uma vez que estas vão viajar como \emph{cleartext} através dos pedidos HTTP com autenticação básica e uma vez que estas estarão disponíveis no ficheiro de configurações. 
+
+\end{itemize}
 
 
 
@@ -745,7 +1292,7 @@ Usar o mint para colocar partes do texto de configuração.
 ]{text}
 /home/git/gitlab/log/
 \end{minted}
-
+\fi
 
 
 
@@ -757,35 +1304,141 @@ Usar o mint para colocar partes do texto de configuração.
 \newpage
 \section{Componentes críticos}
 
-Através da análise da arquitetura do \emph{GitLab}, conseguimos detetar facilmente, os componentes que garantem a alta disponibilidade da aplicação que, sem os quais, tornariam o seu desempenho critico e indesejável.
+Através da análise da arquitetura do \emph{GitLab}, é possível detetar os componentes críticos sem os quais comprometeriam a disponibilidade e consistência da aplicação \emph{GitLab}. Em baixo mostramos os elementos considerados críticos.
 
-\begin{center}
+\begin{table}[ht]
+    \centering
+    \begin{adjustbox}{width=1\textwidth}
     \small
-    \begin{tabular}{ | l | p{6cm} | p{6cm} |}
-    \hline
-    \textbf{Componente} & \textbf{Motivo} & \textbf{Solução} \\ \hline
-    \textit{HAProxy} & Utilizado para balancear tráfego entre os diferentes componentes como o PostgreSQL ou pedidos como o Redis. & Pag 21. \\ \hline
-    \textit{Keepalived} &Responsável por manter sempre duas instâncias de HAProxy ativas. & pag 21. \\
-    \hline
-    \textit{Redis Sentinel} & Incubido de 
+    \begin{tabular}{ | p{4cm} | p{7cm} | p{7cm} |}
+        \hline
+        \textbf{Componente} & \textbf{Motivo} & \textbf{Solução} \\ \hline
+        \textit{HAProxy} & Utilizado para balancear tráfego entre os diferentes componentes como o PostgreSQL ou pedidos como o Redis, originando um ponto de falha central & Uma das soluções passa por usar o \textit{Keepalived} para possibilitar a partilha do endereço IP por diversas instâncias de servidores diferentes. \\ \hline
+        \textit{Keepalived} &Responsável por manter sempre duas instâncias de HAProxy ativas. & Quantas mais instâncias do servidor de HAProxy estiverem ativas maior será a disponibilidade. \\
+        \hline
+        \textit{Redis Sentinel} & Ferramentas de automação que atualizam os ficheiros de configuração poderão causar erros ou até mesmo a falha do sistema. & É importante que caso sejam usadas ferramentas de automação para criar os ficheiros iniciais, estas não atualizem constantemente o ficheiro, uma vez que por defeito a maioria das ferramentas tenta manter o ficheiro consistente e o \textit{Redis Sentinel} necessita que alterações vão ocorrendo.  \\
+        \hline
+        \textit{Sistema de Ficheiros Distribuído} & Numa aplicação como o git, se todos os restantes componentes estiverem disponíveis e não tiverem acesso ao sistema de ficheiros, a aplicação está basicamente inutilizável. & GPFS é um sistema de ficheiros paralelo responsável por assegurar redundância e tempos de leitura eficientes da base de dados.\\
+        \hline
     \end{tabular}
-\end{center}
-
-
-
-\section{Diferentes cenários}
-\subsection{Pequena escala}
-\subsection{Grande escala}
+    \end{adjustbox}
+\end{table} 
 
 
 
 
 % ---------------------------------------------------------------
+\iffalse
+\subsection{Escalabilidade de uma aplicação}
+
+Empresas que usufruam de um sistema como o \emph{GitLab}, podem, por vezes, atingir um \emph{treshold} devido ao aumento do número de utilizadores a usar a aplicação.
+
+Situações como estas devem ser tidas em conta durante o processo criação da infraestrutura. 
+
+De seguida, serão abordadas duas possíveis implementações que permitem explorar a escalabilidade de um sistema.
+
+\subsubsection{Escalabilidade simples}
+
+É uma solução mais simples e mais económica que permite que, compomentes como o \emph{PostgreSQL}, o \emph{Redis} e unidades de armazenamento de dados, sejam executados em nós computacionais distintos e, componentes da enquanto da camada aplicacional corram em dois ou mais nós.
+
+Um exemplo desta arquitetura seria:
+\begin{itemize}
+    \item 1 nó a servir o \emph{PostgreSQL};
+    \item 1 nó a servir o \emph{Redis};
+    \item 1 nó a servir o \empty{Gitaly} e \emph{NFS};
+    \item 2 ou mais nós a correr a aplicação \emph{GitLab} com componentes distribuídos entre si (\emph{Unicorn}, \emph{Workhorse}, \emph{Sideqik}).
+\end{itemize}
+
+
+\subsubsection{Escalabilidade completa}
+
+Para instalações que necessitem de uma maior escalabilidade, é necessário separar ainda mais os diferentes componentes da arquitetura \emph{GitLab}.
+
+Numa arquitetura assim, é necessário separar os diferentes componentes parte aplicacional. Isto surge quando há a necessidade de aumentar constantemente a \emph{queue} de tarefas que o \emph{Sidekiq} apresenta, indicando que não há recursos suficientes para responder aos pedidos.
+
+Um exemplo desta arquitetura seria:
+\begin{itemize}
+    \item 1 nó a servir o \emph{PostgreSQL};
+    \item 1 nó a servir o \emph{Redis};
+    \item 2 ou mais nós a servir o \empty{Gitaly} e \emph{NFS};
+    \item 2 ou mais nós a servir o \emph{Sidekiq};
+    \item 2 ou mais nós a correr a aplicação \emph{GitLab} com componentes distribuídos entre si (\emph{Unicorn}, \emph{Workhorse}).
+\end{itemize}
+\fi
+
+
+
+% ---------------------------------------------------------------
+\subsection{Disponibilidade e escalabilidade da aplicação \emph{GitLab}}
+
+Como já foi referido anteriormente, aplicações como o \emph{GitLab} requerem uma alta disponibilidade, ou seja, não podem existir falhas que comprometam a atividade do sistema, quer seja pelos custos envolvidos quer seja pela confiança dos utilizadores.
+
+Na estruturação de uma arquitetura que sustente o \emph{GitLab}, é necessário ter em conta que o sistema pode e vai falhar, pelo que devem ser tomadas medidas que contornem esta situação.
+
+Dependendo da tolerância máxima a falhas, a alta disponibilidade está diretamente relacionada com soluções mais complexas que irão necessitar de mais trabalho no processo de instalação e manutenção.
+
+Nas seguintes secções, iremos abordar três arquiteturas que garantem escalabilidade e disponibilidade da aplicação \emph{GitLab}.
+
+
+\subsubsection{Arquitetura horizontal}
+
+Esta é a solução mais simples que implementa grande disponibilidade e escalabilidade. É também a que requer menos servidores individuais (físicos ou virtuais), mas também tem algumas desvantagens em relação às outras.
+
+Esta arquitetura será suficiente para a maioria dos utilizadores. Contudo, utilizadores mais ambiciosos podem começar notar que certos eventos causam congestionamento. Por exemplo, clonar muitos repositórios de grande dimensão com ficheiros binários, utilização de APIs, elevado número de tarefas no \emph{Sideqik}, etc. Caso isto aconteça, deve ser considerada a migração para uma das arquiteturas, que irão ser vistas mais à frente.
+
+Para cenário, um exemplo dos elementos do sistema, seria:
+
+\begin{itemize}
+    \item Dois nodos para \emph{PostgresSQL}
+    \item Dois nodos para \emph{Redis}
+    \item Três nodos para \emph{Consul}/\emph{Sentinel}
+    \item Dois ou mais nodos aplicacionais \emph{GitLab} (\emph{Unicorn}, \emph{Workhorse}, \emph{Sideqik})
+    \item Um servidor NFS/\emph{Gitaly}
+\end{itemize}
+
+\subsubsection{Arquitetura híbrida}
+
+Nesta arquitetura, certos componentes são separados em nodos dedicados, de maneira a que a sua sobrecarga não interfira com os outros nodos. Em cenários maiores, esta é uma boa arquitetura que deve ser usada quando, existe, ou é previsível que haja, congestionamento devido à sobrecarga dos nodos.
+
+Um exemplo prático dos componentes requeridos para estar arquitetura é:
+
+\begin{itemize}
+    \item Dois nodos para \emph{PostgresSQL}
+    \item Dois nodos para \emph{Redis}
+    \item Três nodos para \emph{Consul}/\emph{Sentinel}
+    \item Dois ou mais nodos para \emph{Sideqik}
+    \item Dois ou mais nodos para \emph{Web} (\emph{Unicorn}, \emph{Workhorse}, \emph{Sideqik})
+    \item Um ou mais nodos para servidores NFS/\emph{Gitaly}
+\end{itemize}
+
+\subsubsection{Completamente Distribuída}
+
+Esta arquitetura pode escalar para centenas de milhares de utilizadores e projetos, o que é o principio da arquitetura do \emph{GitLab}. No entanto, sendo a escalabilidade bastante melhor, esta vem com uma elevada complexidade, devido à necessidade de configurar bastantes mais nodos e a sua gestão e monitorização.
+
+Um exemplo de elementos necessários, para implementar uma solução completamente distribuída seria:
+
+\begin{itemize}
+    \item Dois nodos para \emph{PostgresSQL}
+    \item Quatro ou mais nodos para \emph{Redis}
+    \item Três nodos para \emph{Consul}
+    \item Três nodos para \emph{Sentinel}
+    \item Múltiplos nodos \emph{Sideqik} dedicados
+    \item Dois ou mais nodos para \emph{Git}
+    \item Dois ou mais nodos para a \emph{API} (Todos os pedidos para api)
+    \item Dois ou mais nodos para \emph{Web} (Todos os outros pedidos \emph{web})
+    \item Dois ou mais nodos para servidores NFS \emph{Gitaly}
+\end{itemize}
+
+% ---------------------------------------------------------------
 \newpage
 \section{Conclusão}
-
-A arquitetura do \emph{GitLab} está dividia em diferentes componentes que fazem do \emph{GitLab} uma aplicação bastante disponível ao utilizador. Esta arquitetura é facilmente relacionada a um sistema distribuído bastante complexo onde existem componentes que podem ser reutilizados no âmbito de outra aplicação.
-
+\par Numa primeira fase, tornou-se claro que antes de qualquer \emph{deployment} de uma plataforma com o \emph{GitLab} é necessário um estudo prévio da arquitetura por motivos de \emph{High Avaibility} conforme os objetivos futuros da implementação desta. Por estas razões, é necessário dissecar a arquitetura nos seus vários componentes e compreender as funcionalidades e objetivos destes, assim como as relações existentes entre os vários. Apenas desta forma o utilizador irá conseguir criar uma plataforma \emph{GitLab} que corresponda aos seus interesses. 
+\par
+Assim sendo, o \emph{GitLab} é facilmente reconhecido como um sistema distribuído bastante complexo em constante desenvolvimento, com vista a poder responder a cada vez mais utilizadores, desde simples programadores com projetos individuais, até grandes empresas tecnológicas onde cada componente pode ser reutilizado noutro tipo de plataformas, devido ao cuidado com que foi desenvolvido e à sua documentação.
+Esta arquitetura é facilmente relacionada a um sistema distribuído bastante complexo onde existem componentes que podem ser reutilizados no âmbito de outra aplicação.
+\par Outro grande fator que deve motivar o estudo da arquitetura é o custo financeiro da própria escalabilidade, onde este pode escalar e ter um desempenho que não corresponda às expectativas de quem a está a implementar.
+\par Para finalizar, após um estudo intensivo da arquitetura e após identificar os componentes críticos desta e tendo em consideração todos os tópicos descritos neste relatório, é seguro dizer que o processo de \emph{deployment} a realizar numa próxima fase deste projeto, irá respeitar o plafon disponível pela equipa de trabalho..
+ 
 % ---------------------------------------------------------------
 \newpage
 \section{Referências}
@@ -798,11 +1451,6 @@ GitLab Architecture Overview, GitLab Documentation. Acedido em \today, em \url{h
 
 \bigbreak
 GitLab High Availability, GitLab Documentation. Acedido em \today, em \url{https://goo.gl/Dt93fF}
-
-
-
-
-
 
 
 
