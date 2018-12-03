@@ -1,0 +1,38 @@
+global
+  user {{ haproxy_user }}
+  group {{ haproxy_group }}
+  daemon
+{% for global_var in haproxy_global_vars %}
+  {{ global_var }}
+{% endfor %}
+
+defaults
+  mode http
+  timeout connect 5000ms
+  timeout client 50000ms
+  timeout server 50000ms
+
+listen stats # Define a listen section called "stats"
+  bind :9000 # Listen on localhost:9000
+  mode http
+  stats enable  # Enable stats page
+  stats hide-version  # Hide HAProxy version
+  stats realm Haproxy\ Statistics  # Title text for popup window
+  stats uri /stats  # Stats URI
+  stats auth root:root  # Authentication credentials
+
+frontend {{ haproxy_frontend_name }}
+    bind {{ haproxy_frontend_bind_address }}:{{ haproxy_frontend_port }}
+    mode {{ haproxy_frontend_mode }}
+    default_backend {{ haproxy_backend_name }}
+
+backend {{ haproxy_backend_name }}
+    mode {{ haproxy_backend_mode }}
+    balance {{ haproxy_backend_balance_method }}
+    server server1 10.240.0.2:5000 check fall 2 rise 1
+    server server2 10.240.0.3:5000 check fall 2 rise 1
+    {#  
+    {% for backend in haproxy_backend_servers %}
+      server {{ hostvars[backend]['ansible_%s' | format(ansible_interfaces[0])].ipv4.address }} 
+    {% endfor %}
+    #}

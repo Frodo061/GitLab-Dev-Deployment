@@ -1,0 +1,78 @@
+- name: GitLab's provisioning and deployment
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - role: gcp
+      vars:
+        gcp_zone: us-east1-b
+        gcp_region: us-east1
+        gcp_project: copper-gear-221110
+        gcp_cred_kind: serviceaccount
+        gcp_cred_file: ../.gcloud/gcloud.json
+        gcp_machine_type: n1-standard-2
+        source_image: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20181030
+        disk_size: 12
+        disks:
+          - disk-01
+          - disk-02
+          - disk-03
+        addresses:
+          - addr-1
+          - addr-2
+          - addr-3
+        instances:
+          - { index: 1, tag: gitlab, name: gitlab-1 }
+          - { index: 2, tag: gitlab, name: gitlab-2 }
+          - { index: 3, tag: haproxy, name: haproxy-1 }
+
+
+- name: Installing HAproxy
+  hosts: haproxy
+  become: yes
+  roles:
+    - role: haproxy
+      vars:
+        # global
+        haproxy_user: haproxy
+        haproxy_group: haproxy
+        haproxy_global_vars:
+          - maxconn 256
+        # frontend
+        haproxy_frontend_name: 'http-frontend'
+        haproxy_frontend_bind_address: '*'
+        haproxy_frontend_port: 80
+        haproxy_frontend_mode: http
+        # backend
+        haproxy_backend_name: 'http-backend'
+        haproxy_backend_balance_method: roundrobin
+        haproxy_backend_mode: http
+        haproxy_backend_servers: "{{ groups['gitlab'] }}" # server {{ backend.name }} {{ backend.address }} check fall 2 rise 1
+
+
+# - name: Installing GitLab
+#   hosts: gitlab
+#   become: yes
+#   tasks:
+#     - name: Check if GitLab is already installed.
+#       stat: path=/usr/bin/gitlab-ctl
+#       register: gitlab_file
+# 
+#     - name: Download GitLab repository installation script
+#       get_url:
+#         url: "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh"
+#         dest: /tmp/gitlab.sh
+#         validate_certs: true
+#       when: not gitlab_file.stat.exists
+# 
+#     - name: Run GitLab installation script
+#       command: bash /tmp/gitlab.sh
+#       when: not gitlab_file.stat.exists
+# 
+#     - name: Install GitLab
+#       package:
+#         name: "gitlab-ee"
+#         state: present
+#       when: not gitlab_file.stat.exists
+
+

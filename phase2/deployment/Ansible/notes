@@ -1,0 +1,51 @@
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+
+https://docs.gitlab.com/ee/administration/high_availability/load_balancer.html
+
+NGINX:
+    https://gitlab.com/gitlab-org/gitlab-recipes/tree/master/web-server/nginx
+REDIS:
+    https://docs.gitlab.com/ee/administration/high_availability/redis.html
+BD:
+    https://docs.gitlab.com/ee/administration/high_availability/database.html
+
+
+--------------------------------
+--------------------------------
+--------------------------------
+HAPROXY
+--------------------------------
+sudo systemctl start haproxy
+sudo vim /etc/haproxy/haproxy.cfg
+sudo haproxy -f /etc/haproxy/haproxy.cfg -c
+https://www.serverlab.ca/tutorials/linux/network-services/how-to-configure-haproxy-health-checks/
+--------------------------------
+global
+        daemon
+        maxconn 256
+
+defaults
+        mode http
+        timeout connect 5000ms
+        timeout client 50000ms
+        timeout server 50000ms
+
+listen stats # Define a listen section called "stats"
+        bind :9000 # Listen on localhost:9000
+        mode http
+        stats enable  # Enable stats page
+        stats hide-version  # Hide HAProxy version
+        stats realm Haproxy\ Statistics  # Title text for popup window
+        stats uri /stats  # Stats URI
+        stats auth root:root  # Authentication credentials
+
+frontend http-in
+        bind *:80
+        default_backend servers
+
+backend servers
+        balance roundrobin
+        mode http
+        server server1 10.240.0.2:5000 check fall 2 rise 1
+        server server2 10.240.0.4:5000 check fall 2 rise 1
