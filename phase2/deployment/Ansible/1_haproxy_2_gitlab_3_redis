@@ -1,0 +1,80 @@
+One GitLab - Three Redis Three Sentinels
+
+sudo apt-get install redis-tools
+redis-cli -h 10.240.0.5 -p 6379 -a redis-password-goes-here INFO
+redis-cli -h 10.240.0.5 -p 6379 -a redis-password-goes-here DEBUG sleep 20
+------------------------------------------------
+------------------------------------------------
+
+> GitLab
+------------------------------------------------
+external_url "http://10.240.0.2"
+nginx['listen_port'] = 5000
+
+# REDIS
+redis['enable'] = false
+gitlab_rails['redis_host'] = '10.240.0.5'
+gitlab_rails['redis_port'] = 6379
+gitlab_rails['redis_password'] = 'redis-password-goes-here'
+
+# REDIS SENTINEL
+redis['master_name'] = 'gitlab-redis'
+redis['master_password'] = 'redis-password-goes-here'
+
+gitlab_rails['redis_sentinels'] = [
+  {'host' => '10.240.0.5', 'port' => 26379},
+  {'host' => '10.240.0.6', 'port' => 26379},
+  {'host' => '10.240.0.7', 'port' => 26379}
+]
+
+
+
+
+> Redis Master
+------------------------------------------------
+# REDIS
+redis_master_role['enable'] = true
+redis['bind'] = '10.240.0.5'
+redis['port'] = 6379
+redis['password'] = 'redis-password-goes-here'
+
+# REDIS MASTER
+redis['master_ip'] = '10.240.0.5'
+redis['master_name'] = 'gitlab-redis'
+redis['master_port'] = 6379
+redis['master_password'] = 'redis-password-goes-here'
+
+# REDIS SENTINEL
+redis_sentinel_role['enable'] = true
+sentinel['bind'] = '10.240.0.5'
+sentinel['port'] = 26379
+sentinel['quorum'] = 1
+# sentinel['down_after_milliseconds'] = 10000
+# sentinel['failover_timeout'] = 60000
+
+gitlab_rails['auto_migrate'] = false
+
+
+> Redis Slaves
+------------------------------------------------
+# REDIS
+redis_slave_role['enable'] = true
+redis['bind'] = '10.240.0.6'
+redis['port'] = 6379
+redis['password'] = 'redis-password-goes-here'
+
+# REDIS MASTER
+redis['master_ip'] = '10.240.0.5'
+redis['master_name'] = 'gitlab-redis'
+redis['master_port'] = 6379
+redis['master_password'] = 'redis-password-goes-here'
+
+# REDIS SENTINEL
+redis_sentinel_role['enable'] = true
+sentinel['bind'] = '10.240.0.6'
+sentinel['port'] = 26379
+sentinel['quorum'] = 1
+# sentinel['down_after_milliseconds'] = 10000
+# sentinel['failover_timeout'] = 60000
+
+gitlab_rails['auto_migrate'] = false

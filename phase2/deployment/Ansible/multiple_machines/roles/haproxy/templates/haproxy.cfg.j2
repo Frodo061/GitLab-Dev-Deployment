@@ -22,17 +22,13 @@ listen stats # Define a listen section called "stats"
   stats auth root:root  # Authentication credentials
 
 frontend {{ haproxy_frontend_name }}
-    bind {{ haproxy_frontend_bind_address }}:{{ haproxy_frontend_port }}
-    mode {{ haproxy_frontend_mode }}
-    default_backend {{ haproxy_backend_name }}
+  bind {{ haproxy_frontend_bind_address }}:{{ haproxy_frontend_port }}
+  mode {{ haproxy_frontend_mode }}
+  default_backend {{ haproxy_backend_name }}
 
 backend {{ haproxy_backend_name }}
-    mode {{ haproxy_backend_mode }}
-    balance {{ haproxy_backend_balance_method }}
-    server server1 10.240.0.2:5000 check fall 2 rise 1
-    server server2 10.240.0.3:5000 check fall 2 rise 1
-    {#  
-    {% for backend in haproxy_backend_servers %}
-      server {{ hostvars[backend]['ansible_%s' | format(ansible_interfaces[0])].ipv4.address }} 
-    {% endfor %}
-    #}
+  mode {{ haproxy_backend_mode }}
+  balance {{ haproxy_backend_balance_method }}
+  {% for backend in haproxy_backend_servers %}
+    server gitlab-{{ '%d' | format(loop.index) }} {{ hostvars[backend]['ansible_default_ipv4']['address'] }}:5000 check fall 2 rise 1
+  {% endfor %}

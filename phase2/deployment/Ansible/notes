@@ -12,6 +12,81 @@ BD:
 
 
 --------------------------------
+GITLAB
+--------------------------------
+external_url "http://10.240.0.2"
+nginx['listen_port'] = 5000
+
+redis['enable'] = false
+## Must be the same in every sentinel node
+redis['master_name'] = 'gitlab-redis'
+
+## The same password for Redis authentication you set up for the master node.
+redis['master_password'] = 'redis-password-goes-here'
+
+## A list of sentinels with `host` and `port`
+gitlab_rails['redis_sentinels'] = [
+  {'host' => '10.240.0.5', 'port' => 26379},
+  {'host' => '10.240.0.6', 'port' => 26379},
+  {'host' => '10.240.0.7', 'port' => 26379}
+]
+--------------------------------
+--------------------------------
+
+
+--------------------------------
+REDIS MASTER
+--------------------------------
+roles ['redis_master_role']
+
+roles ['redis_sentinel_role']
+redis['master_name'] = 'gitlab-redis'
+redis['master_password'] = 'redis-password-goes-here'
+redis['master_ip'] = '10.240.0.5'
+redis['master_port'] = 6379
+sentinel['bind'] = '10.240.0.5'
+sentinel['port'] = 26379
+sentinel['quorum'] = 2
+
+redis['bind'] = '10.240.0.5'
+redis['port'] = 6379
+redis['password'] = 'redis-password-goes-here'
+gitlab_rails['auto_migrate'] = false
+
+sudo gitlab-ctl reconfigure
+--------------------------------
+--------------------------------
+
+
+--------------------------------
+REDIS SLAVE
+--------------------------------
+roles ['redis_slave_role']
+
+roles ['redis_sentinel_role']
+redis['master_name'] = 'gitlab-redis'
+redis['master_password'] = 'redis-password-goes-here'
+sentinel['bind'] = '10.240.0.7'
+sentinel['port'] = 26379
+sentinel['quorum'] = 2
+
+
+redis['bind'] = '10.240.0.7'
+redis['port'] = 6379
+redis['password'] = 'redis-password-goes-here'
+
+redis['master_ip'] = '10.240.0.5'
+redis['master_port'] = 6379
+
+gitlab_rails['auto_migrate'] = false
+
+sudo touch /etc/gitlab/skip-auto-reconfigure
+sudo gitlab-ctl reconfigure
+--------------------------------
+--------------------------------
+
+
+--------------------------------
 --------------------------------
 --------------------------------
 HAPROXY

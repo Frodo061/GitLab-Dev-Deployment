@@ -1,0 +1,22 @@
+---
+
+- name: Check if GitLab is already installed.
+  stat: path=/usr/bin/gitlab-ctl
+  register: gitlab_file
+
+- name: Download GitLab repository installation script
+  get_url:
+    url: "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh"
+    dest: /tmp/gitlab.sh
+    validate_certs: true
+  when: not gitlab_file.stat.exists
+
+- name: Run GitLab installation script
+  command: bash /tmp/gitlab.sh
+  when: not gitlab_file.stat.exists
+
+- name: Install GitLab
+  package:
+    name: "gitlab-ee"
+    state: present
+  when: not gitlab_file.stat.exists

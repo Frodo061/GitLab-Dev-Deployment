@@ -1,0 +1,22 @@
+One GitLab - One Redis
+------------------------------------------------
+------------------------------------------------
+
+> GitLab
+------------------------------------------------
+external_url "http://35.237.115.161"
+nginx['listen_port'] = 80
+
+# REDIS
+redis['enable'] = false
+gitlab_rails['redis_host'] = '10.240.0.5'
+gitlab_rails['redis_port'] = 6379
+gitlab_rails['redis_password'] = 'redis-password-goes-here'
+
+> GitLab
+------------------------------------------------
+roles ['redis_master_role']
+redis['bind'] = '10.240.0.5'
+redis['port'] = 6379
+redis['password'] = 'redis-password-goes-here'
+gitlab_rails['auto_migrate'] = false

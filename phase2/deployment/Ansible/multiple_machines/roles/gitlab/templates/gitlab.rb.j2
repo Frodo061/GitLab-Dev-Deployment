@@ -1,0 +1,18 @@
+external_url "http://{{ gitlab_external_url }}"
+nginx['listen_port'] = {{ gitlab_nginx_listen_port }}
+
+# REDIS
+redis['enable'] = false
+gitlab_rails['redis_host'] = '{{ hostvars[redis_host]['ansible_default_ipv4']['address'] }}'
+gitlab_rails['redis_port'] = {{ redis_port }}
+gitlab_rails['redis_password'] = '{{ redis_password }}'
+
+# REDIS SENTINEL
+redis['master_name'] = '{{ redis_name }}'
+redis['master_password'] = '{{ redis_password }}'
+
+gitlab_rails['redis_sentinels'] = [
+  {'host' => '10.240.0.5', 'port' => 26379},
+  {'host' => '10.240.0.6', 'port' => 26379},
+  {'host' => '10.240.0.7', 'port' => 26379}
+]

@@ -54,6 +54,8 @@
       - ip_protocol: tcp
         ports:
           - 5000
+          - 6379
+          - 26379
     source_ranges:
       - 10.128.0.0/9
     network: "global/networks/{{ network.name }}"

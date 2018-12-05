@@ -17,62 +17,87 @@
           - disk-01
           - disk-02
           - disk-03
+          - disk-04
+          - disk-05
+          - disk-06
         addresses:
           - addr-1
           - addr-2
           - addr-3
+          - addr-4
+          - addr-5
+          - addr-6
         instances:
           - { index: 1, tag: gitlab, name: gitlab-1 }
           - { index: 2, tag: gitlab, name: gitlab-2 }
           - { index: 3, tag: haproxy, name: haproxy-1 }
+          - { index: 4, tag: redis, name: redis-master }
+          - { index: 5, tag: redis, name: redis-2 }
+          - { index: 6, tag: redis, name: redis-3 }
 
+#- name: Installing HAproxy
+#  hosts: 
+#    - haproxy
+#    - gitlab
+#  become: yes
+#  gather_facts: yes
+#  roles:
+#    - role: haproxy
+#      vars:
+#        # global
+#        haproxy_user: haproxy
+#        haproxy_group: haproxy
+#        haproxy_global_vars:
+#          - maxconn 256
+#        # frontend
+#        haproxy_frontend_name: 'http-frontend'
+#        haproxy_frontend_bind_address: '*'
+#        haproxy_frontend_port: 80
+#        haproxy_frontend_mode: http
+#        # backend
+#        haproxy_backend_name: 'http-backend'
+#        haproxy_backend_balance_method: roundrobin
+#        haproxy_backend_mode: http
+#        haproxy_backend_servers: "{{ groups['gitlab'] }}"
+#      when: inventory_hostname not in groups.gitlab
 
-- name: Installing HAproxy
-  hosts: haproxy
+- name: Installing Omnibus
+  hosts:
+    - gitlab
+    - redis
   become: yes
+  gather_facts: yes
   roles:
-    - role: haproxy
+    - role: omnibus
+    - role: gitlab
       vars:
-        # global
-        haproxy_user: haproxy
-        haproxy_group: haproxy
-        haproxy_global_vars:
-          - maxconn 256
-        # frontend
-        haproxy_frontend_name: 'http-frontend'
-        haproxy_frontend_bind_address: '*'
-        haproxy_frontend_port: 80
-        haproxy_frontend_mode: http
-        # backend
-        haproxy_backend_name: 'http-backend'
-        haproxy_backend_balance_method: roundrobin
-        haproxy_backend_mode: http
-        haproxy_backend_servers: "{{ groups['gitlab'] }}" # server {{ backend.name }} {{ backend.address }} check fall 2 rise 1
+        gitlab_external_url: "{{ ansible_default_ipv4.address }}"
+        gitlab_nginx_listen_port: 5000
+        redis_name: gitlab-redis
+        redis_password: redis-password-goes-here
+        redis_host: "{{ groups['redis'][0] }}"
+        redis_port: 6379
+      when: inventory_hostname not in groups.redis
 
 
-# - name: Installing GitLab
-#   hosts: gitlab
-#   become: yes
-#   tasks:
-#     - name: Check if GitLab is already installed.
-#       stat: path=/usr/bin/gitlab-ctl
-#       register: gitlab_file
-# 
-#     - name: Download GitLab repository installation script
-#       get_url:
-#         url: "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh"
-#         dest: /tmp/gitlab.sh
-#         validate_certs: true
-#       when: not gitlab_file.stat.exists
-# 
-#     - name: Run GitLab installation script
-#       command: bash /tmp/gitlab.sh
-#       when: not gitlab_file.stat.exists
-# 
-#     - name: Install GitLab
-#       package:
-#         name: "gitlab-ee"
-#         state: present
-#       when: not gitlab_file.stat.exists
+#- name: Debug hostvars
+#  hosts: 
+#    - redis
+#  gather_facts: yes
+#  tasks:
+#    - debug:
+#        var: groups['redis'][0]
 
+#- name: Debug hostvars
+#  hosts: 
+#    - gitlab
+#  gather_facts: yes
+#  tasks:
+#    - debug:
+#        var: hostvars["{{groups['gitlab'][0]}}"]['ansible_default_ipv4']['address']
+#      # when: inventory_hostname not in groups.haproxy
 
+#- hosts: gitlab
+#  connection: local
+#  tasks:
+#    - debug: var=ansible_default_ipv4.address
