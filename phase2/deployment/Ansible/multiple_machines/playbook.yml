@@ -31,40 +31,41 @@
           - { index: 1, tag: gitlab, name: gitlab-1 }
           - { index: 2, tag: gitlab, name: gitlab-2 }
           - { index: 3, tag: haproxy, name: haproxy-1 }
-          - { index: 4, tag: redis, name: redis-master }
-          - { index: 5, tag: redis, name: redis-2 }
-          - { index: 6, tag: redis, name: redis-3 }
+          - { index: 4, tag: redis-master, name: redis-master }
+          - { index: 5, tag: redis-slave, name: redis-1 }
+          - { index: 6, tag: redis-slave, name: redis-2 }
 
-#- name: Installing HAproxy
-#  hosts: 
-#    - haproxy
-#    - gitlab
-#  become: yes
-#  gather_facts: yes
-#  roles:
-#    - role: haproxy
-#      vars:
-#        # global
-#        haproxy_user: haproxy
-#        haproxy_group: haproxy
-#        haproxy_global_vars:
-#          - maxconn 256
-#        # frontend
-#        haproxy_frontend_name: 'http-frontend'
-#        haproxy_frontend_bind_address: '*'
-#        haproxy_frontend_port: 80
-#        haproxy_frontend_mode: http
-#        # backend
-#        haproxy_backend_name: 'http-backend'
-#        haproxy_backend_balance_method: roundrobin
-#        haproxy_backend_mode: http
-#        haproxy_backend_servers: "{{ groups['gitlab'] }}"
-#      when: inventory_hostname not in groups.gitlab
+- name: Installing HAproxy
+  hosts: 
+    - haproxy
+    - gitlab
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: haproxy
+      vars:
+        # global
+        haproxy_user: haproxy
+        haproxy_group: haproxy
+        haproxy_global_vars:
+          - maxconn 256
+        # frontend
+        haproxy_frontend_name: 'http-frontend'
+        haproxy_frontend_bind_address: '*'
+        haproxy_frontend_port: 80
+        haproxy_frontend_mode: http
+        # backend
+        haproxy_backend_name: 'http-backend'
+        haproxy_backend_balance_method: roundrobin
+        haproxy_backend_mode: http
+        haproxy_backend_servers: "{{ groups['gitlab'] }}"
+      when: inventory_hostname not in groups.gitlab
 
 - name: Installing Omnibus
   hosts:
     - gitlab
-    - redis
+    - redis-master
+    - redis-slave
   become: yes
   gather_facts: yes
   roles:
@@ -75,10 +76,34 @@
         gitlab_nginx_listen_port: 5000
         redis_name: gitlab-redis
         redis_password: redis-password-goes-here
-        redis_host: "{{ groups['redis'][0] }}"
+        redis_host: "{{ groups['redis-master'][0] }}"
         redis_port: 6379
-      when: inventory_hostname not in groups.redis
-
+      when: inventory_hostname in groups.gitlab
+    - role: redis_master
+      vars:
+        redis_name: gitlab-redis
+        redis_password: redis-password-goes-here
+        redis_ip: "{{ ansible_default_ipv4.address }}"
+        redis_port: 6379
+        sentinel_ip: "{{ ansible_default_ipv4.address }}"
+        sentinel_port: 26379
+        sentinel_quorum: 2
+        sentinel_down_after: 10000 # 10000
+        sentinel_failover_timeout: 60000 # 60000
+      when: inventory_hostname in groups['redis-master']
+    - role: redis_slave
+      vars:
+        redis_name: gitlab-redis
+        redis_password: redis-password-goes-here
+        redis_master_ip: "{{ groups['redis-master'][0] }}"
+        redis_ip: "{{ ansible_default_ipv4.address }}"
+        redis_port: 6379
+        sentinel_ip: "{{ ansible_default_ipv4.address }}"
+        sentinel_port: 26379
+        sentinel_quorum: 2
+        sentinel_down_after: 3000 # 10000
+        sentinel_failover_timeout: 10000 # 60000
+      when: inventory_hostname in groups['redis-slave']
 
 #- name: Debug hostvars
 #  hosts: 
