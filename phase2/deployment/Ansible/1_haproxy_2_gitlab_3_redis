@@ -1,6 +1,6 @@
 One GitLab - Three Redis Three Sentinels
 
-sudo apt-get install redis-tools
+sudo apt-get install redis-tools -y
 redis-cli -h 10.240.0.5 -p 6379 -a redis-password-goes-here INFO
 redis-cli -h 10.240.0.5 -p 6379 -a redis-password-goes-here DEBUG sleep 20
 ------------------------------------------------
