@@ -1,0 +1,77 @@
+- name: Database's provisioning and deployment
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - role: gcp
+      vars:
+        gcp_zone: us-west1-b
+        gcp_region: us-west1
+        gcp_project: copper-gear-221110
+        gcp_cred_kind: serviceaccount
+        gcp_cred_file: ../.gcloud/gcloud.json
+        gcp_machine_type: n1-standard-2
+        source_image: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20181030
+        disk_size: 12
+
+        disks:
+          - consul-disk-01
+          - consul-disk-02
+          - consul-disk-03
+          - database-disk-04
+          - database-disk-05
+          - database-disk-06
+          - pgbouncer-disk-07
+
+        addresses:
+          - addr-1
+          - addr-2
+          - addr-3
+          - addr-4
+          - addr-5
+          - addr-6
+          - addr-7
+
+        instances:
+          - { index: 1, tag: [consul, omnibus], name: consul-1 }
+          - { index: 2, tag: [consul, omnibus], name: consul-2 }
+          - { index: 3, tag: [consul, omnibus], name: consul-3 }
+          - { index: 4, tag: [database-master, omnibus], name: database-master }
+          - { index: 5, tag: [database-slave, omnibus], name: database-1 }
+          - { index: 6, tag: [database-slave, omnibus], name: database-2 }
+          - { index: 7, tag: [pgbouncer, omnibus], name: pgbouncer }
+
+        # VPC main network
+        network_name: gitlab-network
+        # VPC subnet
+        subnetwork_name: database-network
+        subnetwork_ip_cidr_range: 10.20.0.0/16
+        subnetwork_external_rules_name: database-network-external-rules
+        subnetwork_internal_rules_name: database-network-internal-rules
+        subnetwork_private_ports: [5432, 6432, 8301]
+        subnetwork_public_ports: [22]
+
+- name: Debug (get all ip addrs)
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - debug:
+        msg: "{{ ansible_hostname }}"
+
+- name: Installing Omnibus
+  hosts:
+    - omnibus
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: omnibus
+
+- name: Installing Consul
+  hosts:
+    - consul
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: consul
+      vars:
+        - consul_hots: "{{ groups['consul'] }}"

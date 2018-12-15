@@ -30,5 +30,5 @@ backend {{ haproxy_backend_name }}
   mode {{ haproxy_backend_mode }}
   balance {{ haproxy_backend_balance_method }}
   {% for backend in haproxy_backend_servers %}
-    server gitlab-{{ '%d' | format(loop.index) }} {{ hostvars[backend]['ansible_default_ipv4']['address'] }}:5000 check fall 2 rise 1
+    server gitlab-{{ '%d' | format(loop.index) }} {{ hostvars[backend]['ansible_default_ipv4']['address'] }}:{{ haproxy_backend_port }} check fall 2 rise 1
   {% endfor %}

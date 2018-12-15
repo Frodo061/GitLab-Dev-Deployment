@@ -7,4 +7,6 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart gitlab
+
+- name: Reconfigure and start GitLab
+  command: gitlab-ctl reconfigure

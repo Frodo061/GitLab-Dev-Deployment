@@ -1,13 +1,12 @@
 ---
 
-- name: Copy GitLab-Redis configuration file.
+- name: Copy Consul configuration file.
   template:
-    src: redis_master.rb.j2
+    src: consul.j2
     dest: /etc/gitlab/gitlab.rb
     owner: root
     group: root
     mode: 0644
-    
 
-- name: Reconfigure master redis
+- name: Reconfigure and start Consul
   command: gitlab-ctl reconfigure

@@ -13,6 +13,7 @@
         gcp_machine_type: n1-standard-2
         source_image: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20181030
         disk_size: 12
+        
         disks:
           - disk-01
           - disk-02
@@ -20,6 +21,7 @@
           - disk-04
           - disk-05
           - disk-06
+        
         addresses:
           - addr-1
           - addr-2
@@ -27,18 +29,37 @@
           - addr-4
           - addr-5
           - addr-6
+        
         instances:
-          - { index: 1, tag: gitlab, name: gitlab-1 }
-          - { index: 2, tag: gitlab, name: gitlab-2 }
-          - { index: 3, tag: haproxy, name: haproxy-1 }
-          - { index: 4, tag: redis-master, name: redis-master }
-          - { index: 5, tag: redis-slave, name: redis-1 }
-          - { index: 6, tag: redis-slave, name: redis-2 }
+          - { index: 1, tag: [gitlab, omnibus], name: gitlab-1 }
+          - { index: 2, tag: [gitlab, omnibus], name: gitlab-2 }
+          - { index: 3, tag: [haproxy], name: haproxy-1 }
+          - { index: 4, tag: [redis-master, omnibus], name: redis-master }
+          - { index: 5, tag: [redis-slave, omnibus], name: redis-1 }
+          - { index: 6, tag: [redis-slave, omnibus], name: redis-2 }
+
+        # VPC main network
+        network_name: gitlab-network
+        # VPC subnet
+        subnetwork_name: application-network
+        subnetwork_ip_cidr_range: 10.10.0.0/16
+        subnetwork_external_rules_name: application-network-external-rules
+        subnetwork_internal_rules_name: application-network-internal-rules
+        subnetwork_private_ports: [6379, 8080, 26379]
+        subnetwork_public_ports: [22, 80, 9000]
+
+
+- name: Debug (get all ip addrs)
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - debug:
+        msg: "{{ ansible_hostname }}"
+
 
 - name: Installing HAproxy
   hosts: 
     - haproxy
-    - gitlab
   become: yes
   gather_facts: yes
   roles:
@@ -59,26 +80,24 @@
         haproxy_backend_balance_method: roundrobin
         haproxy_backend_mode: http
         haproxy_backend_servers: "{{ groups['gitlab'] }}"
-      when: inventory_hostname not in groups.gitlab
+        haproxy_backend_port: 8080
+
 
 - name: Installing Omnibus
   hosts:
-    - gitlab
-    - redis-master
-    - redis-slave
+    - omnibus
   become: yes
   gather_facts: yes
   roles:
     - role: omnibus
-    - role: gitlab
-      vars:
-        gitlab_external_url: "{{ ansible_default_ipv4.address }}"
-        gitlab_nginx_listen_port: 5000
-        redis_name: gitlab-redis
-        redis_password: redis-password-goes-here
-        redis_host: "{{ groups['redis-master'][0] }}"
-        redis_port: 6379
-      when: inventory_hostname in groups.gitlab
+
+
+- name: Installing Redis Master
+  hosts:
+    - redis-master
+  become: yes
+  gather_facts: yes
+  roles:
     - role: redis_master
       vars:
         redis_name: gitlab-redis
@@ -90,7 +109,14 @@
         sentinel_quorum: 2
         sentinel_down_after: 10000 # 10000
         sentinel_failover_timeout: 60000 # 60000
-      when: inventory_hostname in groups['redis-master']
+
+
+- name: Installing Redis Slave
+  hosts:
+    - redis-slave
+  become: yes
+  gather_facts: yes
+  roles:
     - role: redis_slave
       vars:
         redis_name: gitlab-redis
@@ -103,7 +129,30 @@
         sentinel_quorum: 2
         sentinel_down_after: 3000 # 10000
         sentinel_failover_timeout: 10000 # 60000
-      when: inventory_hostname in groups['redis-slave']
+
+
+- name: Installing GitLab
+  hosts:
+    - gitlab
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: gitlab
+      vars:
+        gitlab_external_url: "{{ ansible_default_ipv4.address }}"
+        gitlab_nginx_listen_port: 8080
+        redis_name: gitlab-redis
+        redis_password: redis-password-goes-here
+        redis_host: "{{ groups['redis-master'][0] }}"
+        redis_port: 6379 
+        sentinel_master_host: "{{ groups['redis-master'][0] }}"
+        sentinel_master_port: 26379
+        sentinel_slave_hosts: "{{ groups['redis-slave'] }}"
+        sentinel_slave_port: 26379
+        # db_host: 192.168.0.8
+        # db_port: 6432
+        # db_password: gitlab-consul
+    
 
 #- name: Debug hostvars
 #  hosts: 
