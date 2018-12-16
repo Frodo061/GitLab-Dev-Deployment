@@ -1,0 +1,24 @@
+---
+
+- name: Copy GitLab-Postgres slave configuration file.
+  template:
+    src: postgres_slave.j2
+    dest: /etc/gitlab/gitlab.rb
+    owner: root
+    group: root
+    mode: 0644
+
+#- name: Add IP address of all hosts to all hosts
+#  lineinfile:
+#    dest: /etc/hosts
+#    regexp: '.*{{ item }}$'
+#    line: "{{ hostvars[item].ansible_host }} {{item}}"
+#    state: present
+#  when: hostvars[item].ansible_host is defined
+#  with_items: "{{ groups.all }}"
+
+- name: Reconfigure slave postgres
+  command: gitlab-ctl reconfigure
+
+- name: Set up the repmgr standby
+  command: gitlab-ctl repmgr standby setup database-master.us-west1-b.c.copper-gear-221110.internal

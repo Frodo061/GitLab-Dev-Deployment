@@ -1,0 +1,22 @@
+roles ['postgres_role']
+
+postgresql['listen_address'] = '{{ listen_address }}'
+postgresql['hot_standby'] = 'on'
+postgresql['wal_level'] = 'replica'
+postgresql['shared_preload_libraries'] = 'repmgr_funcs'
+
+gitlab_rails['auto_migrate'] = false
+consul['services'] = %w(postgresql)
+
+postgresql['pgbouncer_user_password'] = '{{ pgbouncer_user_password }}'
+postgresql['sql_user_password'] = '{{ sql_user_password }}'
+postgresql['max_wal_senders'] = 4
+
+postgresql['trust_auth_cidr_addresses'] = %w({{ trust_auth_cidr_addresses }})
+repmgr['trust_auth_cidr_addresses'] = %w(127.0.0.1/32 {{ trust_auth_cidr_addresses }})
+
+consul['configuration'] = {
+    retry_join: %w({% for server in consul_hosts %} {{ hostvars[server]['ansible_default_ipv4']['address'] }} {% endfor %})
+}
+
+repmgr['master_on_initialization'] = false

@@ -10,3 +10,7 @@
 
 - name: Reconfigure and start GitLab
   command: gitlab-ctl reconfigure
+
+#- name: Ensure that all migrantions ran
+#  command: gitlab-rake gitlab:db:configure
+

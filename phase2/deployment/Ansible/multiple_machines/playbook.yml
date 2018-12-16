@@ -40,13 +40,15 @@
 
         # VPC main network
         network_name: gitlab-network
-        # VPC subnet
-        subnetwork_name: application-network
-        subnetwork_ip_cidr_range: 10.10.0.0/16
-        subnetwork_external_rules_name: application-network-external-rules
-        subnetwork_internal_rules_name: application-network-internal-rules
-        subnetwork_private_ports: [6379, 8080, 26379]
+        subnetwork_private_ports: [80, 5432, 6379, 6432, 8301, 26379]
         subnetwork_public_ports: [22, 80, 9000]
+        # VPC subnet
+        # subnetwork_name: application-network
+        # subnetwork_ip_cidr_range: 10.10.0.0/16
+        # subnetwork_external_rules_name: application-network-external-rules
+        # subnetwork_internal_rules_name: application-network-internal-rules
+        # subnetwork_private_ports: [6379, 8080, 26379]
+        # subnetwork_public_ports: [22, 80, 9000]
 
 
 - name: Debug (get all ip addrs)
@@ -58,7 +60,7 @@
 
 
 - name: Installing HAproxy
-  hosts: 
+  hosts:
     - haproxy
   become: yes
   gather_facts: yes
@@ -80,7 +82,7 @@
         haproxy_backend_balance_method: roundrobin
         haproxy_backend_mode: http
         haproxy_backend_servers: "{{ groups['gitlab'] }}"
-        haproxy_backend_port: 8080
+        haproxy_backend_port: 80
 
 
 - name: Installing Omnibus
@@ -127,8 +129,8 @@
         sentinel_ip: "{{ ansible_default_ipv4.address }}"
         sentinel_port: 26379
         sentinel_quorum: 2
-        sentinel_down_after: 3000 # 10000
-        sentinel_failover_timeout: 10000 # 60000
+        sentinel_down_after: 10000
+        sentinel_failover_timeout: 60000
 
 
 - name: Installing GitLab
@@ -140,7 +142,7 @@
     - role: gitlab
       vars:
         gitlab_external_url: "{{ ansible_default_ipv4.address }}"
-        gitlab_nginx_listen_port: 8080
+        gitlab_nginx_listen_port: 80
         redis_name: gitlab-redis
         redis_password: redis-password-goes-here
         redis_host: "{{ groups['redis-master'][0] }}"
@@ -149,9 +151,10 @@
         sentinel_master_port: 26379
         sentinel_slave_hosts: "{{ groups['redis-slave'] }}"
         sentinel_slave_port: 26379
-        # db_host: 192.168.0.8
-        # db_port: 6432
-        # db_password: gitlab-consul
+        db_host: 10.240.0.2 # 10.240.0.8 (pgbouncer)
+        db_port: 5432 # 6432 (pgbouncer)
+        db_username: gitlab
+        db_password: gitlab
     
 
 #- name: Debug hostvars

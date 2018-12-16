@@ -1,0 +1,20 @@
+roles ['pgbouncer_role']
+
+pgbouncer['admin_users'] = %w(pgbouncer gitlab-consul)
+pgbouncer['listen_addr'] = '{{ listen_addr }}'
+pgbouncer['listen_port'] = {{ listen_port }}
+
+consul['watchers'] = %w(postgresql)
+
+pgbouncer['users'] = {
+    'gitlab-consul': {
+        password: '{{ consul_user_password }}'
+    },
+    'pgbouncer': {
+        password: '{{ pgbouncer_user_password }}'
+    }
+}
+
+consul['configuration'] = {
+    retry_join: %w({% for server in consul_hosts %} {{ hostvars[server]['ansible_default_ipv4']['address'] }} {% endfor %})
+}

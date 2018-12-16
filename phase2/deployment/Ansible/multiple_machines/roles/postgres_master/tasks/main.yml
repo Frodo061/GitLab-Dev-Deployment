@@ -1,0 +1,21 @@
+---
+
+- name: Copy GitLab-Postgres master configuration file.
+  template:
+    src: postgres_master.j2
+    dest: /etc/gitlab/gitlab.rb
+    owner: root
+    group: root
+    mode: 0644
+
+#- name: Add IP address of all hosts to all hosts
+#  lineinfile:
+#    dest: /etc/hosts
+#    regexp: '.*{{ item }}$'
+#    line: "{{ hostvars[item].ansible_host }} {{item}}"
+#    state: present
+#  when: hostvars[item].ansible_host is defined
+#  with_items: "{{ groups.all }}"
+
+- name: Reconfigure postgres master
+  command: gitlab-ctl reconfigure

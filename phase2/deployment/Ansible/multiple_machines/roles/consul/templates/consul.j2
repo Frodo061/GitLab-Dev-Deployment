@@ -2,7 +2,7 @@ roles ['consul_role']
 
 consul['configuration'] = {
     server: true,
-    retry_join: %w({% for server in consul_hots %} {{ hostvars[server]['ansible_default_ipv4']['address'] }} {% endfor %})
+    retry_join: %w({% for server in consul_hosts %} {{ hostvars[server]['ansible_default_ipv4']['address'] }} {% endfor %})
 }
 
 gitlab_rails['auto_migrate'] = false

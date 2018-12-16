@@ -12,18 +12,18 @@ redis['master_name'] = '{{ redis_name }}'
 redis['master_password'] = '{{ redis_password }}'
 
 gitlab_rails['redis_sentinels'] = [
-
     {'host' => '{{ hostvars[sentinel_master_host]['ansible_default_ipv4']['address'] }}', 'port' => {{sentinel_master_port}}},
 {% for server in sentinel_slave_hosts %}
     {'host' => '{{ hostvars[server]['ansible_default_ipv4']['address'] }}', 'port' => {{sentinel_slave_port}}},
 {% endfor %}
-
 ]
 
+# DATABASE
+postgresql['enable'] = false
 
-# DATABASE (pgbouncer)
-# postgresql['enable'] = false
-# gitlab_rails['db_host'] = '{{ db_host }}'
-# gitlab_rails['db_port'] = {{ db_port }}
-# gitlab_rails['db_password'] = '{{ db_password }}'
-# gitlab_rails['auto_migrate'] = false
+gitlab_rails['db_host'] = '{{ db_host }}'
+gitlab_rails['db_port'] = {{ db_port }}
+gitlab_rails['db_username'] = '{{ db_username }}'
+gitlab_rails['db_password'] = '{{ db_password }}'
+
+gitlab_rails['auto_migrate'] = false
