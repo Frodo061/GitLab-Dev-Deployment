@@ -21,7 +21,7 @@ roles ['consul_role']
 
 consul['configuration'] = {
     server: true,
-    retry_join: %w(192.168.0.2 192.168.0.3 192.168.0.4)
+    retry_join: %w(10.20.0.2 10.20.0.3 10.20.0.4)
 }
 
 gitlab_rails['auto_migrate'] = false
@@ -30,7 +30,7 @@ gitlab_rails['auto_migrate'] = false
 # > DataBase Master
 # ------------------------------------------------
 # USERNAME: gitlab
-# PASSWORD: gitlab-consul
+# PASSWORD: gitlab
 # PASSWORD_HASH: b7a289c0600988fe8e709dd2887e4d37
 # ------------------------------------------------
 # export LC_CTYPE=en_US.UTF-8
