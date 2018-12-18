@@ -10,7 +10,7 @@
         gcp_project: copper-gear-221110
         gcp_cred_kind: serviceaccount
         gcp_cred_file: ../.gcloud/gcloud.json
-        gcp_machine_type: n1-standard-2
+        gcp_machine_type: n1-standard-1
         source_image: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20181030
         disk_size: 12
         
@@ -21,6 +21,7 @@
           - disk-04
           - disk-05
           - disk-06
+          - disk-07
         
         addresses:
           - addr-1
@@ -29,6 +30,7 @@
           - addr-4
           - addr-5
           - addr-6
+          - addr-7
         
         instances:
           - { index: 1, tag: [gitlab, omnibus], name: gitlab-1 }
@@ -37,19 +39,15 @@
           - { index: 4, tag: [redis-master, omnibus], name: redis-master }
           - { index: 5, tag: [redis-slave, omnibus], name: redis-1 }
           - { index: 6, tag: [redis-slave, omnibus], name: redis-2 }
+          - { index: 7, tag: [nfs], name: nfs }
 
         # VPC main network
         network_name: gitlab-network
-        subnetwork_private_ports: [80, 5432, 6379, 6432, 8301, 26379]
+        firewall_private_name: gitlab-private-firewall
+        firewall_public_name: gitlab-public-firewall
+        subnetwork_private_ports: [80, 2049, 5432, 6379, 6432, 8301, 26379]
         subnetwork_public_ports: [22, 80, 9000]
-        # VPC subnet
-        # subnetwork_name: application-network
-        # subnetwork_ip_cidr_range: 10.10.0.0/16
-        # subnetwork_external_rules_name: application-network-external-rules
-        # subnetwork_internal_rules_name: application-network-internal-rules
-        # subnetwork_private_ports: [6379, 8080, 26379]
-        # subnetwork_public_ports: [22, 80, 9000]
-
+        
 
 - name: Debug (get all ip addrs)
   hosts: all
@@ -133,6 +131,7 @@
         sentinel_failover_timeout: 60000
 
 
+# TODO: add haproxy external address as gitlab_external_url
 - name: Installing GitLab
   hosts:
     - gitlab
@@ -141,7 +140,7 @@
   roles:
     - role: gitlab
       vars:
-        gitlab_external_url: "{{ ansible_default_ipv4.address }}"
+        gitlab_external_url: "{{ ansible_default_ipv4.address }}" # TODO this
         gitlab_nginx_listen_port: 80
         redis_name: gitlab-redis
         redis_password: redis-password-goes-here
@@ -156,6 +155,13 @@
         db_username: gitlab
         db_password: gitlab
     
+- name: Installing NFS
+  hosts:
+    - nfs
+  roles:
+    - role: nfs
+      vars:
+        cidr_addresses: 10.240.0.0/16
 
 #- name: Debug hostvars
 #  hosts: 

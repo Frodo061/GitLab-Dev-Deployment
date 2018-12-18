@@ -1,0 +1,38 @@
+---
+
+- name: Ensure NFS utilities are installed.
+  apt:
+    name:
+      - nfs-kernel-server
+    state: present
+
+- name: Create gitlab-nfs directory
+  file:
+    path: /gitlab-nfs
+    state: directory
+
+- name: Create aux directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /gitlab-nfs/builds
+    - /gitlab-nfs/git-data
+    - /gitlab-nfs/home-git
+    - /gitlab-nfs/shared
+    - /gitlab-nfs/uploads
+
+- name: Copy exports file.
+  template:
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Reload nfs
+  command: 'exportfs -ra'
+
+- name: Ensure nfs is running.
+  service: "name=nfs-kernel-server state=started enabled=yes"
+  when: nfs_exports|length

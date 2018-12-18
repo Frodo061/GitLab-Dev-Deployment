@@ -8,16 +8,16 @@
     group: root
     mode: 0644
 
-- name: Reconfigure pgbouncer
-  command: gitlab-ctl reconfigure
-
-- name: Create and copy .pgpass
-  command: gitlab-ctl write-pgpass --host 127.0.0.1 --database pgbouncer --user pgbouncer --hostuser gitlab-consul
-  responses:
-      (?i)password: "pgbouncer"
-
-- name: Restart GitLab-Consul
-  command: gitlab-ctl restart consul
-
-- name: Restart GitLab-Pgbouncer
-  command: gitlab-ctl restart pgbouncer
+#- name: Reconfigure pgbouncer
+#  command: gitlab-ctl reconfigure
+#
+#- name: Create and copy .pgpass
+#  command: gitlab-ctl write-pgpass --host 127.0.0.1 --database pgbouncer --user pgbouncer --hostuser gitlab-consul
+#  responses:
+#    (?i)password: "pgbouncer"
+#
+#- name: Restart GitLab-Consul
+#  command: gitlab-ctl restart consul
+#
+#- name: Restart GitLab-Pgbouncer
+#  command: gitlab-ctl restart pgbouncer

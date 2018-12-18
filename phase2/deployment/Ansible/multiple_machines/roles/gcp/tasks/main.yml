@@ -35,7 +35,7 @@
 
 - name: internal/external firewall rules
   gcp_compute_firewall:
-    name: "internal-external-rules"
+    name: "{{ firewall_public_name }}"
     allowed:
       - ip_protocol: tcp
         ports: "{{ subnetwork_public_ports }}"
@@ -48,7 +48,7 @@
 
 - name: internal firewall rules
   gcp_compute_firewall:
-    name: "internal-rules"
+    name: "{{ firewall_private_name }}"
     allowed:
       - ip_protocol: tcp
         ports: "{{ subnetwork_private_ports }}"
@@ -68,8 +68,8 @@
       - auto_delete: true
         boot: true
         source: "{{ disk.results[item.index - 1] }}"
-    scheduling:
-      preemptible: true
+    # scheduling:
+    #   preemptible: true
     metadata:
       startup-script: |
         #!/bin/bash

@@ -1,0 +1,23 @@
+# SERVER
+sudo apt-get install nfs-kernel-server
+sudo mkdir /gitlab-nfs
+sudo vim /etc/exports
+    /gitlab-nfs 10.240.0.0/16(rw,sync,no_root_squash)
+sudo service nfs-kernel-server restart
+
+# CLIENT
+sudo apt-get install nfs-common
+sudo mount -t nfs4 -o proto=tcp,port=2049 10.240.0.9:/gitlab-nfs /gitlab-nfs
+
+sudo vim /etc/fstab
+10.240.0.9:/gitlab-nfs /gitlab-nfs nfs4 auto,noatime,nofail,nolock,intr,tcp,lookupcache=positive 0 2
+
+# df -h
+
+
+# GITLAB
+git_data_dirs({"default" => { "path" => "/gitlab-nfs/gitlab-data/git-data"} })
+user['home'] = '/gitlab-nfs/gitlab-data/home'
+gitlab_rails['uploads_directory'] = '/gitlab-nfs/gitlab-data/uploads'
+gitlab_rails['shared_path'] = '/gitlab-nfs/gitlab-data/shared'
+gitlab_ci['builds_directory'] = '/gitlab-nfs/gitlab-data/builds'
