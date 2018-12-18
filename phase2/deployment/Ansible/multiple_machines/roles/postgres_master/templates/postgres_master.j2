@@ -1,18 +1,6 @@
 roles ['postgres_role']
 
 postgresql['listen_address'] = '{{ listen_address }}'
-postgresql['port'] = {{ listen_port }}
-
-# NON High Availability
-# ----------------------------------------------------------------------------------------
-postgresql['trust_auth_cidr_addresses'] = %w(127.0.0.1/32 {{ trust_auth_cidr_addresses }})
-postgresql['sql_user'] = '{{ postgres_user }}'
-postgresql['sql_user_password'] = '{{ postgres_user_hash_password }}'
-# ----------------------------------------------------------------------------------------
-
-{#
-# High Availability
-# ----------------------------------------------------------------------------------------
 postgresql['hot_standby'] = 'on'
 postgresql['wal_level'] = 'replica'
 postgresql['shared_preload_libraries'] = 'repmgr_funcs'
@@ -30,5 +18,3 @@ repmgr['trust_auth_cidr_addresses'] = %w(127.0.0.1/32 {{ trust_auth_cidr_address
 consul['configuration'] = {
     retry_join: %w({% for server in consul_hosts %} {{ hostvars[server]['ansible_default_ipv4']['address'] }} {% endfor %})
 }
-# ----------------------------------------------------------------------------------------
-#}
