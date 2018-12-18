@@ -1,0 +1,415 @@
+% ---------------------------------------------------------------
+% TO COMPILE USE: pdflatex -shell-escape -jobname report *.tex
+% ---------------------------------------------------------------
+
+\documentclass[12pt,a4paper]{article}
+
+% ---------------------------------------------------------------
+% ALL PACKAGES
+% ---------------------------------------------------------------
+\usepackage[left=3cm,right=2.5cm,top=3cm,bottom=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage[dvipsnames,table,xcdraw]{xcolor}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{mathtools}
+\usepackage{outlines}
+\usepackage[normalem]{ulem}
+\usepackage{adjustbox}
+\usepackage{pdfpages}
+
+\usepackage{minted} %for code template
+\usemintedstyle{friendly}
+\definecolor{bg}{rgb}{0.96,0.96,0.96}
+
+
+
+
+
+\begin{document}
+% ---------------------------------------------------------------
+% FIRST PAGE
+% ---------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=2.2]{images/logo_um.jpg}
+    \end{figure}
+    {\huge\bfseries Universidade do Minho \par}
+    \vspace{0.5cm}
+    {\large Mestrado Integrado em Engenharia Informática \par}
+    \vspace{2cm}
+    {\Large \emph{System Deployment and Benchmarking} \par}
+    \vspace{2cm}
+    {\Large Fase 2 \par}
+    \vspace{0.2cm}
+    {\Large\bfseries Provisionamento, \emph{Deployment} e monitorização da aplicação GitLab \par}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{images/gitlab_logo.png}
+    \end{figure}
+    \vspace{2.5cm}
+    {\Large Grupo 4 \par}
+     \vspace{0.5cm}
+    {\Large\itshape João Alves (A77070)\par}
+    {\Large\itshape Gonçalo Raposo (A77211)\par}
+    {\Large\itshape Alexandre Dias (A78425)\par}
+    {\Large\itshape Hugo Oliveira (A78565)\par}
+    \vfill
+    {\large \today\par}
+    \centering
+\end{titlepage}
+
+
+
+
+% ---------------------------------------------------------------
+% ABSTRACT
+% ---------------------------------------------------------------
+\vspace*{\fill}
+\begin{abstract}
+O presente documento diz respeito à fase 1 do trabalho prático da unidade curricular \emph{System Deployment} e \emph{Benchmarking}.
+
+Este documento consiste numa análise da aplicação \emph{open source} \textit{GitLab}. Começaremos com uma breve explicação sobre a sua funcionalidade e, posteriormente, será descrita a arquitetura e os diferentes componentes que constituem a aplicação.
+
+Analisar-se-á ainda o ficheiro de configuração do \textit{GitLab} que servirá de complemento aos componentes da arquitetura do \emph{GitLab}.
+
+Por fim serão analisados os componentes críticos e as diferentes implementações da arquitetura do \emph{GitLab} que fazem dele uma aplicação altamente disponível.
+\end{abstract}
+\vspace*{\fill}
+\thispagestyle{empty}
+
+
+
+
+% ---------------------------------------------------------------
+% TABLE OF CONTENTS
+% ---------------------------------------------------------------
+\clearpage
+\tableofcontents
+\listoffigures
+\clearpage
+
+
+
+
+% ---------------------------------------------------------------
+% INTRODUCTION
+% ---------------------------------------------------------------
+\setcounter{page}{1}
+\section{Introdução}
+
+
+
+\bigbreak
+Numa primeira fase, vamos apresentar a aplicação \emph{GitLab} e os serviços que nos são oferecidos. Posteriormente, será demonstrada toda a arquitetura da aplicação, começando com uma comparação desta com um escritório físico. Mais tarde serão descritos todos os componentes que fazem parte da arquitetura do \emph{GitLab}.
+
+\bigbreak
+Para completarmos a informação relativa aos componentes da arquitetura do \emph{GitLab}, será apresentado o ficheiro de configuração da aplicação que permite configurar cada um dos diferentes componentes.
+
+\bigbreak
+Por fim, serão expostos os componentes críticos do \emph{GitLab} bem como as diferentes arquiteturas do \emph{GitLab} que tornam a aplicação altamente disponível.
+
+
+
+
+
+
+% ---------------------------------------------------------------
+% GITLAB
+% ---------------------------------------------------------------
+\newpage
+\section{\emph{GitLab}}
+Antes de podermos descrever toda a arquitetura e funcionamento do \emph{GitLab}, é necessário perceber o que é o \emph{\textbf{git}}.
+
+% ---------------------------------------------------------------
+\subsection{O que é o \emph{git}?}
+O \emph{git} é um sistema \emph{open source} que permite controlar versões de ficheiros de um projeto de uma forma rápida e eficaz.
+
+O uso de um sistema como este, permite, em projetos que possam envolver vários contribuidores, criar e editar ficheiros em simultâneo, bem como retroceder a versões mais antigas destes. Assim, existe a possibilidade de analisarmos toda a evolução de um projeto.
+
+% ---------------------------------------------------------------
+\subsection{O que é o \emph{GitLab}?}
+O \textbf{\emph{GitLab}} é uma plataforma grátis que permite hospedar projetos em servidores locais ou remotos, utilizando o \textbf{\emph{git}} para fazer o controlo de versões. O \emph{GitLab} é um concorrente \emph{open source} direto aos serviços \emph{GitHub} e \emph{Bitbucket}.
+
+Para além desta sua principal funcionalidade, a empresa \emph{GitLab} disponibiliza o código da sua aplicação para que qualquer utilizador possa a usar livremente num outro ambiente. Recentemente, foi disponibilizado uma imagem \emph{Docker} que permite instalar e correr o \emph{GitLab} facilmente. Para uma utilização que permita uma alta disponibilidade da aplicação, é necessário alterar e configurar os diferentes componentes da \emph{stack} aplicacional do \emph{GitLab}.
+
+% ---------------------------------------------------------------
+\subsection{\emph{GitLab Software Delivery}}
+Existem atualmente dois tipos de distribuição do \emph{GitLab}, a versão CE (\emph{Community Edition}) e a versão EE (\emph{Enterprise Edition}).
+
+\begin{itemize}
+    \item \textbf{\emph{Community Edition}}: é uma versão \emph{open source} que não necessita de qualquer apoio externo no processo de \emph{delivery} ou \emph{deployment}. Apresenta funcionalidades reduzidas.
+    \item \textbf{\emph{Enterprise Edition}}: ao contrários da versão anterior, esta inclui vários serviços para além dos incluidos na versão CE, entre estes, destacamos o suporte técnico especializado 24/7, a gestão adicional de servidores, desempenho e segurança, ferramentas de estatística. Esta versão apresenta diferentes preçários mensais.
+\end{itemize}
+
+
+
+% ---------------------------------------------------------------
+% ARQUITETURA DO GITLAB
+% ---------------------------------------------------------------
+\newpage
+\section{Arquitetura do \emph{GitLab}}\label{arq}
+
+A alta \textbf{disponibilidade} e \textbf{escabilidade} são, hoje em dia, condições importantes e obrigatórias em qualquer aplicação. Se estes requisitos não são cumpridos, os utilizadores podem querer migrar para outra aplicação idêntica.
+
+Um dos principais aspetos para a alta disponibilidade, consiste no acesso de várias instâncias da aplicação a uma base de dados. Isto é, para prevenirmos que uma aplicação se torne indisponível, são criadas várias réplicas da mesma. Estas réplicas são, no entanto, invisíveis ao utilizador, dado que este apenas vê a aplicação como uma única instância.
+
+Seguindo este raciocínio, o \emph{GitLab} foi desenhado sobre um padrão de várias camadas a trabalhar entre si. Como atualmente é cada vez mais difícil tornar uma aplicação completamente \emph{stateless}, devido à necessidade de armazenamento de informações, é importante separarmos os componentes com estado (como uma base de dados ou sistema de ficheiros) dos componentes sem estado, meramente aplicacionais. Como seria de esperar, isto gera complexidade no desenho e configuração da aplicação.
+
+O \emph{GitLab} possui cerca de 7 camadas aplicacionais distintas, projetadas e configuradas para assegurarem a alta disponibilidade. A imagem em baixo, demonstra a arquitetura do \emph{GitLab}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.47]{images/gitlab_architecture_diagram.png}
+  \caption{Arquitetura do \emph{GitLab}.}
+\end{figure}
+
+% ---------------------------------------------------------------
+\newpage
+\subsection{A arquitetura vista como um escritório físico}
+
+Toda a estrutura do \emph{GitLab} pode ser comparada como um escritório físico. Vejamos alguns componentes na seguinte lista.
+
+\begin{itemize}
+    \item \textbf{Os repositórios} serão os bens que o \emph{GitLab} gere. Estes armazenam as chamadas \textit{codebases}, que são constituídas por todo o código fonte que é usado para construir uma aplicação;
+    \item \textbf{\emph{Nginx}} pode ser visto como uma secretaria, onde os utilizadores se dirigem para requisitar certas operações, que serão realizadas pelos funcionários que lá trabalham;
+    \item \textbf{Armazenamento de dados} consiste numa série de armários que contêm ficheiros com informações sobre:
+    \begin{itemize}
+        \item os bens que são armazenados;
+        \item os utilizadores que se dirigem à secretaria.
+    \end{itemize}
+    \item \textbf{\emph{Redis}} é visto como uma espécie de quadro, que contém uma série de tarefas, para serem executadas pelos funcionários;
+    \item \textbf{\emph{Sidekiq}} pode ser comparado como um trabalhador, que recolhe as suas tarefas do quadro (\emph{Redis}), tratando principalmente do envio de emails;
+    \item \textbf{\emph{Unicorn worker}} é um operário que trata de tarefas rápidas/gerais, coletadas pelo quadro (Redis). Estas consistem principalmente em:
+    \begin{itemize}
+        \item verificar as permissões dos utilizadores , confirmando a sessão de cada um no \emph{Redis};
+        \item criar tarefas para o \emph{Sidekiq};
+        \item recolher dados presentes no armazenamento de dados.
+    \end{itemize}
+    \item \textbf{\emph{GitLab-shell}} pode ser visto também como um funcionário que recebe ordens (por \emph{SSH}), comunica com o \emph{Sidekiq} por via do \emph{Redis} e faz alguns pedidos rápidos aos \emph{Unicorn Workers} ou diretamente, ou por via do \emph{Nginx};
+    \item \textbf{\emph{Gitaly}} corresponde a uma espécie de escritório secundário que gere todas as operações feitas através do \emph{git}, desde monitorizar a sua eficiência, até manter cópias dos resultados de operações mais custosas.
+\end{itemize}
+
+Com esta simples introdução aos componentes da arquitetura do \emph{GitLab}, conseguimos visualizar o seu funcionamento.
+
+Nas secções a seguir, serão descritos todos os componentes presentes na arquitetura do \emph{GitLab}.
+
+
+% ---------------------------------------------------------------
+\subsection{Componentes do \emph{GitLab}}
+A aplicação \emph{GitLab} apresenta uma interface \emph{web} que utiliza várias tecnologias \emph{open source}. A sua aplicação \emph{web} foi desenvolvida utilizando a \emph{framework} \emph{Ruby on Rails}, baseada num padrão \emph{MVC}. Esta aplicação permite não só, a gestão de repositórios \emph{git}, como também a gestão de comentários, que complementam os diferentes projetos.
+
+Relativamente à estruturação da aplicação \emph{web}, é importante destacarmos os seguintes componentes da camada aplicacional:
+
+\begin{itemize}
+    \item \emph{\textbf{NGINX}}: é um servidor \emph{web} utilizado para servir conteúdo \emph{web} aos clientes;
+    \item \emph{\textbf{GitLab Shell}} e \emph{\textbf{GitLab Workhorse}}: lidam com os comandos \emph{git} enviados pela a aplicação \emph{web} ou por conexões via \emph{ssh}. Ou seja, comandos como \emph{clone, fork, push} ou \emph{pull}, são redirecionados para um destes componentes, onde serão executados;
+    \begin{itemize}
+        \item o \emph{GitLab Shell} permite ainda modificar a lista as chaves autoritativas \emph{ssh} dos utilizadores, verificar um determinada chave pública, limitar comandos \emph{git} aos utilizadores e, por fim, copiar entre o cliente e servidores \emph{Gitaly};
+        \item o \emph{GitLab Workhorse} funciona como um \emph{reverse proxy} que trata de pedidos \emph{http} (p.e transferências de arquivos, \emph{git pull/push}, etc). É responsável por assumir uma ligação direta com a aplicação \emph{GitLab}, tentando sempre que possível, diminuir as comunicações entre estes dois (por exemplo ficheiros \emph{Javascript} e \emph{CSS} são diretamente passados ao cliente); assume-se então que os servidores \emph{Nginx} ou \emph{Apache} enviam os pedidos ao \emph{Workhorse} e este ao \emph{backend} do \emph{GitLab}.
+    \end{itemize}
+    \item \emph{\textbf{Sidekiq}}: ferramenta responsável pela gestão e execução de processos \emph{Ruby} da aplicação \emph{GitLab} em \emph{background}. O \emph{Sidekiq} foi introduzido devido a fugas de memória da aplicação \emph{GitLab}. Ou seja, por forma a evitar as fugas de memória, o \emph{Sidekiq} é reiniciado a cada intervalo de tempo previamente definido, permitindo que a aplicação esteja disponível;
+    \item \emph{\textbf{Unicorn}}: tal como o \emph{Sidekiq}, o \emph{Unicorn} foi introduzido para gerir o uso de memória entre pedidos \emph{web http} e pedidos \emph{git} via \emph{http}. É um \emph{deamon} que corre a aplicação \emph{GitLab} (\emph{master}) e contém um conjunto de \emph{workers}. Cada um é responsável por executar uma tarefa durante um determinado período (\emph{timeout}), caso contrário, a tarefa é atribuída a outro \emph{worker}. O \emph{master} nunca lida com os pedidos recebidos. Tal como referido anteriormente, o \emph{GitLab} apresenta fugas de memória. Ao fim de algum tempo, os processos começam a apresentar falhas, que podem ser controladas com a interrupção do processo (\emph{kill}).
+\end{itemize}
+
+Os componentes descritos em cima fazem parte da camada aplicacional \emph{GitLab}, no entanto, não traduzem a verdadeira essência da aplicação \emph{GitLab}. Isto é, a aplicação ou várias instâncias desta não guardam qualquer tipo de informação a longo prazo. O \emph{frontend} do \emph{GitLab} faz pedidos à camada lógica da aplicação para que possa ser guardado um dado estado ou informação num dos outros componentes da \emph{stack}. O único estado que é guardado na aplicação, é o ficheiro de configuração que abordaremos mais à frente.
+
+% ---------------------------------------------------------------
+\subsubsection{\emph{HAProxy}}
+O \emph{HAProxy} (\emph{High Performance TCP/HTTP Load Balancer}) é um servidor \emph{proxy} para \emph{web} que oferece soluções fiáveis como: alta escalabilidade, balanceamento de carga e \emph{proxying} para aplicações que usam \emph{TCP} e \emph{HTTP}.
+
+No contexto da aplicação \emph{GitLab}, o \emph{HAProxy} tem várias funcionalidades e funciona como um \emph{gateway} que distribui tráfego e pedidos pelos vários servidores que correm a aplicação \emph{GitLab}. Em baixo, encontra-se uma imagem que pretende demonstrar o funcionamento do \emph{HAProxy}, destacado como \emph{load balancer} que recebe vários pedidos \emph{SSH} e \emph{HTTP} e encaminha-os para os servidores que correm o \emph{GitLab}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.25]{images/haproxy.png}
+  \caption{Exemplo de funcionamento do \emph{HAProxy}.}
+\end{figure}
+
+Para além das funcionalidades descritas em cima, o \emph{HAProxy} funciona como um \emph{edge-node} entre a rede externa (\emph{internet}) e a rede interna do \emph{GitLab}. Isto é, o \emph{HAProxy} irá negar qualquer tentativa de acesso (através de \emph{sockets unix}) aos servidores \emph{frontend} do \emph{GitLab}.
+
+
+% ---------------------------------------------------------------
+\subsubsection{\emph{Keepalived}}
+Juntamente com o \emph{HAProxy}, existe a aplicação \emph{Keepalived} que garante que o serviço \emph{GitLab} está sempre disponivel. Isto é, permanece ativas duas instâncias idênticas do \emph{HAProxy}, garantido assim, que pelo menos uma delas se encontra configurada para um determinado IP, tornando o \emph{HAProxy} eficiente. Se uma instância falhar, outra é automaticamente configurada para o IP anterior (único).
+
+
+% ---------------------------------------------------------------
+\subsection{\emph{Redis}}
+O \emph{Redis} funciona como uma estrutura de armazenamento de dados guardada em memória. É geralmente utilizado para fazer \emph{caching} de dados que, na maioria das vezes, permanecem em memória num curto período de tempo.
+
+Dentro da camada aplicacional do \emph{GitLab}, o \emph{Redis} funciona como um serviço que guarda as sessões ativas de utilizadores e uma lista de tarefas a serem realizadas pelo \emph{Sidekiq}. Isto é, a informação da sessão de um utilizador e as tarefas que estão a ser executadas são guardadas numa ou várias instâncias \emph{Redis}.
+
+Para além destas funcionalidades, o \emph{Redis} permite que os restantes componentes da camada aplicacional guardem o seu estado e o partilhem com o resto dos componentes, por exemplo, através de trocas de messagens. Tal como alguns dos componentes anteriores, é também importante que toda a informação seja consistente e facilmente partilhada com as várias instâncias do \emph{GitLab}.
+
+\subsubsection{\emph{Redis Sentinel}}
+O \emph{Redis Sentinel} tem uma funcionalidade muito semelhante ao \emph{Keepalived}. Para garantirmos uma alta disponibilidade, é necessário que para além de existir um \emph{Master} e um \emph{Slave} do \emph{Redis}, exista algo à escuta de falhas de instâncias \emph{Redis}, começando automaticamente o processo de \emph{failover}, que consiste em atribuir uma nova instância aquando uma falha.
+
+Com o \emph{Redis Sentinel}, consegue-se garantir a existência e disponibilidade de uma instância \emph{Redis} para um cliente, tornando abstratas todas as falhas.
+
+
+
+% ---------------------------------------------------------------
+\subsection{Base de dados - \emph{PostgreSQL}}
+O \emph{Postegres} é um sistema de base de dados relacional \emph{open source} que permite o controlo e  persistência de dados.
+
+Os dados que são armazenados incluem dados do utilizador (como \emph{username}, \emph{email}, \emph{password}, definições de conta, etc), permissões dos repositórios, comentários, problemas encontrados e todos os outros dados que não são diretamente controlados pelo \emph{git}. Todos os dados devem, uma vez mais, estar disponíveis e consistentes para poderem ser exibidos e validados corretamente para a aplicação \emph{web} do \emph{GitLab}.
+
+Num cluster onde possam existir várias instâncias do \emph{Postgres} (como o \emph{master} ou \emph{slaves}/réplicas), existe também uma instância do \emph{HAProxy}. Tal como vimos anteriormente, o \emph{HAProxy} permite o balanceamento de carga e permite transmitir os pedidos a um grupo de nós previamente conhecidos. Ou seja, qualquer instância da aplicação \emph{GitLab} irá comunicar com este \emph{HAProxy} acreditando que este é a base de dados. 
+
+Os diferentes \emph{slaves} são configurados para se manterem \emph{up to date} e prontos a atuarem como \emph{master} no caso de uma falha do servidor principal. A alta escalabilidade e disponibilidade do \emph{Postgres} é mantida através da utilização de instâncias \emph{HAProxy} e \emph{Repmgr}.
+
+% ---------------------------------------------------------------
+\subsubsection{\emph{Repmgr}}
+O \emph{Repmgr} é uma ferramenta usada para facilitar e automatizar processos como replicação e falhas de instâncias do \emph{PostgreSQL}.
+
+Esta ferramenta possui o \emph{Patroni} como alternativa, que torna possível assegurar não só as funcionalidades garantidas pelo \emph{Repmgr}, mas seria também facilitado o processo de adição ou remoção de novos nós que contêm réplicas dos dados, uma vez que esta é uma tarefa difícil e que requer configurações que podem induzir a erros. Esta solução foi no entanto descartada em virtude da implementação mais simples do Repmgr, uma vez que no processo de criação de novos nós na cloud está a ser feito através de \emph{Ansible}.
+
+Esta ferramenta corre em conjunto com as instâncias do \emph{Postgres}. Para que seja possível reconhecer e atualizar o estado de cada uma destas instâncias, o \emph{Rempgr} recorre neste caso, ao \textbf{\emph{Consul}}, podendo ainda serem usados o \emph{ETCD} ou o\emph{Zookeeper} em prol do primeiro.
+
+
+% ---------------------------------------------------------------
+\subsection{Sistema distribuído de ficheiros}
+No núcleo do \emph{GitLab} encontra-se o \emph{git}. Como vimos anteriormente, o \emph{git} é uma ferramenta que permite o controlo de versões de ficheiros. O protocolo do \emph{git} utiliza um sistema de ficheiros para guardar ficheiros. Como seria de esperar, todas as instâncias do \emph{GitLab} utilizam o mesmo sistema de ficheiros.
+
+Para além do sistema de ficheiros utilizado pelo \emph{git}, existem ainda outras pastas partilhadas que permitem guardar outros ficheiros necessários ao funcionamento do \emph{git} e do \emph{GitLab}. Incluem-se: a pasta que armazena as chaves \emph{SSH}, recursos estáticos que são carregados (como imagens, ficheiros \emph{Javascript, CSS}) e outros ficheiros que necessitam de estar presentes em todas as instâncias do \emph{GitLab}.
+
+% ---------------------------------------------------------------
+\subsection{\emph{Consul}}
+% ver https://gist.github.com/yurishkuro/10cb2dc42f42a007a8ce0e055ed0d171
+Ferramentas como \textbf{\emph{Consul}}, \textbf{\emph{ETCD}} e \textbf{\emph{Zookeeper}} permitem guardar informações num estilo \emph{key-value} dentro de um \emph{cluster}. Ou seja, podemos guardar o estado de cada uma das instâncias do \emph{Postegres} nestas ferramentas. 
+
+As ferramentas mencionadas em cima são muito semelhantes. Optamos por escolher o \emph{Consul} para descrever o funcionamento básico de um componente deste tipo. Este apresenta um \emph{time to live} (configurável) para o armazenamento dos dados. Isto é, ao fim de um tempo previamente estabelecido, todos os dados sobre os estados das máquinas, é removido. Isto garante que as instâncias \emph{Repmgr} verificam continuamente o estado e o atualizam. Com a utilização deste recurso, o \emph{Repmgr} consegue reconhecer facilmente quem são as máquinas disponíveis bem como o líder atual. 
+
+Como podemos verificar, componentes como \emph{Consul}, \emph{ETCD} e \emph{Zookeeper} são extremamente importantes na estrutura do \emph{GitLab}, pelo que devem existir várias instâncias destes.
+
+% ---------------------------------------------------------------
+\subsection{\emph{Gitaly}}
+O \emph{Gitaly} é um serviço RPC (\emph{Remote Procedure Call}), escrito em \textit{Go}, que trata todas as chamadas ao \emph{git}, feitas pelo \emph{GitLab}, ou seja, é responsável por fazer todos os acessos aos repositórios \emph{git}.
+
+Os componentes \emph{GitLab-Shell} e \emph{GitLab-Workhorse} funcionam como clientes para o \emph{Gitaly}.
+
+O diagrama em baixo pretende demonstrar a como é efetuada a comunicação entre clientes e o \emph{Gitaly} para um acesso ao serviço \emph{git}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.7]{images/gitlab-gitaly.png}
+  \caption{Funcionamento do \emph{Gitaly}.}
+\end{figure}
+
+O \textit{Gitaly} irá atuar como uma passagem para os repositórios. Possui ajudantes que permitem agilizar todo o processo de troca de informações. Estes são conhecidos por ocasionalmente terem fugas de memória, pelo que o \textit{Gitaly} irá reiniciar estes ajudantes quando estes excederem uma certa quantidade máxima.
+
+Para possibilitar a comunicação entre os ajudantes e o servidor \textit{Go}, o \textit{Gitaly} usa a framework \textit{gRPC}, que permite aos ajudantes chamarem métodos sobre objetos no servidor, e executa-los como se o método fosse local, possibilitando assim uma implementação distribuída da aplicação.
+
+Finalmente, deve ser considerada a criação de alternativas ao \textit{Gitaly} na implementação, uma vez que no caso de haver falha de rede, este constituirá um ponto central de falha, e os pedidos não serão atendidos.
+
+
+
+
+
+% ---------------------------------------------------------------
+% COMPONENTES CRÍTICOS
+% ---------------------------------------------------------------
+\newpage
+\section{Componentes críticos}
+
+Através da análise da arquitetura do \emph{GitLab}, é possível detetar os componentes críticos sem os quais comprometeriam a disponibilidade e consistência da aplicação \emph{GitLab}. Grande parte dos componentes referidos em baixo têm em vista a existência de várias réplicas do serviço \emph{GitLab}, pelo que numa abordagem com apenas uma instância alguns dos componentes não seriam considerados à partida críticos.
+
+\begin{table}[ht]
+    \centering
+    \begin{adjustbox}{width=1\textwidth}
+    \small
+    \begin{tabular}{ | p{5cm} | p{6cm} | p{6cm} |}
+        \hline
+        \textbf{Componente} & \textbf{Motivo} & \textbf{Solução} \\ \hline
+       
+        \textit{HAProxy} & Tornar uma aplicação altamente disponível envolve a existência de múltiplas instâncias de um determinado serviço. O \emph{HAProxy} permite balancear pedidos e serviços para cada uma das potenciais instâncias replicadas, verificando também o  seu estado. A existência de uma única instância do \emph{HAProxy} origina um ponto de falha central. & Uma das soluções passa por utilizar o \textbf{\textit{Keepalived}}, que permite a partilha do mesmo endereço IP por diversas instâncias de servidores diferentes. Sempre que uma instância do \emph{HAProxy} falhar, o \textit{Keepalived} deverá ser capaz de atribuir o endereço IP a outra instância ativa.  \\ \hline
+        
+        \emph{Redis} & A configuração básica de \emph{master-slave} do \emph{Redis} não permite, muitas das vezes, manter a alta disponibilidade de um serviço. Como tal, é necessária a adição de um serviço capaz de resolver problemas relacionados com falhas e replicações de instâncias \emph{Redis}. A falha de uma instância \emph{Redis} compromete a disponibilidade do \emph{GitLab}. & O \textbf{\emph{Redis Sentinel}} permite complementar a escolha das instâncias \emph{master} e \emph{slave} de  \emph{Redis}, agindo como a única fonte de verdade na hora da decisão. Garante assim a existência de uma instância \emph{Redis}.  Este permite ainda indicar aos clientes qual a instância correta que deverá ser utilizada.   \\ \hline
+        
+        Base de dados - \emph{Postgres} & TODO & TODO (pgbouncer e consul) \\ \hline
+        
+        \emph{Sidekiq} & TODO & TODO (várias instâncias a correr o \emph{Sidekiq}) \\ \hline
+        
+        Sistema de ficheiros distribuído - \emph{NFS} & O \emph{GitLab} foi desenvolvido em torno do protocolo \emph{git}. Este protocolo armazena todos os dados diretamente num sistema de ficheiros. Qualquer indisponibilidade do sistema de ficheiros, comprometerá a experiência de utilização do \emph{GitLab}. Este componente é, por si só, dos mais importantes entre os restantes anteriormente indicados. & Serviços como o \textbf{\emph{GPFS}} e \textbf{\emph{HighlyAvailableNFS}}, permitem que os dados estejam sempre disponíveis. No caso do \emph{GPFS}, é possível distribuir os dados em diferentes instâncias assegurando redundância e tempos leitura mais baixos. No entanto, ainda que seja utilizado este serviço, é necessário que existam pelo menos 2 nós a persistirem dados.\\
+        \hline
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Componentes críticos numa arquitetura distribuída.}
+\end{table} 
+
+
+
+
+
+% ---------------------------------------------------------------
+% ARQUITETURA ADOTADA
+% ---------------------------------------------------------------
+\newpage
+\section{Arquitetura adotada}
+
+De seguida, é apresentada a arquitetura que foi adotada para a realização do provisionamento e \emph{deployment} da aplicação \emph{GitLab}.
+
+Para que seja possível tornar o \emph{GitLab} altamente disponível, adotamos uma arquitetura distribuída, semelhante à utilizada atualmente pela aplicação \emph{GitLab}. Esta arquitetura apresenta um acentuado número de nós computacionais que requerem alguma gestão e monitorização.
+
+\bigbreak
+\begin{figure}[H]
+  \centering
+  \includegraphics[
+    page=1,
+    width=\textwidth,
+    height=\textheight,
+    keepaspectratio
+  ]{GITLAB.pdf}
+  \caption{Arquitetura adotada.}
+\end{figure}
+
+
+
+
+% ---------------------------------------------------------------
+% CONCLUSÃO
+% ---------------------------------------------------------------
+\newpage
+\section{Conclusão}
+\par Numa primeira fase, tornou-se claro que, antes de qualquer \emph{deployment} de uma plataforma com o \emph{GitLab}, é necessário um estudo prévio da arquitetura por motivos de \emph{High Avaibility}, conforme os objetivos futuros da implementação desta. Por estas razões, é necessário dissecar a arquitetura nos seus vários componentes e compreender as funcionalidades e objetivos destes, assim como as relações existentes entre os vários. Apenas desta forma, o utilizador irá conseguir criar uma plataforma \emph{GitLab} que corresponda aos seus interesses. 
+\par
+Assim sendo, o \emph{GitLab} é facilmente reconhecido como um sistema distribuído bastante complexo em constante desenvolvimento, com vista a poder responder a cada vez mais utilizadores. Estes podem ser desde simples programadores com projetos pessoais, até grandes empresas tecnológicas, onde cada componente pode ser reutilizado noutro tipo de plataformas, devido ao cuidado com que foi desenvolvido e à sua documentação.
+\par Outro grande fator que deve motivar o estudo da arquitetura é o custo financeiro da própria escalabilidade, onde este pode escalar e ter um desempenho que não corresponda às expectativas de quem a está a implementar.
+\par Para finalizar, após um estudo intensivo da arquitetura e após identificar os componentes críticos desta e tendo em consideração todos os tópicos descritos neste relatório, é seguro dizer que o processo de \emph{deployment}, a realizar numa próxima fase deste projeto, irá respeitar o orçamento disponível para a equipa de trabalho.
+ 
+% ---------------------------------------------------------------
+\newpage
+\section{Referências}
+
+\vspace{1.3cm}
+Bertsche, Ryan. IBM Corp. (2017). GitLab: Highly Available Architecture.
+
+\bigbreak
+GitLab Architecture Overview, GitLab Documentation. Acedido em \today, em \url{https://goo.gl/thmr2N} e \url{https://goo.gl/iyR4zN} 
+
+\bigbreak
+GitLab High Availability, GitLab Documentation. Acedido em \today, em \url{https://goo.gl/Dt93fF}
+
+
+% ---------------------------------------------------------------
+\newpage
+\section{Anexos}\label{anexos}
+
+
+\end{document}
+
