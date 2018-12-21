@@ -1,5 +1,20 @@
 ---
 
+- name: Install NFS client
+  apt:
+    name:
+      - nfs-common
+    state: present
+
+
+- name: Configure /etc/fstab
+  action: mount name={{ nfsmount }} src={{ nfsserver }}:{{ nfspath }} fstype={{ fstype }} opts={{ opts }} dump=0 passno=2 state=mounted
+
+
+- name: Reload fstab
+  command: mount -a
+
+
 - name: Copy GitLab configuration file.
   template:
     src: gitlab.rb.j2
@@ -10,6 +25,9 @@
 
 - name: Reconfigure and start GitLab
   command: gitlab-ctl reconfigure
+
+#- name: Create DB
+#  command: gitlab-rake gitlab:setup
 
 #- name: Ensure that all migrantions ran
 #  command: gitlab-rake gitlab:db:configure

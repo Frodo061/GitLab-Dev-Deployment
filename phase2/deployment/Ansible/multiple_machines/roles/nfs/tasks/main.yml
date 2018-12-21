@@ -34,5 +34,7 @@
   command: 'exportfs -ra'
 
 - name: Ensure nfs is running.
-  service: "name=nfs-kernel-server state=started enabled=yes"
-  when: nfs_exports|length
+  service:
+    name: nfs-kernel-server
+    state: started 
+    enabled: yes

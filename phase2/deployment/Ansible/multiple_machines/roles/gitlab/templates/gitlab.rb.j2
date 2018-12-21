@@ -23,7 +23,25 @@ postgresql['enable'] = false
 
 gitlab_rails['db_host'] = '{{ db_host }}'
 gitlab_rails['db_port'] = {{ db_port }}
-gitlab_rails['db_username'] = '{{ db_username }}'
 gitlab_rails['db_password'] = '{{ db_password }}'
-
 gitlab_rails['auto_migrate'] = false
+
+
+# NFS
+high_availability['mountpoint'] = '{{ nfsmount }}'
+git_data_dirs({"default" => { "path" => "{{ nfsmount }}/gitlab-data/git-data"} })
+user['home'] = '{{ nfsmount }}/gitlab-data/home'
+gitlab_rails['uploads_directory'] = '{{ nfsmount }}/gitlab-data/uploads'
+gitlab_rails['shared_path'] = '{{ nfsmount }}/gitlab-data/shared'
+gitlab_ci['builds_directory'] = '{{ nfsmount }}/gitlab-data/builds'
+
+
+# SMTP (not working)
+gitlab_rails['smtp_enable'] = true
+gitlab_rails['smtp_address'] = "smtp.mailtrap.io"
+gitlab_rails['smtp_port'] = 25
+gitlab_rails['smtp_user_name'] = "511d4659f8686f"
+gitlab_rails['smtp_password'] = "b64861b35ad7e6"
+gitlab_rails['smtp_domain'] = "smtp.mailtrap.io"
+gitlab_rails['smtp_tls'] = true
+

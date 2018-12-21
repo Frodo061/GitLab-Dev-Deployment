@@ -1,4 +1,54 @@
-- name: GitLab's provisioning and deployment
+- name: Database's provisioning
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - role: gcp
+      vars:
+        gcp_zone: us-west1-b
+        gcp_region: us-west1
+        gcp_project: copper-gear-221110
+        gcp_cred_kind: serviceaccount
+        gcp_cred_file: ../.gcloud/gcloud.json
+        gcp_machine_type: n1-standard-1
+        source_image: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20181030
+        disk_size: 12
+
+        disks:
+          - consul-disk-01
+          - consul-disk-02
+          - consul-disk-03
+          - database-disk-04
+          - database-disk-05
+          - database-disk-06
+          - pgbouncer-disk-07
+
+        addresses:
+          - addr-1
+          - addr-2
+          - addr-3
+          - addr-4
+          - addr-5
+          - addr-6
+          - addr-7
+
+        instances:
+          - { index: 1, tag: [consul, omnibus], name: consul-1 }
+          - { index: 2, tag: [consul, omnibus], name: consul-2 }
+          - { index: 3, tag: [consul, omnibus], name: consul-3 }
+          - { index: 4, tag: [database-master, omnibus], name: database-master }
+          - { index: 5, tag: [database-slave, omnibus], name: database-1 }
+          - { index: 6, tag: [database-slave, omnibus], name: database-2 }
+          - { index: 7, tag: [pgbouncer, omnibus], name: pgbouncer }
+
+        # VPC main network
+        network_name: gitlab-network
+        firewall_private_name: gitlab-private-firewall
+        firewall_public_name: gitlab-public-firewall
+        subnetwork_private_ports: [80, 2049, 5432, 6379, 6432, 8301, 9418, 26379]
+        subnetwork_public_ports: [22, 80, 9000, 9418]
+
+- name: GitLab's provisioning
   hosts: localhost
   connection: local
   gather_facts: no
@@ -45,10 +95,9 @@
         network_name: gitlab-network
         firewall_private_name: gitlab-private-firewall
         firewall_public_name: gitlab-public-firewall
-        subnetwork_private_ports: [80, 2049, 5432, 6379, 6432, 8301, 26379]
-        subnetwork_public_ports: [22, 80, 9000]
+        subnetwork_private_ports: [80, 2049, 5432, 6379, 6432, 8301, 9418, 26379]
+        subnetwork_public_ports: [22, 80, 9000, 9418]
         
-
 - name: Debug (get all ip addrs)
   hosts: all
   gather_facts: yes
@@ -56,7 +105,88 @@
     - debug:
         msg: "{{ ansible_hostname }}"
 
+- name: Export variables to .bashrc
+  hosts: all
+  tasks:
+    - blockinfile:
+        dest: "~/.bashrc"
+        block: |
+          export LC_CTYPE=en_US.UTF-8
+          export LC_ALL=en_US.UTF-8
+        insertafter: EOF
+        create: yes
 
+- name: Installing Omnibus
+  hosts:
+    - omnibus
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: omnibus
+
+# DATABASE
+# --------------------------------------------
+- name: Installing Consul
+  hosts:
+    - consul
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: consul
+      vars:
+        - consul_hosts: "{{ groups['consul'] }}"
+
+- name: Intalling master postgres node
+  hosts:
+    - database-master
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: postgres_master
+      vars:
+        listen_address: 0.0.0.0
+        listen_port: 5432
+        # FOR NON-HA
+        # postgres_user: gitlab
+        # postgres_user_hash_password: b7a289c0600988fe8e709dd2887e4d37
+        # trust_auth_cidr_addresses: 10.240.0.0/16
+        # FOR HA
+        trust_auth_cidr_addresses: 10.240.0.0/16
+        pgbouncer_user_password: be5544d3807b54dd0637f2439ecb03b9
+        sql_user_password: b7a289c0600988fe8e709dd2887e4d37
+        consul_hosts: "{{ groups['consul'] }}"
+
+- name: Intalling secondary postgres nodes
+  hosts:
+    - database-slave
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: postgres_slave
+      vars:
+        listen_address: 0.0.0.0
+        trust_auth_cidr_addresses: 10.240.0.0/16
+        pgbouncer_user_password: be5544d3807b54dd0637f2439ecb03b9
+        sql_user_password: b7a289c0600988fe8e709dd2887e4d37
+        consul_hosts: "{{ groups['consul'] }}"
+
+- name: Intalling pgbouncer
+  hosts:
+    - pgbouncer
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: pgbouncer
+      vars:
+        pgbouncer_user_password: be5544d3807b54dd0637f2439ecb03b9
+        consul_user_password: bc175b38365ec8781fa93720255dee85
+        consul_hosts: "{{ groups['consul'] }}"
+        listen_addr: "{{ ansible_default_ipv4.address }}"
+        listen_port: 6432
+
+
+# GITLAB
+# --------------------------------------------
 - name: Installing HAproxy
   hosts:
     - haproxy
@@ -82,16 +212,6 @@
         haproxy_backend_servers: "{{ groups['gitlab'] }}"
         haproxy_backend_port: 80
 
-
-- name: Installing Omnibus
-  hosts:
-    - omnibus
-  become: yes
-  gather_facts: yes
-  roles:
-    - role: omnibus
-
-
 - name: Installing Redis Master
   hosts:
     - redis-master
@@ -109,7 +229,6 @@
         sentinel_quorum: 2
         sentinel_down_after: 10000 # 10000
         sentinel_failover_timeout: 60000 # 60000
-
 
 - name: Installing Redis Slave
   hosts:
@@ -130,8 +249,15 @@
         sentinel_down_after: 10000
         sentinel_failover_timeout: 60000
 
+- name: Installing NFS
+  hosts:
+    - nfs
+  become: yes
+  roles:
+    - role: nfs
+      vars:
+        cidr_addresses: 10.240.0.0/16
 
-# TODO: add haproxy external address as gitlab_external_url
 - name: Installing GitLab
   hosts:
     - gitlab
@@ -140,8 +266,9 @@
   roles:
     - role: gitlab
       vars:
-        gitlab_external_url: "{{ ansible_default_ipv4.address }}" # TODO this
+        gitlab_external_url: "{{ groups['haproxy'][0] }}" # Haproxy external address
         gitlab_nginx_listen_port: 80
+        # REDIS
         redis_name: gitlab-redis
         redis_password: redis-password-goes-here
         redis_host: "{{ groups['redis-master'][0] }}"
@@ -150,37 +277,21 @@
         sentinel_master_port: 26379
         sentinel_slave_hosts: "{{ groups['redis-slave'] }}"
         sentinel_slave_port: 26379
-        db_host: 10.240.0.2 # 10.240.0.8 (pgbouncer)
-        db_port: 5432 # 6432 (pgbouncer)
-        db_username: gitlab
+        # DATABASE
+        db_host: "{{ hostvars[groups['pgbouncer'][0]]['ansible_default_ipv4']['address'] }}" # (pgbouncer)
+        db_port: 6432 # (pgbouncer)
         db_password: gitlab
-    
-- name: Installing NFS
-  hosts:
-    - nfs
-  roles:
-    - role: nfs
-      vars:
-        cidr_addresses: 10.240.0.0/16
+        # NFS
+        nfsserver: "{{ hostvars[groups['nfs'][0]]['ansible_default_ipv4']['address'] }}"
+        nfspath: /gitlab-nfs
+        nfsmount: /gitlab-nfs
+        fstype: nfs4
+        opts: auto,noatime,nofail,nolock,intr,tcp,lookupcache=positive
 
 #- name: Debug hostvars
-#  hosts: 
-#    - redis
+#  hosts:
+#    - haproxy
 #  gather_facts: yes
 #  tasks:
 #    - debug:
-#        var: groups['redis'][0]
-
-#- name: Debug hostvars
-#  hosts: 
-#    - gitlab
-#  gather_facts: yes
-#  tasks:
-#    - debug:
-#        var: hostvars["{{groups['gitlab'][0]}}"]['ansible_default_ipv4']['address']
-#      # when: inventory_hostname not in groups.haproxy
-
-#- hosts: gitlab
-#  connection: local
-#  tasks:
-#    - debug: var=ansible_default_ipv4.address
+#        var: groups['haproxy'][0]
