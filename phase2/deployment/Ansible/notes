@@ -9,6 +9,15 @@ REDIS:
     https://docs.gitlab.com/ee/administration/high_availability/redis.html
 BD:
     https://docs.gitlab.com/ee/administration/high_availability/database.html
+NFS:
+    https://docs.gitlab.com/ee/administration/high_availability/nfs_host_client_setup.html
+    https://docs.gitlab.com/ee/administration/high_availability/nfs.html
+    https://docs.gitlab.com/omnibus/settings/configuration.html#disable-storage-directories-management
+
+GITALY:
+    https://docs.gitlab.com/ee/administration/gitaly/#gitaly-server-configuration
+    https://gitlab.com/gitlab-org/gitaly
+    https://gitlab.com/gitlab-org/gitaly/tree/master/doc/configuration
 
 
 --------------------------------
