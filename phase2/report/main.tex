@@ -229,23 +229,23 @@ Relativamente à estruturação da aplicação \emph{web}, é importante destaca
 Os componentes descritos em cima fazem parte da camada aplicacional \emph{GitLab}, no entanto, não traduzem a verdadeira essência da aplicação \emph{GitLab}. Isto é, a aplicação ou várias instâncias desta não guardam qualquer tipo de informação a longo prazo. O \emph{frontend} do \emph{GitLab} faz pedidos à camada lógica da aplicação para que possa ser guardado um dado estado ou informação num dos outros componentes da \emph{stack}. O único estado que é guardado na aplicação, é o ficheiro de configuração que abordaremos mais à frente.
 
 % ---------------------------------------------------------------
-\subsubsection{\emph{HAProxy}}
-O \emph{HAProxy} (\emph{High Performance TCP/HTTP Load Balancer}) é um servidor \emph{proxy} para \emph{web} que oferece soluções fiáveis como: alta escalabilidade, balanceamento de carga e \emph{proxying} para aplicações que usam \emph{TCP} e \emph{HTTP}.
+% \subsubsection{\emph{HAProxy}}
+% O \emph{HAProxy} (\emph{High Performance TCP/HTTP Load Balancer}) é um servidor \emph{proxy} para \emph{web} que oferece soluções fiáveis como: alta escalabilidade, balanceamento de carga e \emph{proxying} para aplicações que usam \emph{TCP} e \emph{HTTP}.
 
-No contexto da aplicação \emph{GitLab}, o \emph{HAProxy} tem várias funcionalidades e funciona como um \emph{gateway} que distribui tráfego e pedidos pelos vários servidores que correm a aplicação \emph{GitLab}. Em baixo, encontra-se uma imagem que pretende demonstrar o funcionamento do \emph{HAProxy}, destacado como \emph{load balancer} que recebe vários pedidos \emph{SSH} e \emph{HTTP} e encaminha-os para os servidores que correm o \emph{GitLab}.
+% No contexto da aplicação \emph{GitLab}, o \emph{HAProxy} tem várias funcionalidades e funciona como um \emph{gateway} que distribui tráfego e pedidos pelos vários servidores que correm a aplicação \emph{GitLab}. Em baixo, encontra-se uma imagem que pretende demonstrar o funcionamento do \emph{HAProxy}, destacado como \emph{load balancer} que recebe vários pedidos \emph{SSH} e \emph{HTTP} e encaminha-os para os servidores que correm o \emph{GitLab}.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[scale=0.25]{images/haproxy.png}
-  \caption{Exemplo de funcionamento do \emph{HAProxy}.}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[scale=0.25]{images/haproxy.png}
+%   \caption{Exemplo de funcionamento do \emph{HAProxy}.}
+% \end{figure}
 
-Para além das funcionalidades descritas em cima, o \emph{HAProxy} funciona como um \emph{edge-node} entre a rede externa (\emph{internet}) e a rede interna do \emph{GitLab}. Isto é, o \emph{HAProxy} irá negar qualquer tentativa de acesso (através de \emph{sockets unix}) aos servidores \emph{frontend} do \emph{GitLab}.
+% Para além das funcionalidades descritas em cima, o \emph{HAProxy} funciona como um \emph{edge-node} entre a rede externa (\emph{internet}) e a rede interna do \emph{GitLab}. Isto é, o \emph{HAProxy} irá negar qualquer tentativa de acesso (através de \emph{sockets unix}) aos servidores \emph{frontend} do \emph{GitLab}.
 
 
 % ---------------------------------------------------------------
-\subsubsection{\emph{Keepalived}}
-Juntamente com o \emph{HAProxy}, existe a aplicação \emph{Keepalived} que garante que o serviço \emph{GitLab} está sempre disponivel. Isto é, permanece ativas duas instâncias idênticas do \emph{HAProxy}, garantido assim, que pelo menos uma delas se encontra configurada para um determinado IP, tornando o \emph{HAProxy} eficiente. Se uma instância falhar, outra é automaticamente configurada para o IP anterior (único).
+% \subsubsection{\emph{Keepalived}}
+% Juntamente com o \emph{HAProxy}, existe a aplicação \emph{Keepalived} que garante que o serviço \emph{GitLab} está sempre disponivel. Isto é, permanece ativas duas instâncias idênticas do \emph{HAProxy}, garantido assim, que pelo menos uma delas se encontra configurada para um determinado IP, tornando o \emph{HAProxy} eficiente. Se uma instância falhar, outra é automaticamente configurada para o IP anterior (único).
 
 
 % ---------------------------------------------------------------
@@ -254,56 +254,52 @@ O \emph{Redis} funciona como uma estrutura de armazenamento de dados guardada em
 
 Dentro da camada aplicacional do \emph{GitLab}, o \emph{Redis} funciona como um serviço que guarda as sessões ativas de utilizadores e uma lista de tarefas a serem realizadas pelo \emph{Sidekiq}. Isto é, a informação da sessão de um utilizador e as tarefas que estão a ser executadas são guardadas numa ou várias instâncias \emph{Redis}.
 
-Para além destas funcionalidades, o \emph{Redis} permite que os restantes componentes da camada aplicacional guardem o seu estado e o partilhem com o resto dos componentes, por exemplo, através de trocas de messagens. Tal como alguns dos componentes anteriores, é também importante que toda a informação seja consistente e facilmente partilhada com as várias instâncias do \emph{GitLab}.
+Para além destas funcionalidades, o \emph{Redis} permite que os restantes componentes da camada aplicacional guardem o seu estado e o partilhem com o resto dos componentes, por exemplo, através de trocas de messagens. O \emph{Redis} permite que a informação seja consistente e facilmente partilhada com as várias instâncias do \emph{GitLab}.
 
-\subsubsection{\emph{Redis Sentinel}}
-O \emph{Redis Sentinel} tem uma funcionalidade muito semelhante ao \emph{Keepalived}. Para garantirmos uma alta disponibilidade, é necessário que para além de existir um \emph{Master} e um \emph{Slave} do \emph{Redis}, exista algo à escuta de falhas de instâncias \emph{Redis}, começando automaticamente o processo de \emph{failover}, que consiste em atribuir uma nova instância aquando uma falha.
+Uma forma de mantermos a alta disponibilidade do \emph{Redis} consiste na integração de um \emph{Redis Master}, vários \emph{Redis Slaves} e ainda do \emph{Redis Sentinel} (que controla falhas de instâncias \emph{Redis} começando o processo de seleção e atribuição de um \emph{master}).
 
-Com o \emph{Redis Sentinel}, consegue-se garantir a existência e disponibilidade de uma instância \emph{Redis} para um cliente, tornando abstratas todas as falhas.
+% \subsubsection{\emph{Redis Sentinel}}
+% O \emph{Redis Sentinel} tem uma funcionalidade muito semelhante ao \emph{Keepalived}. Para garantirmos uma alta disponibilidade, é necessário que para além de existir um \emph{Master} e um \emph{Slave} do \emph{Redis}, exista algo à escuta de falhas de instâncias \emph{Redis}, começando automaticamente o processo de \emph{failover}, que consiste em atribuir uma nova instância aquando uma falha.
+
+% Com o \emph{Redis Sentinel}, consegue-se garantir a existência e disponibilidade de uma instância \emph{Redis} para um cliente, tornando abstratas todas as falhas.
 
 
 
 % ---------------------------------------------------------------
 \subsection{Base de dados - \emph{PostgreSQL}}
-O \emph{Postegres} é um sistema de base de dados relacional \emph{open source} que permite o controlo e  persistência de dados.
+O \emph{Postegres} é um sistema de base de dados relacional \emph{open source}, que permite o controlo e persistência de dados.
 
-Os dados que são armazenados incluem dados do utilizador (como \emph{username}, \emph{email}, \emph{password}, definições de conta, etc), permissões dos repositórios, comentários, problemas encontrados e todos os outros dados que não são diretamente controlados pelo \emph{git}. Todos os dados devem, uma vez mais, estar disponíveis e consistentes para poderem ser exibidos e validados corretamente para a aplicação \emph{web} do \emph{GitLab}.
+Os dados que são armazenados incluem dados do utilizador (como \emph{username}, \emph{email}, \emph{password}, definições de conta, etc), permissões dos repositórios, comentários, problemas encontrados e todos os outros dados que não são diretamente controlados pelo \emph{git}. Todos os dados devem, uma vez mais, estar disponíveis e consistentes para poderem ser recolhidos pelo \emph{GitLab}.
 
-Num cluster onde possam existir várias instâncias do \emph{Postgres} (como o \emph{master} ou \emph{slaves}/réplicas), existe também uma instância do \emph{HAProxy}. Tal como vimos anteriormente, o \emph{HAProxy} permite o balanceamento de carga e permite transmitir os pedidos a um grupo de nós previamente conhecidos. Ou seja, qualquer instância da aplicação \emph{GitLab} irá comunicar com este \emph{HAProxy} acreditando que este é a base de dados. 
+% Num cluster onde possam existir várias instâncias do \emph{Postgres} (como o \emph{master} ou \emph{slaves}/réplicas), existe também uma instância do \emph{HAProxy}. Tal como vimos anteriormente, o \emph{HAProxy} permite o balanceamento de carga e permite transmitir os pedidos a um grupo de nós previamente conhecidos. Ou seja, qualquer instância da aplicação \emph{GitLab} irá comunicar com este \emph{HAProxy} acreditando que este é a base de dados. 
 
-Os diferentes \emph{slaves} são configurados para se manterem \emph{up to date} e prontos a atuarem como \emph{master} no caso de uma falha do servidor principal. A alta escalabilidade e disponibilidade do \emph{Postgres} é mantida através da utilização de instâncias \emph{HAProxy} e \emph{Repmgr}.
+Uma das funcionalidades do \emph{Postgres}, é a existência de um \emph{master} e de um ou mais \emph{slaves}(réplicas). As diferentes réplicas são configurados para se manterem \emph{up to date} e prontas a atuarem como \emph{master} no caso de uma falha do servidor principal. A alta escalabilidade e disponibilidade do \emph{Postgres} é mantida através da utilização do \emph{consul}, \emph{repmgr} e \emph{pgbouncer}.
 
 % ---------------------------------------------------------------
-\subsubsection{\emph{Repmgr}}
-O \emph{Repmgr} é uma ferramenta usada para facilitar e automatizar processos como replicação e falhas de instâncias do \emph{PostgreSQL}.
+% \subsubsection{\emph{Repmgr}}
+% O \emph{Repmgr} é uma ferramenta usada para facilitar e automatizar processos como replicação e falhas de instâncias do \emph{PostgreSQL}.
 
-Esta ferramenta possui o \emph{Patroni} como alternativa, que torna possível assegurar não só as funcionalidades garantidas pelo \emph{Repmgr}, mas seria também facilitado o processo de adição ou remoção de novos nós que contêm réplicas dos dados, uma vez que esta é uma tarefa difícil e que requer configurações que podem induzir a erros. Esta solução foi no entanto descartada em virtude da implementação mais simples do Repmgr, uma vez que no processo de criação de novos nós na cloud está a ser feito através de \emph{Ansible}.
+% Esta ferramenta possui o \emph{Patroni} como alternativa, que torna possível assegurar não só as funcionalidades garantidas pelo \emph{Repmgr}, mas seria também facilitado o processo de adição ou remoção de novos nós que contêm réplicas dos dados, uma vez que esta é uma tarefa difícil e que requer configurações que podem induzir a erros. Esta solução foi no entanto descartada em virtude da implementação mais simples do Repmgr, uma vez que no processo de criação de novos nós na cloud está a ser feito através de \emph{Ansible}.
 
-Esta ferramenta corre em conjunto com as instâncias do \emph{Postgres}. Para que seja possível reconhecer e atualizar o estado de cada uma destas instâncias, o \emph{Rempgr} recorre neste caso, ao \textbf{\emph{Consul}}, podendo ainda serem usados o \emph{ETCD} ou o\emph{Zookeeper} em prol do primeiro.
+% Esta ferramenta corre em conjunto com as instâncias do \emph{Postgres}. Para que seja possível reconhecer e atualizar o estado de cada uma destas instâncias, o \emph{Rempgr} recorre neste caso, ao \textbf{\emph{Consul}}, podendo ainda serem usados o \emph{ETCD} ou o\emph{Zookeeper} em prol do primeiro.
 
 
 % ---------------------------------------------------------------
 \subsection{Sistema distribuído de ficheiros}
-No núcleo do \emph{GitLab} encontra-se o \emph{git}. Como vimos anteriormente, o \emph{git} é uma ferramenta que permite o controlo de versões de ficheiros. O protocolo do \emph{git} utiliza um sistema de ficheiros para guardar ficheiros. Como seria de esperar, todas as instâncias do \emph{GitLab} utilizam o mesmo sistema de ficheiros.
+\textcolor{red}{No núcleo do \emph{GitLab} encontra-se o \emph{git}. Como vimos anteriormente, o \emph{git} é uma ferramenta que permite o controlo de versões de ficheiros. O protocolo do \emph{git} utiliza um sistema de ficheiros para guardar ficheiros. Como seria de esperar, todas as instâncias do \emph{GitLab} utilizam o mesmo sistema de ficheiros.}
 
-Para além do sistema de ficheiros utilizado pelo \emph{git}, existem ainda outras pastas partilhadas que permitem guardar outros ficheiros necessários ao funcionamento do \emph{git} e do \emph{GitLab}. Incluem-se: a pasta que armazena as chaves \emph{SSH}, recursos estáticos que são carregados (como imagens, ficheiros \emph{Javascript, CSS}) e outros ficheiros que necessitam de estar presentes em todas as instâncias do \emph{GitLab}.
 
-% ---------------------------------------------------------------
-\subsection{\emph{Consul}}
-% ver https://gist.github.com/yurishkuro/10cb2dc42f42a007a8ce0e055ed0d171
-Ferramentas como \textbf{\emph{Consul}}, \textbf{\emph{ETCD}} e \textbf{\emph{Zookeeper}} permitem guardar informações num estilo \emph{key-value} dentro de um \emph{cluster}. Ou seja, podemos guardar o estado de cada uma das instâncias do \emph{Postegres} nestas ferramentas. 
+\textcolor{red}{Para além do sistema de ficheiros utilizado pelo \emph{git}, existem ainda outras pastas partilhadas que permitem guardar outros ficheiros necessários ao funcionamento do \emph{git} e do \emph{GitLab}. Incluem-se: a pasta que armazena as chaves \emph{SSH}, recursos estáticos que são carregados (como imagens, ficheiros \emph{Javascript, CSS}) e outros ficheiros que necessitam de estar presentes em todas as instâncias do \emph{GitLab}.}
 
-As ferramentas mencionadas em cima são muito semelhantes. Optamos por escolher o \emph{Consul} para descrever o funcionamento básico de um componente deste tipo. Este apresenta um \emph{time to live} (configurável) para o armazenamento dos dados. Isto é, ao fim de um tempo previamente estabelecido, todos os dados sobre os estados das máquinas, é removido. Isto garante que as instâncias \emph{Repmgr} verificam continuamente o estado e o atualizam. Com a utilização deste recurso, o \emph{Repmgr} consegue reconhecer facilmente quem são as máquinas disponíveis bem como o líder atual. 
-
-Como podemos verificar, componentes como \emph{Consul}, \emph{ETCD} e \emph{Zookeeper} são extremamente importantes na estrutura do \emph{GitLab}, pelo que devem existir várias instâncias destes.
 
 % ---------------------------------------------------------------
 \subsection{\emph{Gitaly}}
-O \emph{Gitaly} é um serviço RPC (\emph{Remote Procedure Call}), escrito em \textit{Go}, que trata todas as chamadas ao \emph{git}, feitas pelo \emph{GitLab}, ou seja, é responsável por fazer todos os acessos aos repositórios \emph{git}.
 
-Os componentes \emph{GitLab-Shell} e \emph{GitLab-Workhorse} funcionam como clientes para o \emph{Gitaly}.
+\textcolor{red}{O \emph{Gitaly} é um serviço RPC (\emph{Remote Procedure Call}), escrito em \textit{Go}, que trata todas as chamadas ao \emph{git}, feitas pelo \emph{GitLab}, ou seja, é responsável por fazer todos os acessos aos repositórios \emph{git}.}
 
-O diagrama em baixo pretende demonstrar a como é efetuada a comunicação entre clientes e o \emph{Gitaly} para um acesso ao serviço \emph{git}.
+\textcolor{red}{Os componentes \emph{GitLab-Shell} e \emph{GitLab-Workhorse} funcionam como clientes para o \emph{Gitaly}.}
+
+\textcolor{red}{O diagrama em baixo pretende demonstrar a como é efetuada a comunicação entre clientes e o \emph{Gitaly} para um acesso ao serviço \emph{git}.}
 
 \begin{figure}[H]
   \centering
@@ -311,11 +307,11 @@ O diagrama em baixo pretende demonstrar a como é efetuada a comunicação entre
   \caption{Funcionamento do \emph{Gitaly}.}
 \end{figure}
 
-O \textit{Gitaly} irá atuar como uma passagem para os repositórios. Possui ajudantes que permitem agilizar todo o processo de troca de informações. Estes são conhecidos por ocasionalmente terem fugas de memória, pelo que o \textit{Gitaly} irá reiniciar estes ajudantes quando estes excederem uma certa quantidade máxima.
+\textcolor{red}{O \textit{Gitaly} irá atuar como uma passagem para os repositórios. Possui ajudantes que permitem agilizar todo o processo de troca de informações. Estes são conhecidos por ocasionalmente terem fugas de memória, pelo que o \textit{Gitaly} irá reiniciar estes ajudantes quando estes excederem uma certa quantidade máxima.}
 
-Para possibilitar a comunicação entre os ajudantes e o servidor \textit{Go}, o \textit{Gitaly} usa a framework \textit{gRPC}, que permite aos ajudantes chamarem métodos sobre objetos no servidor, e executa-los como se o método fosse local, possibilitando assim uma implementação distribuída da aplicação.
+\textcolor{red}{Para possibilitar a comunicação entre os ajudantes e o servidor \textit{Go}, o \textit{Gitaly} usa a framework \textit{gRPC}, que permite aos ajudantes chamarem métodos sobre objetos no servidor, e executa-los como se o método fosse local, possibilitando assim uma implementação distribuída da aplicação.}
 
-Finalmente, deve ser considerada a criação de alternativas ao \textit{Gitaly} na implementação, uma vez que no caso de haver falha de rede, este constituirá um ponto central de falha, e os pedidos não serão atendidos.
+\textcolor{red}{Finalmente, deve ser considerada a criação de alternativas ao \textit{Gitaly} na implementação, uma vez que no caso de haver falha de rede, este constituirá um ponto central de falha, e os pedidos não serão atendidos.}
 
 
 
@@ -341,9 +337,11 @@ Através da análise da arquitetura do \emph{GitLab}, é possível detetar os co
         
         \emph{Redis} & A configuração básica de \emph{master-slave} do \emph{Redis} não permite, muitas das vezes, manter a alta disponibilidade de um serviço. Como tal, é necessária a adição de um serviço capaz de resolver problemas relacionados com falhas e replicações de instâncias \emph{Redis}. A falha de uma instância \emph{Redis} compromete a disponibilidade do \emph{GitLab}. & O \textbf{\emph{Redis Sentinel}} permite complementar a escolha das instâncias \emph{master} e \emph{slave} de  \emph{Redis}, agindo como a única fonte de verdade na hora da decisão. Garante assim a existência de uma instância \emph{Redis}.  Este permite ainda indicar aos clientes qual a instância correta que deverá ser utilizada.   \\ \hline
         
-        Base de dados - \emph{Postgres} & TODO & TODO (pgbouncer e consul) \\ \hline
+        Base de dados - \emph{Postgres} & TODO & TODO (pgbouncer e consul, repmgr) \\ \hline
         
         \emph{Sidekiq} & TODO & TODO (várias instâncias a correr o \emph{Sidekiq}) \\ \hline
+        
+        \emph{Gitlay} & TODO & TODO (várias instâncias a correr o \emph{Sidekiq}) \\ \hline
         
         Sistema de ficheiros distribuído - \emph{NFS} & O \emph{GitLab} foi desenvolvido em torno do protocolo \emph{git}. Este protocolo armazena todos os dados diretamente num sistema de ficheiros. Qualquer indisponibilidade do sistema de ficheiros, comprometerá a experiência de utilização do \emph{GitLab}. Este componente é, por si só, dos mais importantes entre os restantes anteriormente indicados. & Serviços como o \textbf{\emph{GPFS}} e \textbf{\emph{HighlyAvailableNFS}}, permitem que os dados estejam sempre disponíveis. No caso do \emph{GPFS}, é possível distribuir os dados em diferentes instâncias assegurando redundância e tempos leitura mais baixos. No entanto, ainda que seja utilizado este serviço, é necessário que existam pelo menos 2 nós a persistirem dados.\\
         \hline
@@ -376,8 +374,106 @@ Para que seja possível tornar o \emph{GitLab} altamente disponível, adotamos u
     keepaspectratio
   ]{GITLAB.pdf}
   \caption{Arquitetura adotada.}
+  \label{fig:arq}
 \end{figure}
 
+\bigbreak
+Com base nos componentes do \emph{GitLab} e na arquitetura adotada, vamos proceder à explicação de um possível provisionamento do \emph{GitLab}.
+
+% ---------------------------------------------------------------
+\newpage
+\subsection{\emph{HAproxy}}
+A introdução de uma instância a realizar \emph{load balancing} é uma das tarefas mais importantes quando se pretende tornar uma aplicação altamente disponível.
+
+Como visto anteriormente, uma instância com o \emph{HAproxy} é, por si só, um componente crítico e como tal deverá ser usada uma ferramenta como o \emph{keepalived} que permite verificar o estado de uma máquina e automaticamente a colocar num estado de \emph{standby} sempre que existe uma falha. A adição de um único servidor \emph{HAproxy} com o \emph{keepalived} não garante, no entanto, a alta disponibilidade. Para garantirmos isso, é necessário adicionarmos mais uma máquina a servir as mesmas necessidades. Para isso seria necessário existir um \emph{floating ip}. Em baixo segue um exemplo que sugere a estrutura destes componentes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[
+    page=1,
+    width=13cm,
+    height=\textheight,
+    keepaspectratio
+  ]{HAproxy.pdf}
+  \caption{Estrutura ideal para \emph{load balacing}.}
+\end{figure}
+
+\bigbreak
+Na estrutura adotada adicionamos unicamente uma instância a servir o \emph{HAproxy}. A solução ideal para seria a apresentada em cima. Nesta estrutura não existe limite para o número de instâncias a serem adicionadas, garantindo a alta escalabilidade e resiliência.
+
+% ---------------------------------------------------------------
+\subsection{Aplicação \emph{GitLab}}
+
+A introdução de \emph{load balancers}, como mostrado anteriormente, permite que instâncias que sirvam a aplicação \emph{GitLab} não sofram um grande \emph{overhead} caso exista um elevado número de clientes. O \emph{HAproxy} possui um mecanismo de verificação do estado dos servidores aplicacionais, garantindo que não é encaminhado tráfego para servidores em baixo.
+
+A estrutura adotada inclui duas instâncias a servir o \emph{GitLab}, no entanto poderiam ser adicionadas mais instâncias, conforme as necessidades.
+
+Como vimos anteriormente, existem inúmeros componentes que são vitais ao funcionamento do \emph{GitLab}, como é o caso do \emph{Nginx}, \emph{Gitaly}, \emph{GitLab Shell}, \emph{GitLab Workhorse}, \emph{Sidekiq}, \emph{Unicorn}, \emph{Redis} e base de dados.
+
+À exceção da base de dados, do \emph{Gitaly}, do \emph{Redis} e do \emph{Sidekiq}, nenhum dos outros componentes requer ser replicado ou até mesmo ser colocado numa instância isolada, uma vez que acabam por ser intrínsecos ao \emph{GitLab}. No entanto, não existem indicações de que é uma abordagem incorreta. Abordaremos mais à frente componentes como o \emph{Gitaly}, \emph{Redis} e base de dados.
+
+Relativamente ao \emph{Sidekiq}, seria favorável colocar este serviço em diferentes máquinas. Esta ação tornaria a aplicação \emph{GitLab} mais rápida a processar pedidos. Estes pedidos estão "armazenados" temporariamente no \emph{Redis} e são posteriormente tratados pelo \emph{Sidekiq}, pelo que, quantas mais instâncias existirem a correr este serviço, mais rápido será o sistema. Em baixo segue um exemplo que sugere a estrutura destes componentes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[
+    page=1,
+    width=13cm,
+    height=\textheight,
+    keepaspectratio
+  ]{SIDEKIQ.pdf}
+  \caption{Estrutura ideal para executar pedidos rapidamente.}
+\end{figure}
+
+\bigbreak
+A vantagem da estrutura apresentada em cima, consiste na distribuição de diferentes tarefas, por cada uma das instâncias a servir o \emph{Sidekiq}.
+
+% ---------------------------------------------------------------
+\subsection{\emph{Network File System}}
+
+A estrutura apresentada na figura \ref{fig:arq}, inclui unicamente uma instância a partilhar o sistema de ficheiros com a rede local. Esta máquina é, por si só, um ponto de falha grave, pois toda a aplicação ficará inconsistente com a sua falha, como mencionada anteriormente.
+
+
+
+
+
+% ---------------------------------------------------------------
+\subsection{\emph{Redis}}
+
+% ---------------------------------------------------------------
+\subsection{Base de dados}
+
+
+
+
+
+
+% ---------------------------------------------------------------
+% FERRAMENTAS DE MONITORIZAÇÃO
+% ---------------------------------------------------------------
+\newpage
+\section{Ferramentas de monitorização}
+
+
+
+
+
+
+% ---------------------------------------------------------------
+% FERRAMENTAS DE AVALIAÇÃO
+% ---------------------------------------------------------------
+\newpage
+\section{Ferramentas de avaliação}
+
+
+
+
+
+% ---------------------------------------------------------------
+% FERRAMENTAS DE INSTALAÇÃO AUTOMÁTICA
+% ---------------------------------------------------------------
+\newpage
+\section{Ferramentas de instalação automática}
 
 
 
@@ -412,4 +508,3 @@ GitLab High Availability, GitLab Documentation. Acedido em \today, em \url{https
 
 
 \end{document}
-
