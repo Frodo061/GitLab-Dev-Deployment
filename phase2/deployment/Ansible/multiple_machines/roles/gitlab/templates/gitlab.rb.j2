@@ -1,16 +1,19 @@
 external_url "http://{{ gitlab_external_url }}"
 nginx['listen_port'] = {{ gitlab_nginx_listen_port }}
 
+
+
 # REDIS
 redis['enable'] = false
 gitlab_rails['redis_host'] = '{{ hostvars[redis_host]['ansible_default_ipv4']['address'] }}'
 gitlab_rails['redis_port'] = {{ redis_port }}
 gitlab_rails['redis_password'] = '{{ redis_password }}'
 
+
+
 # REDIS SENTINEL
 redis['master_name'] = '{{ redis_name }}'
 redis['master_password'] = '{{ redis_password }}'
-
 gitlab_rails['redis_sentinels'] = [
     {'host' => '{{ hostvars[sentinel_master_host]['ansible_default_ipv4']['address'] }}', 'port' => {{sentinel_master_port}}},
 {% for server in sentinel_slave_hosts %}
@@ -18,30 +21,33 @@ gitlab_rails['redis_sentinels'] = [
 {% endfor %}
 ]
 
+
+
 # DATABASE
 postgresql['enable'] = false
-
 gitlab_rails['db_host'] = '{{ db_host }}'
 gitlab_rails['db_port'] = {{ db_port }}
 gitlab_rails['db_password'] = '{{ db_password }}'
+{% if ansible_facts['nodename'] == 'gitlab-2' %}
+gitlab_rails['auto_migrate'] = true
+gitlab_rails['initial_root_password'] = 'gitlab123456789'
+{% else %}
 gitlab_rails['auto_migrate'] = false
+{% endif %}
+
+
+
+# GITALY
+gitaly['enable'] = true
+
 
 
 # NFS
 high_availability['mountpoint'] = '{{ nfsmount }}'
-git_data_dirs({"default" => { "path" => "{{ nfsmount }}/gitlab-data/git-data"} })
+git_data_dirs({
+    "default" => { "path" => "{{ nfsmount }}/gitlab-data/git-data"}
+})
 user['home'] = '{{ nfsmount }}/gitlab-data/home'
 gitlab_rails['uploads_directory'] = '{{ nfsmount }}/gitlab-data/uploads'
 gitlab_rails['shared_path'] = '{{ nfsmount }}/gitlab-data/shared'
 gitlab_ci['builds_directory'] = '{{ nfsmount }}/gitlab-data/builds'
-
-
-# SMTP (not working)
-gitlab_rails['smtp_enable'] = true
-gitlab_rails['smtp_address'] = "smtp.mailtrap.io"
-gitlab_rails['smtp_port'] = 25
-gitlab_rails['smtp_user_name'] = "511d4659f8686f"
-gitlab_rails['smtp_password'] = "b64861b35ad7e6"
-gitlab_rails['smtp_domain'] = "smtp.mailtrap.io"
-gitlab_rails['smtp_tls'] = true
-

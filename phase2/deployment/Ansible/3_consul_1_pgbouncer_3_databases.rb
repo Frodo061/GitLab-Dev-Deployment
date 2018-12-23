@@ -92,6 +92,7 @@ repmgr['master_on_initialization'] = false
 # ------------------------------------------------
 # sudo gitlab-psql -d gitlabhq_production
 # sudo gitlab-ctl repmgr cluster show
+
 # Secondary
 # ------------------------------------------------
 # sudo gitlab-ctl repmgr standby setup database-master.us-west1-b.c.copper-gear-221110.internal

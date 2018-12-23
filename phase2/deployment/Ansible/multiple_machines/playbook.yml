@@ -10,36 +10,36 @@
         gcp_project: copper-gear-221110
         gcp_cred_kind: serviceaccount
         gcp_cred_file: ../.gcloud/gcloud.json
-        gcp_machine_type: n1-standard-1
+        gcp_machine_type: n1-standard-2
         source_image: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20181030
         disk_size: 12
 
         disks:
-          - consul-disk-01
-          - consul-disk-02
-          - consul-disk-03
+          # - consul-disk-01
+          # - consul-disk-02
+          # - consul-disk-03
           - database-disk-04
-          - database-disk-05
-          - database-disk-06
-          - pgbouncer-disk-07
+          # - database-disk-05
+          # - database-disk-06
+          # - pgbouncer-disk-07
 
         addresses:
-          - addr-1
-          - addr-2
-          - addr-3
+          # - addr-1
+          # - addr-2
+          # - addr-3
           - addr-4
-          - addr-5
-          - addr-6
-          - addr-7
+          # - addr-5
+          # - addr-6
+          # - addr-7
 
         instances:
-          - { index: 1, tag: [consul, omnibus], name: consul-1 }
-          - { index: 2, tag: [consul, omnibus], name: consul-2 }
-          - { index: 3, tag: [consul, omnibus], name: consul-3 }
-          - { index: 4, tag: [database-master, omnibus], name: database-master }
-          - { index: 5, tag: [database-slave, omnibus], name: database-1 }
-          - { index: 6, tag: [database-slave, omnibus], name: database-2 }
-          - { index: 7, tag: [pgbouncer, omnibus], name: pgbouncer }
+          # - { index: 1, tag: [consul, omnibus], name: consul-1 }
+          # - { index: 2, tag: [consul, omnibus], name: consul-2 }
+          # - { index: 3, tag: [consul, omnibus], name: consul-3 }
+          - { index: 1, tag: [database-master, omnibus], name: database-master }
+          # - { index: 5, tag: [database-slave, omnibus], name: database-1 }
+          # - { index: 6, tag: [database-slave, omnibus], name: database-2 }
+          # - { index: 7, tag: [pgbouncer, omnibus], name: pgbouncer }
 
         # VPC main network
         network_name: gitlab-network
@@ -60,7 +60,7 @@
         gcp_project: copper-gear-221110
         gcp_cred_kind: serviceaccount
         gcp_cred_file: ../.gcloud/gcloud.json
-        gcp_machine_type: n1-standard-1
+        gcp_machine_type: n1-standard-2
         source_image: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20181030
         disk_size: 12
         
@@ -126,15 +126,15 @@
 
 # DATABASE
 # --------------------------------------------
-- name: Installing Consul
-  hosts:
-    - consul
-  become: yes
-  gather_facts: yes
-  roles:
-    - role: consul
-      vars:
-        - consul_hosts: "{{ groups['consul'] }}"
+# - name: Installing Consul
+#   hosts:
+#     - consul
+#   become: yes
+#   gather_facts: yes
+#   roles:
+#     - role: consul
+#       vars:
+#         - consul_hosts: "{{ groups['consul'] }}"
 
 - name: Intalling master postgres node
   hosts:
@@ -147,42 +147,42 @@
         listen_address: 0.0.0.0
         listen_port: 5432
         # FOR NON-HA
-        # postgres_user: gitlab
-        # postgres_user_hash_password: b7a289c0600988fe8e709dd2887e4d37
-        # trust_auth_cidr_addresses: 10.240.0.0/16
+        sql_user: gitlab
+        sql_user_password: b7a289c0600988fe8e709dd2887e4d37
+        trust_auth_cidr_addresses: 10.240.0.0/16
         # FOR HA
-        trust_auth_cidr_addresses: 10.240.0.0/16
-        pgbouncer_user_password: be5544d3807b54dd0637f2439ecb03b9
-        sql_user_password: b7a289c0600988fe8e709dd2887e4d37
-        consul_hosts: "{{ groups['consul'] }}"
+        # trust_auth_cidr_addresses: 10.240.0.0/16
+        # pgbouncer_user_password: be5544d3807b54dd0637f2439ecb03b9
+        # sql_user_password: b7a289c0600988fe8e709dd2887e4d37
+        # consul_hosts: "{{ groups['consul'] }}"
 
-- name: Intalling secondary postgres nodes
-  hosts:
-    - database-slave
-  become: yes
-  gather_facts: yes
-  roles:
-    - role: postgres_slave
-      vars:
-        listen_address: 0.0.0.0
-        trust_auth_cidr_addresses: 10.240.0.0/16
-        pgbouncer_user_password: be5544d3807b54dd0637f2439ecb03b9
-        sql_user_password: b7a289c0600988fe8e709dd2887e4d37
-        consul_hosts: "{{ groups['consul'] }}"
+# - name: Intalling secondary postgres nodes
+#   hosts:
+#     - database-slave
+#   become: yes
+#   gather_facts: yes
+#   roles:
+#     - role: postgres_slave
+#       vars:
+#         listen_address: 0.0.0.0
+#         trust_auth_cidr_addresses: 10.240.0.0/16
+#         pgbouncer_user_password: be5544d3807b54dd0637f2439ecb03b9
+#         sql_user_password: b7a289c0600988fe8e709dd2887e4d37
+#         consul_hosts: "{{ groups['consul'] }}"
 
-- name: Intalling pgbouncer
-  hosts:
-    - pgbouncer
-  become: yes
-  gather_facts: yes
-  roles:
-    - role: pgbouncer
-      vars:
-        pgbouncer_user_password: be5544d3807b54dd0637f2439ecb03b9
-        consul_user_password: bc175b38365ec8781fa93720255dee85
-        consul_hosts: "{{ groups['consul'] }}"
-        listen_addr: "{{ ansible_default_ipv4.address }}"
-        listen_port: 6432
+# - name: Intalling pgbouncer
+#   hosts:
+#     - pgbouncer
+#   become: yes
+#   gather_facts: yes
+#   roles:
+#     - role: pgbouncer
+#       vars:
+#         pgbouncer_user_password: be5544d3807b54dd0637f2439ecb03b9
+#         consul_user_password: bc175b38365ec8781fa93720255dee85
+#         consul_hosts: "{{ groups['consul'] }}"
+#         listen_addr: "{{ ansible_default_ipv4.address }}"
+#         listen_port: 6432
 
 
 # GITLAB
@@ -277,10 +277,14 @@
         sentinel_master_port: 26379
         sentinel_slave_hosts: "{{ groups['redis-slave'] }}"
         sentinel_slave_port: 26379
-        # DATABASE
-        db_host: "{{ hostvars[groups['pgbouncer'][0]]['ansible_default_ipv4']['address'] }}" # (pgbouncer)
-        db_port: 6432 # (pgbouncer)
+        # DATABASE (postgres)
+        db_host: "{{ hostvars[groups['database-master'][0]]['ansible_default_ipv4']['address'] }}"
+        db_port: 5432
         db_password: gitlab
+        # DATABASE (pgbouncer)
+        # db_host: "{{ hostvars[groups['pgbouncer'][0]]['ansible_default_ipv4']['address'] }}"
+        # db_port: 6432
+        # db_password: gitlab
         # NFS
         nfsserver: "{{ hostvars[groups['nfs'][0]]['ansible_default_ipv4']['address'] }}"
         nfspath: /gitlab-nfs

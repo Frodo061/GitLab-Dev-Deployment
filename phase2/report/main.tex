@@ -285,34 +285,27 @@ Uma das funcionalidades do \emph{Postgres}, é a existência de um \emph{master}
 
 
 % ---------------------------------------------------------------
-\subsection{Sistema distribuído de ficheiros}
-\textcolor{red}{No núcleo do \emph{GitLab} encontra-se o \emph{git}. Como vimos anteriormente, o \emph{git} é uma ferramenta que permite o controlo de versões de ficheiros. O protocolo do \emph{git} utiliza um sistema de ficheiros para guardar ficheiros. Como seria de esperar, todas as instâncias do \emph{GitLab} utilizam o mesmo sistema de ficheiros.}
+\subsection{Sistema de armazenamento de ficheiros}
 
+Em versões antigas do \emph{GitLab}, era utilizado um único sistema de ficheiros local ou distribuído (como o \emph{NFS}), para que pudessem ser armazenados dados e para que o \emph{git} conseguisse controlar repositórios e gerir e versões de ficheiros. Atualmente, o serviço \emph{git} é efetudo pelo \emph{Gitaly}, falado mais à frente. No entanto, todos os restantes dados continuam a ser armazenados num sistema de ficheiros.
 
-\textcolor{red}{Para além do sistema de ficheiros utilizado pelo \emph{git}, existem ainda outras pastas partilhadas que permitem guardar outros ficheiros necessários ao funcionamento do \emph{git} e do \emph{GitLab}. Incluem-se: a pasta que armazena as chaves \emph{SSH}, recursos estáticos que são carregados (como imagens, ficheiros \emph{Javascript, CSS}) e outros ficheiros que necessitam de estar presentes em todas as instâncias do \emph{GitLab}.}
+Num ambiente onde existem múltiplas instâncias do \emph{GitLab}, é necessário que exista um sistema de ficheiros comum a todas as instâncias, para que estas consigam manipular dados. 
+
+O \emph{NFS} é um exemplo de sistema distribuído de ficheiros e que é atualmente utilizado pelo \emph{GitLab}. Neste sistema permitem armazenar dados essenciais ao \emph{GitLab}: armazenamento das chaves públicas \emph{SSH} dos utilizadores, \emph{uploads} dos utilizadores, \emph{GitLab pages}, etc.
 
 
 % ---------------------------------------------------------------
 \subsection{\emph{Gitaly}}
 
-\textcolor{red}{O \emph{Gitaly} é um serviço RPC (\emph{Remote Procedure Call}), escrito em \textit{Go}, que trata todas as chamadas ao \emph{git}, feitas pelo \emph{GitLab}, ou seja, é responsável por fazer todos os acessos aos repositórios \emph{git}.}
+O \emph{Gitaly} é um serviço RPC (\emph{Remote Procedure Call}), escrito em \textit{Go}, que surgiu com o intuito de resolver problemas de escalabilidade. Isto é, depois o \emph{GitLab} ter crescido como aplicação, existiu a necessidade  de escalar horizontalmente quando verticalmente passou a ser insuficiente e dispendioso. Ainda assim, o \emph{Gitaly} surge com a necessidade de remover falhas no acesso aos repositórios e serviços do \emph{git}, que eram armazenados diretamente num sistema distribuído de ficheiros (\emph{NFS}).
 
-\textcolor{red}{Os componentes \emph{GitLab-Shell} e \emph{GitLab-Workhorse} funcionam como clientes para o \emph{Gitaly}.}
-
-\textcolor{red}{O diagrama em baixo pretende demonstrar a como é efetuada a comunicação entre clientes e o \emph{Gitaly} para um acesso ao serviço \emph{git}.}
+No contexto da aplicação \emph{GitLab}, o \emph{Gitaly} apresenta vários clientes distintos, como é o caso do \emph{GitLab Shell}, \emph{GitLab Workhorse} e \emph{GitLab Rails}. Assim, nenhum outro componente conseguirá escrever ou ler dados do \emph{git}. O diagrama em baixo pretende demonstrar a como é efetuada a comunicação entre clientes e o \emph{Gitaly}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.7]{images/gitlab-gitaly.png}
-  \caption{Funcionamento do \emph{Gitaly}.}
+  \includegraphics[scale=0.4]{images/gitlay.png}
+  \caption{Estrutura do \emph{Gitaly}.}
 \end{figure}
-
-\textcolor{red}{O \textit{Gitaly} irá atuar como uma passagem para os repositórios. Possui ajudantes que permitem agilizar todo o processo de troca de informações. Estes são conhecidos por ocasionalmente terem fugas de memória, pelo que o \textit{Gitaly} irá reiniciar estes ajudantes quando estes excederem uma certa quantidade máxima.}
-
-\textcolor{red}{Para possibilitar a comunicação entre os ajudantes e o servidor \textit{Go}, o \textit{Gitaly} usa a framework \textit{gRPC}, que permite aos ajudantes chamarem métodos sobre objetos no servidor, e executa-los como se o método fosse local, possibilitando assim uma implementação distribuída da aplicação.}
-
-\textcolor{red}{Finalmente, deve ser considerada a criação de alternativas ao \textit{Gitaly} na implementação, uma vez que no caso de haver falha de rede, este constituirá um ponto central de falha, e os pedidos não serão atendidos.}
-
 
 
 
@@ -362,7 +355,7 @@ Através da análise da arquitetura do \emph{GitLab}, é possível detetar os co
 
 De seguida, é apresentada a arquitetura que foi adotada para a realização do provisionamento e \emph{deployment} da aplicação \emph{GitLab}.
 
-Para que seja possível tornar o \emph{GitLab} altamente disponível, adotamos uma arquitetura distribuída, semelhante à utilizada atualmente pela aplicação \emph{GitLab}. Esta arquitetura apresenta um acentuado número de nós computacionais que requerem alguma gestão e monitorização.
+Para que seja possível tornar o \emph{GitLab} altamente disponível, adotamos uma arquitetura distribuída, semelhante à utilizada atualmente pela aplicação \emph{GitLab}. Esta arquitetura apresenta um acentuado número de nós computacionais que requerem alguma gestão e monitorização. Não foram utilizados \emph{containers} durante a fase de provisionamento e \emph{deployment}.
 
 \bigbreak
 \begin{figure}[H]
@@ -433,17 +426,38 @@ A vantagem da estrutura apresentada em cima, consiste na distribuição de difer
 
 A estrutura apresentada na figura \ref{fig:arq}, inclui unicamente uma instância a partilhar o sistema de ficheiros com a rede local. Esta máquina é, por si só, um ponto de falha grave, pois toda a aplicação ficará inconsistente com a sua falha, como mencionada anteriormente.
 
+Uma das soluções para corrigir este ponto de falha, seria utilizar um \emph{Highly Available NFS}. Isto é, permitir que um serviço como o \emph{NFS} esteja sempre disponível aos utilizadores de \emph{NFS}. Uma forma de fornecer um único endereço para os clientes para terem acesso ao \emph{NFS}, passa por utilizar um endereço virtual juntamente com o serviço \emph{heartbeat} que permite analisar o estado das instâncias. Para garantirmos a replicação dos dados podemos utilizar o serviço \emph{DRBD}. Em baixo segue um exemplo que sugere a estrutura destes componentes.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[
+    page=1,
+    width=10cm,
+    height=\textheight,
+    keepaspectratio
+  ]{NFSHA.pdf}
+  \caption{\emph{High Available NFS}.}
+\end{figure}
 
 
+% ---------------------------------------------------------------
+\subsection{\emph{Gitaly}}
+
+
+% FALAR QUE PODERIAMOS TER O GITALY numa máquina isolada. Controla os acesso aos repositorios do git. Numa arquitetura HA seria o ideal, para as varias instancias partilharem o mesmo "locking"
+
+% https://docs.gitlab.com/ee/administration/gitaly/#gitaly-server-configuration
 
 
 % ---------------------------------------------------------------
 \subsection{\emph{Redis}}
 
+A estrutura adotada inclui três instâncias \emph{Redis}, nomeadamente uma instância \emph{master} e duas instâncias \emph{slaves}. Juntamente com o serviço \emph{Redis}, foi adicionado o \emph{Redis Sentinel} que garante a alta disponibilidade do serviço. Este permanece à escuta de falhas das instâncias. Nesta situação inicia o processo de seleção de um novo \emph{master}. Um exemplo desta estrutura encontra-se na figura \ref{fig:arq}.
+
 % ---------------------------------------------------------------
 \subsection{Base de dados}
 
-
+% FALAR QUE EXISTE UM ERRO COM O pgbouncer https://goo.gl/a9uF5H e que para continuarmos apenas utilizamos um base de dados.
 
 
 
@@ -453,11 +467,10 @@ A estrutura apresentada na figura \ref{fig:arq}, inclui unicamente uma instânci
 % ---------------------------------------------------------------
 \newpage
 \section{Ferramentas de monitorização}
-
-
-
-
-
+\paragraph{} Para sistemas cuja a alta disponibilidade é uma característica indispensável, uma monitorização da atividade dos componentes da sua arquitetura é fundamental pois, apenas assim é possível identificar com grande facilidade problemas estruturais que possam estar a por em causa o bom funcionamento de toda a aplicação. Desta forma, estes módulos poderão ser melhorados normalmente através de soluções que melhorem a sua escalabilidade.
+\par No caso do \emph{GitLab}, existem camadas que deverão ser monitorizadas frequentemente, entre elas, o \emph{Workhorse}, o \emph{HaProxy}, a base de dados \emph{Postgres} e por fim o sistema de ficheiros distribuído \emph{NFS}. Assim sendo, para recolhermos informações das máquinas onde irão correr estes módulos, foram utilizados diferentes \emph{Beats} que enviam dados para uma máquina remota que posteriormente os analisará. Para recolher informações relevantes sobre a base de dados \emph{Postgres} foi utilizado a ferramenta \emph{filebeat} e para todas as outras máquinas utilizamos a ferramenta \emph{metricbeat}. Desta forma, conseguimos recolher informação que varia desde frequência do processador e memória utilizada até número de processos ativos e capacidade de disco utilizada por cada uma das máquinas em tempo real.
+\par Todos estes dados referentes a diferentes máquinas são enviados para uma terceira ferramenta que os irá recolher, agrupar e analisar devidamente, o \emph{elasticsearch}. Esta, foi escolhida por ter sido construida com o intuito de ser escalável, flexível e ter a capacidade de ler diretamente a informação em formato \emph{JSON} enviada por cada um dos \emph{Beats} das máquinas remotas.
+\par Finalmente, depois dos dados recolhidos, filtrados e devidamente analisados, a aplicação \emph{Kibana} é responsável pela sua apresentação, sendo facilmente adaptável às intenções de quem está a monitorizar toda a arquitetura.
 
 % ---------------------------------------------------------------
 % FERRAMENTAS DE AVALIAÇÃO
@@ -465,6 +478,13 @@ A estrutura apresentada na figura \ref{fig:arq}, inclui unicamente uma instânci
 \newpage
 \section{Ferramentas de avaliação}
 
+Para avaliar o desempenho da aplicação implementada, irá ser utilizada uma ferramenta de geração de carga e medição de desempenho, o Apache JMeter. Através deste, é possível automaticamente gerar cargas para testar diversos tipos de serviços e analisar o desempenho dos mesmos.
+
+% ok 
+%Honestamente acho que ficava melhor em inglês até, a cena de gerar payloads
+%só que não sei traduzir payload direito, gerar cargas foi o mais próximo que encontrei
+
+Uma vez que o Apache JMeter permite a realização de testes que utilizem diferentes serviços, este pode ser utilizado para testar componentes individualmente, ou para avaliar a performance da aplicação como um todo. Por exemplo, uma vez que o postgres tem suporte JDBC é possível utilizar o Apache JMeter para gerar um conjunto de instruções SQL e alimentar a base de dados com os mesmos para avaliar o seu desempenho individualmente, como um componente isolado, no entanto, uma vez que esta ferramenta suporta gravação de comandos num browser, é possível simular um conjunto de ações via interface web, que possam originar o mesmo tipo de carga na base de dados, mas no entanto testam a aplicação como um todo avaliando o desempenho que seria percebido pelo cliente ao invés de avaliar o desempenho de um único componente.
 
 
 
@@ -508,3 +528,4 @@ GitLab High Availability, GitLab Documentation. Acedido em \today, em \url{https
 
 
 \end{document}
+

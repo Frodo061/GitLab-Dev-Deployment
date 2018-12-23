@@ -68,8 +68,8 @@
       - auto_delete: true
         boot: true
         source: "{{ disk.results[item.index - 1] }}"
-    scheduling:
-      preemptible: true
+    # scheduling:
+    #   preemptible: true
     metadata:
       startup-script: |
         #!/bin/bash
