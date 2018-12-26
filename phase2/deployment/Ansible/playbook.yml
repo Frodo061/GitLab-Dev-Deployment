@@ -1,4 +1,4 @@
-- name: Database's provisioning
+- name: Database provisioning
   hosts: localhost
   connection: local
   gather_facts: no
@@ -48,7 +48,7 @@
         subnetwork_private_ports: [22, 80, 2049, 5432, 5601, 6379, 6432, 8301, 9200, 26379]
         subnetwork_public_ports: [22, 80, 5601, 9000]
 
-- name: GitLab's provisioning
+- name: GitLab provisioning
   hosts: localhost
   connection: local
   gather_facts: no
