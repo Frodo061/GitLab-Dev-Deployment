@@ -30,6 +30,8 @@
 \usepackage{adjustbox}
 \usepackage{pdfpages}
 
+\usepackage{longtable}
+
 \usepackage{minted} %for code template
 \usemintedstyle{friendly}
 \definecolor{bg}{rgb}{0.96,0.96,0.96}
@@ -318,30 +320,29 @@ No contexto da aplicação \emph{GitLab}, o \emph{Gitaly} apresenta vários clie
 
 Através da análise da arquitetura do \emph{GitLab}, é possível detetar os componentes críticos sem os quais comprometeriam a disponibilidade e consistência da aplicação \emph{GitLab}. Grande parte dos componentes referidos em baixo têm em vista a existência de várias réplicas do serviço \emph{GitLab}, pelo que numa abordagem com apenas uma instância alguns dos componentes não seriam considerados à partida críticos.
 
-\begin{table}[ht]
-    \centering
-    \begin{adjustbox}{width=1\textwidth}
-    \small
-    \begin{tabular}{ | p{5cm} | p{6cm} | p{6cm} |}
-        \hline
-        \textbf{Componente} & \textbf{Motivo} & \textbf{Solução} \\ \hline
-       
-        \textit{HAProxy} & Tornar uma aplicação altamente disponível envolve a existência de múltiplas instâncias de um determinado serviço. O \emph{HAProxy} permite balancear pedidos e serviços para cada uma das potenciais instâncias replicadas, verificando também o  seu estado. A existência de uma única instância do \emph{HAProxy} origina um ponto de falha central. & Uma das soluções passa por utilizar o \textbf{\textit{Keepalived}}, que permite a partilha do mesmo endereço IP por diversas instâncias de servidores diferentes. Sempre que uma instância do \emph{HAProxy} falhar, o \textit{Keepalived} deverá ser capaz de atribuir o endereço IP a outra instância ativa.  \\ \hline
-        
-        \emph{Redis} & A configuração básica de \emph{master-slave} do \emph{Redis} não permite, muitas das vezes, manter a alta disponibilidade de um serviço. Como tal, é necessária a adição de um serviço capaz de resolver problemas relacionados com falhas e replicações de instâncias \emph{Redis}. A falha de uma instância \emph{Redis} compromete a disponibilidade do \emph{GitLab}. & O \textbf{\emph{Redis Sentinel}} permite complementar a escolha das instâncias \emph{master} e \emph{slave} de  \emph{Redis}, agindo como a única fonte de verdade na hora da decisão. Garante assim a existência de uma instância \emph{Redis}.  Este permite ainda indicar aos clientes qual a instância correta que deverá ser utilizada.   \\ \hline
-        
-        Base de dados - \emph{Postgres} & TODO & TODO (pgbouncer e consul, repmgr) \\ \hline
-        
-        \emph{Sidekiq} & TODO & TODO (várias instâncias a correr o \emph{Sidekiq}) \\ \hline
-        
-        \emph{Gitlay} & TODO & TODO (várias instâncias a correr o \emph{Sidekiq}) \\ \hline
-        
-        Sistema de ficheiros distribuído - \emph{NFS} & O \emph{GitLab} foi desenvolvido em torno do protocolo \emph{git}. Este protocolo armazena todos os dados diretamente num sistema de ficheiros. Qualquer indisponibilidade do sistema de ficheiros, comprometerá a experiência de utilização do \emph{GitLab}. Este componente é, por si só, dos mais importantes entre os restantes anteriormente indicados. & Serviços como o \textbf{\emph{GPFS}} e \textbf{\emph{HighlyAvailableNFS}}, permitem que os dados estejam sempre disponíveis. No caso do \emph{GPFS}, é possível distribuir os dados em diferentes instâncias assegurando redundância e tempos leitura mais baixos. No entanto, ainda que seja utilizado este serviço, é necessário que existam pelo menos 2 nós a persistirem dados.\\
-        \hline
-    \end{tabular}
-    \end{adjustbox}
-    \caption{Componentes críticos numa arquitetura distribuída.}
-\end{table} 
+
+\begin{center}
+\small
+\begin{longtable}{|p{.15\textwidth}|p{.40\textwidth}|p{.40\textwidth}|}
+    \hline
+    \textbf{Componente} & \textbf{Motivo} & \textbf{Solução} \\ \hline
+    
+    \textit{HAProxy} & Tornar uma aplicação altamente disponível envolve a existência de múltiplas instâncias de um determinado serviço. O \emph{HAProxy} permite balancear pedidos e serviços para cada uma das potenciais instâncias replicadas, verificando também o  seu estado. A existência de uma única instância do \emph{HAProxy} origina um ponto de falha central. & Uma das soluções passa por utilizar o \textbf{\textit{keepalived}}, que permite a partilha do mesmo endereço IP por diversas instâncias de servidores diferentes. Sempre que uma instância do \emph{HAProxy} falhar, o \textit{Keepalived} deverá ser capaz de atribuir o endereço IP a outra instância ativa.  \\ \hline
+    
+    \emph{Redis} & A configuração básica de \emph{master-slave} do \emph{Redis} não permite, muitas das vezes, manter a alta disponibilidade de um serviço. Como tal, é necessária a adição de um serviço capaz de resolver problemas relacionados com falhas e replicações de instâncias \emph{Redis}. A falha de uma instância \emph{Redis} compromete a disponibilidade do \emph{GitLab}. & O \textbf{\emph{Redis Sentinel}} permite complementar a escolha das instâncias \emph{master} e \emph{slave} de  \emph{Redis}, agindo como a única fonte de verdade na hora da decisão. Garante assim a existência de uma instância \emph{Redis}.  Este permite ainda indicar aos clientes qual a instância correta que deverá ser utilizada.   \\ \hline
+    
+    Base de dados - \emph{Postgres} & Se a instância da base de dados for comprometida ou estiver inacessível, os dados que os clientes armazenaram na mesma tornam-se indisponíveis, tornando o \emph{GitLab} inutilizável. & Uma forma de ultrapassar a falta de uma instância passa por utilizarmos um \emph{master} e vários \emph{slaves}. A replicação deverá ser efetuada pelo \textbf{\emph{repmgr}}. Para verificar o estado das instâncias pode utilizar-se o \textbf{\emph{consul}}. Através do \textbf{\emph{pgbouncer}} é possível distribuir os pedidos por diferentes instâncias da base de dados. \\ \hline
+    
+    \emph{Sidekiq} & A execução das tarefas em fila de espera no \emph{Redis} é da responsabilidade do \emph{Sidekiq}. Assim sendo, caso o Sidekiq falhe, as tarefas deixarão de ser executadas. & Utilizando várias instâncias do \emph{Sidekiq} é possível evitar este ponto central de falha, uma vez que a aplicação deixa de estar dependente de uma única instância para correr. \\ \hline 
+
+    \emph{Gitaly} & O \emph{Gitaly} é responsável por tratar de todos os acessos ao \emph{git} e aos seus repositórios. É muito importante que este esteja disponível às várias instâncias do \emph{GitLab}, dado que estas deixam de ter acesso ao serviço \emph{git}. & Atualmente ainda não existem soluções para garantir a alta disponibilidade do \emph{Gitaly}. No entanto, o \emph{GitLab} tem investigado soluções nesse sentido. \\ \hline
+    
+    Sistema de ficheiros distribuído - \emph{NFS} & O \emph{GitLab} foi desenvolvido em torno do protocolo \emph{git}. Este protocolo armazena todos os dados diretamente num sistema de ficheiros. Qualquer indisponibilidade do sistema de ficheiros, comprometerá a experiência de utilização do \emph{GitLab}. Este componente é, por si só, dos mais importantes entre os restantes anteriormente indicados. & Serviços como o \textbf{\emph{GPFS}} e \textbf{\emph{HighlyAvailableNFS}}, permitem que os dados estejam sempre disponíveis. No caso do \emph{GPFS}, é possível distribuir os dados em diferentes instâncias assegurando redundância e tempos leitura mais baixos. No entanto, ainda que seja utilizado este serviço, é necessário que existam pelo menos 2 nós a persistirem dados.\\ \hline
+    
+\caption{Componentes críticos numa arquitetura distribuída do \emph{GitLab}.}
+\end{longtable}
+\normalsize
+\end{center}
 
 
 
@@ -459,7 +460,21 @@ A estrutura adotada inclui três instâncias \emph{Redis}, nomeadamente uma inst
 
 % FALAR QUE EXISTE UM ERRO COM O pgbouncer https://goo.gl/a9uF5H e que para continuarmos apenas utilizamos um base de dados.
 
+% A aplicação \emph{GitLab} suporta várias opções, no que diz respeito a servidores de bases de dados, que incluem o \emph{PostgresSQL} e o \emph{MySQL}. Para o primeiro, existem duas opções, sendo que uma delas consiste em configurar um servidor \emph{PostgresSQL} externo. Para o segundo, este terá que ser instalado e configurado externamente, pelo utilizador.
 
+O \emph{GitLab} recomenda a utilização do \emph{PostgreSQL} como sistema de gestão de base de dados. Nesse sentido, foram exploradas várias configurações que permitissem assegurar a elevada disponibilidade.
+
+A figura \ref{fig:arq} ilustra a arquitetura que o grupo planeou para uma configuração da base de dados que garante grande disponibilidade. Relativamente à arquitetura da base de dados, esta é constituída por um total de sete instâncias:
+
+\begin{itemize}
+    \item três instâncias a servir o \emph{postgres}, nomeadamente um \emph{master} e dois \emph{slaves};
+    \item três instâncias a servir o \emph{consul}, que ficam à escuta de falhas das instâncias mencionadas anteriormente;
+    \item uma instância a servir o \emph{pgbouncer}; as instâncias \emph{GitLab} conectam-se ao \emph{pgbouncer} que encaminha os pedidos para a base de dados \emph{master};
+\end{itemize}
+
+É ainda importante referir, que nas instâncias a replicação entre os servidores \emph{postgres} é efetuada pelo serviço \emph{repmgrd}, pelo que se encontra ativo nestas máquinas, assim como o \emph{consul} que serve de cliente para as instâncias principais.
+
+No decorrer do provisionamento e \emph{deployment} da base de dados, o \emph{pgbouncer} tornou-se problemático, uma vez que a sua tentativa de inicialização resulta sempre num \emph{timeout}. Numa tentativa de resolução do problema\footnote{\url{https://goo.gl/a9uF5H}}, foi encontrada um \emph{board} onde eram relatados erros semelhantes que, até ao dado momento, não possuem solução oficial da equipa do \emph{Omnibus} do \emph{GitLab}. Para solução deste problema decidimos apenas utilizar uma instância a servir a base de dados.
 
 
 % ---------------------------------------------------------------
@@ -467,10 +482,26 @@ A estrutura adotada inclui três instâncias \emph{Redis}, nomeadamente uma inst
 % ---------------------------------------------------------------
 \newpage
 \section{Ferramentas de monitorização}
-\paragraph{} Para sistemas cuja a alta disponibilidade é uma característica indispensável, uma monitorização da atividade dos componentes da sua arquitetura é fundamental pois, apenas assim é possível identificar com grande facilidade problemas estruturais que possam estar a por em causa o bom funcionamento de toda a aplicação. Desta forma, estes módulos poderão ser melhorados normalmente através de soluções que melhorem a sua escalabilidade.
-\par No caso do \emph{GitLab}, existem camadas que deverão ser monitorizadas frequentemente, entre elas, o \emph{Workhorse}, o \emph{HaProxy}, a base de dados \emph{Postgres} e por fim o sistema de ficheiros distribuído \emph{NFS}. Assim sendo, para recolhermos informações das máquinas onde irão correr estes módulos, foram utilizados diferentes \emph{Beats} que enviam dados para uma máquina remota que posteriormente os analisará. Para recolher informações relevantes sobre a base de dados \emph{Postgres} foi utilizado a ferramenta \emph{filebeat} e para todas as outras máquinas utilizamos a ferramenta \emph{metricbeat}. Desta forma, conseguimos recolher informação que varia desde frequência do processador e memória utilizada até número de processos ativos e capacidade de disco utilizada por cada uma das máquinas em tempo real.
-\par Todos estes dados referentes a diferentes máquinas são enviados para uma terceira ferramenta que os irá recolher, agrupar e analisar devidamente, o \emph{elasticsearch}. Esta, foi escolhida por ter sido construida com o intuito de ser escalável, flexível e ter a capacidade de ler diretamente a informação em formato \emph{JSON} enviada por cada um dos \emph{Beats} das máquinas remotas.
-\par Finalmente, depois dos dados recolhidos, filtrados e devidamente analisados, a aplicação \emph{Kibana} é responsável pela sua apresentação, sendo facilmente adaptável às intenções de quem está a monitorizar toda a arquitetura.
+
+No que concerne à monitorização das instâncias presentes na estrutura apresentada na figura \ref{fig:arq}, foram utilizadas, em conjunto, as seguintes ferramentas fornecidas pelo \emph{elastic}\footnote{\url{https://www.elastic.co/products}}: \emph{Elasticsearch}, \emph{Kibana} e \emph{Beats}.
+
+\begin{itemize}
+    \item \textbf{\emph{Elasticsearch}}: aplicação \emph{RESTful} que regista e fornece os dados fornecidos pelos diferentes \emph{Beats};
+    \item \textbf{\emph{Kibana}}: aplicação \emph{web} que permite exibir os dados recolhidos e analisados pelo \emph{Elasticsearch} ao utilizador;
+    \item \textbf{\emph{Beats}}: ferramenta que recolhe vários tipos de dados sobre uma dada instância, um dado serviço, um dado ficheiro, etc.
+\end{itemize}
+
+Numa arquitetura de dimensão semelhante à do \emph{GitLab}, é indispensável a monitorização das diferentes instâncias. Só assim é possível identificar o estado dos componentes.
+
+\textcolor{red}{MÉTRICAS DE MONITORIZAÇÃO}
+
+\textcolor{red}{que BEATS foram utilizados}
+
+% No caso do \emph{GitLab}, existem camadas que deverão ser monitorizadas frequentemente, entre elas, o \emph{Workhorse}, o \emph{HaProxy}, a base de dados \emph{Postgres} e por fim o sistema de ficheiros distribuído \emph{NFS}. Assim sendo, para recolhermos informações das máquinas onde irão correr estes módulos, foram utilizados diferentes \emph{Beats} que enviam dados para uma máquina remota que posteriormente os analisará. Para recolher informações relevantes sobre a base de dados \emph{Postgres} foi utilizado a ferramenta \emph{filebeat} e para todas as outras máquinas utilizamos a ferramenta \emph{metricbeat}. Desta forma, conseguimos recolher informação que varia desde frequência do processador e memória utilizada até número de processos ativos e capacidade de disco utilizada por cada uma das máquinas em tempo real.
+
+% Todos estes dados referentes a diferentes máquinas são enviados para uma terceira ferramenta que os irá recolher, agrupar e analisar devidamente, o \emph{elasticsearch}. Esta, foi escolhida por ter sido construida com o intuito de ser escalável, flexível e ter a capacidade de ler diretamente a informação em formato \emph{JSON} enviada por cada um dos \emph{Beats} das máquinas remotas.
+
+% Finalmente, depois dos dados recolhidos, filtrados e devidamente analisados, a aplicação \emph{Kibana} é responsável pela sua apresentação, sendo facilmente adaptável às intenções de quem está a monitorizar toda a arquitetura.
 
 % ---------------------------------------------------------------
 % FERRAMENTAS DE AVALIAÇÃO
@@ -528,4 +559,3 @@ GitLab High Availability, GitLab Documentation. Acedido em \today, em \url{https
 
 
 \end{document}
-

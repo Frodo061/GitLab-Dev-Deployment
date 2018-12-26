@@ -1,3 +1,7 @@
+# CHECK FILE:           haproxy -c -V -f /etc/haproxy/haproxy.cfg
+# RESTART SERVICE:      sudo /etc/init.d/haproxy restart
+# ---------------------------------------------------------------
+
 global
   user {{ haproxy_user }}
   group {{ haproxy_group }}
@@ -7,28 +11,44 @@ global
 {% endfor %}
 
 defaults
-  mode http
   timeout connect 5000ms
   timeout client 50000ms
   timeout server 50000ms
 
-listen stats # Define a listen section called "stats"
-  bind :9000 # Listen on localhost:9000
+listen stats
+  bind *:9000
   mode http
-  stats enable  # Enable stats page
-  stats hide-version  # Hide HAProxy version
-  stats realm Haproxy\ Statistics  # Title text for popup window
-  stats uri /stats  # Stats URI
-  stats auth root:root  # Authentication credentials
+  stats enable
+  stats hide-version
+  stats realm Haproxy\ Statistics
+  stats uri /stats
+  stats auth root:root
 
-frontend {{ haproxy_frontend_name }}
-  bind {{ haproxy_frontend_bind_address }}:{{ haproxy_frontend_port }}
-  mode {{ haproxy_frontend_mode }}
-  default_backend {{ haproxy_backend_name }}
 
-backend {{ haproxy_backend_name }}
-  mode {{ haproxy_backend_mode }}
-  balance {{ haproxy_backend_balance_method }}
-  {% for backend in haproxy_backend_servers %}
-    server gitlab-{{ '%d' | format(loop.index) }} {{ hostvars[backend]['ansible_default_ipv4']['address'] }}:{{ haproxy_backend_port }} check fall 2 rise 1
+
+# FRONTEND
+# ---------------------------------------------------------------
+frontend {{ frontend_name }}
+  bind {{ bind_address }}:{{ gitlab_frontend_port }}
+  bind {{ bind_address }}:{{ kibana_frontend_port }}
+  mode http
+  acl d1 dst_port {{ gitlab_frontend_port }}
+  acl d2 dst_port {{ kibana_frontend_port }}
+  use_backend {{ gitlab_backend_name }} if d1
+  use_backend {{ kibana_backend_name }} if d2
+  default_backend {{ gitlab_backend_name }}
+
+
+# BACKEND
+# ---------------------------------------------------------------
+backend {{ gitlab_backend_name }}
+  mode http
+  balance {{ gitlab_backend_balance_method }}
+  {% for backend in gitlab_backend_servers %}
+    server gitlab-{{ '%d' | format(loop.index) }} {{ hostvars[backend]['ansible_default_ipv4']['address'] }}:{{ gitlab_backend_port }} check fall 2 rise 1
   {% endfor %}
+
+backend {{ kibana_backend_name }}
+  mode http
+  server monitor {{ kibana_backend_server }}:{{ kibana_backend_port }} check fall 2 rise 1
+

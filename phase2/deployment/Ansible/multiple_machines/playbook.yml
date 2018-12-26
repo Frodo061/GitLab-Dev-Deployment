@@ -36,7 +36,7 @@
           # - { index: 1, tag: [consul, omnibus], name: consul-1 }
           # - { index: 2, tag: [consul, omnibus], name: consul-2 }
           # - { index: 3, tag: [consul, omnibus], name: consul-3 }
-          - { index: 1, tag: [database-master, omnibus], name: database-master }
+          - { index: 1, tag: [database-master, omnibus, metricbeat], name: database-master }
           # - { index: 5, tag: [database-slave, omnibus], name: database-1 }
           # - { index: 6, tag: [database-slave, omnibus], name: database-2 }
           # - { index: 7, tag: [pgbouncer, omnibus], name: pgbouncer }
@@ -45,8 +45,8 @@
         network_name: gitlab-network
         firewall_private_name: gitlab-private-firewall
         firewall_public_name: gitlab-public-firewall
-        subnetwork_private_ports: [80, 2049, 5432, 6379, 6432, 8301, 9418, 26379]
-        subnetwork_public_ports: [22, 80, 9000, 9418]
+        subnetwork_private_ports: [22, 80, 2049, 5432, 5601, 6379, 6432, 8301, 9200, 26379]
+        subnetwork_public_ports: [22, 80, 5601, 9000]
 
 - name: GitLab's provisioning
   hosts: localhost
@@ -65,38 +65,41 @@
         disk_size: 12
         
         disks:
-          - disk-01
-          - disk-02
-          - disk-03
-          - disk-04
-          - disk-05
-          - disk-06
-          - disk-07
+          - gitlab-1-disk
+          - gitlab-2-disk
+          - haproxy-disk
+          - redis-master-disk
+          - redis-1-disk
+          - redis-2-disk
+          - nfs-disk
+          - monitor-disk
         
         addresses:
-          - addr-1
-          - addr-2
-          - addr-3
-          - addr-4
-          - addr-5
-          - addr-6
-          - addr-7
+          - gitlab-1-addr
+          - gitlab-2-addr
+          - haproxy-addr
+          - redis-master-addr
+          - redis-1-addr
+          - redis-2-addr
+          - nfs-addr
+          - monitor-addr
         
         instances:
-          - { index: 1, tag: [gitlab, omnibus], name: gitlab-1 }
-          - { index: 2, tag: [gitlab, omnibus], name: gitlab-2 }
-          - { index: 3, tag: [haproxy], name: haproxy-1 }
-          - { index: 4, tag: [redis-master, omnibus], name: redis-master }
-          - { index: 5, tag: [redis-slave, omnibus], name: redis-1 }
-          - { index: 6, tag: [redis-slave, omnibus], name: redis-2 }
-          - { index: 7, tag: [nfs], name: nfs }
+          - { index: 1, tag: [gitlab, omnibus, metricbeat], name: gitlab-1 }
+          - { index: 2, tag: [gitlab, omnibus, metricbeat], name: gitlab-2 }
+          - { index: 3, tag: [haproxy, metricbeat], name: haproxy }
+          - { index: 4, tag: [redis-master, omnibus, metricbeat], name: redis-master }
+          - { index: 5, tag: [redis-slave, omnibus, metricbeat], name: redis-1 }
+          - { index: 6, tag: [redis-slave, omnibus, metricbeat], name: redis-2 }
+          - { index: 7, tag: [nfs, metricbeat], name: nfs }
+          - { index: 8, tag: [elastic], name: monitor }
 
         # VPC main network
         network_name: gitlab-network
         firewall_private_name: gitlab-private-firewall
         firewall_public_name: gitlab-public-firewall
-        subnetwork_private_ports: [80, 2049, 5432, 6379, 6432, 8301, 9418, 26379]
-        subnetwork_public_ports: [22, 80, 9000, 9418]
+        subnetwork_private_ports: [22, 80, 2049, 5432, 5601, 6379, 6432, 8301, 9200, 26379]
+        subnetwork_public_ports: [22, 80, 5601, 9000]
         
 - name: Debug (get all ip addrs)
   hosts: all
@@ -201,16 +204,19 @@
         haproxy_global_vars:
           - maxconn 256
         # frontend
-        haproxy_frontend_name: 'http-frontend'
-        haproxy_frontend_bind_address: '*'
-        haproxy_frontend_port: 80
-        haproxy_frontend_mode: http
-        # backend
-        haproxy_backend_name: 'http-backend'
-        haproxy_backend_balance_method: roundrobin
-        haproxy_backend_mode: http
-        haproxy_backend_servers: "{{ groups['gitlab'] }}"
-        haproxy_backend_port: 80
+        frontend_name: 'http-frontend'
+        bind_address: '*'
+        # GitLab
+        gitlab_frontend_port: 80
+        gitlab_backend_port: 80
+        gitlab_backend_name: 'http-backend-gitlab'
+        gitlab_backend_balance_method: roundrobin
+        gitlab_backend_servers: "{{ groups['gitlab'] }}"
+        # Kibana
+        kibana_frontend_port: 5601
+        kibana_backend_port: 5601
+        kibana_backend_name: 'http-backend-kibana'
+        kibana_backend_server: "{{ hostvars[groups['elastic'][0]]['ansible_default_ipv4']['address'] }}"
 
 - name: Installing Redis Master
   hosts:
@@ -292,10 +298,39 @@
         fstype: nfs4
         opts: auto,noatime,nofail,nolock,intr,tcp,lookupcache=positive
 
-#- name: Debug hostvars
-#  hosts:
-#    - haproxy
-#  gather_facts: yes
-#  tasks:
-#    - debug:
-#        var: groups['haproxy'][0]
+
+# MONITORING
+# --------------------------------------------
+- name: Installing Elasticsearch and Kibana
+  hosts:
+    - elastic
+  become: yes
+  roles:
+    - role: elastic
+      vars:
+        # elasticsearch
+        elasticsearch_instance_name: "monitor"
+        elasticsearch_server_port: 9200
+        elasticsearch_server_host: "0.0.0.0"
+        # kibana
+        kibana_server_port: 5601
+        kibana_server_host: "0.0.0.0"
+        kibana_elasticsearch_url: "http://localhost:9200"
+
+
+- name: Installing Metricbeat
+  hosts:
+    - metricbeat
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: metricbeat
+      vars:
+        # name: "{{ ansible_hostname }}"
+        # elasticsearch
+        elasticsearch_server_port: 9200
+        kibana_server_port: 5601
+        elasticsearch_server_host: "{{ hostvars[groups['elastic'][0]]['ansible_default_ipv4']['address'] }}"
+        # dashboards
+        enable_dashboards: true
+

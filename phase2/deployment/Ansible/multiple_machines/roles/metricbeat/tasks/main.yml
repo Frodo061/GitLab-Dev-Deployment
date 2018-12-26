@@ -1,0 +1,53 @@
+---
+
+# DEPENDENCIES
+# ------------------------------------------------------------
+- name: Install apt-transport-https to support https APT downloads
+  apt: 
+    name: apt-transport-https
+    state: present
+
+
+# ELASTICSEARCH Rep
+# ------------------------------------------------------------
+- name: Add Elasticsearch repository key.
+  apt_key: 
+    url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch" 
+    state: present
+
+
+- name: Add Elastic repository.
+  apt_repository: 
+    repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+    state: present
+    update_cache: true
+
+
+# METRICBEAT
+# ------------------------------------------------------------
+- name: Ensure Metricbeat is installed.
+  apt:
+    name: metricbeat
+    state: present
+
+
+- name: Copy Metricbeat configuration file.
+  template:
+    src: metricbeat.yml.j2
+    dest: /etc/metricbeat/metricbeat.yml
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Metricbeat
+
+
+#- name: Set up kibana dashboards
+#  command: metricbeat setup --dashboards
+#  when: enable_dashboards
+
+
+- name: Ensure Metricbeat is started and enabled at boot.
+  service:
+    name: metricbeat
+    enabled: true
+    state: started
