@@ -41,9 +41,8 @@
   notify: Restart Metricbeat
 
 
-#- name: Set up kibana dashboards
-#  command: metricbeat setup --dashboards
-#  when: enable_dashboards
+- name: Configure metricbeat to start during boot
+  command: update-rc.d metricbeat defaults 95 10
 
 
 - name: Ensure Metricbeat is started and enabled at boot.
