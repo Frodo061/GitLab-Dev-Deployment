@@ -41,7 +41,7 @@
   notify: Restart Metricbeat
 
 
-- name: Configure metricbeat to start during boot
+- name: Configure metricbeat to start during boot.
   command: update-rc.d metricbeat defaults 95 10
 
 
