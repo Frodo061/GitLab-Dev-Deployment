@@ -1,0 +1,28 @@
+---
+# HEARTBEAT
+# ------------------------------------------------------------
+- name: Ensure Heartbeat is installed.
+  apt:
+    name: heartbeat
+    state: present
+
+
+- name: Copy Heartbeat configuration file.
+  template:
+    src: heartbeat.yml.j2
+    dest: /etc/heartbeat/heartbeat.yml
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Heartbeat
+
+
+- name: Configure heartbeat to start during boot.
+  command: update-rc.d heartbeat defaults 95 10
+
+
+- name: Ensure Heartbeat is started and enabled at boot.
+  service:
+    name: heartbeat
+    enabled: true
+    state: started

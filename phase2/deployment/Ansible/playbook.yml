@@ -334,3 +334,16 @@
         # dashboards
         enable_dashboards: true
 
+- name: Installing Heartbeat
+  hosts:
+    - heartbeat
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: heartbeat
+      vars:
+        elasticsearch_server_host: "{{ hostvars[groups['elastic'][0]]['ansible_default_ipv4']['address'] }}"
+        kibana_server_port: 5601
+        elasticsearch_server_port: 9200
+        # dashboards
+        enable_dashboards: true
