@@ -3,15 +3,8 @@ nginx['listen_port'] = {{ gitlab_nginx_listen_port }}
 
 
 
-# REDIS
-# redis['enable'] = false
-# gitlab_rails['redis_host'] = '{{ hostvars[redis_host]['ansible_default_ipv4']['address'] }}'
-# gitlab_rails['redis_port'] = {{ redis_port }}
-# gitlab_rails['redis_password'] = '{{ redis_password }}'
-
-
-
 # REDIS SENTINEL
+redis['enable'] = false
 redis['master_name'] = '{{ redis_name }}'
 redis['master_password'] = '{{ redis_password }}'
 gitlab_rails['redis_sentinels'] = [

@@ -10,7 +10,7 @@
         gcp_project: copper-gear-221110
         gcp_cred_kind: serviceaccount
         gcp_cred_file: .gcloud/gcloud.json
-        gcp_machine_type: n1-standard-2
+        gcp_machine_type: n1-standard-4
         source_image: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20181030
         disk_size: 12
 
@@ -36,10 +36,45 @@
           # - { index: 1, tag: [consul, omnibus], name: consul-1 }
           # - { index: 2, tag: [consul, omnibus], name: consul-2 }
           # - { index: 3, tag: [consul, omnibus], name: consul-3 }
-          - { index: 1, tag: [database-master, omnibus, metricbeat], name: database-master }
+          - { index: 1, tag: [database-master, omnibus, beat], name: database-master }
           # - { index: 5, tag: [database-slave, omnibus], name: database-1 }
           # - { index: 6, tag: [database-slave, omnibus], name: database-2 }
           # - { index: 7, tag: [pgbouncer, omnibus], name: pgbouncer }
+
+        # VPC main network
+        network_name: gitlab-network
+        firewall_private_name: gitlab-private-firewall
+        firewall_public_name: gitlab-public-firewall
+        subnetwork_private_ports: [22, 80, 2049, 5432, 5601, 6379, 6432, 8301, 9200, 26379]
+        subnetwork_public_ports: [22, 80, 5601, 9000]
+
+- name: GitLab provisioning
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - role: gcp
+      vars:
+        gcp_zone: us-east1-b
+        gcp_region: us-east1
+        gcp_project: copper-gear-221110
+        gcp_cred_kind: serviceaccount
+        gcp_cred_file: .gcloud/gcloud.json
+        gcp_machine_type: n1-standard-4
+        source_image: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20181030
+        disk_size: 12
+        
+        disks:
+          - gitlab-1-disk
+          - gitlab-2-disk
+        
+        addresses:
+          - gitlab-1-addr
+          - gitlab-2-addr
+        
+        instances:
+          - { index: 1, tag: [gitlab, omnibus, beat], name: gitlab-1 }
+          - { index: 2, tag: [gitlab, omnibus, beat], name: gitlab-2 }
 
         # VPC main network
         network_name: gitlab-network
@@ -65,8 +100,6 @@
         disk_size: 12
         
         disks:
-          - gitlab-1-disk
-          - gitlab-2-disk
           - haproxy-disk
           - redis-master-disk
           - redis-1-disk
@@ -75,8 +108,6 @@
           - monitor-disk
         
         addresses:
-          - gitlab-1-addr
-          - gitlab-2-addr
           - haproxy-addr
           - redis-master-addr
           - redis-1-addr
@@ -85,14 +116,12 @@
           - monitor-addr
         
         instances:
-          - { index: 1, tag: [gitlab, omnibus, metricbeat], name: gitlab-1 }
-          - { index: 2, tag: [gitlab, omnibus, metricbeat], name: gitlab-2 }
-          - { index: 3, tag: [haproxy, metricbeat], name: haproxy }
-          - { index: 4, tag: [redis-master, omnibus, metricbeat], name: redis-master }
-          - { index: 5, tag: [redis-slave, omnibus, metricbeat], name: redis-1 }
-          - { index: 6, tag: [redis-slave, omnibus, metricbeat], name: redis-2 }
-          - { index: 7, tag: [nfs, metricbeat], name: nfs }
-          - { index: 8, tag: [elastic], name: monitor }
+          - { index: 1, tag: [haproxy, beat], name: haproxy }
+          - { index: 2, tag: [redis-master, omnibus, beat], name: redis-master }
+          - { index: 3, tag: [redis-slave, omnibus, beat], name: redis-1 }
+          - { index: 4, tag: [redis-slave, omnibus, beat], name: redis-2 }
+          - { index: 5, tag: [nfs, beat], name: nfs }
+          - { index: 6, tag: [elastic], name: monitor }
 
         # VPC main network
         network_name: gitlab-network
@@ -320,13 +349,12 @@
 
 - name: Installing Metricbeat
   hosts:
-    - metricbeat
+    - beat
   become: yes
   gather_facts: yes
   roles:
     - role: metricbeat
       vars:
-        # name: "{{ ansible_hostname }}"
         # elasticsearch
         elasticsearch_server_port: 9200
         kibana_server_port: 5601
@@ -334,16 +362,87 @@
         # dashboards
         enable_dashboards: true
 
+
 - name: Installing Heartbeat
   hosts:
-    - heartbeat
+    - gitlab
+    - haproxy
   become: yes
   gather_facts: yes
   roles:
     - role: heartbeat
       vars:
+        # name
+        name: "{{ ansible_hostname }}"
+        # elasticsearch
         elasticsearch_server_host: "{{ hostvars[groups['elastic'][0]]['ansible_default_ipv4']['address'] }}"
-        kibana_server_port: 5601
         elasticsearch_server_port: 9200
+        kibana_server_port: 5601
+        # dashboards
+        enable_dashboards: true
+
+
+- name: Installing Filebeat on GitLab
+  hosts:
+    - gitlab
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: filebeat
+      vars:
+        # log dir
+        log_dirs: 
+          - /var/log/gitlab/gitlab-rails/production.log
+          - /var/log/gitlab/gitaly/current
+        # name
+        name: "{{ ansible_hostname }}"
+        # elasticsearch
+        elasticsearch_server_host: "{{ hostvars[groups['elastic'][0]]['ansible_default_ipv4']['address'] }}"
+        elasticsearch_server_port: 9200
+        kibana_server_port: 5601
+        # dashboards
+        enable_dashboards: true
+
+
+- name: Installing Filebeat on Redis
+  hosts:
+    - redis-master
+    - redis-slave
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: filebeat
+      vars:
+        # log dir
+        log_dirs:
+          - /var/log/gitlab/redis/current
+          - /var/log/gitlab/sentinel/current
+        # name
+        name: "{{ ansible_hostname }}"
+        # elasticsearch
+        elasticsearch_server_host: "{{ hostvars[groups['elastic'][0]]['ansible_default_ipv4']['address'] }}"
+        elasticsearch_server_port: 9200
+        kibana_server_port: 5601
+        # dashboards
+        enable_dashboards: true
+
+
+- name: Installing Filebeat on Database
+  hosts:
+    - database-master
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: filebeat
+      vars:
+        # log dir
+        log_dirs:
+          - /var/log/gitlab/postgresql/current
+        # name
+        name: "{{ ansible_hostname }}"
+        # elasticsearch
+        elasticsearch_server_host: "{{ hostvars[groups['elastic'][0]]['ansible_default_ipv4']['address'] }}"
+        elasticsearch_server_port: 9200
+        kibana_server_port: 5601
         # dashboards
         enable_dashboards: true

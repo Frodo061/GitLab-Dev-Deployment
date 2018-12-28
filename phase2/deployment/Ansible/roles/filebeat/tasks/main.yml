@@ -1,0 +1,29 @@
+---
+
+# FILEBEAT
+# ------------------------------------------------------------
+- name: Ensure Filebeat is installed.
+  apt:
+    name: filebeat
+    state: present
+
+
+- name: Copy Filebeat configuration file.
+  template:
+    src: filebeat.yml.j2
+    dest: /etc/filebeat/filebeat.yml
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Filebeat
+
+
+- name: Configure Filebeat to start during boot.
+  command: update-rc.d filebeat defaults 95 10
+
+
+- name: Ensure Filebeat is started and enabled at boot.
+  service:
+    name: filebeat
+    enabled: true
+    state: started

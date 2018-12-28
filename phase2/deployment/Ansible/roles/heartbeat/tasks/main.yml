@@ -3,7 +3,7 @@
 # ------------------------------------------------------------
 - name: Ensure Heartbeat is installed.
   apt:
-    name: heartbeat
+    name: heartbeat-elastic
     state: present
 
 
@@ -18,11 +18,11 @@
 
 
 - name: Configure heartbeat to start during boot.
-  command: update-rc.d heartbeat defaults 95 10
+  command: update-rc.d heartbeat-elastic defaults 95 10
 
 
 - name: Ensure Heartbeat is started and enabled at boot.
   service:
-    name: heartbeat
+    name: heartbeat-elastic
     enabled: true
     state: started
