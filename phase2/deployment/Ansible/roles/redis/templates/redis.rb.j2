@@ -1,0 +1,25 @@
+{% if ansible_facts['nodename'] == 'redis-master' %}
+roles ['redis_sentinel_role', 'redis_master_role']
+{% else %}
+roles ['redis_sentinel_role', 'redis_slave_role']
+{% endif %}
+
+
+# REDIS HOST
+redis['bind'] = '{{ redis_host_address }}'
+redis['port'] = {{ redis_host_port }}
+redis['password'] = '{{ redis_cluster_password }}'
+
+# REDIS MASTER
+redis['master_ip'] = '{{ redis_master_address }}'
+redis['master_port'] = {{ redis_master_port }}
+redis['master_name'] = '{{ redis_cluster_name }}'
+redis['master_password'] = '{{ redis_cluster_password }}'
+
+# REDIS SENTINEL
+sentinel['bind'] = '{{ sentinel_address }}'
+sentinel['port'] = {{ sentinel_port }}
+sentinel['quorum'] = {{ sentinel_quorum }}
+
+
+gitlab_rails['auto_migrate'] = false

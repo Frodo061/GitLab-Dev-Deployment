@@ -5,12 +5,11 @@ nginx['listen_port'] = {{ gitlab_nginx_listen_port }}
 
 # REDIS SENTINEL
 redis['enable'] = false
-redis['master_name'] = '{{ redis_name }}'
-redis['master_password'] = '{{ redis_password }}'
+redis['master_name'] = '{{ redis_cluster_name }}'
+redis['master_password'] = '{{ redis_cluster_password }}'
 gitlab_rails['redis_sentinels'] = [
-    {'host' => '{{ hostvars[sentinel_master_host]['ansible_default_ipv4']['address'] }}', 'port' => {{sentinel_master_port}}},
-{% for server in sentinel_slave_hosts %}
-    {'host' => '{{ hostvars[server]['ansible_default_ipv4']['address'] }}', 'port' => {{sentinel_slave_port}}},
+{% for server in sentinel_hosts %}
+    {'host' => '{{ hostvars[server]['ansible_default_ipv4']['address'] }}', 'port' => {{ sentinel_hosts_port }}},
 {% endfor %}
 ]
 

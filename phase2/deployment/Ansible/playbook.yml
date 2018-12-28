@@ -101,25 +101,25 @@
         
         disks:
           - haproxy-disk
-          - redis-master-disk
           - redis-1-disk
           - redis-2-disk
+          - redis-3-disk
           - nfs-disk
           - monitor-disk
         
         addresses:
           - haproxy-addr
-          - redis-master-addr
           - redis-1-addr
           - redis-2-addr
+          - redis-3-addr
           - nfs-addr
           - monitor-addr
         
         instances:
           - { index: 1, tag: [haproxy, beat], name: haproxy }
-          - { index: 2, tag: [redis-master, omnibus, beat], name: redis-master }
-          - { index: 3, tag: [redis-slave, omnibus, beat], name: redis-1 }
-          - { index: 4, tag: [redis-slave, omnibus, beat], name: redis-2 }
+          - { index: 2, tag: [redis, omnibus, beat], name: redis-master }
+          - { index: 3, tag: [redis, omnibus, beat], name: redis-slave-1 }
+          - { index: 4, tag: [redis, omnibus, beat], name: redis-slave-2 }
           - { index: 5, tag: [nfs, beat], name: nfs }
           - { index: 6, tag: [elastic], name: monitor }
 
@@ -247,42 +247,27 @@
         kibana_backend_name: 'http-backend-kibana'
         kibana_backend_server: "{{ hostvars[groups['elastic'][0]]['ansible_default_ipv4']['address'] }}"
 
-- name: Installing Redis Master
+- name: Installing Redis Master and Slaves
   hosts:
-    - redis-master
+    - redis
   become: yes
   gather_facts: yes
   roles:
-    - role: redis_master
+    - role: redis
       vars:
-        redis_name: gitlab-redis
-        redis_password: redis-password-goes-here
-        redis_ip: "{{ ansible_default_ipv4.address }}"
-        redis_port: 6379
-        sentinel_ip: "{{ ansible_default_ipv4.address }}"
+        # HOST
+        redis_host_address: "{{ ansible_default_ipv4.address }}"
+        redis_host_port: 6379
+        redis_cluster_name: gitlab-redis
+        redis_cluster_password: redis-password-goes-here
+        # MASTER
+        redis_master_address: "{{ hostvars[groups['redis'][0]]['ansible_default_ipv4']['address'] }}"
+        redis_master_port: 6379
+        # SENTINEL HOST
+        sentinel_address: "{{ ansible_default_ipv4.address }}"
         sentinel_port: 26379
         sentinel_quorum: 2
-        sentinel_down_after: 10000 # 10000
-        sentinel_failover_timeout: 60000 # 60000
 
-- name: Installing Redis Slave
-  hosts:
-    - redis-slave
-  become: yes
-  gather_facts: yes
-  roles:
-    - role: redis_slave
-      vars:
-        redis_name: gitlab-redis
-        redis_password: redis-password-goes-here
-        redis_master_ip: "{{ groups['redis-master'][0] }}"
-        redis_ip: "{{ ansible_default_ipv4.address }}"
-        redis_port: 6379
-        sentinel_ip: "{{ ansible_default_ipv4.address }}"
-        sentinel_port: 26379
-        sentinel_quorum: 2
-        sentinel_down_after: 10000
-        sentinel_failover_timeout: 60000
 
 - name: Installing NFS
   hosts:
@@ -292,6 +277,7 @@
     - role: nfs
       vars:
         cidr_addresses: 10.240.0.0/16
+
 
 - name: Installing GitLab
   hosts:
@@ -303,15 +289,12 @@
       vars:
         gitlab_external_url: "{{ groups['haproxy'][0] }}" # Haproxy external address
         gitlab_nginx_listen_port: 80
-        # REDIS
-        redis_name: gitlab-redis
-        redis_password: redis-password-goes-here
-        redis_host: "{{ groups['redis-master'][0] }}"
-        redis_port: 6379 
-        sentinel_master_host: "{{ groups['redis-master'][0] }}"
-        sentinel_master_port: 26379
-        sentinel_slave_hosts: "{{ groups['redis-slave'] }}"
-        sentinel_slave_port: 26379
+        # REDIS CLUSTER
+        redis_cluster_name: gitlab-redis
+        redis_cluster_password: redis-password-goes-here
+        # SENTINEL
+        sentinel_hosts: "{{ groups['redis'] }}"
+        sentinel_hosts_port: 26379
         # DATABASE (postgres)
         db_host: "{{ hostvars[groups['database-master'][0]]['ansible_default_ipv4']['address'] }}"
         db_port: 5432
@@ -393,7 +376,7 @@
         # log dir
         log_dirs: 
           - /var/log/gitlab/gitlab-rails/production.log
-          - /var/log/gitlab/gitaly/current
+          # - /var/log/gitlab/gitaly/current
         # name
         name: "{{ ansible_hostname }}"
         # elasticsearch
@@ -406,8 +389,7 @@
 
 - name: Installing Filebeat on Redis
   hosts:
-    - redis-master
-    - redis-slave
+    - redis
   become: yes
   gather_facts: yes
   roles:
@@ -415,7 +397,7 @@
       vars:
         # log dir
         log_dirs:
-          - /var/log/gitlab/redis/current
+          # - /var/log/gitlab/redis/current
           - /var/log/gitlab/sentinel/current
         # name
         name: "{{ ansible_hostname }}"

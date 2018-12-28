@@ -2,11 +2,12 @@
 
 - name: Copy GitLab-Redis configuration file.
   template:
-    src: redis_slave.rb.j2
+    src: redis.rb.j2
     dest: /etc/gitlab/gitlab.rb
     owner: root
     group: root
     mode: 0644
+    
 
-- name: Reconfigure slave redis
+- name: Reconfigure Redis
   command: gitlab-ctl reconfigure
