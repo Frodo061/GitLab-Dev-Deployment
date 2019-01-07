@@ -1,0 +1,1401 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1545957108441,928,1 /,200,OK,Thread Group 1-3,text,true,,5339,669,20,20,http://35.237.17.93/users/sign_in,321,0,164
+1545957108492,881,1 /,200,OK,Thread Group 1-4,text,true,,5337,669,21,21,http://35.237.17.93/users/sign_in,289,0,134
+1545957108440,923,1 /,200,OK,Thread Group 1-1,text,true,,5342,669,20,20,http://35.237.17.93/users/sign_in,322,0,165
+1545957108445,918,1 /,200,OK,Thread Group 1-2,text,true,,5341,669,20,20,http://35.237.17.93/users/sign_in,317,0,152
+1545957108441,321,1 /-0,302,Found,Thread Group 1-3,text,true,,510,328,20,20,http://35.237.17.93/,321,0,164
+1545957108492,289,1 /-0,302,Found,Thread Group 1-4,text,true,,511,328,21,21,http://35.237.17.93/,289,0,134
+1545957108440,322,1 /-0,302,Found,Thread Group 1-1,text,true,,511,328,20,20,http://35.237.17.93/,322,0,165
+1545957108445,317,1 /-0,302,Found,Thread Group 1-2,text,true,,511,328,20,20,http://35.237.17.93/,317,0,152
+1545957108765,604,1 /-1,200,OK,Thread Group 1-3,text,true,,4829,341,20,20,http://35.237.17.93/users/sign_in,603,0,0
+1545957108765,598,1 /-1,200,OK,Thread Group 1-1,text,true,,4831,341,20,20,http://35.237.17.93/users/sign_in,595,0,0
+1545957108781,592,1 /-1,200,OK,Thread Group 1-4,text,true,,4826,341,21,21,http://35.237.17.93/users/sign_in,591,0,0
+1545957108765,598,1 /-1,200,OK,Thread Group 1-2,text,true,,4830,341,20,20,http://35.237.17.93/users/sign_in,595,0,0
+1545957108491,881,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-4,,true,,5337,669,21,21,null,289,19,134
+1545957108340,923,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-1,,true,,5342,669,20,20,null,322,127,165
+1545957108390,918,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-2,,true,,5341,669,20,20,null,317,83,152
+1545957108440,928,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-3,,true,,5339,669,20,20,null,321,23,164
+1545957108545,884,1 /,200,OK,Thread Group 1-5,text,true,,5339,669,22,22,http://35.237.17.93/users/sign_in,281,0,132
+1545957108545,281,1 /-0,302,Found,Thread Group 1-5,text,true,,511,328,22,22,http://35.237.17.93/,281,0,132
+1545957108826,603,1 /-1,200,OK,Thread Group 1-5,text,true,,4828,341,22,22,http://35.237.17.93/users/sign_in,601,0,0
+1545957108544,884,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-5,,true,,5339,669,22,22,null,281,3,132
+1545957108595,909,1 /,200,OK,Thread Group 1-6,text,true,,5340,669,23,23,http://35.237.17.93/users/sign_in,289,0,136
+1545957108595,289,1 /-0,302,Found,Thread Group 1-6,text,true,,511,328,23,23,http://35.237.17.93/,289,0,136
+1545957108884,620,1 /-1,200,OK,Thread Group 1-6,text,true,,4829,341,23,23,http://35.237.17.93/users/sign_in,620,0,0
+1545957108594,909,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-6,,true,,5340,669,23,23,null,289,4,136
+1545957108699,1117,1 /,200,OK,Thread Group 1-8,text,true,,5343,669,29,29,http://35.237.17.93/users/sign_in,284,0,132
+1545957108699,284,1 /-0,302,Found,Thread Group 1-8,text,true,,511,328,29,29,http://35.237.17.93/,284,0,132
+1545957108984,832,1 /-1,200,OK,Thread Group 1-8,text,true,,4832,341,29,29,http://35.237.17.93/users/sign_in,831,0,0
+1545957108698,1117,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-8,,true,,5343,669,29,29,null,284,5,132
+1545957108647,1177,1 /,200,OK,Thread Group 1-7,text,true,,5340,669,29,29,http://35.237.17.93/users/sign_in,283,0,136
+1545957108647,283,1 /-0,302,Found,Thread Group 1-7,text,true,,511,328,29,29,http://35.237.17.93/,283,0,136
+1545957108930,894,1 /-1,200,OK,Thread Group 1-7,text,true,,4829,341,29,29,http://35.237.17.93/users/sign_in,893,0,0
+1545957108646,1177,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-7,,true,,5340,669,29,29,null,283,5,136
+1545957108800,1154,1 /,200,OK,Thread Group 1-10,text,true,,5337,669,32,32,http://35.237.17.93/users/sign_in,561,0,130
+1545957108800,561,1 /-0,302,Found,Thread Group 1-10,text,true,,511,328,32,32,http://35.237.17.93/,561,0,130
+1545957109361,593,1 /-1,200,OK,Thread Group 1-10,text,true,,4826,341,32,32,http://35.237.17.93/users/sign_in,593,0,0
+1545957108799,1154,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-10,,true,,5337,669,32,32,null,561,5,130
+1545957108749,1212,1 /,200,OK,Thread Group 1-9,text,true,,5343,669,32,32,http://35.237.17.93/users/sign_in,622,0,131
+1545957108749,623,1 /-0,302,Found,Thread Group 1-9,text,true,,510,328,32,32,http://35.237.17.93/,622,0,131
+1545957109372,589,1 /-1,200,OK,Thread Group 1-9,text,true,,4833,341,32,32,http://35.237.17.93/users/sign_in,588,0,0
+1545957108748,1212,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-9,,true,,5343,669,32,32,null,622,3,131
+1545957109063,918,1 /,200,OK,Thread Group 1-15,text,true,,5337,669,32,32,http://35.237.17.93/users/sign_in,319,0,132
+1545957109063,319,1 /-0,302,Found,Thread Group 1-15,text,true,,510,328,32,32,http://35.237.17.93/,319,0,132
+1545957109383,598,1 /-1,200,OK,Thread Group 1-15,text,true,,4827,341,32,32,http://35.237.17.93/users/sign_in,597,0,0
+1545957109061,918,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-15,,true,,5337,669,32,32,null,319,4,132
+1545957108957,1031,1 /,200,OK,Thread Group 1-13,text,true,,5340,669,33,33,http://35.237.17.93/users/sign_in,416,0,133
+1545957108957,416,1 /-0,302,Found,Thread Group 1-13,text,true,,511,328,33,33,http://35.237.17.93/,416,0,133
+1545957109374,614,1 /-1,200,OK,Thread Group 1-13,text,true,,4829,341,33,33,http://35.237.17.93/users/sign_in,613,0,0
+1545957108956,1031,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-13,,true,,5340,669,33,33,null,416,4,133
+1545957108851,1417,1 /,200,OK,Thread Group 1-11,text,true,,5340,669,38,38,http://35.237.17.93/users/sign_in,531,0,133
+1545957108851,531,1 /-0,302,Found,Thread Group 1-11,text,true,,511,328,38,38,http://35.237.17.93/,531,0,133
+1545957109383,885,1 /-1,200,OK,Thread Group 1-11,text,true,,4829,341,38,38,http://35.237.17.93/users/sign_in,884,0,0
+1545957108850,1417,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-11,,true,,5340,669,38,38,null,531,2,133
+1545957108907,1368,1 /,200,OK,Thread Group 1-12,text,true,,5343,669,38,38,http://35.237.17.93/users/sign_in,487,0,138
+1545957108907,487,1 /-0,302,Found,Thread Group 1-12,text,true,,511,328,38,38,http://35.237.17.93/,487,0,138
+1545957109394,881,1 /-1,200,OK,Thread Group 1-12,text,true,,4832,341,38,38,http://35.237.17.93/users/sign_in,880,0,0
+1545957108905,1368,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-12,,true,,5343,669,38,38,null,487,4,138
+1545957109011,1409,1 /,200,OK,Thread Group 1-14,text,true,,5336,669,41,41,http://35.237.17.93/users/sign_in,391,0,138
+1545957109011,392,1 /-0,302,Found,Thread Group 1-14,text,true,,511,328,41,41,http://35.237.17.93/,391,0,138
+1545957109403,1017,1 /-1,200,OK,Thread Group 1-14,text,true,,4825,341,41,41,http://35.237.17.93/users/sign_in,1016,0,0
+1545957109009,1409,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-14,,true,,5336,669,41,41,null,391,4,138
+1545957109113,1610,1 /,200,OK,Thread Group 1-16,text,true,,5344,669,47,47,http://35.237.17.93/users/sign_in,300,0,134
+1545957109113,300,1 /-0,302,Found,Thread Group 1-16,text,true,,511,328,47,47,http://35.237.17.93/,300,0,134
+1545957109413,1310,1 /-1,200,OK,Thread Group 1-16,text,true,,4833,341,47,47,http://35.237.17.93/users/sign_in,1309,0,0
+1545957109111,1610,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-16,,true,,5344,669,47,47,null,300,4,134
+1545957109164,2015,1 /,200,OK,Thread Group 1-17,text,true,,5338,669,56,56,http://35.237.17.93/users/sign_in,280,0,133
+1545957109164,280,1 /-0,302,Found,Thread Group 1-17,text,true,,511,328,56,56,http://35.237.17.93/,280,0,133
+1545957109444,1735,1 /-1,200,OK,Thread Group 1-17,text,true,,4827,341,56,56,http://35.237.17.93/users/sign_in,1735,0,0
+1545957109162,2015,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-17,,true,,5338,669,56,56,null,280,4,133
+1545957109220,2750,1 /,200,OK,Thread Group 1-18,text,true,,5343,669,71,71,http://35.237.17.93/users/sign_in,291,0,136
+1545957109220,291,1 /-0,302,Found,Thread Group 1-18,text,true,,511,328,71,71,http://35.237.17.93/,291,0,136
+1545957109511,2459,1 /-1,200,OK,Thread Group 1-18,text,true,,4832,341,71,71,http://35.237.17.93/users/sign_in,2459,0,0
+1545957109218,2750,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-18,,true,,5343,669,71,71,null,291,4,136
+1545957109270,4312,1 /,200,OK,Thread Group 1-19,text,true,,5341,669,100,100,http://35.237.17.93/users/sign_in,728,0,132
+1545957109270,728,1 /-0,302,Found,Thread Group 1-19,text,true,,510,328,100,100,http://35.237.17.93/,728,0,132
+1545957109999,3583,1 /-1,200,OK,Thread Group 1-19,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,3582,0,0
+1545957109268,4312,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-19,,true,,5341,669,100,100,null,728,3,132
+1545957109634,3997,1 /,200,OK,Thread Group 1-26,text,true,,5335,669,100,100,http://35.237.17.93/users/sign_in,1881,0,134
+1545957109634,1882,1 /-0,302,Found,Thread Group 1-26,text,true,,511,328,100,100,http://35.237.17.93/,1881,0,134
+1545957111516,2115,1 /-1,200,OK,Thread Group 1-26,text,true,,4824,341,100,100,http://35.237.17.93/users/sign_in,2115,0,0
+1545957109631,3997,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-26,,true,,5335,669,100,100,null,1881,6,134
+1545957109580,4116,1 /,200,OK,Thread Group 1-25,text,true,,5347,669,100,100,http://35.237.17.93/users/sign_in,1995,0,137
+1545957109580,1995,1 /-0,302,Found,Thread Group 1-25,text,true,,511,328,100,100,http://35.237.17.93/,1995,0,137
+1545957111575,2121,1 /-1,200,OK,Thread Group 1-25,text,true,,4836,341,100,100,http://35.237.17.93/users/sign_in,2121,0,0
+1545957109578,4116,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-25,,true,,5347,669,100,100,null,1995,4,137
+1545957109425,4732,1 /,200,OK,Thread Group 1-22,text,true,,5349,669,100,100,http://35.237.17.93/users/sign_in,2065,0,134
+1545957109425,2066,1 /-0,302,Found,Thread Group 1-22,text,true,,511,328,100,100,http://35.237.17.93/,2065,0,134
+1545957111491,2666,1 /-1,200,OK,Thread Group 1-22,text,true,,4838,341,100,100,http://35.237.17.93/users/sign_in,2664,0,137
+1545957109424,4732,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-22,,true,,5349,669,100,100,null,2065,3,134
+1545957109392,5192,5 /users/sign_in,200,OK,Thread Group 1-4,text,true,,8007,1203,100,100,http://35.237.17.93/,2063,0,0
+1545957109392,2063,5 /users/sign_in-0,302,Found,Thread Group 1-4,text,true,,619,724,100,100,http://35.237.17.93/users/sign_in,2063,0,0
+1545957111456,3128,5 /users/sign_in-1,200,OK,Thread Group 1-4,text,true,,7388,479,100,100,http://35.237.17.93/,3127,0,141
+1545957109391,5192,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-4,,true,,8007,1203,100,100,null,2063,2,0
+1545957109736,4877,1 /,200,OK,Thread Group 1-28,text,true,,5344,669,100,100,http://35.237.17.93/users/sign_in,1915,0,134
+1545957109736,1915,1 /-0,302,Found,Thread Group 1-28,text,true,,511,328,100,100,http://35.237.17.93/,1915,0,134
+1545957111651,2962,1 /-1,200,OK,Thread Group 1-28,text,true,,4833,341,100,100,http://35.237.17.93/users/sign_in,2961,0,0
+1545957109734,4877,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-28,,true,,5344,669,100,100,null,1915,4,134
+1545957109479,5569,1 /,200,OK,Thread Group 1-23,text,true,,5343,669,100,100,http://35.237.17.93/users/sign_in,2090,0,134
+1545957109479,2090,1 /-0,302,Found,Thread Group 1-23,text,true,,511,328,100,100,http://35.237.17.93/,2090,0,134
+1545957111570,3478,1 /-1,200,OK,Thread Group 1-23,text,true,,4832,341,100,100,http://35.237.17.93/users/sign_in,3477,0,134
+1545957109476,5569,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-23,,true,,5343,669,100,100,null,2090,5,134
+1545957109392,6048,5 /users/sign_in,200,OK,Thread Group 1-1,text,true,,8006,1207,100,100,http://35.237.17.93/,2164,0,0
+1545957109392,2164,5 /users/sign_in-0,302,Found,Thread Group 1-1,text,true,,620,728,100,100,http://35.237.17.93/users/sign_in,2164,0,0
+1545957111557,3883,5 /users/sign_in-1,200,OK,Thread Group 1-1,text,true,,7386,479,100,100,http://35.237.17.93/,3881,0,131
+1545957109391,6048,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-1,,true,,8006,1207,100,100,null,2164,2,0
+1545957109837,5675,1 /,200,OK,Thread Group 1-30,text,true,,5341,669,100,100,http://35.237.17.93/users/sign_in,1987,0,133
+1545957109837,1988,1 /-0,302,Found,Thread Group 1-30,text,true,,511,328,100,100,http://35.237.17.93/,1987,0,133
+1545957111825,3687,1 /-1,200,OK,Thread Group 1-30,text,true,,4830,341,100,100,http://35.237.17.93/users/sign_in,3686,0,0
+1545957109835,5675,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-30,,true,,5341,669,100,100,null,1987,4,133
+1545957109392,6203,5 /users/sign_in,200,OK,Thread Group 1-2,text,true,,8003,1201,100,100,http://35.237.17.93/,2245,0,0
+1545957109392,2245,5 /users/sign_in-0,302,Found,Thread Group 1-2,text,true,,620,722,100,100,http://35.237.17.93/users/sign_in,2245,0,0
+1545957111638,3957,5 /users/sign_in-1,200,OK,Thread Group 1-2,text,true,,7383,479,100,100,http://35.237.17.93/,3956,0,133
+1545957109391,6203,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-2,,true,,8003,1201,100,100,null,2245,2,0
+1545957109527,6113,1 /,200,OK,Thread Group 1-24,text,true,,5332,669,100,100,http://35.237.17.93/users/sign_in,1975,0,134
+1545957109527,1975,1 /-0,302,Found,Thread Group 1-24,text,true,,510,328,100,100,http://35.237.17.93/,1975,0,134
+1545957111503,4137,1 /-1,200,OK,Thread Group 1-24,text,true,,4822,341,100,100,http://35.237.17.93/users/sign_in,4137,0,0
+1545957109526,6113,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-24,,true,,5332,669,100,100,null,1975,4,134
+1545957109685,6054,1 /,200,OK,Thread Group 1-27,text,true,,5342,669,100,100,http://35.237.17.93/users/sign_in,1897,0,137
+1545957109685,1898,1 /-0,302,Found,Thread Group 1-27,text,true,,511,328,100,100,http://35.237.17.93/,1897,0,137
+1545957111583,4156,1 /-1,200,OK,Thread Group 1-27,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,4155,0,0
+1545957109682,6054,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-27,,true,,5342,669,100,100,null,1897,4,137
+1545957109988,6073,1 /,200,OK,Thread Group 1-33,text,true,,5340,669,100,100,http://35.237.17.93/users/sign_in,2922,0,140
+1545957109988,2922,1 /-0,302,Found,Thread Group 1-33,text,true,,511,328,100,100,http://35.237.17.93/,2922,0,140
+1545957112910,3151,1 /-1,200,OK,Thread Group 1-33,text,true,,4829,341,100,100,http://35.237.17.93/users/sign_in,3150,0,132
+1545957109986,6073,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-33,,true,,5340,669,100,100,null,2922,4,140
+1545957109324,6796,1 /,200,OK,Thread Group 1-20,text,true,,5344,669,100,100,http://35.237.17.93/users/sign_in,2141,0,134
+1545957109324,2142,1 /-0,302,Found,Thread Group 1-20,text,true,,511,328,100,100,http://35.237.17.93/,2141,0,134
+1545957111466,4654,1 /-1,200,OK,Thread Group 1-20,text,true,,4833,341,100,100,http://35.237.17.93/users/sign_in,4653,0,134
+1545957109321,6796,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-20,,true,,5344,669,100,100,null,2141,5,134
+1545957109375,6819,1 /,200,OK,Thread Group 1-21,text,true,,5341,669,100,100,http://35.237.17.93/users/sign_in,2101,0,135
+1545957109375,2101,1 /-0,302,Found,Thread Group 1-21,text,true,,511,328,100,100,http://35.237.17.93/,2101,0,135
+1545957111476,4718,1 /-1,200,OK,Thread Group 1-21,text,true,,4830,341,100,100,http://35.237.17.93/users/sign_in,4717,0,134
+1545957109373,6819,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-21,,true,,5341,669,100,100,null,2101,3,135
+1545957109507,6971,5 /users/sign_in,200,OK,Thread Group 1-6,text,true,,8004,1207,100,100,http://35.237.17.93/,3031,0,0
+1545957109507,3031,5 /users/sign_in-0,302,Found,Thread Group 1-6,text,true,,620,728,100,100,http://35.237.17.93/users/sign_in,3031,0,0
+1545957112539,3939,5 /users/sign_in-1,200,OK,Thread Group 1-6,text,true,,7384,479,100,100,http://35.237.17.93/,3937,0,131
+1545957109507,6971,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-6,,true,,8004,1207,100,100,null,3031,1,0
+1545957110089,6426,1 /,200,OK,Thread Group 1-35,text,true,,5347,669,100,100,http://35.237.17.93/users/sign_in,2869,0,133
+1545957110089,2869,1 /-0,302,Found,Thread Group 1-35,text,true,,511,328,100,100,http://35.237.17.93/,2869,0,133
+1545957112958,3557,1 /-1,200,OK,Thread Group 1-35,text,true,,4836,341,100,100,http://35.237.17.93/users/sign_in,3555,0,134
+1545957110088,6426,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-35,,true,,5347,669,100,100,null,2869,3,133
+1545957109821,6779,5 /users/sign_in,200,OK,Thread Group 1-8,text,true,,8004,1205,100,100,http://35.237.17.93/,3061,0,0
+1545957109821,3062,5 /users/sign_in-0,302,Found,Thread Group 1-8,text,true,,620,726,100,100,http://35.237.17.93/users/sign_in,3061,0,0
+1545957112884,3716,5 /users/sign_in-1,200,OK,Thread Group 1-8,text,true,,7384,479,100,100,http://35.237.17.93/,3714,0,132
+1545957109820,6779,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-8,,true,,8004,1205,100,100,null,3061,1,0
+1545957110291,6653,1 /,200,OK,Thread Group 1-39,text,true,,5339,669,100,100,http://35.237.17.93/users/sign_in,2707,0,132
+1545957110291,2707,1 /-0,302,Found,Thread Group 1-39,text,true,,511,328,100,100,http://35.237.17.93/,2707,0,132
+1545957112999,3945,1 /-1,200,OK,Thread Group 1-39,text,true,,4828,341,100,100,http://35.237.17.93/users/sign_in,3943,0,131
+1545957110289,6653,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-39,,true,,5339,669,100,100,null,2707,3,132
+1545957110442,6537,1 /,200,OK,Thread Group 1-42,text,true,,5341,669,100,100,http://35.237.17.93/users/sign_in,2581,0,139
+1545957110442,2581,1 /-0,302,Found,Thread Group 1-42,text,true,,511,328,100,100,http://35.237.17.93/,2581,0,139
+1545957113023,3956,1 /-1,200,OK,Thread Group 1-42,text,true,,4830,341,100,100,http://35.237.17.93/users/sign_in,3954,0,134
+1545957110440,6537,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-42,,true,,5341,669,100,100,null,2581,4,139
+1545957110544,6508,1 /,200,OK,Thread Group 1-44,text,true,,5341,669,100,100,http://35.237.17.93/users/sign_in,2490,0,139
+1545957110544,2490,1 /-0,302,Found,Thread Group 1-44,text,true,,511,328,100,100,http://35.237.17.93/,2490,0,139
+1545957113034,4018,1 /-1,200,OK,Thread Group 1-44,text,true,,4830,341,100,100,http://35.237.17.93/users/sign_in,4016,0,137
+1545957110542,6508,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-44,,true,,5341,669,100,100,null,2490,3,139
+1545957109392,7673,5 /users/sign_in,200,OK,Thread Group 1-3,text,true,,8008,1205,100,100,http://35.237.17.93/,2129,0,0
+1545957109392,2129,5 /users/sign_in-0,302,Found,Thread Group 1-3,text,true,,619,726,100,100,http://35.237.17.93/users/sign_in,2129,0,0
+1545957111521,5544,5 /users/sign_in-1,200,OK,Thread Group 1-3,text,true,,7389,479,100,100,http://35.237.17.93/,5543,0,135
+1545957109391,7673,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-3,,true,,8008,1205,100,100,null,2129,2,0
+1545957109431,7866,5 /users/sign_in,200,OK,Thread Group 1-5,text,true,,8006,1201,100,100,http://35.237.17.93/,2379,0,0
+1545957109431,2379,5 /users/sign_in-0,302,Found,Thread Group 1-5,text,true,,620,722,100,100,http://35.237.17.93/users/sign_in,2379,0,0
+1545957111811,5486,5 /users/sign_in-1,200,OK,Thread Group 1-5,text,true,,7386,479,100,100,http://35.237.17.93/,5484,0,134
+1545957109431,7866,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-5,,true,,8006,1201,100,100,null,2379,1,0
+1545957110596,6800,1 /,200,OK,Thread Group 1-45,text,true,,5346,669,100,100,http://35.237.17.93/users/sign_in,2480,0,135
+1545957110596,2480,1 /-0,302,Found,Thread Group 1-45,text,true,,511,328,100,100,http://35.237.17.93/,2480,0,135
+1545957113076,4320,1 /-1,200,OK,Thread Group 1-45,text,true,,4835,341,100,100,http://35.237.17.93/users/sign_in,4319,0,136
+1545957110594,6800,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-45,,true,,5346,669,100,100,null,2480,3,135
+1545957110696,6735,1 /,200,OK,Thread Group 1-47,text,true,,5343,669,100,100,http://35.237.17.93/users/sign_in,2392,0,131
+1545957110696,2392,1 /-0,302,Found,Thread Group 1-47,text,true,,511,328,100,100,http://35.237.17.93/,2392,0,131
+1545957113088,4343,1 /-1,200,OK,Thread Group 1-47,text,true,,4832,341,100,100,http://35.237.17.93/users/sign_in,4343,0,132
+1545957110694,6735,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-47,,true,,5343,669,100,100,null,2392,5,131
+1545957110899,6610,1 /,200,OK,Thread Group 1-51,text,true,,5342,669,100,100,http://35.237.17.93/users/sign_in,2216,0,133
+1545957110899,2216,1 /-0,302,Found,Thread Group 1-51,text,true,,511,328,100,100,http://35.237.17.93/,2216,0,133
+1545957113115,4394,1 /-1,200,OK,Thread Group 1-51,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,4394,0,133
+1545957110897,6610,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-51,,true,,5342,669,100,100,null,2216,4,133
+1545957109786,7731,1 /,200,OK,Thread Group 1-29,text,true,,5339,669,100,100,http://35.237.17.93/users/sign_in,2198,0,140
+1545957109786,2198,1 /-0,302,Found,Thread Group 1-29,text,true,,511,328,100,100,http://35.237.17.93/,2198,0,140
+1545957111985,5532,1 /-1,200,OK,Thread Group 1-29,text,true,,4828,341,100,100,http://35.237.17.93/users/sign_in,5531,0,136
+1545957109784,7731,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-29,,true,,5339,669,100,100,null,2198,3,140
+1545957109885,8003,1 /,200,OK,Thread Group 1-31,text,true,,5337,669,100,100,http://35.237.17.93/users/sign_in,3010,0,131
+1545957111105,6784,1 /,200,OK,Thread Group 1-55,text,true,,5336,669,100,100,http://35.237.17.93/users/sign_in,2039,0,135
+1545957109885,3010,1 /-0,302,Found,Thread Group 1-31,text,true,,511,328,100,100,http://35.237.17.93/,3010,0,131
+1545957111105,2039,1 /-0,302,Found,Thread Group 1-55,text,true,,511,328,100,100,http://35.237.17.93/,2039,0,135
+1545957112896,4992,1 /-1,200,OK,Thread Group 1-31,text,true,,4826,341,100,100,http://35.237.17.93/users/sign_in,4990,0,130
+1545957113144,4745,1 /-1,200,OK,Thread Group 1-55,text,true,,4825,341,100,100,http://35.237.17.93/users/sign_in,4745,0,130
+1545957109884,8003,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-31,,true,,5337,669,100,100,null,3010,3,131
+1545957111103,6784,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-55,,true,,5336,669,100,100,null,2039,3,135
+1545957110139,7839,1 /,200,OK,Thread Group 1-36,text,true,,5340,669,100,100,http://35.237.17.93/users/sign_in,2831,0,133
+1545957110139,2832,1 /-0,302,Found,Thread Group 1-36,text,true,,511,328,100,100,http://35.237.17.93/,2831,0,133
+1545957112971,5007,1 /-1,200,OK,Thread Group 1-36,text,true,,4829,341,100,100,http://35.237.17.93/users/sign_in,5006,0,141
+1545957110137,7839,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-36,,true,,5340,669,100,100,null,2831,4,133
+1545957110190,7900,1 /,200,OK,Thread Group 1-37,text,true,,5343,669,100,100,http://35.237.17.93/users/sign_in,2794,0,130
+1545957110190,2794,1 /-0,302,Found,Thread Group 1-37,text,true,,511,328,100,100,http://35.237.17.93/,2794,0,130
+1545957112984,5106,1 /-1,200,OK,Thread Group 1-37,text,true,,4832,341,100,100,http://35.237.17.93/users/sign_in,5105,0,137
+1545957110188,7900,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-37,,true,,5343,669,100,100,null,2794,4,130
+1545957109959,8365,5 /users/sign_in,200,OK,Thread Group 1-10,text,true,,8006,1203,100,100,http://35.237.17.93/,3174,0,0
+1545957109959,3174,5 /users/sign_in-0,302,Found,Thread Group 1-10,text,true,,620,724,100,100,http://35.237.17.93/users/sign_in,3174,0,0
+1545957113133,5191,5 /users/sign_in-1,200,OK,Thread Group 1-10,text,true,,7386,479,100,100,http://35.237.17.93/,5188,0,133
+1545957109958,8365,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-10,,true,,8006,1203,100,100,null,3174,2,0
+1545957109938,8428,1 /,200,OK,Thread Group 1-32,text,true,,5340,669,100,100,http://35.237.17.93/users/sign_in,3448,0,133
+1545957109938,3448,1 /-0,302,Found,Thread Group 1-32,text,true,,511,328,100,100,http://35.237.17.93/,3448,0,133
+1545957113387,4979,1 /-1,200,OK,Thread Group 1-32,text,true,,4829,341,100,100,http://35.237.17.93/users/sign_in,4977,0,141
+1545957109936,8428,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-32,,true,,5340,669,100,100,null,3448,4,133
+1545957110341,8027,1 /,200,OK,Thread Group 1-40,text,true,,5345,669,100,100,http://35.237.17.93/users/sign_in,2670,0,133
+1545957110341,2670,1 /-0,302,Found,Thread Group 1-40,text,true,,511,328,100,100,http://35.237.17.93/,2670,0,133
+1545957113012,5356,1 /-1,200,OK,Thread Group 1-40,text,true,,4834,341,100,100,http://35.237.17.93/users/sign_in,5356,0,136
+1545957110339,8027,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-40,,true,,5345,669,100,100,null,2670,4,133
+1545957109991,8446,5 /users/sign_in,200,OK,Thread Group 1-13,text,true,,8007,1211,100,100,http://35.237.17.93/,3217,0,0
+1545957109991,3217,5 /users/sign_in-0,302,Found,Thread Group 1-13,text,true,,620,732,100,100,http://35.237.17.93/users/sign_in,3217,0,0
+1545957113209,5228,5 /users/sign_in-1,200,OK,Thread Group 1-13,text,true,,7387,479,100,100,http://35.237.17.93/,5227,0,137
+1545957109991,8446,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-13,,true,,8007,1211,100,100,null,3217,0,0
+1545957111255,7202,1 /,200,OK,Thread Group 1-58,text,true,,5342,669,100,100,http://35.237.17.93/users/sign_in,1901,0,132
+1545957111255,1901,1 /-0,302,Found,Thread Group 1-58,text,true,,511,328,100,100,http://35.237.17.93/,1901,0,132
+1545957113156,5301,1 /-1,200,OK,Thread Group 1-58,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,5300,0,0
+1545957111254,7202,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-58,,true,,5342,669,100,100,null,1901,2,132
+1545957111361,7183,1 /,200,OK,Thread Group 1-60,text,true,,5340,669,100,100,http://35.237.17.93/users/sign_in,1805,0,132
+1545957111361,1805,1 /-0,302,Found,Thread Group 1-60,text,true,,511,328,100,100,http://35.237.17.93/,1805,0,132
+1545957113167,5377,1 /-1,200,OK,Thread Group 1-60,text,true,,4829,341,100,100,http://35.237.17.93/users/sign_in,5377,0,0
+1545957111359,7183,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-60,,true,,5340,669,100,100,null,1805,4,132
+1545957110241,8646,1 /,200,OK,Thread Group 1-38,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,3674,0,131
+1545957110241,3674,1 /-0,302,Found,Thread Group 1-38,text,true,,511,328,100,100,http://35.237.17.93/,3674,0,131
+1545957113915,4972,1 /-1,200,OK,Thread Group 1-38,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,4971,0,133
+1545957110239,8646,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-38,,true,,5338,669,100,100,null,3674,4,131
+1545957110798,8113,1 /,200,OK,Thread Group 1-49,text,true,,5342,669,100,100,http://35.237.17.93/users/sign_in,2307,0,135
+1545957110798,2307,1 /-0,302,Found,Thread Group 1-49,text,true,,511,328,100,100,http://35.237.17.93/,2307,0,135
+1545957113105,5806,1 /-1,200,OK,Thread Group 1-49,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,5805,0,137
+1545957110796,8113,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-49,,true,,5342,669,100,100,null,2307,4,135
+1545957111005,8002,1 /,200,OK,Thread Group 1-53,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,2121,0,132
+1545957111005,2121,1 /-0,302,Found,Thread Group 1-53,text,true,,511,328,100,100,http://35.237.17.93/,2121,0,132
+1545957113127,5880,1 /-1,200,OK,Thread Group 1-53,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,5879,0,135
+1545957111004,8002,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-53,,true,,5338,669,100,100,null,2121,2,132
+1545957109829,9522,5 /users/sign_in,200,OK,Thread Group 1-7,text,true,,8007,1203,100,100,http://35.237.17.93/,3251,0,0
+1545957109829,3251,5 /users/sign_in-0,302,Found,Thread Group 1-7,text,true,,620,724,100,100,http://35.237.17.93/users/sign_in,3251,0,0
+1545957113081,6270,5 /users/sign_in-1,200,OK,Thread Group 1-7,text,true,,7387,479,100,100,http://35.237.17.93/,6269,0,134
+1545957109828,9522,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-7,,true,,8007,1203,100,100,null,3251,2,0
+1545957110039,9421,1 /,200,OK,Thread Group 1-34,text,true,,5333,669,100,100,http://35.237.17.93/users/sign_in,3356,0,134
+1545957110039,3356,1 /-0,302,Found,Thread Group 1-34,text,true,,510,328,100,100,http://35.237.17.93/,3356,0,134
+1545957113396,6064,1 /-1,200,OK,Thread Group 1-34,text,true,,4823,341,100,100,http://35.237.17.93/users/sign_in,6060,0,137
+1545957110038,9421,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-34,,true,,5333,669,100,100,null,3356,4,134
+1545957111182,8622,5 /users/sign_in,200,OK,Thread Group 1-17,text,true,,8006,1203,100,100,http://35.237.17.93/,3318,0,132
+1545957111182,3319,5 /users/sign_in-0,302,Found,Thread Group 1-17,text,true,,620,724,100,100,http://35.237.17.93/users/sign_in,3318,0,132
+1545957114501,5303,5 /users/sign_in-1,200,OK,Thread Group 1-17,text,true,,7386,479,100,100,http://35.237.17.93/,5301,0,134
+1545957111181,8622,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-17,,true,,8006,1203,100,100,null,3318,1,132
+1545957109964,9885,5 /users/sign_in,200,OK,Thread Group 1-9,text,true,,8009,1209,100,100,http://35.237.17.93/,3408,0,0
+1545957109964,3408,5 /users/sign_in-0,302,Found,Thread Group 1-9,text,true,,620,730,100,100,http://35.237.17.93/users/sign_in,3408,0,0
+1545957113373,6476,5 /users/sign_in-1,200,OK,Thread Group 1-9,text,true,,7389,479,100,100,http://35.237.17.93/,6474,0,135
+1545957109963,9885,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-9,,true,,8009,1209,100,100,null,3408,1,0
+1545957111462,8444,1 /,200,OK,Thread Group 1-62,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,2183,0,133
+1545957111462,2183,1 /-0,302,Found,Thread Group 1-62,text,true,,511,328,100,100,http://35.237.17.93/,2183,0,133
+1545957113646,6260,1 /-1,200,OK,Thread Group 1-62,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,6258,0,156
+1545957111461,8444,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-62,,true,,5338,669,100,100,null,2183,3,133
+1545957110391,9832,1 /,200,OK,Thread Group 1-41,text,true,,5339,669,100,100,http://35.237.17.93/users/sign_in,4367,0,137
+1545957110391,4367,1 /-0,302,Found,Thread Group 1-41,text,true,,511,328,100,100,http://35.237.17.93/,4367,0,137
+1545957114758,5465,1 /-1,200,OK,Thread Group 1-41,text,true,,4828,341,100,100,http://35.237.17.93/users/sign_in,5464,0,132
+1545957110390,9832,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-41,,true,,5339,669,100,100,null,4367,5,137
+1545957110646,10056,1 /,200,OK,Thread Group 1-46,text,true,,5341,669,100,100,http://35.237.17.93/users/sign_in,4411,0,140
+1545957110646,4411,1 /-0,302,Found,Thread Group 1-46,text,true,,511,328,100,100,http://35.237.17.93/,4411,0,140
+1545957115058,5644,1 /-1,200,OK,Thread Group 1-46,text,true,,4830,341,100,100,http://35.237.17.93/users/sign_in,5644,0,136
+1545957110645,10056,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-46,,true,,5341,669,100,100,null,4411,3,140
+1545957110278,10449,5 /users/sign_in,200,OK,Thread Group 1-12,text,true,,8006,1201,100,100,http://35.237.17.93/,4769,0,0
+1545957110278,4769,5 /users/sign_in-0,302,Found,Thread Group 1-12,text,true,,620,722,100,100,http://35.237.17.93/users/sign_in,4769,0,0
+1545957115048,5679,5 /users/sign_in-1,200,OK,Thread Group 1-12,text,true,,7386,479,100,100,http://35.237.17.93/,5678,0,133
+1545957110277,10449,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-12,,true,,8006,1201,100,100,null,4769,1,0
+1545957109985,10778,5 /users/sign_in,200,OK,Thread Group 1-15,text,true,,8008,1199,100,100,http://35.237.17.93/,3915,0,0
+1545957109985,3915,5 /users/sign_in-0,302,Found,Thread Group 1-15,text,true,,620,720,100,100,http://35.237.17.93/users/sign_in,3915,0,0
+1545957113901,6862,5 /users/sign_in-1,200,OK,Thread Group 1-15,text,true,,7388,479,100,100,http://35.237.17.93/,6862,0,137
+1545957109984,10778,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-15,,true,,8008,1199,100,100,null,3915,1,0
+1545957110848,10315,1 /,200,OK,Thread Group 1-50,text,true,,5343,669,100,100,http://35.237.17.93/users/sign_in,4268,0,143
+1545957110848,4268,1 /-0,302,Found,Thread Group 1-50,text,true,,511,328,100,100,http://35.237.17.93/,4268,0,143
+1545957115117,6046,1 /-1,200,OK,Thread Group 1-50,text,true,,4832,341,100,100,http://35.237.17.93/users/sign_in,6045,0,136
+1545957110846,10315,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-50,,true,,5343,669,100,100,null,4268,3,143
+1545957111055,10132,1 /,200,OK,Thread Group 1-54,text,true,,5350,669,100,100,http://35.237.17.93/users/sign_in,4083,0,139
+1545957111055,4083,1 /-0,302,Found,Thread Group 1-54,text,true,,511,328,100,100,http://35.237.17.93/,4083,0,139
+1545957115138,6049,1 /-1,200,OK,Thread Group 1-54,text,true,,4839,341,100,100,http://35.237.17.93/users/sign_in,6048,0,134
+1545957111054,10132,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-54,,true,,5350,669,100,100,null,4083,2,139
+1545957111207,10314,1 /,200,OK,Thread Group 1-57,text,true,,5335,669,100,100,http://35.237.17.93/users/sign_in,3951,0,131
+1545957111207,3951,1 /-0,302,Found,Thread Group 1-57,text,true,,510,328,100,100,http://35.237.17.93/,3951,0,131
+1545957115159,6362,1 /-1,200,OK,Thread Group 1-57,text,true,,4825,341,100,100,http://35.237.17.93/users/sign_in,6362,0,134
+1545957111205,10314,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-57,,true,,5335,669,100,100,null,3951,4,131
+1545957114586,7115,9 /projects/new,200,OK,Thread Group 1-4,text,true,,14138,429,100,100,http://35.237.17.93/projects/new,6982,0,133
+1545957114585,7115,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-4,,true,,14138,429,100,100,null,6982,2,133
+1545957110491,11237,1 /,200,OK,Thread Group 1-43,text,true,,5347,669,100,100,http://35.237.17.93/users/sign_in,4281,0,134
+1545957110491,4281,1 /-0,302,Found,Thread Group 1-43,text,true,,511,328,100,100,http://35.237.17.93/,4281,0,134
+1545957114773,6955,1 /-1,200,OK,Thread Group 1-43,text,true,,4836,341,100,100,http://35.237.17.93/users/sign_in,6953,0,134
+1545957110489,11237,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-43,,true,,5347,669,100,100,null,4281,4,134
+1545957110270,11500,5 /users/sign_in,200,OK,Thread Group 1-11,text,true,,8008,1201,100,100,http://35.237.17.93/,4479,0,0
+1545957110270,4479,5 /users/sign_in-0,302,Found,Thread Group 1-11,text,true,,620,722,100,100,http://35.237.17.93/users/sign_in,4479,0,0
+1545957114749,7021,5 /users/sign_in-1,200,OK,Thread Group 1-11,text,true,,7388,479,100,100,http://35.237.17.93/,7020,0,139
+1545957110270,11500,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-11,,true,,8008,1201,100,100,null,4479,1,0
+1545957111832,10239,1 /,200,OK,Thread Group 1-69,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,3653,0,129
+1545957111832,3653,1 /-0,302,Found,Thread Group 1-69,text,true,,511,328,100,100,http://35.237.17.93/,3653,0,129
+1545957115486,6585,1 /-1,200,OK,Thread Group 1-69,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,6584,0,136
+1545957111830,10239,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-69,,true,,5338,669,100,100,null,3653,3,129
+1545957110423,11689,5 /users/sign_in,200,OK,Thread Group 1-14,text,true,,8005,1203,100,100,http://35.237.17.93/,4850,0,0
+1545957110423,4850,5 /users/sign_in-0,302,Found,Thread Group 1-14,text,true,,620,724,100,100,http://35.237.17.93/users/sign_in,4850,0,0
+1545957115274,6838,5 /users/sign_in-1,200,OK,Thread Group 1-14,text,true,,7385,479,100,100,http://35.237.17.93/,6835,0,138
+1545957110422,11689,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-14,,true,,8005,1203,100,100,null,4850,1,0
+1545957110748,11536,1 /,200,OK,Thread Group 1-48,text,true,,5341,669,100,100,http://35.237.17.93/users/sign_in,4346,0,140
+1545957110748,4346,1 /-0,302,Found,Thread Group 1-48,text,true,,510,328,100,100,http://35.237.17.93/,4346,0,140
+1545957115094,7190,1 /-1,200,OK,Thread Group 1-48,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,7189,0,132
+1545957110746,11536,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-48,,true,,5341,669,100,100,null,4346,3,140
+1545957115442,7012,9 /projects/new,200,OK,Thread Group 1-1,text,true,,14136,429,100,100,http://35.237.17.93/projects/new,6876,0,133
+1545957115441,7012,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-1,,true,,14136,429,100,100,null,6876,2,133
+1545957110952,11554,1 /,200,OK,Thread Group 1-52,text,true,,5339,669,100,100,http://35.237.17.93/users/sign_in,4172,0,136
+1545957110952,4172,1 /-0,302,Found,Thread Group 1-52,text,true,,511,328,100,100,http://35.237.17.93/,4172,0,136
+1545957115124,7382,1 /-1,200,OK,Thread Group 1-52,text,true,,4828,341,100,100,http://35.237.17.93/users/sign_in,7380,0,137
+1545957110950,11554,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-52,,true,,5339,669,100,100,null,4172,3,136
+1545957112037,10524,1 /,200,OK,Thread Group 1-73,text,true,,5341,669,100,100,http://35.237.17.93/users/sign_in,3486,0,132
+1545957112037,3486,1 /-0,302,Found,Thread Group 1-73,text,true,,511,328,100,100,http://35.237.17.93/,3486,0,132
+1545957115524,7037,1 /-1,200,OK,Thread Group 1-73,text,true,,4830,341,100,100,http://35.237.17.93/users/sign_in,7035,0,135
+1545957112034,10524,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-73,,true,,5341,669,100,100,null,3486,4,132
+1545957111157,11636,1 /,200,OK,Thread Group 1-56,text,true,,5339,669,100,100,http://35.237.17.93/users/sign_in,3992,0,135
+1545957111157,3992,1 /-0,302,Found,Thread Group 1-56,text,true,,510,328,100,100,http://35.237.17.93/,3992,0,135
+1545957115149,7644,1 /-1,200,OK,Thread Group 1-56,text,true,,4829,341,100,100,http://35.237.17.93/users/sign_in,7642,0,132
+1545957111155,11636,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-56,,true,,5339,669,100,100,null,3992,3,135
+1545957112136,10667,1 /,200,OK,Thread Group 1-75,text,true,,5342,669,100,100,http://35.237.17.93/users/sign_in,3397,0,135
+1545957112136,3397,1 /-0,302,Found,Thread Group 1-75,text,true,,511,328,100,100,http://35.237.17.93/,3397,0,135
+1545957115534,7269,1 /-1,200,OK,Thread Group 1-75,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,7268,0,136
+1545957112134,10667,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-75,,true,,5342,669,100,100,null,3397,5,135
+1545957111309,11669,1 /,200,OK,Thread Group 1-59,text,true,,5344,669,100,100,http://35.237.17.93/users/sign_in,3854,0,135
+1545957111309,3854,1 /-0,302,Found,Thread Group 1-59,text,true,,511,328,100,100,http://35.237.17.93/,3854,0,135
+1545957115164,7814,1 /-1,200,OK,Thread Group 1-59,text,true,,4833,341,100,100,http://35.237.17.93/users/sign_in,7813,0,134
+1545957111307,11669,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-59,,true,,5344,669,100,100,null,3854,4,135
+1545957112450,10565,1 /,200,OK,Thread Group 1-81,text,true,,5339,669,100,100,http://35.237.17.93/users/sign_in,3105,0,130
+1545957112450,3105,1 /-0,302,Found,Thread Group 1-81,text,true,,511,328,100,100,http://35.237.17.93/,3105,0,130
+1545957115555,7460,1 /-1,200,OK,Thread Group 1-81,text,true,,4828,341,100,100,http://35.237.17.93/users/sign_in,7459,0,135
+1545957112448,10565,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-81,,true,,5339,669,100,100,null,3105,18,130
+1545957111412,11866,1 /,200,OK,Thread Group 1-61,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,3872,0,134
+1545957111412,3873,1 /-0,302,Found,Thread Group 1-61,text,true,,511,328,100,100,http://35.237.17.93/,3872,0,134
+1545957115285,7993,1 /-1,200,OK,Thread Group 1-61,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,7991,0,134
+1545957111410,11866,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-61,,true,,5338,669,100,100,null,3872,3,134
+1545957111779,11668,1 /,200,OK,Thread Group 1-68,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,3669,0,137
+1545957111779,3670,1 /-0,302,Found,Thread Group 1-68,text,true,,511,328,100,100,http://35.237.17.93/,3669,0,137
+1545957115449,7998,1 /-1,200,OK,Thread Group 1-68,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,7997,0,133
+1545957111777,11668,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-68,,true,,5338,669,100,100,null,3669,4,137
+1545957112717,10758,1 /,200,OK,Thread Group 1-86,text,true,,5340,669,100,100,http://35.237.17.93/users/sign_in,2881,0,134
+1545957112717,2881,1 /-0,302,Found,Thread Group 1-86,text,true,,511,328,100,100,http://35.237.17.93/,2881,0,134
+1545957115598,7877,1 /-1,200,OK,Thread Group 1-86,text,true,,4829,341,100,100,http://35.237.17.93/users/sign_in,7876,0,134
+1545957112716,10758,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-86,,true,,5340,669,100,100,null,2881,3,134
+1545957111931,11648,1 /,200,OK,Thread Group 1-71,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,3565,0,133
+1545957111931,3565,1 /-0,302,Found,Thread Group 1-71,text,true,,511,328,100,100,http://35.237.17.93/,3565,0,133
+1545957115497,8082,1 /-1,200,OK,Thread Group 1-71,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,8080,0,132
+1545957111929,11648,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-71,,true,,5338,669,100,100,null,3565,3,133
+1545957115598,8130,9 /projects/new,200,OK,Thread Group 1-2,text,true,,14133,429,100,100,http://35.237.17.93/projects/new,8002,0,131
+1545957115596,8130,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-2,,true,,14133,429,100,100,null,8002,2,131
+1545957111983,11793,1 /,200,OK,Thread Group 1-72,text,true,,5346,669,100,100,http://35.237.17.93/users/sign_in,3536,0,136
+1545957111983,3536,1 /-0,302,Found,Thread Group 1-72,text,true,,511,328,100,100,http://35.237.17.93/,3536,0,136
+1545957115519,8257,1 /-1,200,OK,Thread Group 1-72,text,true,,4835,341,100,100,http://35.237.17.93/users/sign_in,8255,0,135
+1545957111981,11793,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-72,,true,,5346,669,100,100,null,3536,4,136
+1545957112238,11682,1 /,200,OK,Thread Group 1-77,text,true,,5334,669,100,100,http://35.237.17.93/users/sign_in,3296,0,132
+1545957112238,3296,1 /-0,302,Found,Thread Group 1-77,text,true,,511,328,100,100,http://35.237.17.93/,3296,0,132
+1545957115534,8386,1 /-1,200,OK,Thread Group 1-77,text,true,,4823,341,100,100,http://35.237.17.93/users/sign_in,8386,0,136
+1545957112237,11682,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-77,,true,,5334,669,100,100,null,3296,3,132
+1545957112347,11693,1 /,200,OK,Thread Group 1-79,text,true,,5339,669,100,100,http://35.237.17.93/users/sign_in,3196,0,132
+1545957112347,3196,1 /-0,302,Found,Thread Group 1-79,text,true,,511,328,100,100,http://35.237.17.93/,3196,0,132
+1545957115543,8497,1 /-1,200,OK,Thread Group 1-79,text,true,,4828,341,100,100,http://35.237.17.93/users/sign_in,8496,0,134
+1545957112347,11693,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-79,,true,,5339,669,100,100,null,3196,2,132
+1545957112616,11647,1 /,200,OK,Thread Group 1-84,text,true,,5342,669,100,100,http://35.237.17.93/users/sign_in,2968,0,134
+1545957112616,2968,1 /-0,302,Found,Thread Group 1-84,text,true,,511,328,100,100,http://35.237.17.93/,2968,0,134
+1545957115585,8678,1 /-1,200,OK,Thread Group 1-84,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,8677,0,131
+1545957112614,11647,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-84,,true,,5342,669,100,100,null,2968,3,134
+1545957112822,11566,1 /,200,OK,Thread Group 1-88,text,true,,5337,669,100,100,http://35.237.17.93/users/sign_in,2783,0,138
+1545957112822,2783,1 /-0,302,Found,Thread Group 1-88,text,true,,511,328,100,100,http://35.237.17.93/,2783,0,138
+1545957115605,8783,1 /-1,200,OK,Thread Group 1-88,text,true,,4826,341,100,100,http://35.237.17.93/users/sign_in,8782,0,130
+1545957112820,11566,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-88,,true,,5337,669,100,100,null,2783,4,138
+1545957110726,13809,5 /users/sign_in,200,OK,Thread Group 1-16,text,true,,8007,1203,100,100,http://35.237.17.93/,5401,0,0
+1545957110726,5401,5 /users/sign_in-0,302,Found,Thread Group 1-16,text,true,,620,724,100,100,http://35.237.17.93/users/sign_in,5401,0,0
+1545957116128,8407,5 /users/sign_in-1,200,OK,Thread Group 1-16,text,true,,7387,479,100,100,http://35.237.17.93/,8403,0,135
+1545957110725,13809,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-16,,true,,8007,1203,100,100,null,5401,1,0
+1545957111511,13377,1 /,200,OK,Thread Group 1-63,text,true,,5345,669,100,100,http://35.237.17.93/users/sign_in,4623,0,130
+1545957111511,4623,1 /-0,302,Found,Thread Group 1-63,text,true,,511,328,100,100,http://35.237.17.93/,4623,0,130
+1545957116134,8754,1 /-1,200,OK,Thread Group 1-63,text,true,,4834,341,100,100,http://35.237.17.93/users/sign_in,8749,0,131
+1545957111509,13377,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-63,,true,,5345,669,100,100,null,4623,3,130
+1545957111612,13382,1 /,200,OK,Thread Group 1-65,text,true,,5344,669,100,100,http://35.237.17.93/users/sign_in,4538,0,138
+1545957111612,4538,1 /-0,302,Found,Thread Group 1-65,text,true,,511,328,100,100,http://35.237.17.93/,4538,0,138
+1545957116150,8844,1 /-1,200,OK,Thread Group 1-65,text,true,,4833,341,100,100,http://35.237.17.93/users/sign_in,8843,0,134
+1545957111611,13382,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-65,,true,,5344,669,100,100,null,4538,3,138
+1545957111727,13527,1 /,200,OK,Thread Group 1-67,text,true,,5340,669,100,100,http://35.237.17.93/users/sign_in,4439,0,133
+1545957111727,4439,1 /-0,302,Found,Thread Group 1-67,text,true,,511,328,100,100,http://35.237.17.93/,4439,0,133
+1545957116166,9088,1 /-1,200,OK,Thread Group 1-67,text,true,,4829,341,100,100,http://35.237.17.93/users/sign_in,9085,0,133
+1545957111725,13527,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-67,,true,,5340,669,100,100,null,4439,3,133
+1545957111883,13442,1 /,200,OK,Thread Group 1-70,text,true,,5342,669,100,100,http://35.237.17.93/users/sign_in,4378,0,130
+1545957111883,4378,1 /-0,302,Found,Thread Group 1-70,text,true,,511,328,100,100,http://35.237.17.93/,4378,0,130
+1545957116261,9064,1 /-1,200,OK,Thread Group 1-70,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,9062,0,135
+1545957111881,13442,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-70,,true,,5342,669,100,100,null,4378,3,130
+1545957111562,13797,1 /,200,OK,Thread Group 1-64,text,true,,5345,669,100,100,http://35.237.17.93/users/sign_in,4580,0,132
+1545957111562,4580,1 /-0,302,Found,Thread Group 1-64,text,true,,511,328,100,100,http://35.237.17.93/,4580,0,132
+1545957116142,9217,1 /-1,200,OK,Thread Group 1-64,text,true,,4834,341,100,100,http://35.237.17.93/users/sign_in,9215,0,134
+1545957111561,13797,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-64,,true,,5345,669,100,100,null,4580,2,132
+1545957112972,12487,1 /,200,OK,Thread Group 1-91,text,true,,5333,669,100,100,http://35.237.17.93/users/sign_in,3517,0,140
+1545957112972,3517,1 /-0,302,Found,Thread Group 1-91,text,true,,511,328,100,100,http://35.237.17.93/,3517,0,140
+1545957116490,8969,1 /-1,200,OK,Thread Group 1-91,text,true,,4822,341,100,100,http://35.237.17.93/users/sign_in,8968,0,131
+1545957112971,12487,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-91,,true,,5333,669,100,100,null,3517,2,140
+1545957113022,12686,1 /,200,OK,Thread Group 1-92,text,true,,5344,669,100,100,http://35.237.17.93/users/sign_in,3501,0,135
+1545957113022,3501,1 /-0,302,Found,Thread Group 1-92,text,true,,510,328,100,100,http://35.237.17.93/,3501,0,135
+1545957116524,9184,1 /-1,200,OK,Thread Group 1-92,text,true,,4834,341,100,100,http://35.237.17.93/users/sign_in,9184,0,134
+1545957113020,12686,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-92,,true,,5344,669,100,100,null,3501,3,135
+1545957111663,14191,1 /,200,OK,Thread Group 1-66,text,true,,5346,669,100,100,http://35.237.17.93/users/sign_in,4494,0,132
+1545957111663,4495,1 /-0,302,Found,Thread Group 1-66,text,true,,511,328,100,100,http://35.237.17.93/,4494,0,132
+1545957116158,9696,1 /-1,200,OK,Thread Group 1-66,text,true,,4835,341,100,100,http://35.237.17.93/users/sign_in,9693,0,136
+1545957111661,14191,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-66,,true,,5346,669,100,100,null,4494,3,132
+1545957117298,9331,9 /projects/new,200,OK,Thread Group 1-5,text,true,,14137,429,100,100,http://35.237.17.93/projects/new,9197,0,134
+1545957117298,9331,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-5,,true,,14137,429,100,100,null,9197,0,134
+1545957116480,10229,9 /projects/new,200,OK,Thread Group 1-6,text,true,,14139,429,100,100,http://35.237.17.93/projects/new,10091,0,134
+1545957116479,10229,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-6,,true,,14139,429,100,100,null,10091,2,134
+1545957112187,14786,1 /,200,OK,Thread Group 1-76,text,true,,5340,669,100,100,http://35.237.17.93/users/sign_in,5158,0,133
+1545957112187,5158,1 /-0,302,Found,Thread Group 1-76,text,true,,511,328,100,100,http://35.237.17.93/,5158,0,133
+1545957117345,9628,1 /-1,200,OK,Thread Group 1-76,text,true,,4829,341,100,100,http://35.237.17.93/users/sign_in,9627,0,132
+1545957112186,14786,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-76,,true,,5340,669,100,100,null,5158,2,133
+1545957112397,14780,1 /,200,OK,Thread Group 1-80,text,true,,5341,669,100,100,http://35.237.17.93/users/sign_in,4969,0,133
+1545957112397,4969,1 /-0,302,Found,Thread Group 1-80,text,true,,511,328,100,100,http://35.237.17.93/,4969,0,133
+1545957117366,9811,1 /-1,200,OK,Thread Group 1-80,text,true,,4830,341,100,100,http://35.237.17.93/users/sign_in,9810,0,131
+1545957112397,14780,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-80,,true,,5341,669,100,100,null,4969,1,133
+1545957112555,14856,1 /,200,OK,Thread Group 1-83,text,true,,5343,669,100,100,http://35.237.17.93/users/sign_in,4827,0,133
+1545957112555,4827,1 /-0,302,Found,Thread Group 1-83,text,true,,510,328,100,100,http://35.237.17.93/,4827,0,133
+1545957117382,10029,1 /-1,200,OK,Thread Group 1-83,text,true,,4833,341,100,100,http://35.237.17.93/users/sign_in,10028,0,135
+1545957112553,14856,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-83,,true,,5343,669,100,100,null,4827,4,133
+1545957116601,10950,9 /projects/new,200,OK,Thread Group 1-8,text,true,,14138,429,100,100,http://35.237.17.93/projects/new,10817,0,134
+1545957116600,10950,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-8,,true,,14138,429,100,100,null,10817,1,134
+1545957112872,14772,1 /,200,OK,Thread Group 1-89,text,true,,5342,669,100,100,http://35.237.17.93/users/sign_in,4533,0,132
+1545957112872,4533,1 /-0,302,Found,Thread Group 1-89,text,true,,511,328,100,100,http://35.237.17.93/,4533,0,132
+1545957117405,10239,1 /-1,200,OK,Thread Group 1-89,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,10237,0,136
+1545957112870,14772,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-89,,true,,5342,669,100,100,null,4533,3,132
+1545957112087,15822,1 /,200,OK,Thread Group 1-74,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,5245,0,138
+1545957112087,5245,1 /-0,302,Found,Thread Group 1-74,text,true,,511,328,100,100,http://35.237.17.93/,5245,0,138
+1545957117332,10577,1 /-1,200,OK,Thread Group 1-74,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,10575,0,135
+1545957112085,15822,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-74,,true,,5338,669,100,100,null,5245,4,138
+1545957117067,10940,9 /projects/new,200,OK,Thread Group 1-3,text,true,,14139,429,100,100,http://35.237.17.93/projects/new,10802,0,131
+1545957117066,10940,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-3,,true,,14139,429,100,100,null,10802,2,131
+1545957112922,15183,1 /,200,OK,Thread Group 1-90,text,true,,5343,669,100,100,http://35.237.17.93/users/sign_in,4604,0,135
+1545957112922,4604,1 /-0,302,Found,Thread Group 1-90,text,true,,511,328,100,100,http://35.237.17.93/,4604,0,135
+1545957117527,10578,1 /-1,200,OK,Thread Group 1-90,text,true,,4832,341,100,100,http://35.237.17.93/users/sign_in,10577,0,130
+1545957112921,15183,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-90,,true,,5343,669,100,100,null,4604,3,135
+1545957112288,16052,1 /,200,OK,Thread Group 1-78,text,true,,5340,669,100,100,http://35.237.17.93/users/sign_in,5069,0,133
+1545957112288,5069,1 /-0,302,Found,Thread Group 1-78,text,true,,511,328,100,100,http://35.237.17.93/,5069,0,133
+1545957117358,10982,1 /-1,200,OK,Thread Group 1-78,text,true,,4829,341,100,100,http://35.237.17.93/users/sign_in,10980,0,134
+1545957112287,16052,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-78,,true,,5340,669,100,100,null,5069,2,133
+1545957112502,15890,1 /,200,OK,Thread Group 1-82,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,4872,0,130
+1545957112502,4872,1 /-0,302,Found,Thread Group 1-82,text,true,,511,328,100,100,http://35.237.17.93/,4872,0,130
+1545957117374,11018,1 /-1,200,OK,Thread Group 1-82,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,11018,0,132
+1545957112500,15890,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-82,,true,,5338,669,100,100,null,4872,3,130
+1545957112668,15992,1 /,200,OK,Thread Group 1-85,text,true,,5337,669,100,100,http://35.237.17.93/users/sign_in,4724,0,138
+1545957112668,4724,1 /-0,302,Found,Thread Group 1-85,text,true,,511,328,100,100,http://35.237.17.93/,4724,0,138
+1545957117392,11268,1 /-1,200,OK,Thread Group 1-85,text,true,,4826,341,100,100,http://35.237.17.93/users/sign_in,11268,0,134
+1545957112666,15992,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-85,,true,,5337,669,100,100,null,4724,3,138
+1545957112772,16039,1 /,200,OK,Thread Group 1-87,text,true,,5348,669,100,100,http://35.237.17.93/users/sign_in,4626,0,136
+1545957112772,4627,1 /-0,302,Found,Thread Group 1-87,text,true,,511,328,100,100,http://35.237.17.93/,4626,0,136
+1545957117399,11412,1 /-1,200,OK,Thread Group 1-87,text,true,,4837,341,100,100,http://35.237.17.93/users/sign_in,11411,0,137
+1545957112770,16039,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-87,,true,,5348,669,100,100,null,4626,3,136
+1545957113272,15673,1 /,200,OK,Thread Group 1-97,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,4629,0,137
+1545957113272,4629,1 /-0,302,Found,Thread Group 1-97,text,true,,511,328,100,100,http://35.237.17.93/,4629,0,137
+1545957117901,11044,1 /-1,200,OK,Thread Group 1-97,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,11044,0,133
+1545957113271,15673,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-97,,true,,5338,669,100,100,null,4629,3,137
+1545957111973,17785,5 /users/sign_in,200,OK,Thread Group 1-18,text,true,,8005,1201,100,100,http://35.237.17.93/,5663,0,137
+1545957111973,5664,5 /users/sign_in-0,302,Found,Thread Group 1-18,text,true,,620,722,100,100,http://35.237.17.93/users/sign_in,5663,0,137
+1545957117639,12119,5 /users/sign_in-1,200,OK,Thread Group 1-18,text,true,,7385,479,100,100,http://35.237.17.93/,12116,0,133
+1545957111972,17785,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-18,,true,,8005,1201,100,100,null,5663,2,137
+1545957118325,11609,9 /projects/new,200,OK,Thread Group 1-10,text,true,,14139,429,100,100,http://35.237.17.93/projects/new,11470,0,141
+1545957118325,11609,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-10,,true,,14139,429,100,100,null,11470,1,141
+1545957113072,17216,1 /,200,OK,Thread Group 1-93,text,true,,5346,669,100,100,http://35.237.17.93/users/sign_in,5308,0,133
+1545957113072,5308,1 /-0,302,Found,Thread Group 1-93,text,true,,510,328,100,100,http://35.237.17.93/,5308,0,133
+1545957118381,11907,1 /-1,200,OK,Thread Group 1-93,text,true,,4836,341,100,100,http://35.237.17.93/users/sign_in,11906,0,131
+1545957113070,17216,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-93,,true,,5346,669,100,100,null,5308,4,133
+1545957113374,16959,1 /,200,OK,Thread Group 1-99,text,true,,5342,669,100,100,http://35.237.17.93/users/sign_in,4537,0,135
+1545957113374,4537,1 /-0,302,Found,Thread Group 1-99,text,true,,511,328,100,100,http://35.237.17.93/,4537,0,135
+1545957117911,12422,1 /-1,200,OK,Thread Group 1-99,text,true,,4831,341,100,100,http://35.237.17.93/users/sign_in,12421,0,132
+1545957113373,16959,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-99,,true,,5342,669,100,100,null,4537,2,135
+1545957113121,17655,1 /,200,OK,Thread Group 1-94,text,true,,5340,669,100,100,http://35.237.17.93/users/sign_in,5435,0,133
+1545957113121,5435,1 /-0,302,Found,Thread Group 1-94,text,true,,511,328,100,100,http://35.237.17.93/,5435,0,133
+1545957118557,12219,1 /-1,200,OK,Thread Group 1-94,text,true,,4829,341,100,100,http://35.237.17.93/users/sign_in,12216,0,133
+1545957113120,17655,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-94,,true,,5340,669,100,100,null,5435,3,133
+1545957113424,17392,1 /,200,OK,Thread Group 1-100,text,true,,5346,669,100,100,http://35.237.17.93/users/sign_in,4909,0,133
+1545957113424,4909,1 /-0,302,Found,Thread Group 1-100,text,true,,511,328,100,100,http://35.237.17.93/,4909,0,133
+1545957118333,12483,1 /-1,200,OK,Thread Group 1-100,text,true,,4835,341,100,100,http://35.237.17.93/users/sign_in,12481,0,136
+1545957113422,17392,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-100,,true,,5346,669,100,100,null,4909,3,133
+1545957113223,18118,1 /,200,OK,Thread Group 1-96,text,true,,5340,669,100,100,http://35.237.17.93/users/sign_in,5708,0,136
+1545957113223,5708,1 /-0,302,Found,Thread Group 1-96,text,true,,510,328,100,100,http://35.237.17.93/,5708,0,136
+1545957118931,12410,1 /-1,200,OK,Thread Group 1-96,text,true,,4830,341,100,100,http://35.237.17.93/users/sign_in,12410,0,134
+1545957113222,18118,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-96,,true,,5340,669,100,100,null,5708,2,136
+1545957118438,13723,9 /projects/new,200,OK,Thread Group 1-13,text,true,,14136,429,100,100,http://35.237.17.93/projects/new,13586,0,134
+1545957118438,13723,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-13,,true,,14136,429,100,100,null,13586,1,134
+1545957113173,19634,1 /,200,OK,Thread Group 1-95,text,true,,5338,669,100,100,http://35.237.17.93/users/sign_in,5750,0,134
+1545957113173,5750,1 /-0,302,Found,Thread Group 1-95,text,true,,511,328,100,100,http://35.237.17.93/,5750,0,134
+1545957118923,13884,1 /-1,200,OK,Thread Group 1-95,text,true,,4827,341,100,100,http://35.237.17.93/users/sign_in,13883,0,133
+1545957113172,19634,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-95,,true,,5338,669,100,100,null,5750,3,134
+1545957113698,19571,5 /users/sign_in,200,OK,Thread Group 1-25,text,true,,8003,1205,100,100,http://35.237.17.93/,6072,0,132
+1545957113698,6072,5 /users/sign_in-0,302,Found,Thread Group 1-25,text,true,,620,726,100,100,http://35.237.17.93/users/sign_in,6072,0,132
+1545957119771,13498,5 /users/sign_in-1,200,OK,Thread Group 1-25,text,true,,7383,479,100,100,http://35.237.17.93/,13498,0,135
+1545957113698,19571,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-25,,true,,8003,1205,100,100,null,6072,1,132
+1545957113324,19968,1 /,200,OK,Thread Group 1-98,text,true,,5341,669,100,100,http://35.237.17.93/users/sign_in,5615,0,138
+1545957113324,5616,1 /-0,302,Found,Thread Group 1-98,text,true,,511,328,100,100,http://35.237.17.93/,5615,0,138
+1545957118940,14352,1 /-1,200,OK,Thread Group 1-98,text,true,,4830,341,100,100,http://35.237.17.93/users/sign_in,14347,0,134
+1545957113323,19968,1 /,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-98,,true,,5341,669,100,100,null,5615,2,138
+1545957119850,13927,9 /projects/new,200,OK,Thread Group 1-9,text,true,,14130,429,100,100,http://35.237.17.93/projects/new,13792,0,134
+1545957119849,13927,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-9,,true,,14130,429,100,100,null,13792,2,134
+1545957119353,14514,9 /projects/new,200,OK,Thread Group 1-7,text,true,,14141,429,100,100,http://35.237.17.93/projects/new,14374,0,134
+1545957119352,14514,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-7,,true,,14141,429,100,100,null,14374,1,134
+1545957113635,20450,5 /users/sign_in,200,OK,Thread Group 1-26,text,true,,8009,1199,100,100,http://35.237.17.93/,6064,0,135
+1545957113635,6064,5 /users/sign_in-0,302,Found,Thread Group 1-26,text,true,,620,720,100,100,http://35.237.17.93/users/sign_in,6064,0,135
+1545957119700,14385,5 /users/sign_in-1,200,OK,Thread Group 1-26,text,true,,7389,479,100,100,http://35.237.17.93/,14382,0,134
+1545957113634,20450,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-26,,true,,8009,1199,100,100,null,6064,2,135
+1545957120728,13528,9 /projects/new,200,OK,Thread Group 1-12,text,true,,14132,429,100,100,http://35.237.17.93/projects/new,13393,0,131
+1545957120727,13528,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-12,,true,,14132,429,100,100,null,13393,1,131
+1545957119805,14472,9 /projects/new,200,OK,Thread Group 1-17,text,true,,14140,429,100,100,http://35.237.17.93/projects/new,14340,0,130
+1545957119804,14472,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-17,,true,,14140,429,100,100,null,14340,1,130
+1545957113584,20995,5 /users/sign_in,200,OK,Thread Group 1-19,text,true,,8007,1207,100,100,http://35.237.17.93/,7207,0,135
+1545957113584,7207,5 /users/sign_in-0,302,Found,Thread Group 1-19,text,true,,620,728,100,100,http://35.237.17.93/users/sign_in,7207,0,135
+1545957120792,13787,5 /users/sign_in-1,200,OK,Thread Group 1-19,text,true,,7387,479,100,100,http://35.237.17.93/,13784,0,135
+1545957113583,20995,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-19,,true,,8007,1207,100,100,null,7207,2,135
+1545957120763,14398,9 /projects/new,200,OK,Thread Group 1-15,text,true,,14138,429,100,100,http://35.237.17.93/projects/new,14263,0,136
+1545957120763,14398,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-15,,true,,14138,429,100,100,null,14263,0,136
+1545957114160,21230,5 /users/sign_in,200,OK,Thread Group 1-22,text,true,,8007,1209,100,100,http://35.237.17.93/,7104,0,134
+1545957114160,7104,5 /users/sign_in-0,302,Found,Thread Group 1-22,text,true,,620,730,100,100,http://35.237.17.93/users/sign_in,7104,0,134
+1545957121265,14125,5 /users/sign_in-1,200,OK,Thread Group 1-22,text,true,,7387,479,100,100,http://35.237.17.93/,14122,0,133
+1545957114159,21230,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-22,,true,,8007,1209,100,100,null,7104,2,134
+1545957121771,14190,9 /projects/new,200,OK,Thread Group 1-11,text,true,,14135,429,100,100,http://35.237.17.93/projects/new,14060,0,132
+1545957121771,14190,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-11,,true,,14135,429,100,100,null,14060,0,132
+1545957114616,21394,5 /users/sign_in,200,OK,Thread Group 1-28,text,true,,8003,1205,100,100,http://35.237.17.93/,6448,0,133
+1545957114616,6448,5 /users/sign_in-0,302,Found,Thread Group 1-28,text,true,,620,726,100,100,http://35.237.17.93/users/sign_in,6448,0,133
+1545957121065,14945,5 /users/sign_in-1,200,OK,Thread Group 1-28,text,true,,7383,479,100,100,http://35.237.17.93/,14940,0,135
+1545957114615,21394,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-28,,true,,8003,1205,100,100,null,6448,2,133
+1545957122113,14178,9 /projects/new,200,OK,Thread Group 1-14,text,true,,14133,429,100,100,http://35.237.17.93/projects/new,14042,0,133
+1545957122112,14178,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-14,,true,,14133,429,100,100,null,14042,1,133
+1545957115050,24975,5 /users/sign_in,200,OK,Thread Group 1-23,text,true,,8002,1199,100,100,http://35.237.17.93/,8050,0,138
+1545957115050,8051,5 /users/sign_in-0,302,Found,Thread Group 1-23,text,true,,620,720,100,100,http://35.237.17.93/users/sign_in,8050,0,138
+1545957123101,16924,5 /users/sign_in-1,200,OK,Thread Group 1-23,text,true,,7382,479,100,100,http://35.237.17.93/,16923,0,137
+1545957115050,24975,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-23,,true,,8002,1199,100,100,null,8050,1,138
+1545957115514,24779,5 /users/sign_in,200,OK,Thread Group 1-30,text,true,,8007,1199,100,100,http://35.237.17.93/,7910,0,131
+1545957115514,7910,5 /users/sign_in-0,302,Found,Thread Group 1-30,text,true,,620,720,100,100,http://35.237.17.93/users/sign_in,7910,0,131
+1545957123424,16869,5 /users/sign_in-1,200,OK,Thread Group 1-30,text,true,,7387,479,100,100,http://35.237.17.93/,16869,0,133
+1545957115514,24779,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-30,,true,,8007,1199,100,100,null,7910,2,131
+1545957115741,25258,5 /users/sign_in,200,OK,Thread Group 1-27,text,true,,8004,1201,100,100,http://35.237.17.93/,9049,0,136
+1545957115741,9049,5 /users/sign_in-0,302,Found,Thread Group 1-27,text,true,,620,722,100,100,http://35.237.17.93/users/sign_in,9049,0,136
+1545957124789,16210,5 /users/sign_in-1,200,OK,Thread Group 1-27,text,true,,7384,479,100,100,http://35.237.17.93/,16206,0,131
+1545957115741,25258,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-27,,true,,8004,1201,100,100,null,9049,2,136
+1545957124535,17790,9 /projects/new,200,OK,Thread Group 1-16,text,true,,14137,429,100,100,http://35.237.17.93/projects/new,17606,0,135
+1545957124534,17790,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-16,,true,,14137,429,100,100,null,17606,1,135
+1545957116063,26467,5 /users/sign_in,200,OK,Thread Group 1-33,text,true,,8007,1207,100,100,http://35.237.17.93/,9656,0,134
+1545957116063,9656,5 /users/sign_in-0,302,Found,Thread Group 1-33,text,true,,620,728,100,100,http://35.237.17.93/users/sign_in,9656,0,134
+1545957125718,16812,5 /users/sign_in-1,200,OK,Thread Group 1-33,text,true,,7387,479,100,100,http://35.237.17.93/,16811,0,136
+1545957116063,26467,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-33,,true,,8007,1207,100,100,null,9656,1,134
+1545957116123,26499,5 /users/sign_in,200,OK,Thread Group 1-20,text,true,,8004,1201,100,100,http://35.237.17.93/,8738,0,132
+1545957116123,8738,5 /users/sign_in-0,302,Found,Thread Group 1-20,text,true,,620,722,100,100,http://35.237.17.93/users/sign_in,8738,0,132
+1545957124861,17761,5 /users/sign_in-1,200,OK,Thread Group 1-20,text,true,,7384,479,100,100,http://35.237.17.93/,17753,0,134
+1545957116122,26499,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-20,,true,,8004,1201,100,100,null,8738,2,132
+1545957115644,27905,5 /users/sign_in,200,OK,Thread Group 1-24,text,true,,8002,1205,100,100,http://35.237.17.93/,9777,0,137
+1545957115644,9777,5 /users/sign_in-0,302,Found,Thread Group 1-24,text,true,,620,726,100,100,http://35.237.17.93/users/sign_in,9777,0,137
+1545957125420,18129,5 /users/sign_in-1,200,OK,Thread Group 1-24,text,true,,7382,479,100,100,http://35.237.17.93/,18122,0,133
+1545957115643,27905,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-24,,true,,8002,1205,100,100,null,9777,2,137
+1545957116946,26605,5 /users/sign_in,200,OK,Thread Group 1-39,text,true,,8009,1207,100,100,http://35.237.17.93/,9767,0,137
+1545957116946,9767,5 /users/sign_in-0,302,Found,Thread Group 1-39,text,true,,620,728,100,100,http://35.237.17.93/users/sign_in,9767,0,137
+1545957126712,16839,5 /users/sign_in-1,200,OK,Thread Group 1-39,text,true,,7389,479,100,100,http://35.237.17.93/,16839,0,134
+1545957116946,26605,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-39,,true,,8009,1207,100,100,null,9767,1,137
+1545957117054,26725,5 /users/sign_in,200,OK,Thread Group 1-44,text,true,,8005,1205,100,100,http://35.237.17.93/,9894,0,132
+1545957117054,9894,5 /users/sign_in-0,302,Found,Thread Group 1-44,text,true,,620,726,100,100,http://35.237.17.93/users/sign_in,9894,0,132
+1545957126948,16831,5 /users/sign_in-1,200,OK,Thread Group 1-44,text,true,,7385,479,100,100,http://35.237.17.93/,16829,0,134
+1545957117054,26725,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-44,,true,,8005,1205,100,100,null,9894,1,132
+1545957116517,27385,5 /users/sign_in,200,OK,Thread Group 1-35,text,true,,8006,1207,100,100,http://35.237.17.93/,10515,0,133
+1545957116517,10515,5 /users/sign_in-0,302,Found,Thread Group 1-35,text,true,,620,728,100,100,http://35.237.17.93/users/sign_in,10515,0,133
+1545957127032,16870,5 /users/sign_in-1,200,OK,Thread Group 1-35,text,true,,7386,479,100,100,http://35.237.17.93/,16867,0,139
+1545957116517,27385,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-35,,true,,8006,1207,100,100,null,10515,1,133
+1545957116195,28860,5 /users/sign_in,200,OK,Thread Group 1-21,text,true,,8009,1209,100,100,http://35.237.17.93/,10604,0,134
+1545957116195,10605,5 /users/sign_in-0,302,Found,Thread Group 1-21,text,true,,620,730,100,100,http://35.237.17.93/users/sign_in,10604,0,134
+1545957126799,18256,5 /users/sign_in-1,200,OK,Thread Group 1-21,text,true,,7389,479,100,100,http://35.237.17.93/,18252,0,136
+1545957116195,28860,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-21,,true,,8009,1209,100,100,null,10604,1,134
+1545957116981,28315,5 /users/sign_in,200,OK,Thread Group 1-42,text,true,,8010,1205,100,100,http://35.237.17.93/,11193,0,134
+1545957116981,11193,5 /users/sign_in-0,302,Found,Thread Group 1-42,text,true,,620,726,100,100,http://35.237.17.93/users/sign_in,11193,0,134
+1545957128174,17122,5 /users/sign_in-1,200,OK,Thread Group 1-42,text,true,,7390,479,100,100,http://35.237.17.93/,17122,0,133
+1545957116981,28315,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-42,,true,,8010,1205,100,100,null,11193,2,134
+1545957117891,29565,5 /users/sign_in,200,OK,Thread Group 1-55,text,true,,8007,1209,100,100,http://35.237.17.93/,11594,0,135
+1545957117891,11594,5 /users/sign_in-0,302,Found,Thread Group 1-55,text,true,,620,730,100,100,http://35.237.17.93/users/sign_in,11594,0,135
+1545957129485,17971,5 /users/sign_in-1,200,OK,Thread Group 1-55,text,true,,7387,479,100,100,http://35.237.17.93/,17967,0,131
+1545957117890,29565,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-55,,true,,8007,1209,100,100,null,11594,3,135
+1545957117519,30064,5 /users/sign_in,200,OK,Thread Group 1-29,text,true,,8007,1205,100,100,http://35.237.17.93/,12515,0,132
+1545957117519,12515,5 /users/sign_in-0,302,Found,Thread Group 1-29,text,true,,619,726,100,100,http://35.237.17.93/users/sign_in,12515,0,132
+1545957130034,17549,5 /users/sign_in-1,200,OK,Thread Group 1-29,text,true,,7388,479,100,100,http://35.237.17.93/,17543,0,133
+1545957117519,30064,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-29,,true,,8007,1205,100,100,null,12515,1,132
+1545957117434,30163,5 /users/sign_in,200,OK,Thread Group 1-47,text,true,,8007,1201,100,100,http://35.237.17.93/,12410,0,133
+1545957117434,12410,5 /users/sign_in-0,302,Found,Thread Group 1-47,text,true,,620,722,100,100,http://35.237.17.93/users/sign_in,12410,0,133
+1545957129844,17753,5 /users/sign_in-1,200,OK,Thread Group 1-47,text,true,,7387,479,100,100,http://35.237.17.93/,17748,0,136
+1545957117434,30163,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-47,,true,,8007,1201,100,100,null,12410,2,133
+1545957117398,30475,5 /users/sign_in,200,OK,Thread Group 1-45,text,true,,7999,1209,100,100,http://35.237.17.93/,11057,0,135
+1545957117398,11057,5 /users/sign_in-0,302,Found,Thread Group 1-45,text,true,,620,730,100,100,http://35.237.17.93/users/sign_in,11057,0,135
+1545957128455,19418,5 /users/sign_in-1,200,OK,Thread Group 1-45,text,true,,7379,479,100,100,http://35.237.17.93/,19415,0,133
+1545957117397,30475,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-45,,true,,7999,1209,100,100,null,11057,2,135
+1545957118369,30213,5 /users/sign_in,200,OK,Thread Group 1-32,text,true,,8007,1203,100,100,http://35.237.17.93/,12501,0,132
+1545957118369,12501,5 /users/sign_in-0,302,Found,Thread Group 1-32,text,true,,620,724,100,100,http://35.237.17.93/users/sign_in,12501,0,132
+1545957130869,17713,5 /users/sign_in-1,200,OK,Thread Group 1-32,text,true,,7387,479,100,100,http://35.237.17.93/,17709,0,137
+1545957118369,30213,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-32,,true,,8007,1203,100,100,null,12501,1,132
+1545957117511,31086,5 /users/sign_in,200,OK,Thread Group 1-51,text,true,,8006,1205,100,100,http://35.237.17.93/,11279,0,134
+1545957117511,11279,5 /users/sign_in-0,302,Found,Thread Group 1-51,text,true,,620,726,100,100,http://35.237.17.93/users/sign_in,11279,0,134
+1545957128790,19807,5 /users/sign_in-1,200,OK,Thread Group 1-51,text,true,,7386,479,100,100,http://35.237.17.93/,19804,0,142
+1545957117511,31086,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-51,,true,,8006,1205,100,100,null,11279,1,134
+1545957129758,19070,9 /projects/new,200,OK,Thread Group 1-18,text,true,,14138,429,100,100,http://35.237.17.93/projects/new,18938,0,131
+1545957129758,19070,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-18,,true,,14138,429,100,100,null,18938,1,131
+1545957117981,31665,5 /users/sign_in,200,OK,Thread Group 1-36,text,true,,8008,1199,100,100,http://35.237.17.93/,12190,0,133
+1545957117981,12190,5 /users/sign_in-0,302,Found,Thread Group 1-36,text,true,,620,720,100,100,http://35.237.17.93/users/sign_in,12190,0,133
+1545957130171,19475,5 /users/sign_in-1,200,OK,Thread Group 1-36,text,true,,7388,479,100,100,http://35.237.17.93/,19473,0,131
+1545957117980,31665,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-36,,true,,8008,1199,100,100,null,12190,3,133
+1545957118459,31300,5 /users/sign_in,200,OK,Thread Group 1-58,text,true,,8007,1205,100,100,http://35.237.17.93/,13103,0,137
+1545957118459,13103,5 /users/sign_in-0,302,Found,Thread Group 1-58,text,true,,620,726,100,100,http://35.237.17.93/users/sign_in,13103,0,137
+1545957131562,18197,5 /users/sign_in-1,200,OK,Thread Group 1-58,text,true,,7387,479,100,100,http://35.237.17.93/,18195,0,132
+1545957118458,31300,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-58,,true,,8007,1205,100,100,null,13103,3,137
+1545957118913,31004,5 /users/sign_in,200,OK,Thread Group 1-49,text,true,,8004,1203,100,100,http://35.237.17.93/,13326,0,136
+1545957118913,13327,5 /users/sign_in-0,302,Found,Thread Group 1-49,text,true,,620,724,100,100,http://35.237.17.93/users/sign_in,13326,0,136
+1545957132239,17678,5 /users/sign_in-1,200,OK,Thread Group 1-49,text,true,,7384,479,100,100,http://35.237.17.93/,17675,0,135
+1545957118913,31004,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-49,,true,,8004,1203,100,100,null,13326,1,136
+1545957117891,32726,5 /users/sign_in,200,OK,Thread Group 1-31,text,true,,8009,1207,100,100,http://35.237.17.93/,13309,0,135
+1545957117891,13309,5 /users/sign_in-0,302,Found,Thread Group 1-31,text,true,,620,728,100,100,http://35.237.17.93/users/sign_in,13309,0,135
+1545957131200,19417,5 /users/sign_in-1,200,OK,Thread Group 1-31,text,true,,7389,479,100,100,http://35.237.17.93/,19417,0,136
+1545957117890,32726,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-31,,true,,8009,1207,100,100,null,13309,5,135
+1545957119009,31695,5 /users/sign_in,200,OK,Thread Group 1-53,text,true,,8002,1207,100,100,http://35.237.17.93/,13789,0,132
+1545957119009,13789,5 /users/sign_in-0,302,Found,Thread Group 1-53,text,true,,619,728,100,100,http://35.237.17.93/users/sign_in,13789,0,132
+1545957132797,17907,5 /users/sign_in-1,200,OK,Thread Group 1-53,text,true,,7383,479,100,100,http://35.237.17.93/,17907,0,138
+1545957119009,31695,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-53,,true,,8002,1207,100,100,null,13789,2,132
+1545957118547,32314,5 /users/sign_in,200,OK,Thread Group 1-60,text,true,,8007,1209,100,100,http://35.237.17.93/,14321,0,133
+1545957118547,14321,5 /users/sign_in-0,302,Found,Thread Group 1-60,text,true,,620,730,100,100,http://35.237.17.93/users/sign_in,14321,0,133
+1545957132867,17994,5 /users/sign_in-1,200,OK,Thread Group 1-60,text,true,,7387,479,100,100,http://35.237.17.93/,17994,0,138
+1545957118546,32314,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-60,,true,,8007,1209,100,100,null,14321,2,133
+1545957118889,32168,5 /users/sign_in,200,OK,Thread Group 1-38,text,true,,8004,1201,100,100,http://35.237.17.93/,14254,0,133
+1545957118889,14254,5 /users/sign_in-0,302,Found,Thread Group 1-38,text,true,,620,722,100,100,http://35.237.17.93/users/sign_in,14254,0,133
+1545957133143,17914,5 /users/sign_in-1,200,OK,Thread Group 1-38,text,true,,7384,479,100,100,http://35.237.17.93/,17914,0,140
+1545957118889,32168,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-38,,true,,8004,1201,100,100,null,14254,2,133
+1545957118370,33203,5 /users/sign_in,200,OK,Thread Group 1-40,text,true,,8003,1203,100,100,http://35.237.17.93/,13947,0,134
+1545957118370,13947,5 /users/sign_in-0,302,Found,Thread Group 1-40,text,true,,620,724,100,100,http://35.237.17.93/users/sign_in,13947,0,134
+1545957132317,19256,5 /users/sign_in-1,200,OK,Thread Group 1-40,text,true,,7383,479,100,100,http://35.237.17.93/,19256,0,132
+1545957118370,33203,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-40,,true,,8003,1203,100,100,null,13947,1,134
+1545957118092,33489,5 /users/sign_in,200,OK,Thread Group 1-37,text,true,,8005,1203,100,100,http://35.237.17.93/,13319,0,133
+1545957118092,13319,5 /users/sign_in-0,302,Found,Thread Group 1-37,text,true,,620,724,100,100,http://35.237.17.93/users/sign_in,13319,0,133
+1545957131411,20170,5 /users/sign_in-1,200,OK,Thread Group 1-37,text,true,,7385,479,100,100,http://35.237.17.93/,20168,0,133
+1545957118092,33489,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-37,,true,,8005,1203,100,100,null,13319,1,133
+1545957121703,30362,30 /users/sign_out,200,OK,Thread Group 1-4,text,true,,5514,897,100,100,http://35.237.17.93/users/sign_in,13323,0,133
+1545957121703,13323,30 /users/sign_out-0,302,Found,Thread Group 1-4,text,true,,687,449,100,100,http://35.237.17.93/users/sign_out,13323,0,133
+1545957135026,17039,30 /users/sign_out-1,200,OK,Thread Group 1-4,text,true,,4827,448,100,100,http://35.237.17.93/users/sign_in,17037,0,137
+1545957121702,30362,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-4,,true,,5514,897,100,100,null,13323,2,133
+1545957120227,32021,5 /users/sign_in,200,OK,Thread Group 1-41,text,true,,8010,1207,99,99,http://35.237.17.93/,14215,0,134
+1545957120227,14215,5 /users/sign_in-0,302,Found,Thread Group 1-41,text,true,,620,728,99,99,http://35.237.17.93/users/sign_in,14215,0,134
+1545957134442,17806,5 /users/sign_in-1,200,OK,Thread Group 1-41,text,true,,7390,479,99,99,http://35.237.17.93/,17800,0,136
+1545957120227,32021,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-41,,true,,8010,1207,99,99,null,14215,1,134
+1545957119463,33039,5 /users/sign_in,200,OK,Thread Group 1-34,text,true,,8011,1201,99,99,http://35.237.17.93/,13595,0,133
+1545957119463,13595,5 /users/sign_in-0,302,Found,Thread Group 1-34,text,true,,620,722,99,99,http://35.237.17.93/users/sign_in,13595,0,133
+1545957133058,19444,5 /users/sign_in-1,200,OK,Thread Group 1-34,text,true,,7391,479,99,99,http://35.237.17.93/,19440,0,137
+1545957119463,33039,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-34,,true,,8011,1201,99,99,null,13595,2,133
+1545957133270,19326,9 /projects/new,200,OK,Thread Group 1-25,text,true,,14134,429,99,99,http://35.237.17.93/projects/new,19190,0,134
+1545957133269,19326,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-25,,true,,14134,429,99,99,null,19190,1,134
+1545957119908,33147,5 /users/sign_in,200,OK,Thread Group 1-62,text,true,,8007,1211,99,99,http://35.237.17.93/,15283,0,133
+1545957119908,15283,5 /users/sign_in-0,302,Found,Thread Group 1-62,text,true,,620,732,99,99,http://35.237.17.93/users/sign_in,15283,0,133
+1545957135191,17864,5 /users/sign_in-1,200,OK,Thread Group 1-62,text,true,,7387,479,99,99,http://35.237.17.93/,17864,0,142
+1545957119908,33147,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-62,,true,,8007,1211,99,99,null,15283,2,133
+1545957122456,30604,30 /users/sign_out,200,OK,Thread Group 1-1,text,true,,5521,897,99,99,http://35.237.17.93/users/sign_in,13411,0,134
+1545957122456,13411,30 /users/sign_out-0,302,Found,Thread Group 1-1,text,true,,687,449,99,99,http://35.237.17.93/users/sign_out,13411,0,134
+1545957135867,17193,30 /users/sign_out-1,200,OK,Thread Group 1-1,text,true,,4834,448,99,99,http://35.237.17.93/users/sign_in,17192,0,135
+1545957122455,30604,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-1,,true,,5521,897,99,99,null,13411,2,134
+1545957135390,17818,9 /projects/new,200,OK,Thread Group 1-22,text,true,,14138,429,98,98,http://35.237.17.93/projects/new,17684,0,133
+1545957135390,17818,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-22,,true,,14138,429,98,98,null,17684,1,133
+1545957134085,19371,9 /projects/new,200,OK,Thread Group 1-26,text,true,,14140,429,98,98,http://35.237.17.93/projects/new,19240,0,134
+1545957134085,19371,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-26,,true,,14140,429,98,98,null,19240,0,134
+1545957134579,19051,9 /projects/new,200,OK,Thread Group 1-19,text,true,,14137,429,98,98,http://35.237.17.93/projects/new,18909,0,137
+1545957134579,19051,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-19,,true,,14137,429,98,98,null,18909,0,137
+1545957136010,18021,9 /projects/new,200,OK,Thread Group 1-28,text,true,,14133,429,98,98,http://35.237.17.93/projects/new,17886,0,132
+1545957136010,18021,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-28,,true,,14133,429,98,98,null,17886,0,132
+1545957122563,31468,5 /users/sign_in,200,OK,Thread Group 1-73,text,true,,8008,1199,98,98,http://35.237.17.93/,14653,0,133
+1545957122563,14653,5 /users/sign_in-0,302,Found,Thread Group 1-73,text,true,,620,720,98,98,http://35.237.17.93/users/sign_in,14653,0,133
+1545957137216,16815,5 /users/sign_in-1,200,OK,Thread Group 1-73,text,true,,7388,479,98,98,http://35.237.17.93/,16811,0,131
+1545957122562,31468,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-73,,true,,8008,1199,98,98,null,14653,3,133
+1545957121188,32874,5 /users/sign_in,200,OK,Thread Group 1-54,text,true,,8006,1207,98,98,http://35.237.17.93/,15377,0,133
+1545957121188,15377,5 /users/sign_in-0,302,Found,Thread Group 1-54,text,true,,620,728,98,98,http://35.237.17.93/users/sign_in,15377,0,133
+1545957136564,17498,5 /users/sign_in-1,200,OK,Thread Group 1-54,text,true,,7386,479,98,98,http://35.237.17.93/,17498,0,132
+1545957121188,32874,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-54,,true,,8006,1207,98,98,null,15377,2,133
+1545957121164,33148,5 /users/sign_in,200,OK,Thread Group 1-50,text,true,,8006,1205,98,98,http://35.237.17.93/,14126,0,138
+1545957121164,14127,5 /users/sign_in-0,302,Found,Thread Group 1-50,text,true,,620,726,98,98,http://35.237.17.93/users/sign_in,14126,0,138
+1545957135290,19022,5 /users/sign_in-1,200,OK,Thread Group 1-50,text,true,,7386,479,98,98,http://35.237.17.93/,19019,0,134
+1545957121164,33148,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-50,,true,,8006,1205,98,98,null,14126,1,138
+1545957120704,33620,5 /users/sign_in,200,OK,Thread Group 1-46,text,true,,8004,1203,98,98,http://35.237.17.93/,14782,0,136
+1545957120704,14782,5 /users/sign_in-0,302,Found,Thread Group 1-46,text,true,,620,724,98,98,http://35.237.17.93/users/sign_in,14782,0,136
+1545957135486,18838,5 /users/sign_in-1,200,OK,Thread Group 1-46,text,true,,7384,479,98,98,http://35.237.17.93/,18835,0,138
+1545957120704,33620,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-46,,true,,8004,1203,98,98,null,14782,1,136
+1545957123031,31866,5 /users/sign_in,200,OK,Thread Group 1-81,text,true,,8004,1213,98,98,http://35.237.17.93/,14286,0,131
+1545957123031,14286,5 /users/sign_in-0,302,Found,Thread Group 1-81,text,true,,620,734,98,98,http://35.237.17.93/users/sign_in,14286,0,131
+1545957137317,17580,5 /users/sign_in-1,200,OK,Thread Group 1-81,text,true,,7384,479,98,98,http://35.237.17.93/,17579,0,135
+1545957123031,31866,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-81,,true,,8004,1213,98,98,null,14286,2,131
+1545957122073,32904,5 /users/sign_in,200,OK,Thread Group 1-69,text,true,,8006,1207,98,98,http://35.237.17.93/,15900,0,136
+1545957122073,15900,5 /users/sign_in-0,302,Found,Thread Group 1-69,text,true,,620,728,98,98,http://35.237.17.93/users/sign_in,15900,0,136
+1545957137972,17005,5 /users/sign_in-1,200,OK,Thread Group 1-69,text,true,,7386,479,98,98,http://35.237.17.93/,17004,0,134
+1545957122073,32904,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-69,,true,,8006,1207,98,98,null,15900,1,136
+1545957123580,31481,5 /users/sign_in,200,OK,Thread Group 1-71,text,true,,8007,1201,98,98,http://35.237.17.93/,14938,0,132
+1545957123580,14938,5 /users/sign_in-0,302,Found,Thread Group 1-71,text,true,,620,722,98,98,http://35.237.17.93/users/sign_in,14938,0,132
+1545957138518,16543,5 /users/sign_in-1,200,OK,Thread Group 1-71,text,true,,7387,479,98,98,http://35.237.17.93/,16541,0,139
+1545957123579,31481,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-71,,true,,8007,1201,98,98,null,14938,1,132
+1545957122806,32462,5 /users/sign_in,200,OK,Thread Group 1-75,text,true,,8007,1201,98,98,http://35.237.17.93/,14481,0,134
+1545957122806,14481,5 /users/sign_in-0,302,Found,Thread Group 1-75,text,true,,620,722,98,98,http://35.237.17.93/users/sign_in,14481,0,134
+1545957137286,17982,5 /users/sign_in-1,200,OK,Thread Group 1-75,text,true,,7387,479,98,98,http://35.237.17.93/,17979,0,135
+1545957122806,32462,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-75,,true,,8007,1201,98,98,null,14481,2,134
+1545957121523,33777,5 /users/sign_in,200,OK,Thread Group 1-57,text,true,,8009,1205,98,98,http://35.237.17.93/,15413,0,135
+1545957121523,15413,5 /users/sign_in-0,302,Found,Thread Group 1-57,text,true,,620,726,98,98,http://35.237.17.93/users/sign_in,15413,0,135
+1545957136936,18364,5 /users/sign_in-1,200,OK,Thread Group 1-57,text,true,,7389,479,98,98,http://35.237.17.93/,18358,0,137
+1545957121523,33777,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-57,,true,,8009,1205,98,98,null,15413,1,135
+1545957121731,33627,5 /users/sign_in,200,OK,Thread Group 1-43,text,true,,8004,1209,98,98,http://35.237.17.93/,15752,0,134
+1545957121731,15752,5 /users/sign_in-0,302,Found,Thread Group 1-43,text,true,,620,730,98,98,http://35.237.17.93/users/sign_in,15752,0,134
+1545957137482,17876,5 /users/sign_in-1,200,OK,Thread Group 1-43,text,true,,7384,479,98,98,http://35.237.17.93/,17873,0,135
+1545957121731,33627,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-43,,true,,8004,1209,98,98,null,15752,1,134
+1545957123449,32383,5 /users/sign_in,200,OK,Thread Group 1-68,text,true,,8008,1207,98,98,http://35.237.17.93/,15248,0,138
+1545957123449,15248,5 /users/sign_in-0,302,Found,Thread Group 1-68,text,true,,620,728,98,98,http://35.237.17.93/users/sign_in,15248,0,138
+1545957138698,17134,5 /users/sign_in-1,200,OK,Thread Group 1-68,text,true,,7388,479,98,98,http://35.237.17.93/,17132,0,139
+1545957123449,32383,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-68,,true,,8008,1207,98,98,null,15248,0,138
+1545957122795,33122,5 /users/sign_in,200,OK,Thread Group 1-56,text,true,,8005,1203,98,98,http://35.237.17.93/,16555,0,136
+1545957122795,16555,5 /users/sign_in-0,302,Found,Thread Group 1-56,text,true,,620,724,98,98,http://35.237.17.93/users/sign_in,16555,0,136
+1545957139349,16568,5 /users/sign_in-1,200,OK,Thread Group 1-56,text,true,,7385,479,98,98,http://35.237.17.93/,16566,0,135
+1545957122795,33122,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-56,,true,,8005,1203,98,98,null,16555,1,136
+1545957123777,32272,5 /users/sign_in,200,OK,Thread Group 1-72,text,true,,8010,1205,98,98,http://35.237.17.93/,16206,0,136
+1545957123777,16206,5 /users/sign_in-0,302,Found,Thread Group 1-72,text,true,,620,726,98,98,http://35.237.17.93/users/sign_in,16206,0,136
+1545957139984,16065,5 /users/sign_in-1,200,OK,Thread Group 1-72,text,true,,7390,479,98,98,http://35.237.17.93/,16063,0,133
+1545957123777,32272,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-72,,true,,8010,1205,98,98,null,16206,1,136
+1545957122286,33910,5 /users/sign_in,200,OK,Thread Group 1-48,text,true,,8004,1201,98,98,http://35.237.17.93/,16141,0,137
+1545957122286,16141,5 /users/sign_in-0,302,Found,Thread Group 1-48,text,true,,620,722,98,98,http://35.237.17.93/users/sign_in,16141,0,137
+1545957138426,17770,5 /users/sign_in-1,200,OK,Thread Group 1-48,text,true,,7384,479,98,98,http://35.237.17.93/,17768,0,135
+1545957122285,33910,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-48,,true,,8004,1201,98,98,null,16141,2,137
+1545957123280,32995,5 /users/sign_in,200,OK,Thread Group 1-61,text,true,,8004,1205,98,98,http://35.237.17.93/,15316,0,135
+1545957123280,15316,5 /users/sign_in-0,302,Found,Thread Group 1-61,text,true,,619,726,98,98,http://35.237.17.93/users/sign_in,15316,0,135
+1545957138595,17680,5 /users/sign_in-1,200,OK,Thread Group 1-61,text,true,,7385,479,98,98,http://35.237.17.93/,17678,0,135
+1545957123279,32995,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-61,,true,,8004,1205,98,98,null,15316,3,135
+1545957122508,33823,5 /users/sign_in,200,OK,Thread Group 1-52,text,true,,8005,1209,98,98,http://35.237.17.93/,16518,0,132
+1545957122508,16518,5 /users/sign_in-0,302,Found,Thread Group 1-52,text,true,,620,730,98,98,http://35.237.17.93/users/sign_in,16518,0,132
+1545957139026,17305,5 /users/sign_in-1,200,OK,Thread Group 1-52,text,true,,7385,479,98,98,http://35.237.17.93/,17304,0,139
+1545957122507,33823,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-52,,true,,8005,1209,98,98,null,16518,3,132
+1545957124041,32725,5 /users/sign_in,200,OK,Thread Group 1-79,text,true,,8004,1199,98,98,http://35.237.17.93/,15991,0,134
+1545957124041,15992,5 /users/sign_in-0,302,Found,Thread Group 1-79,text,true,,620,720,98,98,http://35.237.17.93/users/sign_in,15991,0,134
+1545957140033,16733,5 /users/sign_in-1,200,OK,Thread Group 1-79,text,true,,7384,479,98,98,http://35.237.17.93/,16731,0,133
+1545957124041,32725,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-79,,true,,8004,1199,98,98,null,15991,0,134
+1545957140294,16559,9 /projects/new,200,OK,Thread Group 1-30,text,true,,14145,429,98,98,http://35.237.17.93/projects/new,16429,0,141
+1545957140294,16559,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-30,,true,,14145,429,98,98,null,16429,0,141
+1545957141000,16039,9 /projects/new,200,OK,Thread Group 1-27,text,true,,14137,429,98,98,http://35.237.17.93/projects/new,15901,0,136
+1545957141000,16039,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-27,,true,,14137,429,98,98,null,15901,0,136
+1545957122981,34149,5 /users/sign_in,200,OK,Thread Group 1-59,text,true,,8006,1203,98,98,http://35.237.17.93/,16897,0,135
+1545957122981,16897,5 /users/sign_in-0,302,Found,Thread Group 1-59,text,true,,620,724,98,98,http://35.237.17.93/users/sign_in,16897,0,135
+1545957139878,17252,5 /users/sign_in-1,200,OK,Thread Group 1-59,text,true,,7386,479,98,98,http://35.237.17.93/,17250,0,134
+1545957122981,34149,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-59,,true,,8006,1203,98,98,null,16897,1,135
+1545957140025,17243,9 /projects/new,200,OK,Thread Group 1-23,text,true,,14127,429,98,98,http://35.237.17.93/projects/new,17111,0,131
+1545957140025,17243,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-23,,true,,14127,429,98,98,null,17111,0,131
+1545957124389,32889,5 /users/sign_in,200,OK,Thread Group 1-88,text,true,,8001,1205,98,98,http://35.237.17.93/,15714,0,132
+1545957124389,15714,5 /users/sign_in-0,302,Found,Thread Group 1-88,text,true,,620,726,98,98,http://35.237.17.93/users/sign_in,15714,0,132
+1545957140104,17174,5 /users/sign_in-1,200,OK,Thread Group 1-88,text,true,,7381,479,98,98,http://35.237.17.93/,17171,0,131
+1545957124389,32889,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-88,,true,,8001,1205,98,98,null,15714,1,132
+1545957123728,33866,30 /users/sign_out,200,OK,Thread Group 1-2,text,true,,5515,897,98,98,http://35.237.17.93/users/sign_in,16762,0,134
+1545957123728,16762,30 /users/sign_out-0,302,Found,Thread Group 1-2,text,true,,687,449,98,98,http://35.237.17.93/users/sign_out,16762,0,134
+1545957140490,17104,30 /users/sign_out-1,200,OK,Thread Group 1-2,text,true,,4828,448,98,98,http://35.237.17.93/users/sign_in,17103,0,134
+1545957123728,33866,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-2,,true,,5515,897,98,98,null,16762,1,134
+1545957124889,32782,5 /users/sign_in,200,OK,Thread Group 1-63,text,true,,8003,1201,97,97,http://35.237.17.93/,16536,0,132
+1545957124889,16536,5 /users/sign_in-0,302,Found,Thread Group 1-63,text,true,,620,722,97,97,http://35.237.17.93/users/sign_in,16536,0,132
+1545957141426,16245,5 /users/sign_in-1,200,OK,Thread Group 1-63,text,true,,7383,479,97,97,http://35.237.17.93/,16243,0,134
+1545957124888,32782,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-63,,true,,8003,1201,97,97,null,16536,2,132
+1545957123921,33780,5 /users/sign_in,200,OK,Thread Group 1-77,text,true,,8007,1207,97,97,http://35.237.17.93/,17741,0,133
+1545957123921,17741,5 /users/sign_in-0,302,Found,Thread Group 1-77,text,true,,620,728,97,97,http://35.237.17.93/users/sign_in,17741,0,133
+1545957141663,16038,5 /users/sign_in-1,200,OK,Thread Group 1-77,text,true,,7387,479,97,97,http://35.237.17.93/,16036,0,132
+1545957123921,33780,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-77,,true,,8007,1207,97,97,null,17741,0,133
+1545957123477,34637,5 /users/sign_in,200,OK,Thread Group 1-86,text,true,,8003,1201,97,97,http://35.237.17.93/,17839,0,139
+1545957123477,17839,5 /users/sign_in-0,302,Found,Thread Group 1-86,text,true,,620,722,97,97,http://35.237.17.93/users/sign_in,17839,0,139
+1545957141316,16798,5 /users/sign_in-1,200,OK,Thread Group 1-86,text,true,,7383,479,97,97,http://35.237.17.93/,16797,0,134
+1545957123476,34637,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-86,,true,,8003,1201,97,97,null,17839,2,139
+1545957125254,32965,5 /users/sign_in,200,OK,Thread Group 1-67,text,true,,8011,1203,97,97,http://35.237.17.93/,16323,0,134
+1545957125254,16323,5 /users/sign_in-0,302,Found,Thread Group 1-67,text,true,,620,724,97,97,http://35.237.17.93/users/sign_in,16323,0,134
+1545957141578,16641,5 /users/sign_in-1,200,OK,Thread Group 1-67,text,true,,7391,479,97,97,http://35.237.17.93/,16638,0,140
+1545957125254,32965,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-67,,true,,8011,1203,97,97,null,16323,0,134
+1545957142532,15867,9 /projects/new,200,OK,Thread Group 1-33,text,true,,14139,429,97,97,http://35.237.17.93/projects/new,15727,0,161
+1545957142531,15867,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-33,,true,,14139,429,97,97,null,15727,1,161
+1545957124264,34255,5 /users/sign_in,200,OK,Thread Group 1-84,text,true,,8006,1203,97,97,http://35.237.17.93/,17416,0,130
+1545957124264,17416,5 /users/sign_in-0,302,Found,Thread Group 1-84,text,true,,619,724,97,97,http://35.237.17.93/users/sign_in,17416,0,130
+1545957141681,16838,5 /users/sign_in-1,200,OK,Thread Group 1-84,text,true,,7387,479,97,97,http://35.237.17.93/,16836,0,134
+1545957124263,34255,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-84,,true,,8006,1203,97,97,null,17416,1,130
+1545957125459,33178,5 /users/sign_in,200,OK,Thread Group 1-91,text,true,,8006,1203,97,97,http://35.237.17.93/,17415,0,133
+1545957125459,17415,5 /users/sign_in-0,302,Found,Thread Group 1-91,text,true,,620,724,97,97,http://35.237.17.93/users/sign_in,17415,0,133
+1545957142874,15763,5 /users/sign_in-1,200,OK,Thread Group 1-91,text,true,,7386,479,97,97,http://35.237.17.93/,15761,0,152
+1545957125459,33178,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-91,,true,,8006,1203,97,97,null,17415,0,133
+1545957124995,33649,5 /users/sign_in,200,OK,Thread Group 1-65,text,true,,8006,1203,97,97,http://35.237.17.93/,18146,0,135
+1545957124995,18146,5 /users/sign_in-0,302,Found,Thread Group 1-65,text,true,,620,724,97,97,http://35.237.17.93/users/sign_in,18146,0,135
+1545957143141,15503,5 /users/sign_in-1,200,OK,Thread Group 1-65,text,true,,7386,479,97,97,http://35.237.17.93/,15501,0,134
+1545957124995,33649,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-65,,true,,8006,1203,97,97,null,18146,0,135
+1545957126629,32351,30 /users/sign_out,200,OK,Thread Group 1-5,text,true,,5514,897,97,97,http://35.237.17.93/users/sign_in,16338,0,135
+1545957126629,16338,30 /users/sign_out-0,302,Found,Thread Group 1-5,text,true,,687,449,97,97,http://35.237.17.93/users/sign_out,16338,0,135
+1545957142967,16013,30 /users/sign_out-1,200,OK,Thread Group 1-5,text,true,,4827,448,97,97,http://35.237.17.93/users/sign_in,16011,0,167
+1545957126628,32351,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-5,,true,,5514,897,97,97,null,16338,2,135
+1545957125359,33743,5 /users/sign_in,200,OK,Thread Group 1-64,text,true,,8006,1199,96,96,http://35.237.17.93/,17174,0,134
+1545957125359,17174,5 /users/sign_in-0,302,Found,Thread Group 1-64,text,true,,619,720,96,96,http://35.237.17.93/users/sign_in,17174,0,134
+1545957142533,16569,5 /users/sign_in-1,200,OK,Thread Group 1-64,text,true,,7387,479,96,96,http://35.237.17.93/,16565,0,159
+1545957125359,33743,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-64,,true,,8006,1199,96,96,null,17174,0,134
+1545957126709,32401,30 /users/sign_out,200,OK,Thread Group 1-6,text,true,,5518,897,96,96,http://35.237.17.93/users/sign_in,17386,0,133
+1545957126709,17386,30 /users/sign_out-0,302,Found,Thread Group 1-6,text,true,,687,449,96,96,http://35.237.17.93/users/sign_out,17386,0,133
+1545957144097,15013,30 /users/sign_out-1,200,OK,Thread Group 1-6,text,true,,4831,448,96,96,http://35.237.17.93/users/sign_in,15013,0,131
+1545957126709,32401,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-6,,true,,5518,897,96,96,null,17386,0,133
+1545957142623,16545,9 /projects/new,200,OK,Thread Group 1-20,text,true,,14133,429,95,95,http://35.237.17.93/projects/new,16410,0,174
+1545957142622,16545,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-20,,true,,14133,429,95,95,null,16410,1,174
+1545957143552,15693,9 /projects/new,200,OK,Thread Group 1-39,text,true,,14143,429,95,95,http://35.237.17.93/projects/new,15561,0,139
+1545957143552,15693,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-39,,true,,14143,429,95,95,null,15561,1,139
+1545957143780,15801,9 /projects/new,200,OK,Thread Group 1-44,text,true,,14138,429,95,95,http://35.237.17.93/projects/new,15664,0,137
+1545957143780,15801,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-44,,true,,14138,429,95,95,null,15664,0,137
+1545957143550,16357,9 /projects/new,200,OK,Thread Group 1-24,text,true,,14142,429,95,95,http://35.237.17.93/projects/new,16227,0,134
+1545957143550,16357,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-24,,true,,14142,429,95,95,null,16227,0,134
+1545957125325,34658,5 /users/sign_in,200,OK,Thread Group 1-70,text,true,,8002,1205,95,95,http://35.237.17.93/,18319,0,134
+1545957125325,18319,5 /users/sign_in-0,302,Found,Thread Group 1-70,text,true,,620,726,95,95,http://35.237.17.93/users/sign_in,18319,0,134
+1545957143646,16337,5 /users/sign_in-1,200,OK,Thread Group 1-70,text,true,,7382,479,95,95,http://35.237.17.93/,16334,0,142
+1545957125325,34658,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-70,,true,,8002,1205,95,95,null,18319,-1,134
+1545957125709,34340,5 /users/sign_in,200,OK,Thread Group 1-92,text,true,,8005,1205,95,95,http://35.237.17.93/,18956,0,135
+1545957125709,18956,5 /users/sign_in-0,302,Found,Thread Group 1-92,text,true,,620,726,95,95,http://35.237.17.93/users/sign_in,18956,0,135
+1545957144666,15383,5 /users/sign_in-1,200,OK,Thread Group 1-92,text,true,,7385,479,95,95,http://35.237.17.93/,15381,0,133
+1545957125708,34340,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-92,,true,,8005,1205,95,95,null,18956,1,135
+1545957143904,16173,9 /projects/new,200,OK,Thread Group 1-35,text,true,,14134,429,95,95,http://35.237.17.93/projects/new,16041,0,138
+1545957143903,16173,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-35,,true,,14134,429,95,95,null,16041,2,138
+1545957127413,32691,5 /users/sign_in,200,OK,Thread Group 1-83,text,true,,7997,1207,95,95,http://35.237.17.93/,17634,0,136
+1545957127413,17634,5 /users/sign_in-0,302,Found,Thread Group 1-83,text,true,,620,728,95,95,http://35.237.17.93/users/sign_in,17634,0,136
+1545957145048,15056,5 /users/sign_in-1,200,OK,Thread Group 1-83,text,true,,7377,479,95,95,http://35.237.17.93/,15054,0,143
+1545957127412,32691,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-83,,true,,7997,1207,95,95,null,17634,0,136
+1545957128007,32224,30 /users/sign_out,200,OK,Thread Group 1-3,text,true,,5520,897,95,95,http://35.237.17.93/users/sign_in,16337,0,137
+1545957128007,16338,30 /users/sign_out-0,302,Found,Thread Group 1-3,text,true,,687,449,95,95,http://35.237.17.93/users/sign_out,16337,0,137
+1545957144346,15885,30 /users/sign_out-1,200,OK,Thread Group 1-3,text,true,,4833,448,95,95,http://35.237.17.93/users/sign_in,15884,0,137
+1545957128007,32224,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-3,,true,,5520,897,95,95,null,16337,0,137
+1545957127644,32741,5 /users/sign_in,200,OK,Thread Group 1-89,text,true,,8006,1201,94,94,http://35.237.17.93/,17522,0,141
+1545957127644,17522,5 /users/sign_in-0,302,Found,Thread Group 1-89,text,true,,620,722,94,94,http://35.237.17.93/users/sign_in,17522,0,141
+1545957145167,15218,5 /users/sign_in-1,200,OK,Thread Group 1-89,text,true,,7386,479,94,94,http://35.237.17.93/,15217,0,138
+1545957127644,32741,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-89,,true,,8006,1201,94,94,null,17522,0,141
+1545957127551,32961,30 /users/sign_out,200,OK,Thread Group 1-8,text,true,,5515,897,94,94,http://35.237.17.93/users/sign_in,17955,0,132
+1545957127551,17955,30 /users/sign_out-0,302,Found,Thread Group 1-8,text,true,,687,449,94,94,http://35.237.17.93/users/sign_out,17955,0,132
+1545957145508,15004,30 /users/sign_out-1,200,OK,Thread Group 1-8,text,true,,4828,448,94,94,http://35.237.17.93/users/sign_in,15003,0,134
+1545957127550,32961,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-8,,true,,5515,897,94,94,null,17955,1,132
+1545957125854,35066,5 /users/sign_in,200,OK,Thread Group 1-66,text,true,,8008,1205,93,93,http://35.237.17.93/,19060,0,137
+1545957125854,19060,5 /users/sign_in-0,302,Found,Thread Group 1-66,text,true,,620,726,93,93,http://35.237.17.93/users/sign_in,19060,0,137
+1545957144915,16005,5 /users/sign_in-1,200,OK,Thread Group 1-66,text,true,,7388,479,93,93,http://35.237.17.93/,16003,0,141
+1545957125854,35066,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-66,,true,,8008,1205,93,93,null,19060,-1,137
+1545957145056,15877,9 /projects/new,200,OK,Thread Group 1-21,text,true,,14135,429,93,93,http://35.237.17.93/projects/new,15738,0,140
+1545957145056,15877,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-21,,true,,14135,429,93,93,null,15738,0,140
+1545957127178,33922,5 /users/sign_in,200,OK,Thread Group 1-80,text,true,,8003,1207,93,93,http://35.237.17.93/,19151,0,136
+1545957127178,19151,5 /users/sign_in-0,302,Found,Thread Group 1-80,text,true,,620,728,93,93,http://35.237.17.93/users/sign_in,19151,0,136
+1545957146330,14770,5 /users/sign_in-1,200,OK,Thread Group 1-80,text,true,,7383,479,93,93,http://35.237.17.93/,14768,0,130
+1545957127177,33922,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-80,,true,,8003,1207,93,93,null,19151,0,136
+1545957145298,15897,9 /projects/new,200,OK,Thread Group 1-42,text,true,,14140,429,93,93,http://35.237.17.93/projects/new,15766,0,136
+1545957145298,15897,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-42,,true,,14140,429,93,93,null,15766,1,136
+1545957128393,32952,5 /users/sign_in,200,OK,Thread Group 1-82,text,true,,8009,1203,93,93,http://35.237.17.93/,18173,0,135
+1545957128393,18173,5 /users/sign_in-0,302,Found,Thread Group 1-82,text,true,,620,724,93,93,http://35.237.17.93/users/sign_in,18173,0,135
+1545957146568,14777,5 /users/sign_in-1,200,OK,Thread Group 1-82,text,true,,7389,479,93,93,http://35.237.17.93/,14775,0,133
+1545957128392,32952,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-82,,true,,8009,1203,93,93,null,18173,0,135
+1545957127910,33537,5 /users/sign_in,200,OK,Thread Group 1-74,text,true,,8006,1205,93,93,http://35.237.17.93/,19011,0,133
+1545957127910,19011,5 /users/sign_in-0,302,Found,Thread Group 1-74,text,true,,620,726,93,93,http://35.237.17.93/users/sign_in,19011,0,133
+1545957146922,14525,5 /users/sign_in-1,200,OK,Thread Group 1-74,text,true,,7386,479,93,93,http://35.237.17.93/,14523,0,134
+1545957127910,33537,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-74,,true,,8006,1205,93,93,null,19011,-1,133
+1545957126974,34779,5 /users/sign_in,200,OK,Thread Group 1-76,text,true,,8003,1209,93,93,http://35.237.17.93/,19159,0,138
+1545957126974,19159,5 /users/sign_in-0,302,Found,Thread Group 1-76,text,true,,620,730,93,93,http://35.237.17.93/users/sign_in,19159,0,138
+1545957146135,15618,5 /users/sign_in-1,200,OK,Thread Group 1-76,text,true,,7383,479,93,93,http://35.237.17.93/,15616,0,134
+1545957126973,34779,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-76,,true,,8003,1209,93,93,null,19159,1,138
+1545957128812,33099,5 /users/sign_in,200,OK,Thread Group 1-87,text,true,,8007,1209,93,93,http://35.237.17.93/,17593,0,138
+1545957128812,17593,5 /users/sign_in-0,302,Found,Thread Group 1-87,text,true,,620,730,93,93,http://35.237.17.93/users/sign_in,17593,0,138
+1545957146407,15504,5 /users/sign_in-1,200,OK,Thread Group 1-87,text,true,,7387,479,93,93,http://35.237.17.93/,15502,0,133
+1545957128812,33099,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-87,,true,,8007,1209,93,93,null,17593,-1,138
+1545957128661,33347,5 /users/sign_in,200,OK,Thread Group 1-85,text,true,,8005,1205,93,93,http://35.237.17.93/,17958,0,131
+1545957128661,17958,5 /users/sign_in-0,302,Found,Thread Group 1-85,text,true,,620,726,93,93,http://35.237.17.93/users/sign_in,17958,0,131
+1545957146621,15387,5 /users/sign_in-1,200,OK,Thread Group 1-85,text,true,,7385,479,93,93,http://35.237.17.93/,15385,0,137
+1545957128660,33347,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-85,,true,,8005,1205,93,93,null,17958,1,131
+1545957147584,14500,9 /projects/new,200,OK,Thread Group 1-29,text,true,,14137,429,93,93,http://35.237.17.93/projects/new,14373,0,144
+1545957147584,14500,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-29,,true,,14137,429,93,93,null,14373,1,144
+1545957128106,34177,5 /users/sign_in,200,OK,Thread Group 1-90,text,true,,8008,1205,93,93,http://35.237.17.93/,19500,0,138
+1545957128106,19500,5 /users/sign_in-0,302,Found,Thread Group 1-90,text,true,,620,726,93,93,http://35.237.17.93/users/sign_in,19500,0,138
+1545957147607,14676,5 /users/sign_in-1,200,OK,Thread Group 1-90,text,true,,7388,479,93,93,http://35.237.17.93/,14675,0,140
+1545957128106,34177,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-90,,true,,8008,1205,93,93,null,19500,-1,138
+1545957147874,14521,9 /projects/new,200,OK,Thread Group 1-45,text,true,,14134,429,93,93,http://35.237.17.93/projects/new,14381,0,134
+1545957147874,14521,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-45,,true,,14134,429,93,93,null,14381,1,134
+1545957129935,32808,30 /users/sign_out,200,OK,Thread Group 1-10,text,true,,5517,897,93,93,http://35.237.17.93/users/sign_in,19129,0,132
+1545957129935,19129,30 /users/sign_out-0,302,Found,Thread Group 1-10,text,true,,687,449,93,93,http://35.237.17.93/users/sign_out,19129,0,132
+1545957149066,13677,30 /users/sign_out-1,200,OK,Thread Group 1-10,text,true,,4830,448,93,93,http://35.237.17.93/users/sign_in,13676,0,132
+1545957129934,32808,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-10,,true,,5517,897,93,93,null,19129,1,132
+1545957147458,15332,9 /projects/new,200,OK,Thread Group 1-55,text,true,,14136,429,92,92,http://35.237.17.93/projects/new,15196,0,156
+1545957147458,15332,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-55,,true,,14136,429,92,92,null,15196,1,156
+1545957147599,15310,9 /projects/new,200,OK,Thread Group 1-47,text,true,,14142,429,92,92,http://35.237.17.93/projects/new,15176,0,141
+1545957147599,15310,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-47,,true,,14142,429,92,92,null,15176,1,141
+1545957128341,34595,5 /users/sign_in,200,OK,Thread Group 1-78,text,true,,8004,1203,92,92,http://35.237.17.93/,19398,0,134
+1545957128341,19398,5 /users/sign_in-0,302,Found,Thread Group 1-78,text,true,,620,724,92,92,http://35.237.17.93/users/sign_in,19398,0,134
+1545957147740,15196,5 /users/sign_in-1,200,OK,Thread Group 1-78,text,true,,7384,479,92,92,http://35.237.17.93/,15194,0,138
+1545957128341,34595,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-78,,true,,8004,1203,92,92,null,19398,0,134
+1545957148600,14345,9 /projects/new,200,OK,Thread Group 1-51,text,true,,14132,429,92,92,http://35.237.17.93/projects/new,14213,0,132
+1545957148598,14345,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-51,,true,,14132,429,92,92,null,14213,2,132
+1545957148584,15023,9 /projects/new,200,OK,Thread Group 1-32,text,true,,14136,429,92,92,http://35.237.17.93/projects/new,14889,0,132
+1545957148583,15023,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-32,,true,,14136,429,92,92,null,14889,1,132
+1545957149649,14042,9 /projects/new,200,OK,Thread Group 1-36,text,true,,14133,429,92,92,http://35.237.17.93/projects/new,13907,0,137
+1545957149648,14042,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-36,,true,,14133,429,92,92,null,13907,1,137
+1545957149919,13815,9 /projects/new,200,OK,Thread Group 1-49,text,true,,14152,429,92,92,http://35.237.17.93/projects/new,13685,0,137
+1545957149918,13815,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-49,,true,,14152,429,92,92,null,13685,1,137
+1545957130289,33478,5 /users/sign_in,200,OK,Thread Group 1-93,text,true,,8002,1203,92,92,http://35.237.17.93/,18517,0,131
+1545957130289,18517,5 /users/sign_in-0,302,Found,Thread Group 1-93,text,true,,619,724,92,92,http://35.237.17.93/users/sign_in,18517,0,131
+1545957148807,14960,5 /users/sign_in-1,200,OK,Thread Group 1-93,text,true,,7383,479,92,92,http://35.237.17.93/,14956,0,134
+1545957130289,33478,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-93,,true,,8002,1203,92,92,null,18517,-1,131
+1545957130333,33496,5 /users/sign_in,200,OK,Thread Group 1-99,text,true,,8004,1203,92,92,http://35.237.17.93/,20256,0,134
+1545957130333,20256,5 /users/sign_in-0,302,Found,Thread Group 1-99,text,true,,620,724,92,92,http://35.237.17.93/users/sign_in,20256,0,134
+1545957150590,13239,5 /users/sign_in-1,200,OK,Thread Group 1-99,text,true,,7384,479,92,92,http://35.237.17.93/,13237,0,138
+1545957130333,33496,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-99,,true,,8004,1203,92,92,null,20256,-1,134
+1545957130778,33099,5 /users/sign_in,200,OK,Thread Group 1-94,text,true,,8010,1203,92,92,http://35.237.17.93/,18186,0,131
+1545957130778,18186,5 /users/sign_in-0,302,Found,Thread Group 1-94,text,true,,620,724,92,92,http://35.237.17.93/users/sign_in,18186,0,131
+1545957148965,14912,5 /users/sign_in-1,200,OK,Thread Group 1-94,text,true,,7390,479,92,92,http://35.237.17.93/,14910,0,131
+1545957130777,33099,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-94,,true,,8010,1203,92,92,null,18186,0,131
+1545957132162,32161,30 /users/sign_out,200,OK,Thread Group 1-13,text,true,,5519,897,92,92,http://35.237.17.93/users/sign_in,18906,0,135
+1545957132162,18906,30 /users/sign_out-0,302,Found,Thread Group 1-13,text,true,,687,449,92,92,http://35.237.17.93/users/sign_out,18906,0,135
+1545957151070,13253,30 /users/sign_out-1,200,OK,Thread Group 1-13,text,true,,4832,448,92,92,http://35.237.17.93/users/sign_in,13252,0,135
+1545957132161,32161,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-13,,true,,5519,897,92,92,null,18906,1,135
+1545957128946,35489,5 /users/sign_in,200,OK,Thread Group 1-97,text,true,,8005,1203,91,91,http://35.237.17.93/,20164,0,138
+1545957128946,20164,5 /users/sign_in-0,302,Found,Thread Group 1-97,text,true,,620,724,91,91,http://35.237.17.93/users/sign_in,20164,0,138
+1545957149112,15323,5 /users/sign_in-1,200,OK,Thread Group 1-97,text,true,,7385,479,91,91,http://35.237.17.93/,15321,0,134
+1545957128946,35489,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-97,,true,,8005,1203,91,91,null,20164,0,138
+1545957130816,33685,5 /users/sign_in,200,OK,Thread Group 1-100,text,true,,8003,1203,91,91,http://35.237.17.93/,19816,0,135
+1545957130816,19816,5 /users/sign_in-0,302,Found,Thread Group 1-100,text,true,,620,724,91,91,http://35.237.17.93/users/sign_in,19816,0,135
+1545957150633,13868,5 /users/sign_in-1,200,OK,Thread Group 1-100,text,true,,7383,479,91,91,http://35.237.17.93/,13865,0,136
+1545957130816,33685,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-100,,true,,8003,1203,91,91,null,19816,0,135
+1545957150863,13685,9 /projects/new,200,OK,Thread Group 1-60,text,true,,14144,429,91,91,http://35.237.17.93/projects/new,13551,0,136
+1545957150863,13685,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-60,,true,,14144,429,91,91,null,13551,0,136
+1545957149761,15012,9 /projects/new,200,OK,Thread Group 1-58,text,true,,14134,429,91,91,http://35.237.17.93/projects/new,14869,0,135
+1545957149761,15012,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-58,,true,,14134,429,91,91,null,14869,0,135
+1545957134256,30558,30 /users/sign_out,200,OK,Thread Group 1-12,text,true,,5516,897,91,91,http://35.237.17.93/users/sign_in,17310,0,136
+1545957134256,17310,30 /users/sign_out-0,302,Found,Thread Group 1-12,text,true,,687,449,91,91,http://35.237.17.93/users/sign_out,17310,0,136
+1545957151567,13247,30 /users/sign_out-1,200,OK,Thread Group 1-12,text,true,,4829,448,91,91,http://35.237.17.93/users/sign_in,13244,0,136
+1545957134255,30558,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-12,,true,,5516,897,91,91,null,17310,0,136
+1545957131342,33472,5 /users/sign_in,200,OK,Thread Group 1-96,text,true,,8004,1203,91,91,http://35.237.17.93/,18707,0,152
+1545957131342,18708,5 /users/sign_in-0,302,Found,Thread Group 1-96,text,true,,620,724,91,91,http://35.237.17.93/users/sign_in,18707,0,152
+1545957150051,14763,5 /users/sign_in-1,200,OK,Thread Group 1-96,text,true,,7384,479,91,91,http://35.237.17.93/,14763,0,140
+1545957131342,33472,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-96,,true,,8004,1203,91,91,null,18707,0,152
+1545957151583,13786,9 /projects/new,200,OK,Thread Group 1-37,text,true,,14154,429,90,90,http://35.237.17.93/projects/new,13652,0,132
+1545957151582,13786,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-37,,true,,14154,429,90,90,null,13652,1,132
+1545957150621,14761,9 /projects/new,200,OK,Thread Group 1-31,text,true,,14141,429,90,90,http://35.237.17.93/projects/new,14631,0,132
+1545957150621,14761,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-31,,true,,14141,429,90,90,null,14631,0,132
+1545957132808,32632,5 /users/sign_in,200,OK,Thread Group 1-95,text,true,,8004,1203,90,90,http://35.237.17.93/,19372,0,134
+1545957132808,19372,5 /users/sign_in-0,302,Found,Thread Group 1-95,text,true,,620,724,90,90,http://35.237.17.93/users/sign_in,19372,0,134
+1545957152181,13259,5 /users/sign_in-1,200,OK,Thread Group 1-95,text,true,,7384,479,90,90,http://35.237.17.93/,13257,0,137
+1545957132808,32632,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-95,,true,,8004,1203,90,90,null,19372,0,134
+1545957150706,14941,9 /projects/new,200,OK,Thread Group 1-53,text,true,,14136,429,90,90,http://35.237.17.93/projects/new,14788,0,132
+1545957150706,14941,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-53,,true,,14136,429,90,90,null,14788,1,132
+1545957133777,31927,30 /users/sign_out,200,OK,Thread Group 1-9,text,true,,5515,897,90,90,http://35.237.17.93/users/sign_in,18859,0,135
+1545957133777,18859,30 /users/sign_out-0,302,Found,Thread Group 1-9,text,true,,687,449,90,90,http://35.237.17.93/users/sign_out,18859,0,135
+1545957152638,13066,30 /users/sign_out-1,200,OK,Thread Group 1-9,text,true,,4828,448,90,90,http://35.237.17.93/users/sign_in,13065,0,136
+1545957133777,31927,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-9,,true,,5515,897,90,90,null,18859,-1,135
+1545957133866,31855,30 /users/sign_out,200,OK,Thread Group 1-7,text,true,,5513,897,89,89,http://35.237.17.93/users/sign_in,17443,0,139
+1545957133866,17443,30 /users/sign_out-0,302,Found,Thread Group 1-7,text,true,,686,449,89,89,http://35.237.17.93/users/sign_out,17443,0,139
+1545957151311,14410,30 /users/sign_out-1,200,OK,Thread Group 1-7,text,true,,4827,448,89,89,http://35.237.17.93/users/sign_in,14409,0,133
+1545957133866,31855,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-7,,true,,5513,897,89,89,null,17443,-1,139
+1545957151059,14717,9 /projects/new,200,OK,Thread Group 1-38,text,true,,14140,429,88,88,http://35.237.17.93/projects/new,14587,0,136
+1545957151059,14717,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-38,,true,,14140,429,88,88,null,14587,0,136
+1545957152504,13325,9 /projects/new,200,OK,Thread Group 1-34,text,true,,14134,429,88,88,http://35.237.17.93/projects/new,13190,0,135
+1545957152504,13325,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-34,,true,,14134,429,88,88,null,13190,0,135
+1545957135161,31030,30 /users/sign_out,200,OK,Thread Group 1-15,text,true,,5515,897,88,88,http://35.237.17.93/users/sign_in,18227,0,133
+1545957135161,18227,30 /users/sign_out-0,302,Found,Thread Group 1-15,text,true,,687,449,88,88,http://35.237.17.93/users/sign_out,18227,0,133
+1545957153389,12802,30 /users/sign_out-1,200,OK,Thread Group 1-15,text,true,,4828,448,88,88,http://35.237.17.93/users/sign_in,12800,0,132
+1545957135160,31030,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-15,,true,,5515,897,88,88,null,18227,1,133
+1545957153057,13334,9 /projects/new,200,OK,Thread Group 1-62,text,true,,14136,429,87,87,http://35.237.17.93/projects/new,13202,0,131
+1545957153057,13334,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-62,,true,,14136,429,87,87,null,13202,0,131
+1545957151574,14892,9 /projects/new,200,OK,Thread Group 1-40,text,true,,14138,429,87,87,http://35.237.17.93/projects/new,14761,0,131
+1545957151574,14892,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-40,,true,,14138,429,87,87,null,14761,0,131
+1545957133293,33260,5 /users/sign_in,200,OK,Thread Group 1-98,text,true,,8003,1203,87,87,http://35.237.17.93/,18805,0,134
+1545957133293,18805,5 /users/sign_in-0,302,Found,Thread Group 1-98,text,true,,620,724,87,87,http://35.237.17.93/users/sign_in,18805,0,134
+1545957152100,14453,5 /users/sign_in-1,200,OK,Thread Group 1-98,text,true,,7383,479,87,87,http://35.237.17.93/,14451,0,132
+1545957133292,33260,5 /users/sign_in,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-98,,true,,8003,1203,87,87,null,18805,0,134
+1545957152249,14423,9 /projects/new,200,OK,Thread Group 1-41,text,true,,14134,429,87,87,http://35.237.17.93/projects/new,14292,0,131
+1545957152249,14423,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-41,,true,,14134,429,87,87,null,14292,0,131
+1545957154032,13162,9 /projects/new,200,OK,Thread Group 1-73,text,true,,14144,429,87,87,http://35.237.17.93/projects/new,13030,0,132
+1545957154032,13162,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-73,,true,,14144,429,87,87,null,13030,0,132
+1545957154063,13159,9 /projects/new,200,OK,Thread Group 1-54,text,true,,14130,429,87,87,http://35.237.17.93/projects/new,13030,0,136
+1545957154063,13159,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-54,,true,,14130,429,87,87,null,13030,1,136
+1545957154325,12910,9 /projects/new,200,OK,Thread Group 1-46,text,true,,14139,429,87,87,http://35.237.17.93/projects/new,12774,0,132
+1545957154324,12910,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-46,,true,,14139,429,87,87,null,12774,1,132
+1545957134277,33067,30 /users/sign_out,200,OK,Thread Group 1-17,text,true,,5517,897,87,87,http://35.237.17.93/users/sign_in,18666,0,132
+1545957134277,18666,30 /users/sign_out-0,302,Found,Thread Group 1-17,text,true,,687,449,87,87,http://35.237.17.93/users/sign_out,18666,0,132
+1545957152945,14399,30 /users/sign_out-1,200,OK,Thread Group 1-17,text,true,,4830,448,87,87,http://35.237.17.93/users/sign_in,14399,0,128
+1545957134276,33067,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-17,,true,,5517,897,87,87,null,18666,1,132
+1545957135960,31819,30 /users/sign_out,200,OK,Thread Group 1-11,text,true,,5515,897,86,86,http://35.237.17.93/users/sign_in,17981,0,131
+1545957135960,17981,30 /users/sign_out-0,302,Found,Thread Group 1-11,text,true,,687,449,86,86,http://35.237.17.93/users/sign_out,17981,0,131
+1545957153941,13838,30 /users/sign_out-1,200,OK,Thread Group 1-11,text,true,,4828,448,86,86,http://35.237.17.93/users/sign_in,13836,0,134
+1545957135960,31819,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-11,,true,,5515,897,86,86,null,17981,0,131
+1545957154898,13064,9 /projects/new,200,OK,Thread Group 1-81,text,true,,14141,429,85,85,http://35.237.17.93/projects/new,12929,0,132
+1545957154898,13064,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-81,,true,,14141,429,85,85,null,12929,1,132
+1545957155300,12778,9 /projects/new,200,OK,Thread Group 1-57,text,true,,14134,429,85,85,http://35.237.17.93/projects/new,12644,0,135
+1545957155300,12778,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-57,,true,,14134,429,85,85,null,12644,0,135
+1545957155061,13027,9 /projects/new,200,OK,Thread Group 1-71,text,true,,14143,429,85,85,http://35.237.17.93/projects/new,12896,0,130
+1545957155061,13027,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-71,,true,,14143,429,85,85,null,12896,1,130
+1545957136290,31947,30 /users/sign_out,200,OK,Thread Group 1-14,text,true,,5523,897,85,85,http://35.237.17.93/users/sign_in,18107,0,133
+1545957136290,18107,30 /users/sign_out-0,302,Found,Thread Group 1-14,text,true,,687,449,85,85,http://35.237.17.93/users/sign_out,18107,0,133
+1545957154398,13839,30 /users/sign_out-1,200,OK,Thread Group 1-14,text,true,,4836,448,85,85,http://35.237.17.93/users/sign_in,13838,0,155
+1545957136290,31947,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-14,,true,,5523,897,85,85,null,18107,1,133
+1545957154312,14383,9 /projects/new,200,OK,Thread Group 1-50,text,true,,14134,429,84,84,http://35.237.17.93/projects/new,14253,0,132
+1545957154312,14383,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-50,,true,,14134,429,84,84,null,14253,1,132
+1545957154978,13800,9 /projects/new,200,OK,Thread Group 1-69,text,true,,14132,429,84,84,http://35.237.17.93/projects/new,13668,0,132
+1545957154977,13800,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-69,,true,,14132,429,84,84,null,13668,1,132
+1545957155833,12958,9 /projects/new,200,OK,Thread Group 1-68,text,true,,14133,429,84,84,http://35.237.17.93/projects/new,12825,0,132
+1545957155832,12958,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-68,,true,,14133,429,84,84,null,12825,2,132
+1545957156050,12854,9 /projects/new,200,OK,Thread Group 1-72,text,true,,14140,429,84,84,http://35.237.17.93/projects/new,12718,0,134
+1545957156050,12854,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-72,,true,,14140,429,84,84,null,12718,0,134
+1545957156276,12680,9 /projects/new,200,OK,Thread Group 1-61,text,true,,14135,429,84,84,http://35.237.17.93/projects/new,12547,0,139
+1545957156276,12680,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-61,,true,,14135,429,84,84,null,12547,1,139
+1545957155269,13910,9 /projects/new,200,OK,Thread Group 1-75,text,true,,14132,429,84,84,http://35.237.17.93/projects/new,13776,0,133
+1545957155269,13910,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-75,,true,,14132,429,84,84,null,13776,0,133
+1545957155358,14223,9 /projects/new,200,OK,Thread Group 1-43,text,true,,14139,429,84,84,http://35.237.17.93/projects/new,14091,0,134
+1545957155358,14223,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-43,,true,,14139,429,84,84,null,14091,1,134
+1545957156767,12854,9 /projects/new,200,OK,Thread Group 1-79,text,true,,14134,429,84,84,http://35.237.17.93/projects/new,12722,0,132
+1545957156766,12854,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-79,,true,,14134,429,84,84,null,12722,1,132
+1545957155918,13710,9 /projects/new,200,OK,Thread Group 1-56,text,true,,14133,429,84,84,http://35.237.17.93/projects/new,13579,0,130
+1545957155917,13710,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-56,,true,,14133,429,84,84,null,13579,2,130
+1545957142326,27484,30 /users/sign_out,200,OK,Thread Group 1-16,text,true,,5518,897,84,84,http://35.237.17.93/users/sign_in,15049,0,152
+1545957142326,15049,30 /users/sign_out-0,302,Found,Thread Group 1-16,text,true,,687,449,84,84,http://35.237.17.93/users/sign_out,15049,0,152
+1545957157376,12434,30 /users/sign_out-1,200,OK,Thread Group 1-16,text,true,,4831,448,84,84,http://35.237.17.93/users/sign_in,12434,0,135
+1545957142326,27484,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-16,,true,,5518,897,84,84,null,15049,1,152
+1545957156197,13798,9 /projects/new,200,OK,Thread Group 1-48,text,true,,14129,429,83,83,http://35.237.17.93/projects/new,13665,0,138
+1545957156196,13798,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-48,,true,,14129,429,83,83,null,13665,1,138
+1545957156332,14097,9 /projects/new,200,OK,Thread Group 1-52,text,true,,14136,429,83,83,http://35.237.17.93/projects/new,13965,0,138
+1545957156332,14097,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-52,,true,,14136,429,83,83,null,13965,0,138
+1545957157703,12741,9 /projects/new,200,OK,Thread Group 1-77,text,true,,14140,429,83,83,http://35.237.17.93/projects/new,12608,0,133
+1545957157701,12741,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-77,,true,,14140,429,83,83,null,12608,2,133
+1545957158219,12408,9 /projects/new,200,OK,Thread Group 1-67,text,true,,14142,429,83,83,http://35.237.17.93/projects/new,12271,0,140
+1545957158219,12408,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-67,,true,,14142,429,83,83,null,12271,0,140
+1545957157131,13680,9 /projects/new,200,OK,Thread Group 1-59,text,true,,14135,429,83,83,http://35.237.17.93/projects/new,13540,0,132
+1545957157130,13680,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-59,,true,,14135,429,83,83,null,13540,2,132
+1545957158520,12296,9 /projects/new,200,OK,Thread Group 1-84,text,true,,14139,429,83,83,http://35.237.17.93/projects/new,12160,0,135
+1545957158519,12296,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-84,,true,,14139,429,83,83,null,12160,3,135
+1545957157279,13636,9 /projects/new,200,OK,Thread Group 1-88,text,true,,14141,429,83,83,http://35.237.17.93/projects/new,13523,0,129
+1545957157279,13636,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-88,,true,,14141,429,83,83,null,13523,1,129
+1545957158637,12636,9 /projects/new,200,OK,Thread Group 1-91,text,true,,14142,429,83,83,http://35.237.17.93/projects/new,12495,0,132
+1545957158637,12636,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-91,,true,,14142,429,83,83,null,12495,0,132
+1545957157673,13611,9 /projects/new,200,OK,Thread Group 1-63,text,true,,14135,429,83,83,http://35.237.17.93/projects/new,13476,0,134
+1545957157672,13611,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-63,,true,,14135,429,83,83,null,13476,1,134
+1545957158116,13512,9 /projects/new,200,OK,Thread Group 1-86,text,true,,14133,429,83,83,http://35.237.17.93/projects/new,13372,0,131
+1545957158115,13512,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-86,,true,,14133,429,83,83,null,13372,1,131
+1545957159982,11956,9 /projects/new,200,OK,Thread Group 1-70,text,true,,14143,429,83,83,http://35.237.17.93/projects/new,11820,0,132
+1545957159982,11956,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-70,,true,,14143,429,83,83,null,11820,0,132
+1545957158644,13493,9 /projects/new,200,OK,Thread Group 1-65,text,true,,14129,429,83,83,http://35.237.17.93/projects/new,13361,0,129
+1545957158644,13493,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-65,,true,,14129,429,83,83,null,13361,0,129
+1545957160385,11774,9 /projects/new,200,OK,Thread Group 1-89,text,true,,14147,429,83,83,http://35.237.17.93/projects/new,11640,0,132
+1545957160385,11774,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-89,,true,,14147,429,83,83,null,11640,0,132
+1545957159102,13092,9 /projects/new,200,OK,Thread Group 1-64,text,true,,14135,429,83,83,http://35.237.17.93/projects/new,12960,0,135
+1545957159102,13092,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-64,,true,,14135,429,83,83,null,12960,1,135
+1545957160049,12954,9 /projects/new,200,OK,Thread Group 1-92,text,true,,14139,429,83,83,http://35.237.17.93/projects/new,12811,0,132
+1545957160049,12954,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-92,,true,,14139,429,83,83,null,12811,0,132
+1545957161911,11094,9 /projects/new,200,OK,Thread Group 1-87,text,true,,14135,429,83,83,http://35.237.17.93/projects/new,10959,0,134
+1545957161910,11094,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-87,,true,,14135,429,83,83,null,10959,1,134
+1545957160104,12920,9 /projects/new,200,OK,Thread Group 1-83,text,true,,14133,429,83,83,http://35.237.17.93/projects/new,12786,0,130
+1545957160103,12920,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-83,,true,,14133,429,83,83,null,12786,2,130
+1545957161447,11590,9 /projects/new,200,OK,Thread Group 1-74,text,true,,14142,429,83,83,http://35.237.17.93/projects/new,11449,0,131
+1545957161447,11590,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-74,,true,,14142,429,83,83,null,11449,1,131
+1545957162936,10956,9 /projects/new,200,OK,Thread Group 1-78,text,true,,14137,429,83,83,http://35.237.17.93/projects/new,10817,0,129
+1545957162936,10956,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-78,,true,,14137,429,83,83,null,10817,0,129
+1545957160919,13056,9 /projects/new,200,OK,Thread Group 1-66,text,true,,14136,429,83,83,http://35.237.17.93/projects/new,12919,0,133
+1545957160919,13056,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-66,,true,,14136,429,83,83,null,12919,0,133
+1545957161345,12634,9 /projects/new,200,OK,Thread Group 1-82,text,true,,14133,429,83,83,http://35.237.17.93/projects/new,12502,0,136
+1545957161100,12879,9 /projects/new,200,OK,Thread Group 1-80,text,true,,14140,429,83,83,http://35.237.17.93/projects/new,12744,0,137
+1545957161344,12634,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-82,,true,,14133,429,83,83,null,12502,1,136
+1545957161099,12879,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-80,,true,,14140,429,83,83,null,12744,1,137
+1545957163830,10747,9 /projects/new,200,OK,Thread Group 1-99,text,true,,14132,429,83,83,http://35.237.17.93/projects/new,10611,0,132
+1545957163829,10747,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-99,,true,,14132,429,83,83,null,10611,1,132
+1545957164436,10319,9 /projects/new,200,OK,Thread Group 1-97,text,true,,14136,429,83,83,http://35.237.17.93/projects/new,10183,0,132
+1545957164436,10319,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-97,,true,,14136,429,83,83,null,10183,0,132
+1545957162008,12805,9 /projects/new,200,OK,Thread Group 1-85,text,true,,14141,429,83,83,http://35.237.17.93/projects/new,12667,0,132
+1545957162008,12805,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-85,,true,,14141,429,83,83,null,12667,0,132
+1545957162283,12536,9 /projects/new,200,OK,Thread Group 1-90,text,true,,14138,429,83,83,http://35.237.17.93/projects/new,12406,0,133
+1545957162282,12536,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-90,,true,,14138,429,83,83,null,12406,2,133
+1545957161753,13080,9 /projects/new,200,OK,Thread Group 1-76,text,true,,14133,429,83,83,http://35.237.17.93/projects/new,12948,0,134
+1545957161753,13080,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-76,,true,,14133,429,83,83,null,12948,1,134
+1545957148831,26310,30 /users/sign_out,200,OK,Thread Group 1-18,text,true,,5517,897,83,83,http://35.237.17.93/users/sign_in,13939,0,133
+1545957148831,13939,30 /users/sign_out-0,302,Found,Thread Group 1-18,text,true,,687,449,83,83,http://35.237.17.93/users/sign_out,13939,0,133
+1545957162770,12371,30 /users/sign_out-1,200,OK,Thread Group 1-18,text,true,,4830,448,83,83,http://35.237.17.93/users/sign_in,12369,0,137
+1545957148830,26310,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-18,,true,,5517,897,83,83,null,13939,2,133
+1545957164815,10366,9 /projects/new,200,OK,Thread Group 1-96,text,true,,14134,429,82,82,http://35.237.17.93/projects/new,10234,0,130
+1545957164815,10366,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-96,,true,,14134,429,82,82,null,10234,0,130
+1545957163768,12327,9 /projects/new,200,OK,Thread Group 1-93,text,true,,14136,429,82,82,http://35.237.17.93/projects/new,12194,0,133
+1545957163767,12327,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-93,,true,,14136,429,82,82,null,12194,2,133
+1545957166554,9568,9 /projects/new,200,OK,Thread Group 1-98,text,true,,14144,429,82,82,http://35.237.17.93/projects/new,9431,0,132
+1545957166553,9568,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-98,,true,,14144,429,82,82,null,9431,1,132
+1545957163878,12272,9 /projects/new,200,OK,Thread Group 1-94,text,true,,14129,429,82,82,http://35.237.17.93/projects/new,12138,0,134
+1545957163878,12272,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-94,,true,,14129,429,82,82,null,12138,0,134
+1545957153210,23045,30 /users/sign_out,200,OK,Thread Group 1-22,text,true,,5518,897,82,82,http://35.237.17.93/users/sign_in,14113,0,133
+1545957153210,14113,30 /users/sign_out-0,302,Found,Thread Group 1-22,text,true,,687,449,82,82,http://35.237.17.93/users/sign_out,14113,0,133
+1545957167324,8931,30 /users/sign_out-1,200,OK,Thread Group 1-22,text,true,,4831,448,82,82,http://35.237.17.93/users/sign_in,8927,0,132
+1545957153210,23045,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-22,,true,,5518,897,82,82,null,14113,0,133
+1545957154032,22404,30 /users/sign_out,200,OK,Thread Group 1-28,text,true,,5519,897,81,81,http://35.237.17.93/users/sign_in,13764,0,134
+1545957154032,13764,30 /users/sign_out-0,302,Found,Thread Group 1-28,text,true,,687,449,81,81,http://35.237.17.93/users/sign_out,13764,0,134
+1545957167798,8638,30 /users/sign_out-1,200,OK,Thread Group 1-28,text,true,,4832,448,81,81,http://35.237.17.93/users/sign_in,8637,0,136
+1545957154032,22404,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-28,,true,,5519,897,81,81,null,13764,0,134
+1545957164502,12051,9 /projects/new,200,OK,Thread Group 1-100,text,true,,14136,429,80,80,http://35.237.17.93/projects/new,11917,0,132
+1545957164502,12051,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-100,,true,,14136,429,80,80,null,11917,0,132
+1545957153631,23350,30 /users/sign_out,200,OK,Thread Group 1-19,text,true,,5520,897,80,80,http://35.237.17.93/users/sign_in,12521,0,131
+1545957153631,12522,30 /users/sign_out-0,302,Found,Thread Group 1-19,text,true,,687,449,80,80,http://35.237.17.93/users/sign_out,12521,0,131
+1545957166154,10827,30 /users/sign_out-1,200,OK,Thread Group 1-19,text,true,,4833,448,80,80,http://35.237.17.93/users/sign_in,10825,0,132
+1545957153630,23350,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-19,,true,,5520,897,80,80,null,12521,0,131
+1545957157039,20116,30 /users/sign_out,200,OK,Thread Group 1-27,text,true,,5514,897,79,79,http://35.237.17.93/users/sign_in,12178,0,130
+1545957157039,12178,30 /users/sign_out-0,302,Found,Thread Group 1-27,text,true,,687,449,79,79,http://35.237.17.93/users/sign_out,12178,0,130
+1545957169219,7936,30 /users/sign_out-1,200,OK,Thread Group 1-27,text,true,,4827,448,79,79,http://35.237.17.93/users/sign_in,7935,0,133
+1545957157039,20116,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-27,,true,,5514,897,79,79,null,12178,-1,130
+1545957165441,11917,9 /projects/new,200,OK,Thread Group 1-95,text,true,,14134,429,78,78,http://35.237.17.93/projects/new,11782,0,169
+1545957165441,11917,9 /projects/new,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-95,,true,,14134,429,78,78,null,11782,0,169
+1545957157269,20150,30 /users/sign_out,200,OK,Thread Group 1-23,text,true,,5515,897,78,78,http://35.237.17.93/users/sign_in,12396,0,133
+1545957157269,12396,30 /users/sign_out-0,302,Found,Thread Group 1-23,text,true,,687,449,78,78,http://35.237.17.93/users/sign_out,12396,0,133
+1545957169666,7753,30 /users/sign_out-1,200,OK,Thread Group 1-23,text,true,,4828,448,78,78,http://35.237.17.93/users/sign_in,7752,0,131
+1545957157269,20150,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-23,,true,,5515,897,78,78,null,12396,-1,133
+1545957152598,25085,30 /users/sign_out,200,OK,Thread Group 1-25,text,true,,5518,897,77,77,http://35.237.17.93/users/sign_in,14613,0,134
+1545957152598,14613,30 /users/sign_out-0,302,Found,Thread Group 1-25,text,true,,687,449,77,77,http://35.237.17.93/users/sign_out,14613,0,134
+1545957167212,10471,30 /users/sign_out-1,200,OK,Thread Group 1-25,text,true,,4831,448,77,77,http://35.237.17.93/users/sign_in,10469,0,134
+1545957152597,25085,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-25,,true,,5518,897,77,77,null,14613,2,134
+1545957153457,24486,30 /users/sign_out,200,OK,Thread Group 1-26,text,true,,5515,897,76,76,http://35.237.17.93/users/sign_in,14249,0,130
+1545957153457,14250,30 /users/sign_out-0,302,Found,Thread Group 1-26,text,true,,686,449,76,76,http://35.237.17.93/users/sign_out,14249,0,130
+1545957167708,10235,30 /users/sign_out-1,200,OK,Thread Group 1-26,text,true,,4829,448,76,76,http://35.237.17.93/users/sign_in,10233,0,136
+1545957153456,24486,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-26,,true,,5515,897,76,76,null,14249,0,130
+1545957159580,18680,30 /users/sign_out,200,OK,Thread Group 1-44,text,true,,5513,897,75,75,http://35.237.17.93/users/sign_in,11577,0,135
+1545957159580,11577,30 /users/sign_out-0,302,Found,Thread Group 1-44,text,true,,686,449,75,75,http://35.237.17.93/users/sign_out,11577,0,135
+1545957171158,7102,30 /users/sign_out-1,200,OK,Thread Group 1-44,text,true,,4827,448,75,75,http://35.237.17.93/users/sign_in,7100,0,133
+1545957159580,18680,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-44,,true,,5513,897,75,75,null,11577,-1,135
+1545957160077,18468,30 /users/sign_out,200,OK,Thread Group 1-35,text,true,,5512,897,74,74,http://35.237.17.93/users/sign_in,11503,0,131
+1545957160077,11503,30 /users/sign_out-0,302,Found,Thread Group 1-35,text,true,,687,449,74,74,http://35.237.17.93/users/sign_out,11503,0,131
+1545957171582,6963,30 /users/sign_out-1,200,OK,Thread Group 1-35,text,true,,4825,448,74,74,http://35.237.17.93/users/sign_in,6962,0,134
+1545957160077,18468,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-35,,true,,5512,897,74,74,null,11503,0,131
+1545957159245,19476,30 /users/sign_out,200,OK,Thread Group 1-39,text,true,,5513,897,73,73,http://35.237.17.93/users/sign_in,12688,0,133
+1545957159245,12688,30 /users/sign_out-0,302,Found,Thread Group 1-39,text,true,,687,449,73,73,http://35.237.17.93/users/sign_out,12688,0,133
+1545957171935,6786,30 /users/sign_out-1,200,OK,Thread Group 1-39,text,true,,4826,448,73,73,http://35.237.17.93/users/sign_in,6784,0,134
+1545957159245,19476,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-39,,true,,5513,897,73,73,null,12688,-1,133
+1545957160933,17994,30 /users/sign_out,200,OK,Thread Group 1-21,text,true,,5518,897,72,72,http://35.237.17.93/users/sign_in,11100,0,133
+1545957160933,11100,30 /users/sign_out-0,302,Found,Thread Group 1-21,text,true,,687,449,72,72,http://35.237.17.93/users/sign_out,11100,0,133
+1545957172034,6893,30 /users/sign_out-1,200,OK,Thread Group 1-21,text,true,,4831,448,72,72,http://35.237.17.93/users/sign_in,6892,0,134
+1545957160932,17994,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-21,,true,,5518,897,72,72,null,11100,0,133
+1545957161195,17991,30 /users/sign_out,200,OK,Thread Group 1-42,text,true,,5520,897,71,71,http://35.237.17.93/users/sign_in,11063,0,131
+1545957161195,11063,30 /users/sign_out-0,302,Found,Thread Group 1-42,text,true,,687,449,71,71,http://35.237.17.93/users/sign_out,11063,0,131
+1545957172259,6927,30 /users/sign_out-1,200,OK,Thread Group 1-42,text,true,,4833,448,71,71,http://35.237.17.93/users/sign_in,6924,0,134
+1545957161195,17991,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-42,,true,,5520,897,71,71,null,11063,0,131
+1545957156854,22341,30 /users/sign_out,200,OK,Thread Group 1-30,text,true,,5512,897,70,70,http://35.237.17.93/users/sign_in,13098,0,133
+1545957156854,13098,30 /users/sign_out-0,302,Found,Thread Group 1-30,text,true,,687,449,70,70,http://35.237.17.93/users/sign_out,13098,0,133
+1545957169954,9241,30 /users/sign_out-1,200,OK,Thread Group 1-30,text,true,,4825,448,70,70,http://35.237.17.93/users/sign_in,9241,0,134
+1545957156853,22341,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-30,,true,,5512,897,70,70,null,13098,1,133
+1545957162084,17401,30 /users/sign_out,200,OK,Thread Group 1-29,text,true,,5517,897,69,69,http://35.237.17.93/users/sign_in,10628,0,137
+1545957162084,10628,30 /users/sign_out-0,302,Found,Thread Group 1-29,text,true,,687,449,69,69,http://35.237.17.93/users/sign_out,10628,0,137
+1545957172713,6772,30 /users/sign_out-1,200,OK,Thread Group 1-29,text,true,,4830,448,69,69,http://35.237.17.93/users/sign_in,6770,0,136
+1545957162084,17401,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-29,,true,,5517,897,69,69,null,10628,-1,137
+1545957159168,20693,30 /users/sign_out,200,OK,Thread Group 1-20,text,true,,5513,897,68,68,http://35.237.17.93/users/sign_in,11799,0,136
+1545957159168,11799,30 /users/sign_out-0,302,Found,Thread Group 1-20,text,true,,687,449,68,68,http://35.237.17.93/users/sign_out,11799,0,136
+1545957170969,8892,30 /users/sign_out-1,200,OK,Thread Group 1-20,text,true,,4826,448,68,68,http://35.237.17.93/users/sign_in,8892,0,132
+1545957159168,20693,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-20,,true,,5513,897,68,68,null,11799,0,136
+1545957158400,21516,30 /users/sign_out,200,OK,Thread Group 1-33,text,true,,5519,897,67,67,http://35.237.17.93/users/sign_in,12837,0,132
+1545957158400,12838,30 /users/sign_out-0,302,Found,Thread Group 1-33,text,true,,687,449,67,67,http://35.237.17.93/users/sign_out,12837,0,132
+1545957171239,8677,30 /users/sign_out-1,200,OK,Thread Group 1-33,text,true,,4832,448,67,67,http://35.237.17.93/users/sign_in,8676,0,133
+1545957158399,21516,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-33,,true,,5519,897,67,67,null,12837,0,132
+1545957162790,17155,30 /users/sign_out,200,OK,Thread Group 1-55,text,true,,5519,897,66,66,http://35.237.17.93/users/sign_in,10537,0,133
+1545957162790,10537,30 /users/sign_out-0,302,Found,Thread Group 1-55,text,true,,687,449,66,66,http://35.237.17.93/users/sign_out,10537,0,133
+1545957173328,6617,30 /users/sign_out-1,200,OK,Thread Group 1-55,text,true,,4832,448,66,66,http://35.237.17.93/users/sign_in,6616,0,133
+1545957162790,17155,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-55,,true,,5519,897,66,66,null,10537,0,133
+1545957163735,16351,30 /users/sign_out,200,OK,Thread Group 1-49,text,true,,5515,897,65,65,http://35.237.17.93/users/sign_in,10044,0,135
+1545957163735,10044,30 /users/sign_out-0,302,Found,Thread Group 1-49,text,true,,687,449,65,65,http://35.237.17.93/users/sign_out,10044,0,135
+1545957173779,6307,30 /users/sign_out-1,200,OK,Thread Group 1-49,text,true,,4828,448,65,65,http://35.237.17.93/users/sign_in,6306,0,134
+1545957163734,16351,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-49,,true,,5515,897,65,65,null,10044,4,135
+1545957159907,20912,30 /users/sign_out,200,OK,Thread Group 1-24,text,true,,5517,897,64,64,http://35.237.17.93/users/sign_in,12471,0,134
+1545957159907,12472,30 /users/sign_out-0,302,Found,Thread Group 1-24,text,true,,687,449,64,64,http://35.237.17.93/users/sign_out,12471,0,134
+1545957172380,8439,30 /users/sign_out-1,200,OK,Thread Group 1-24,text,true,,4830,448,64,64,http://35.237.17.93/users/sign_in,8438,0,133
+1545957159906,20912,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-24,,true,,5517,897,64,64,null,12471,0,134
+1545957165648,15345,30 /users/sign_out,200,OK,Thread Group 1-53,text,true,,5506,897,63,63,http://35.237.17.93/users/sign_in,9475,0,135
+1545957165648,9475,30 /users/sign_out-0,302,Found,Thread Group 1-53,text,true,,687,449,63,63,http://35.237.17.93/users/sign_out,9475,0,135
+1545957175124,5869,30 /users/sign_out-1,200,OK,Thread Group 1-53,text,true,,4819,448,63,63,http://35.237.17.93/users/sign_in,5868,0,135
+1545957165648,15345,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-53,,true,,5506,897,63,63,null,9475,1,135
+1545957162395,18883,30 /users/sign_out,200,OK,Thread Group 1-45,text,true,,5517,897,62,62,http://35.237.17.93/users/sign_in,10767,0,132
+1545957162395,10767,30 /users/sign_out-0,302,Found,Thread Group 1-45,text,true,,687,449,62,62,http://35.237.17.93/users/sign_out,10767,0,132
+1545957173164,8114,30 /users/sign_out-1,200,OK,Thread Group 1-45,text,true,,4830,448,62,62,http://35.237.17.93/users/sign_in,8110,0,134
+1545957162395,18883,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-45,,true,,5517,897,62,62,null,10767,0,132
+1545957162945,18365,30 /users/sign_out,200,OK,Thread Group 1-51,text,true,,5517,897,61,61,http://35.237.17.93/users/sign_in,12228,0,136
+1545957162945,12228,30 /users/sign_out-0,302,Found,Thread Group 1-51,text,true,,687,449,61,61,http://35.237.17.93/users/sign_out,12228,0,136
+1545957175175,6135,30 /users/sign_out-1,200,OK,Thread Group 1-51,text,true,,4830,448,61,61,http://35.237.17.93/users/sign_in,6134,0,133
+1545957162944,18365,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-51,,true,,5517,897,61,61,null,12228,0,136
+1545957165830,15499,30 /users/sign_out,200,OK,Thread Group 1-34,text,true,,5513,897,60,60,http://35.237.17.93/users/sign_in,9509,0,133
+1545957165830,9509,30 /users/sign_out-0,302,Found,Thread Group 1-34,text,true,,687,449,60,60,http://35.237.17.93/users/sign_out,9509,0,133
+1545957175339,5990,30 /users/sign_out-1,200,OK,Thread Group 1-34,text,true,,4826,448,60,60,http://35.237.17.93/users/sign_in,5989,0,134
+1545957165829,15499,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-34,,true,,5513,897,60,60,null,9509,1,133
+1545957163691,17764,30 /users/sign_out,200,OK,Thread Group 1-36,text,true,,5515,897,59,59,http://35.237.17.93/users/sign_in,11892,0,138
+1545957163691,11892,30 /users/sign_out-0,302,Found,Thread Group 1-36,text,true,,687,449,59,59,http://35.237.17.93/users/sign_out,11892,0,138
+1545957175583,5872,30 /users/sign_out-1,200,OK,Thread Group 1-36,text,true,,4828,448,59,59,http://35.237.17.93/users/sign_in,5870,0,141
+1545957163691,17764,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-36,,true,,5515,897,59,59,null,11892,0,138
+1545957163608,17873,30 /users/sign_out,200,OK,Thread Group 1-32,text,true,,5521,897,58,58,http://35.237.17.93/users/sign_in,10003,0,129
+1545957163608,10003,30 /users/sign_out-0,302,Found,Thread Group 1-32,text,true,,687,449,58,58,http://35.237.17.93/users/sign_out,10003,0,129
+1545957173612,7869,30 /users/sign_out-1,200,OK,Thread Group 1-32,text,true,,4834,448,58,58,http://35.237.17.93/users/sign_in,7868,0,133
+1545957163607,17873,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-32,,true,,5521,897,58,58,null,10003,2,129
+1545957167224,14540,30 /users/sign_out,200,OK,Thread Group 1-54,text,true,,5519,897,57,57,http://35.237.17.93/users/sign_in,8722,0,150
+1545957167224,8722,30 /users/sign_out-0,302,Found,Thread Group 1-54,text,true,,687,449,57,57,http://35.237.17.93/users/sign_out,8722,0,150
+1545957175947,5817,30 /users/sign_out-1,200,OK,Thread Group 1-54,text,true,,4832,448,57,57,http://35.237.17.93/users/sign_in,5816,0,133
+1545957167224,14540,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-54,,true,,5519,897,57,57,null,8722,1,150
+1545957164774,17139,30 /users/sign_out,200,OK,Thread Group 1-58,text,true,,5517,897,56,56,http://35.237.17.93/users/sign_in,11650,0,132
+1545957164774,11650,30 /users/sign_out-0,302,Found,Thread Group 1-58,text,true,,687,449,56,56,http://35.237.17.93/users/sign_out,11650,0,132
+1545957176424,5489,30 /users/sign_out-1,200,OK,Thread Group 1-58,text,true,,4830,448,56,56,http://35.237.17.93/users/sign_in,5488,0,132
+1545957164773,17139,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-58,,true,,5517,897,56,56,null,11650,2,132
+1545957164548,17405,30 /users/sign_out,200,OK,Thread Group 1-60,text,true,,5520,897,55,55,http://35.237.17.93/users/sign_in,9675,0,132
+1545957164548,9675,30 /users/sign_out-0,302,Found,Thread Group 1-60,text,true,,687,449,55,55,http://35.237.17.93/users/sign_out,9675,0,132
+1545957174224,7729,30 /users/sign_out-1,200,OK,Thread Group 1-60,text,true,,4833,448,55,55,http://35.237.17.93/users/sign_in,7727,0,136
+1545957164548,17405,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-60,,true,,5520,897,55,55,null,9675,1,132
+1545957165369,16863,30 /users/sign_out,200,OK,Thread Group 1-37,text,true,,5519,897,54,54,http://35.237.17.93/users/sign_in,11117,0,155
+1545957165369,11117,30 /users/sign_out-0,302,Found,Thread Group 1-37,text,true,,687,449,54,54,http://35.237.17.93/users/sign_out,11117,0,155
+1545957176487,5745,30 /users/sign_out-1,200,OK,Thread Group 1-37,text,true,,4832,448,54,54,http://35.237.17.93/users/sign_in,5745,0,136
+1545957165369,16863,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-37,,true,,5519,897,54,54,null,11117,1,155
+1545957168697,13596,30 /users/sign_out,200,OK,Thread Group 1-50,text,true,,5518,897,53,53,http://35.237.17.93/users/sign_in,7996,0,132
+1545957168697,7996,30 /users/sign_out-0,302,Found,Thread Group 1-50,text,true,,687,449,53,53,http://35.237.17.93/users/sign_out,7996,0,132
+1545957176694,5599,30 /users/sign_out-1,200,OK,Thread Group 1-50,text,true,,4831,448,53,53,http://35.237.17.93/users/sign_in,5597,0,133
+1545957168697,13596,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-50,,true,,5518,897,53,53,null,7996,0,132
+1545957168793,13581,30 /users/sign_out,200,OK,Thread Group 1-68,text,true,,5521,897,52,52,http://35.237.17.93/users/sign_in,8085,0,132
+1545957168793,8085,30 /users/sign_out-0,302,Found,Thread Group 1-68,text,true,,687,449,52,52,http://35.237.17.93/users/sign_out,8085,0,132
+1545957176879,5495,30 /users/sign_out-1,200,OK,Thread Group 1-68,text,true,,4834,448,52,52,http://35.237.17.93/users/sign_in,5491,0,133
+1545957168793,13581,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-68,,true,,5521,897,52,52,null,8085,1,132
+1545957165383,17037,30 /users/sign_out,200,OK,Thread Group 1-31,text,true,,5517,897,51,51,http://35.237.17.93/users/sign_in,9506,0,152
+1545957165383,9506,30 /users/sign_out-0,302,Found,Thread Group 1-31,text,true,,687,449,51,51,http://35.237.17.93/users/sign_out,9506,0,152
+1545957174890,7530,30 /users/sign_out-1,200,OK,Thread Group 1-31,text,true,,4830,448,51,51,http://35.237.17.93/users/sign_in,7529,0,133
+1545957165382,17037,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-31,,true,,5517,897,51,51,null,9506,2,152
+1545957162909,19751,30 /users/sign_out,200,OK,Thread Group 1-47,text,true,,5514,897,50,50,http://35.237.17.93/users/sign_in,12234,0,134
+1545957162909,12234,30 /users/sign_out-0,302,Found,Thread Group 1-47,text,true,,687,449,50,50,http://35.237.17.93/users/sign_out,12234,0,134
+1545957175145,7515,30 /users/sign_out-1,200,OK,Thread Group 1-47,text,true,,4827,448,50,50,http://35.237.17.93/users/sign_in,7514,0,136
+1545957162909,19751,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-47,,true,,5514,897,50,50,null,12234,-1,134
+1545957169622,13068,30 /users/sign_out,200,OK,Thread Group 1-79,text,true,,5519,897,49,49,http://35.237.17.93/users/sign_in,7700,0,137
+1545957169622,7700,30 /users/sign_out-0,302,Found,Thread Group 1-79,text,true,,687,449,49,49,http://35.237.17.93/users/sign_out,7700,0,137
+1545957177323,5367,30 /users/sign_out-1,200,OK,Thread Group 1-79,text,true,,4832,448,49,49,http://35.237.17.93/users/sign_in,5365,0,131
+1545957169622,13068,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-79,,true,,5519,897,49,49,null,7700,0,137
+1545957169997,12843,30 /users/sign_out,200,OK,Thread Group 1-48,text,true,,5515,897,48,48,http://35.237.17.93/users/sign_in,7605,0,134
+1545957169997,7605,30 /users/sign_out-0,302,Found,Thread Group 1-48,text,true,,687,449,48,48,http://35.237.17.93/users/sign_out,7605,0,134
+1545957177603,5237,30 /users/sign_out-1,200,OK,Thread Group 1-48,text,true,,4828,448,48,48,http://35.237.17.93/users/sign_in,5235,0,135
+1545957169997,12843,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-48,,true,,5515,897,48,48,null,7605,0,134
+1545957166391,16496,30 /users/sign_out,200,OK,Thread Group 1-62,text,true,,5515,897,47,47,http://35.237.17.93/users/sign_in,9107,0,131
+1545957166391,9107,30 /users/sign_out-0,302,Found,Thread Group 1-62,text,true,,687,449,47,47,http://35.237.17.93/users/sign_out,9107,0,131
+1545957175499,7388,30 /users/sign_out-1,200,OK,Thread Group 1-62,text,true,,4828,448,47,47,http://35.237.17.93/users/sign_in,7386,0,134
+1545957166391,16496,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-62,,true,,5515,897,47,47,null,9107,0,131
+1545957167196,15924,30 /users/sign_out,200,OK,Thread Group 1-73,text,true,,5522,897,46,46,http://35.237.17.93/users/sign_in,8594,0,141
+1545957167196,8594,30 /users/sign_out-0,302,Found,Thread Group 1-73,text,true,,687,449,46,46,http://35.237.17.93/users/sign_out,8594,0,141
+1545957175791,7329,30 /users/sign_out-1,200,OK,Thread Group 1-73,text,true,,4835,448,46,46,http://35.237.17.93/users/sign_in,7328,0,133
+1545957167195,15924,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-73,,true,,5522,897,46,46,null,8594,2,141
+1545957167237,15920,30 /users/sign_out,200,OK,Thread Group 1-46,text,true,,5514,897,45,45,http://35.237.17.93/users/sign_in,10548,0,139
+1545957167237,10548,30 /users/sign_out-0,302,Found,Thread Group 1-46,text,true,,687,449,45,45,http://35.237.17.93/users/sign_out,10548,0,139
+1545957177786,5371,30 /users/sign_out-1,200,OK,Thread Group 1-46,text,true,,4827,448,45,45,http://35.237.17.93/users/sign_in,5369,0,132
+1545957167237,15920,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-46,,true,,5514,897,45,45,null,10548,1,139
+1545957170917,12376,30 /users/sign_out,200,OK,Thread Group 1-88,text,true,,5514,897,44,44,http://35.237.17.93/users/sign_in,7133,0,132
+1545957170917,7133,30 /users/sign_out-0,302,Found,Thread Group 1-88,text,true,,687,449,44,44,http://35.237.17.93/users/sign_out,7133,0,132
+1545957178051,5242,30 /users/sign_out-1,200,OK,Thread Group 1-88,text,true,,4827,448,44,44,http://35.237.17.93/users/sign_in,5240,0,136
+1545957170917,12376,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-88,,true,,5514,897,44,44,null,7133,0,132
+1545957168090,15215,30 /users/sign_out,200,OK,Thread Group 1-71,text,true,,5514,897,43,43,http://35.237.17.93/users/sign_in,10152,0,135
+1545957168090,10152,30 /users/sign_out-0,302,Found,Thread Group 1-71,text,true,,687,449,43,43,http://35.237.17.93/users/sign_out,10152,0,135
+1545957178243,5062,30 /users/sign_out-1,200,OK,Thread Group 1-71,text,true,,4827,448,43,43,http://35.237.17.93/users/sign_in,5061,0,133
+1545957168090,15215,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-71,,true,,5514,897,43,43,null,10152,1,135
+1545957171274,12347,30 /users/sign_out,200,OK,Thread Group 1-91,text,true,,5513,897,42,42,http://35.237.17.93/users/sign_in,7161,0,134
+1545957171274,7161,30 /users/sign_out-0,302,Found,Thread Group 1-91,text,true,,687,449,42,42,http://35.237.17.93/users/sign_out,7161,0,134
+1545957178435,5186,30 /users/sign_out-1,200,OK,Thread Group 1-91,text,true,,4826,448,42,42,http://35.237.17.93/users/sign_in,5185,0,138
+1545957171274,12347,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-91,,true,,5513,897,42,42,null,7161,2,134
+1545957168080,15591,30 /users/sign_out,200,OK,Thread Group 1-57,text,true,,5519,897,41,41,http://35.237.17.93/users/sign_in,8377,0,133
+1545957168080,8377,30 /users/sign_out-0,302,Found,Thread Group 1-57,text,true,,687,449,41,41,http://35.237.17.93/users/sign_out,8377,0,133
+1545957176458,7213,30 /users/sign_out-1,200,OK,Thread Group 1-57,text,true,,4832,448,41,41,http://35.237.17.93/users/sign_in,7211,0,132
+1545957168079,15591,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-57,,true,,5519,897,41,41,null,8377,2,133
+1545957172160,11636,30 /users/sign_out,200,OK,Thread Group 1-89,text,true,,5513,897,40,40,http://35.237.17.93/users/sign_in,6856,0,133
+1545957172160,6856,30 /users/sign_out-0,302,Found,Thread Group 1-89,text,true,,687,449,40,40,http://35.237.17.93/users/sign_out,6856,0,133
+1545957179016,4780,30 /users/sign_out-1,200,OK,Thread Group 1-89,text,true,,4826,448,40,40,http://35.237.17.93/users/sign_in,4778,0,130
+1545957172160,11636,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-89,,true,,5513,897,40,40,null,6856,1,133
+1545957169181,14640,30 /users/sign_out,200,OK,Thread Group 1-75,text,true,,5512,897,39,39,http://35.237.17.93/users/sign_in,9543,0,136
+1545957169181,9543,30 /users/sign_out-0,302,Found,Thread Group 1-75,text,true,,687,449,39,39,http://35.237.17.93/users/sign_out,9543,0,136
+1545957178723,5098,30 /users/sign_out-1,200,OK,Thread Group 1-75,text,true,,4825,448,39,39,http://35.237.17.93/users/sign_in,5097,0,133
+1545957169180,14640,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-75,,true,,5512,897,39,39,null,9543,3,136
+1545957165776,18334,30 /users/sign_out,200,OK,Thread Group 1-38,text,true,,5520,897,38,38,http://35.237.17.93/users/sign_in,11102,0,132
+1545957165776,11102,30 /users/sign_out-0,302,Found,Thread Group 1-38,text,true,,687,449,38,38,http://35.237.17.93/users/sign_out,11102,0,132
+1545957176878,7232,30 /users/sign_out-1,200,OK,Thread Group 1-38,text,true,,4833,448,38,38,http://35.237.17.93/users/sign_in,7232,0,130
+1545957165776,18334,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-38,,true,,5520,897,38,38,null,11102,1,132
+1545957170431,13767,30 /users/sign_out,200,OK,Thread Group 1-52,text,true,,5514,897,37,37,http://35.237.17.93/users/sign_in,8943,0,134
+1545957170431,8943,30 /users/sign_out-0,302,Found,Thread Group 1-52,text,true,,687,449,37,37,http://35.237.17.93/users/sign_out,8943,0,134
+1545957179374,4824,30 /users/sign_out-1,200,OK,Thread Group 1-52,text,true,,4827,448,37,37,http://35.237.17.93/users/sign_in,4820,0,135
+1545957170430,13767,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-52,,true,,5514,897,37,37,null,8943,3,134
+1545957168958,15386,30 /users/sign_out,200,OK,Thread Group 1-61,text,true,,5522,897,36,36,http://35.237.17.93/users/sign_in,7972,0,130
+1545957168958,7972,30 /users/sign_out-0,302,Found,Thread Group 1-61,text,true,,687,449,36,36,http://35.237.17.93/users/sign_out,7972,0,130
+1545957176930,7414,30 /users/sign_out-1,200,OK,Thread Group 1-61,text,true,,4835,448,36,36,http://35.237.17.93/users/sign_in,7414,0,136
+1545957168958,15386,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-61,,true,,5522,897,36,36,null,7972,1,130
+1545957173005,11442,30 /users/sign_out,200,OK,Thread Group 1-92,text,true,,5520,897,35,35,http://35.237.17.93/users/sign_in,6621,0,135
+1545957173005,6621,30 /users/sign_out-0,302,Found,Thread Group 1-92,text,true,,687,449,35,35,http://35.237.17.93/users/sign_out,6621,0,135
+1545957179626,4821,30 /users/sign_out-1,200,OK,Thread Group 1-92,text,true,,4833,448,35,35,http://35.237.17.93/users/sign_in,4821,0,131
+1545957173004,11442,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-92,,true,,5520,897,35,35,null,6621,3,135
+1545957166467,17985,30 /users/sign_out,200,OK,Thread Group 1-40,text,true,,5521,897,34,34,http://35.237.17.93/users/sign_in,10863,0,133
+1545957166467,10863,30 /users/sign_out-0,302,Found,Thread Group 1-40,text,true,,687,449,34,34,http://35.237.17.93/users/sign_out,10863,0,133
+1545957177331,7121,30 /users/sign_out-1,200,OK,Thread Group 1-40,text,true,,4834,448,34,34,http://35.237.17.93/users/sign_in,7121,0,133
+1545957166466,17985,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-40,,true,,5521,897,34,34,null,10863,2,133
+1545957173039,11445,30 /users/sign_out,200,OK,Thread Group 1-74,text,true,,5518,897,33,33,http://35.237.17.93/users/sign_in,6852,0,133
+1545957173039,6852,30 /users/sign_out-0,302,Found,Thread Group 1-74,text,true,,687,449,33,33,http://35.237.17.93/users/sign_out,6852,0,133
+1545957179891,4593,30 /users/sign_out-1,200,OK,Thread Group 1-74,text,true,,4831,448,33,33,http://35.237.17.93/users/sign_in,4586,0,136
+1545957173039,11445,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-74,,true,,5518,897,33,33,null,6852,2,133
+1545957166673,17971,30 /users/sign_out,200,OK,Thread Group 1-41,text,true,,5518,897,32,32,http://35.237.17.93/users/sign_in,10778,0,147
+1545957166673,10778,30 /users/sign_out-0,302,Found,Thread Group 1-41,text,true,,687,449,32,32,http://35.237.17.93/users/sign_out,10778,0,147
+1545957177452,7192,30 /users/sign_out-1,200,OK,Thread Group 1-41,text,true,,4831,448,32,32,http://35.237.17.93/users/sign_in,7192,0,141
+1545957166672,17971,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-41,,true,,5518,897,32,32,null,10778,2,147
+1545957171629,13029,30 /users/sign_out,200,OK,Thread Group 1-86,text,true,,5523,897,31,31,http://35.237.17.93/users/sign_in,8706,0,133
+1545957171629,8706,30 /users/sign_out-0,302,Found,Thread Group 1-86,text,true,,687,449,31,31,http://35.237.17.93/users/sign_out,8706,0,133
+1545957180335,4323,30 /users/sign_out-1,200,OK,Thread Group 1-86,text,true,,4836,448,31,31,http://35.237.17.93/users/sign_in,4323,0,142
+1545957171629,13029,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-86,,true,,5523,897,31,31,null,8706,2,133
+1545957170446,14217,30 /users/sign_out,200,OK,Thread Group 1-77,text,true,,5520,897,30,30,http://35.237.17.93/users/sign_in,7324,0,132
+1545957170446,7324,30 /users/sign_out-0,302,Found,Thread Group 1-77,text,true,,687,449,30,30,http://35.237.17.93/users/sign_out,7324,0,132
+1545957177771,6892,30 /users/sign_out-1,200,OK,Thread Group 1-77,text,true,,4833,448,30,30,http://35.237.17.93/users/sign_in,6889,0,138
+1545957170445,14217,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-77,,true,,5520,897,30,30,null,7324,1,132
+1545957173976,10752,30 /users/sign_out,200,OK,Thread Group 1-66,text,true,,5514,897,29,29,http://35.237.17.93/users/sign_in,6390,0,132
+1545957173976,6390,30 /users/sign_out-0,302,Found,Thread Group 1-66,text,true,,687,449,29,29,http://35.237.17.93/users/sign_out,6390,0,132
+1545957180365,4363,30 /users/sign_out-1,200,OK,Thread Group 1-66,text,true,,4827,448,29,29,http://35.237.17.93/users/sign_in,4361,0,151
+1545957173976,10752,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-66,,true,,5514,897,29,29,null,6390,1,132
+1545957170817,13923,30 /users/sign_out,200,OK,Thread Group 1-59,text,true,,5515,897,28,28,http://35.237.17.93/users/sign_in,7148,0,138
+1545957170817,7148,30 /users/sign_out-0,302,Found,Thread Group 1-59,text,true,,687,449,28,28,http://35.237.17.93/users/sign_out,7148,0,138
+1545957177965,6775,30 /users/sign_out-1,200,OK,Thread Group 1-59,text,true,,4828,448,28,28,http://35.237.17.93/users/sign_in,6774,0,138
+1545957170813,13923,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-59,,true,,5515,897,28,28,null,7148,5,138
+1545957174578,10228,30 /users/sign_out,200,OK,Thread Group 1-99,text,true,,5513,897,27,27,http://35.237.17.93/users/sign_in,5975,0,134
+1545957174578,5975,30 /users/sign_out-0,302,Found,Thread Group 1-99,text,true,,686,449,27,27,http://35.237.17.93/users/sign_out,5975,0,134
+1545957180552,4254,30 /users/sign_out-1,200,OK,Thread Group 1-99,text,true,,4827,448,27,27,http://35.237.17.93/users/sign_in,4253,0,141
+1545957174577,10228,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-99,,true,,5513,897,27,27,null,5975,3,134
+1545957167964,16995,30 /users/sign_out,200,OK,Thread Group 1-81,text,true,,5522,897,26,26,http://35.237.17.93/users/sign_in,10162,0,135
+1545957167964,10162,30 /users/sign_out-0,302,Found,Thread Group 1-81,text,true,,687,449,26,26,http://35.237.17.93/users/sign_out,10162,0,135
+1545957178127,6832,30 /users/sign_out-1,200,OK,Thread Group 1-81,text,true,,4835,448,26,26,http://35.237.17.93/users/sign_in,6831,0,133
+1545957167964,16995,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-81,,true,,5522,897,26,26,null,10162,1,135
+1545957172196,12834,30 /users/sign_out,200,OK,Thread Group 1-64,text,true,,5519,897,25,25,http://35.237.17.93/users/sign_in,8608,0,130
+1545957172196,8608,30 /users/sign_out-0,302,Found,Thread Group 1-64,text,true,,687,449,25,25,http://35.237.17.93/users/sign_out,8608,0,130
+1545957180803,4227,30 /users/sign_out-1,200,OK,Thread Group 1-64,text,true,,4832,448,25,25,http://35.237.17.93/users/sign_in,4226,0,134
+1545957172196,12834,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-64,,true,,5519,897,25,25,null,8608,2,130
+1545957168779,16363,30 /users/sign_out,200,OK,Thread Group 1-69,text,true,,5520,897,24,24,http://35.237.17.93/users/sign_in,9654,0,131
+1545957168779,9655,30 /users/sign_out-0,302,Found,Thread Group 1-69,text,true,,687,449,24,24,http://35.237.17.93/users/sign_out,9654,0,131
+1545957178433,6709,30 /users/sign_out-1,200,OK,Thread Group 1-69,text,true,,4833,448,24,24,http://35.237.17.93/users/sign_in,6707,0,134
+1545957168779,16363,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-69,,true,,5520,897,24,24,null,9654,1,131
+1545957168906,16302,30 /users/sign_out,200,OK,Thread Group 1-72,text,true,,5523,897,23,23,http://35.237.17.93/users/sign_in,9666,0,132
+1545957168906,9666,30 /users/sign_out-0,302,Found,Thread Group 1-72,text,true,,687,449,23,23,http://35.237.17.93/users/sign_out,9666,0,132
+1545957178571,6637,30 /users/sign_out-1,200,OK,Thread Group 1-72,text,true,,4836,448,23,23,http://35.237.17.93/users/sign_in,6634,0,134
+1545957168905,16302,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-72,,true,,5523,897,23,23,null,9666,2,132
+1545957174814,10402,30 /users/sign_out,200,OK,Thread Group 1-85,text,true,,5515,897,22,22,http://35.237.17.93/users/sign_in,6023,0,132
+1545957174814,6023,30 /users/sign_out-0,302,Found,Thread Group 1-85,text,true,,687,449,22,22,http://35.237.17.93/users/sign_out,6023,0,132
+1545957180836,4380,30 /users/sign_out-1,200,OK,Thread Group 1-85,text,true,,4828,448,22,22,http://35.237.17.93/users/sign_in,4379,0,134
+1545957174814,10402,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-85,,true,,5515,897,22,22,null,6023,1,132
+1545957173026,12277,30 /users/sign_out,200,OK,Thread Group 1-83,text,true,,5515,897,21,21,http://35.237.17.93/users/sign_in,8252,0,134
+1545957173026,8252,30 /users/sign_out-0,302,Found,Thread Group 1-83,text,true,,687,449,21,21,http://35.237.17.93/users/sign_out,8252,0,134
+1545957181278,4025,30 /users/sign_out-1,200,OK,Thread Group 1-83,text,true,,4828,448,21,21,http://35.237.17.93/users/sign_in,4025,0,137
+1545957173026,12277,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-83,,true,,5515,897,21,21,null,8252,1,134
+1545957169583,15840,30 /users/sign_out,200,OK,Thread Group 1-43,text,true,,5521,897,20,20,http://35.237.17.93/users/sign_in,9321,0,134
+1545957169583,9321,30 /users/sign_out-0,302,Found,Thread Group 1-43,text,true,,687,449,20,20,http://35.237.17.93/users/sign_out,9321,0,134
+1545957178903,6520,30 /users/sign_out-1,200,OK,Thread Group 1-43,text,true,,4834,448,20,20,http://35.237.17.93/users/sign_in,6519,0,131
+1545957169583,15840,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-43,,true,,5521,897,20,20,null,9321,2,134
+1545957173981,11512,30 /users/sign_out,200,OK,Thread Group 1-80,text,true,,5514,897,19,19,http://35.237.17.93/users/sign_in,7772,0,131
+1545957173981,7772,30 /users/sign_out-0,302,Found,Thread Group 1-80,text,true,,686,449,19,19,http://35.237.17.93/users/sign_out,7772,0,131
+1545957181753,3740,30 /users/sign_out-1,200,OK,Thread Group 1-80,text,true,,4828,448,19,19,http://35.237.17.93/users/sign_in,3739,0,134
+1545957173980,11512,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-80,,true,,5514,897,19,19,null,7772,3,131
+1545957169630,15994,30 /users/sign_out,200,OK,Thread Group 1-56,text,true,,5517,897,18,18,http://35.237.17.93/users/sign_in,9383,0,136
+1545957169630,9383,30 /users/sign_out-0,302,Found,Thread Group 1-56,text,true,,687,449,18,18,http://35.237.17.93/users/sign_out,9383,0,136
+1545957179012,6612,30 /users/sign_out-1,200,OK,Thread Group 1-56,text,true,,4830,448,18,18,http://35.237.17.93/users/sign_in,6611,0,133
+1545957169630,15994,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-56,,true,,5517,897,18,18,null,9383,2,136
+1545957170629,15044,30 /users/sign_out,200,OK,Thread Group 1-67,text,true,,5514,897,17,17,http://35.237.17.93/users/sign_in,8828,0,136
+1545957170629,8828,30 /users/sign_out-0,302,Found,Thread Group 1-67,text,true,,687,449,17,17,http://35.237.17.93/users/sign_out,8828,0,136
+1545957179457,6216,30 /users/sign_out-1,200,OK,Thread Group 1-67,text,true,,4827,448,17,17,http://35.237.17.93/users/sign_in,6216,0,132
+1545957170628,15044,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-67,,true,,5514,897,17,17,null,8828,3,136
+1545957174755,10925,30 /users/sign_out,200,OK,Thread Group 1-97,text,true,,5522,897,16,16,http://35.237.17.93/users/sign_in,7445,0,131
+1545957174755,7445,30 /users/sign_out-0,302,Found,Thread Group 1-97,text,true,,687,449,16,16,http://35.237.17.93/users/sign_out,7445,0,131
+1545957182199,3481,30 /users/sign_out-1,200,OK,Thread Group 1-97,text,true,,4835,448,16,16,http://35.237.17.93/users/sign_in,3479,0,136
+1545957174755,10925,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-97,,true,,5522,897,16,16,null,7445,2,131
+1545957175181,10621,30 /users/sign_out,200,OK,Thread Group 1-96,text,true,,5518,897,15,15,http://35.237.17.93/users/sign_in,7515,0,131
+1545957175181,7515,30 /users/sign_out-0,302,Found,Thread Group 1-96,text,true,,687,449,15,15,http://35.237.17.93/users/sign_out,7515,0,131
+1545957182695,3107,30 /users/sign_out-1,200,OK,Thread Group 1-96,text,true,,4831,448,15,15,http://35.237.17.93/users/sign_in,3106,0,132
+1545957175181,10621,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-96,,true,,5518,897,15,15,null,7515,1,131
+1545957170822,15061,30 /users/sign_out,200,OK,Thread Group 1-84,text,true,,5517,897,14,14,http://35.237.17.93/users/sign_in,8823,0,135
+1545957170822,8823,30 /users/sign_out-0,302,Found,Thread Group 1-84,text,true,,687,449,14,14,http://35.237.17.93/users/sign_out,8823,0,135
+1545957179645,6238,30 /users/sign_out-1,200,OK,Thread Group 1-84,text,true,,4830,448,14,14,http://35.237.17.93/users/sign_in,6236,0,134
+1545957170820,15061,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-84,,true,,5517,897,14,14,null,8823,4,135
+1545957176096,9860,30 /users/sign_out,200,OK,Thread Group 1-93,text,true,,5519,897,13,13,http://35.237.17.93/users/sign_in,7074,0,132
+1545957176096,7075,30 /users/sign_out-0,302,Found,Thread Group 1-93,text,true,,687,449,13,13,http://35.237.17.93/users/sign_out,7074,0,132
+1545957183170,2786,30 /users/sign_out-1,200,OK,Thread Group 1-93,text,true,,4832,448,13,13,http://35.237.17.93/users/sign_in,2784,0,131
+1545957176096,9860,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-93,,true,,5519,897,13,13,null,7074,1,132
+1545957171286,14848,30 /users/sign_out,200,OK,Thread Group 1-63,text,true,,5516,897,12,12,http://35.237.17.93/users/sign_in,8813,0,135
+1545957171286,8813,30 /users/sign_out-0,302,Found,Thread Group 1-63,text,true,,687,449,12,12,http://35.237.17.93/users/sign_out,8813,0,135
+1545957180098,6036,30 /users/sign_out-1,200,OK,Thread Group 1-63,text,true,,4829,448,12,12,http://35.237.17.93/users/sign_in,6035,0,134
+1545957171285,14848,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-63,,true,,5516,897,12,12,null,8813,3,135
+1545957176554,9585,30 /users/sign_out,200,OK,Thread Group 1-100,text,true,,5521,897,11,11,http://35.237.17.93/users/sign_in,7245,0,132
+1545957176554,7245,30 /users/sign_out-0,302,Found,Thread Group 1-100,text,true,,687,449,11,11,http://35.237.17.93/users/sign_out,7245,0,132
+1545957183798,2341,30 /users/sign_out-1,200,OK,Thread Group 1-100,text,true,,4834,448,11,11,http://35.237.17.93/users/sign_in,2340,0,135
+1545957176553,9585,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-100,,true,,5521,897,11,11,null,7245,3,132
+1545957171940,14239,30 /users/sign_out,200,OK,Thread Group 1-70,text,true,,5515,897,10,10,http://35.237.17.93/users/sign_in,8418,0,132
+1545957171940,8418,30 /users/sign_out-0,302,Found,Thread Group 1-70,text,true,,687,449,10,10,http://35.237.17.93/users/sign_out,8418,0,132
+1545957180357,5822,30 /users/sign_out-1,200,OK,Thread Group 1-70,text,true,,4828,448,10,10,http://35.237.17.93/users/sign_in,5821,0,151
+1545957171939,14239,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-70,,true,,5515,897,10,10,null,8418,2,132
+1545957173981,12375,30 /users/sign_out,200,OK,Thread Group 1-82,text,true,,5514,897,9,9,http://35.237.17.93/users/sign_in,6410,0,132
+1545957173981,6410,30 /users/sign_out-0,302,Found,Thread Group 1-82,text,true,,687,449,9,9,http://35.237.17.93/users/sign_out,6410,0,132
+1545957180391,5965,30 /users/sign_out-1,200,OK,Thread Group 1-82,text,true,,4827,448,9,9,http://35.237.17.93/users/sign_in,5962,0,155
+1545957173980,12375,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-82,,true,,5514,897,9,9,null,6410,2,132
+1545957172138,14480,30 /users/sign_out,200,OK,Thread Group 1-65,text,true,,5518,897,8,8,http://35.237.17.93/users/sign_in,8444,0,132
+1545957172138,8444,30 /users/sign_out-0,302,Found,Thread Group 1-65,text,true,,687,449,8,8,http://35.237.17.93/users/sign_out,8444,0,132
+1545957180582,6036,30 /users/sign_out-1,200,OK,Thread Group 1-65,text,true,,4831,448,8,8,http://35.237.17.93/users/sign_in,6035,0,140
+1545957172138,14480,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-65,,true,,5518,897,8,8,null,8444,2,132
+1545957174835,11815,30 /users/sign_out,200,OK,Thread Group 1-76,text,true,,5517,897,7,7,http://35.237.17.93/users/sign_in,6001,0,132
+1545957174835,6001,30 /users/sign_out-0,302,Found,Thread Group 1-76,text,true,,687,449,7,7,http://35.237.17.93/users/sign_out,6001,0,132
+1545957180836,5814,30 /users/sign_out-1,200,OK,Thread Group 1-76,text,true,,4830,448,7,7,http://35.237.17.93/users/sign_in,5812,0,134
+1545957174835,11815,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-76,,true,,5517,897,7,7,null,6001,1,132
+1545957173006,13808,30 /users/sign_out,200,OK,Thread Group 1-87,text,true,,5518,897,6,6,http://35.237.17.93/users/sign_in,8005,0,132
+1545957173006,8005,30 /users/sign_out-0,302,Found,Thread Group 1-87,text,true,,687,449,6,6,http://35.237.17.93/users/sign_out,8005,0,132
+1545957181010,5804,30 /users/sign_out-1,200,OK,Thread Group 1-87,text,true,,4831,448,6,6,http://35.237.17.93/users/sign_in,5801,0,134
+1545957173006,13808,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-87,,true,,5518,897,6,6,null,8005,1,132
+1545957173894,13219,30 /users/sign_out,200,OK,Thread Group 1-78,text,true,,5516,897,5,5,http://35.237.17.93/users/sign_in,7860,0,130
+1545957173894,7860,30 /users/sign_out-0,302,Found,Thread Group 1-78,text,true,,687,449,5,5,http://35.237.17.93/users/sign_out,7860,0,130
+1545957181754,5359,30 /users/sign_out-1,200,OK,Thread Group 1-78,text,true,,4829,448,5,5,http://35.237.17.93/users/sign_in,5356,0,131
+1545957173893,13219,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-78,,true,,5516,897,5,5,null,7860,3,130
+1545957176123,11005,30 /users/sign_out,200,OK,Thread Group 1-98,text,true,,5511,897,4,4,http://35.237.17.93/users/sign_in,5680,0,133
+1545957176123,5680,30 /users/sign_out-0,302,Found,Thread Group 1-98,text,true,,687,449,4,4,http://35.237.17.93/users/sign_out,5680,0,133
+1545957181802,5326,30 /users/sign_out-1,200,OK,Thread Group 1-98,text,true,,4824,448,4,4,http://35.237.17.93/users/sign_in,5321,0,135
+1545957176122,11005,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-98,,true,,5511,897,4,4,null,5680,3,133
+1545957174821,12460,30 /users/sign_out,200,OK,Thread Group 1-90,text,true,,5519,897,3,3,http://35.237.17.93/users/sign_in,7404,0,130
+1545957174821,7404,30 /users/sign_out-0,302,Found,Thread Group 1-90,text,true,,687,449,3,3,http://35.237.17.93/users/sign_out,7404,0,130
+1545957182225,5056,30 /users/sign_out-1,200,OK,Thread Group 1-90,text,true,,4832,448,3,3,http://35.237.17.93/users/sign_in,5055,0,135
+1545957174821,12460,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-90,,true,,5519,897,3,3,null,7404,2,130
+1545957177358,10246,30 /users/sign_out,200,OK,Thread Group 1-95,text,true,,5517,897,2,2,http://35.237.17.93/users/sign_in,5412,0,133
+1545957177358,5412,30 /users/sign_out-0,302,Found,Thread Group 1-95,text,true,,687,449,2,2,http://35.237.17.93/users/sign_out,5412,0,133
+1545957182769,4835,30 /users/sign_out-1,200,OK,Thread Group 1-95,text,true,,4830,448,2,2,http://35.237.17.93/users/sign_in,4833,0,132
+1545957177358,10246,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-95,,true,,5517,897,2,2,null,5412,1,133
+1545957176151,11464,30 /users/sign_out,200,OK,Thread Group 1-94,text,true,,5524,897,1,1,http://35.237.17.93/users/sign_in,7188,0,133
+1545957176151,7188,30 /users/sign_out-0,302,Found,Thread Group 1-94,text,true,,687,449,1,1,http://35.237.17.93/users/sign_out,7188,0,133
+1545957183339,4276,30 /users/sign_out-1,200,OK,Thread Group 1-94,text,true,,4837,448,1,1,http://35.237.17.93/users/sign_in,4275,0,130
+1545957176150,11464,30 /users/sign_out,200,"Number of samples in transaction : 1, number of failing samples : 0",Thread Group 1-94,,true,,5524,897,1,1,null,7188,3,133
