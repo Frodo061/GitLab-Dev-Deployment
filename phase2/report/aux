@@ -1,7 +1,0 @@
-Node                                                      Address          Status  Type    Build  Protocol  DC
-consul-1.us-west1-b.c.copper-gear-221110.internal         10.240.0.2:8301  alive   server  0.9.0  2         gitlab_consul
-consul-2.us-west1-b.c.copper-gear-221110.internal         10.240.0.3:8301  alive   server  0.9.0  2         gitlab_consul
-consul-3.us-west1-b.c.copper-gear-221110.internal         10.240.0.4:8301  alive   server  0.9.0  2         gitlab_consul
-database-1.us-west1-b.c.copper-gear-221110.internal       10.240.0.6:8301  alive   client  0.9.0  2         gitlab_consul
-database-2.us-west1-b.c.copper-gear-221110.internal       10.240.0.7:8301  alive   client  0.9.0  2         gitlab_consul
-database-master.us-west1-b.c.copper-gear-221110.internal  10.240.0.5:8301  alive   client  0.9.0  2         gitlab_consul
